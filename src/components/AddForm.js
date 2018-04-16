@@ -15,6 +15,7 @@ class AddForm extends React.Component {
     event.preventDefault();
     const task = {
       //course form
+      taskType: "Course Task", // type of course
       program: this.programRef.current.value,
       hours: parseFloat(this.hoursRef.current.value),
       type: this.typeRef.current.value,
@@ -30,7 +31,8 @@ class AddForm extends React.Component {
     event.preventDefault();
     const task = {
       //admin form
-      categoryAdmin: this.categoryAdminRef.current.value,
+      taskType: "Adminstration Task",
+      category: this.categoryAdminRef.current.value,
       hours: parseFloat(this.hoursRef.current.value),
       date: this.dateRef.current.value
     };
@@ -48,7 +50,8 @@ class AddForm extends React.Component {
     if (this.props.taskType === "admin") {
       return (
         <form className="task-edit" onSubmit={this.createTask_admin}>
-          <input name="date" ref={this.dateRef} type="date" />
+          <p>Date</p>
+          <input name="date" ref={this.dateRef} type="date" required />
           <p>Select One of the Categories</p>
           <select name="type" ref={this.categoryAdminRef}>
             <option value="Meeting">Meeting</option>
@@ -70,7 +73,8 @@ class AddForm extends React.Component {
     //course form
     return (
       <form className="task-edit" onSubmit={this.createTask}>
-        <input name="date" ref={this.dateRef} type="date" />
+        <p>Date</p>
+        <input name="date" ref={this.dateRef} type="date" required />
 
         <p>Select the Course Task Type</p>
         <select name="type" ref={this.typeRef}>
