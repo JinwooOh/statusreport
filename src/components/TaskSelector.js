@@ -2,7 +2,7 @@ import React, { Component } from "react";
 class TaskSelector extends Component {
   render() {
     return (
-      <div>
+      <div className="taskSelector">
         <button onClick={() => this.props.selectTask("course")}>Course</button>
         <button onClick={() => this.props.selectTask("admin")}>
           Administration

@@ -22,7 +22,7 @@ class Tasks extends React.Component {
     const taskIds = Object.keys(this.props.tasks);
 
     return (
-      <div>
+      <div className="summary">
         <h3>Summary</h3>
         <ul className="tasks">{taskIds.map(this.renderTask)}</ul>
       </div>

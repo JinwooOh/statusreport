@@ -4,7 +4,7 @@ class Forms extends Component {
   render() {
     if (this.props.taskType === "admin") {
       return (
-        <div>
+        <div className="form-list">
           <h2>Admin task</h2>
           <AddForm
             addTask={this.props.addTask}
@@ -15,7 +15,7 @@ class Forms extends Component {
       );
     }
     return (
-      <div>
+      <div className="form-list">
         <h2>Course task</h2>
         <AddForm
           addTask={this.props.addTask}

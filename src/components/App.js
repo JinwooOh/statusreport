@@ -35,7 +35,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="wrapper">
         <h1 className="App-title">Status Report</h1>
         <TaskSelector selectTask={this.selectTask} />
 
@@ -50,9 +50,11 @@ class App extends React.Component {
           details={this.state.tasks}
           taskType={this.state.taskType}
         />
-        <p>Total Hours: {this.state.totalHours}</p>
 
-        <button>Submit</button>
+        <div className="submit-button">
+          <p>Total Hours: {this.state.totalHours}</p>
+          <button>Submit</button>
+        </div>
       </div>
     );
   }
