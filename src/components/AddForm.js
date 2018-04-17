@@ -50,10 +50,13 @@ class AddForm extends React.Component {
     if (this.props.taskType === "admin") {
       return (
         <form className="task-edit" onSubmit={this.createTask_admin}>
-          <label>Date: </label>
+          {/* <label>Date: </label> */}
+          <span>Date: </span>
           <input name="date" ref={this.dateRef} type="date" required />
+          <br />
 
-          <p>Select One of the Categories</p>
+          <span>Select One of the Categories</span>
+          {/* <p>Select One of the Categories</p> */}
           <select name="type" ref={this.categoryAdminRef}>
             <option value="Leave">Leave</option>
             <option value="Meeting">Meeting</option>
@@ -68,36 +71,45 @@ class AddForm extends React.Component {
             <option value="Special Projects">Special Projects</option>
             <option value="Travel">Travel</option>
           </select>
+          <br />
 
-          <p>Please input hours for this task</p>
+          <span>Please input hours for this task</span>
+          {/* <p>Please input hours for this task</p> */}
           <input
             name="hours"
             ref={this.hoursRef}
-            type="text"
+            type="number"
+            step="0.25"
             placeholder="hours"
             required
           />
           <br />
           <br />
-          <button type="submit">Add Task</button>
+          <div className="center">
+            <button type="submit">Add Task</button>
+          </div>
         </form>
       );
     }
+
     //course form
     return (
       <form className="task-edit" onSubmit={this.createTask}>
-        <label>Date: </label>
+        <span>Date: </span>
+        {/* <label>Date: </label> */}
         <input name="date" ref={this.dateRef} type="date" required />
-
-        <p>Select the Course Task Type</p>
-        {/* <span>Select the Course Task Type</span> */}
+        <br />
+        {/* <p>Select the Course Task Type</p> */}
+        <span>Select the Course Task Type</span>
         <select name="type" ref={this.courseTypeRef}>
           <option value="New Course">New Course</option>
           <option value="Course Maintenance">Course Maintenance</option>
           <option value="Course Live Support">Course Live Support</option>
         </select>
+        <br />
 
-        <p>Select the Program</p>
+        {/* <p>Select the Program</p> */}
+        <span>Select the Program</span>
         <input
           name="program"
           ref={this.programRef}
@@ -105,32 +117,41 @@ class AddForm extends React.Component {
           placeholder="Programe name"
         />
 
-        <p>Select the Instructor</p>
+        <span>Select the Instructor</span>
+        {/* <p>Select the Instructor</p> */}
         <input
           name="instructor"
           ref={this.instructorRef}
           type="text"
           placeholder="Instructor name"
         />
+        <br />
 
-        <p>Select One of the Categories</p>
+        <span>Select One of the Categories</span>
+        {/* <p>Select One of the Categories</p> */}
         <select name="type" ref={this.categoryRef}>
           <option value="Content Development">Content Development</option>
           <option value="Media Production">Media Production</option>
           <option value="Quality Control">Quality Control</option>
         </select>
+        <br />
 
-        <p>Please input hours for this task</p>
+        <span>Please input hours for this task</span>
+        {/* <p>Please input hours for this task</p> */}
         <input
           name="hours"
           ref={this.hoursRef}
-          type="text"
+          type="number"
           placeholder="hours"
+          step="0.25"
           required
         />
         <br />
         <br />
-        <button type="submit">Add Task</button>
+
+        <div className="center">
+          <button type="submit">Add Task</button>
+        </div>
       </form>
     );
   }

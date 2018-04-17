@@ -6,7 +6,7 @@ ul {
   list-style-type: none;
 }
 input:required {
-  border: 1px solid #ffafaf;
+  border: 1px solid #ff5729;
 }
 .wrapper {
   display: grid;
@@ -15,35 +15,36 @@ input:required {
   grid-template-rows: auto;
   grid-template-areas:
     "App-title App-title App-title App-title"
-    ". taskSelector  taskSelector ."
+    "taskSelector taskSelector taskSelector taskSelector"
     "form form form form "
     "summary summary summary summary";
 }
 .App-title {
   grid-area: App-title;
+  border: 3px solid gainsboro;
   padding: 120px;
   margin: 10px;
   text-align: center;
-  background: gainsboro;
+  background: #009494;
 }
 .taskSelector {
   grid-area: taskSelector;
-  text-align: center;
+  grid-column: 2;
   padding: 10px;
   margin: 10px;
 }
 .form-list {
   grid-area: form;
-  border: 1px solid gray;
-  /* background: gainsboro; */
-  text-align: center;
+  border: 3px solid gainsboro;
+  background: #f5f2dc;
+  /* text-align: center; */
   padding: 10px;
   margin: 10px;
 }
 .summary {
   grid-area: summary;
-  border: 1px solid gray;
-  /* background: gainsboro; */
+  border: 3px solid gainsboro;
+  background: #f5f2dc;
   text-align: center;
   padding: 10px;
   margin: 10px;
@@ -52,6 +53,7 @@ input:required {
 /* button setting */
 button,
 input[type="submit"] {
+  margin-left: 10px;
   background: none;
   border-radius: 3px;
   border: 1px solid #000;
@@ -67,7 +69,7 @@ input[type="submit"]:after {
   content: "";
   z-index: -1;
   display: block;
-  background: gray;
+  background: #454445;
   position: absolute;
   width: 100%;
   height: 0;
@@ -89,16 +91,43 @@ button:focus:after,
 input[type="submit"]:focus:after {
   height: 100%;
 }
+.summary button:after {
+  background: #ff5729;
+}
+
 /* button setting end */
 
+/* form setting */
+.task-edit {
+  padding: 20px;
+  background-color: #f5f2dc;
+  margin: auto;
+  margin-top: 20px;
+  line-height: 30px;
+}
 .task-edit span {
+  padding: 5px;
   padding-left: 40px;
+  padding-right: 20px;
   display: inline-block;
   vertical-align: top;
-  width: 30%;
+  width: 35%;
+  text-align: right;
 }
-/* .task-edit input {
+.task-edit input {
+  padding: 5px;
   min-height: 25px;
   display: inline-block;
-  width: 50%;
-} */
+  width: 35%;
+}
+
+.task-edit select {
+  padding: 5px;
+  min-height: 25px;
+  display: inline-block;
+  width: 35%;
+}
+.center {
+  text-align: center;
+}
+/* form setting end*/
