@@ -1,34 +1,52 @@
 html {
   font-family: sans-serif;
 }
-
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+input:required {
+  border: 1px solid #ffafaf;
+}
 .wrapper {
   display: grid;
   grid-gap: 20px;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas:
+    "App-title App-title App-title App-title"
+    ". taskSelector  taskSelector ."
+    "form form form form "
+    "summary summary summary summary";
 }
 .App-title {
-  display: grid;
-  grid-column: 1/-1;
+  grid-area: App-title;
+  padding: 120px;
+  margin: 10px;
   text-align: center;
   background: gainsboro;
 }
 .taskSelector {
-  display: grid;
-  grid-column: 1/-1;
+  grid-area: taskSelector;
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
 }
-
 .form-list {
-  background: gainsboro;
+  grid-area: form;
+  border: 1px solid gray;
+  /* background: gainsboro; */
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
 }
-
 .summary {
-  background: gainsboro;
-}
-.submit-button {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column: span 2;
+  grid-area: summary;
+  border: 1px solid gray;
+  /* background: gainsboro; */
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
 }
 
 /* button setting */
@@ -72,3 +90,15 @@ input[type="submit"]:focus:after {
   height: 100%;
 }
 /* button setting end */
+
+.task-edit span {
+  padding-left: 40px;
+  display: inline-block;
+  vertical-align: top;
+  width: 30%;
+}
+/* .task-edit input {
+  min-height: 25px;
+  display: inline-block;
+  width: 50%;
+} */

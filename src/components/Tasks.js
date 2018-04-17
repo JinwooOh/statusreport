@@ -25,8 +25,10 @@ class Tasks extends React.Component {
 
     return (
       <div className="summary">
-        <h3>Summary</h3>
+        <h2>Summary</h2>
         <ul className="tasks">{taskIds.map(this.renderTask)}</ul>
+        <p>Total Hours: {this.props.totalHours}</p>
+        <button>Submit</button>
       </div>
     );
   }

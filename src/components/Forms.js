@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import AddForm from "./AddForm";
+
 class Forms extends Component {
   render() {
     if (this.props.taskType === "admin") {
       return (
         <div className="form-list">
           <h2>Admin task</h2>
+
           <AddForm
             addTask={this.props.addTask}
             sumHours={this.props.sumHours}
@@ -17,6 +19,7 @@ class Forms extends Component {
     return (
       <div className="form-list">
         <h2>Course task</h2>
+
         <AddForm
           addTask={this.props.addTask}
           sumHours={this.props.sumHours}

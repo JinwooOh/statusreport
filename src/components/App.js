@@ -37,6 +37,7 @@ class App extends React.Component {
     return (
       <div className="wrapper">
         <h1 className="App-title">Status Report</h1>
+
         <TaskSelector selectTask={this.selectTask} />
 
         <Forms
@@ -44,17 +45,14 @@ class App extends React.Component {
           sumHours={this.sumHours}
           taskType={this.state.taskType}
         />
+
         <Tasks
           tasks={this.state.tasks}
           removeTask={this.removeTask}
           details={this.state.tasks}
           taskType={this.state.taskType}
+          totalHours={this.state.totalHours}
         />
-
-        <div className="submit-button">
-          <p>Total Hours: {this.state.totalHours}</p>
-          <button>Submit</button>
-        </div>
       </div>
     );
   }

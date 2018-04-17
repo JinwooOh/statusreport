@@ -4,7 +4,7 @@ class AddForm extends React.Component {
   //course task
   programRef = React.createRef();
   hoursRef = React.createRef();
-  typeRef = React.createRef();
+  courseTypeRef = React.createRef();
   dateRef = React.createRef();
   instructorRef = React.createRef();
   categoryRef = React.createRef();
@@ -18,7 +18,7 @@ class AddForm extends React.Component {
       taskType: "Course Task", // type of course
       program: this.programRef.current.value,
       hours: parseFloat(this.hoursRef.current.value),
-      type: this.typeRef.current.value,
+      courseType: this.courseTypeRef.current.value,
       date: this.dateRef.current.value,
       instructor: this.instructorRef.current.value,
       category: this.categoryRef.current.value
@@ -50,13 +50,25 @@ class AddForm extends React.Component {
     if (this.props.taskType === "admin") {
       return (
         <form className="task-edit" onSubmit={this.createTask_admin}>
-          <p>Date</p>
+          <label>Date: </label>
           <input name="date" ref={this.dateRef} type="date" required />
+
           <p>Select One of the Categories</p>
           <select name="type" ref={this.categoryAdminRef}>
-            <option value="Meeting">Meeting</option>
             <option value="Leave">Leave</option>
+            <option value="Meeting">Meeting</option>
+            <option value="Project Management">Project Management</option>
+            <option value="Professional Development">
+              Professional Development
+            </option>
+            <option value="Purchasing">Purchasing</option>
+            <option value="Reporting">Reporting</option>
+            <option value="Support">Support</option>
+            <option value="Students">Students</option>
+            <option value="Special Projects">Special Projects</option>
+            <option value="Travel">Travel</option>
           </select>
+
           <p>Please input hours for this task</p>
           <input
             name="hours"
@@ -66,6 +78,7 @@ class AddForm extends React.Component {
             required
           />
           <br />
+          <br />
           <button type="submit">Add Task</button>
         </form>
       );
@@ -73,11 +86,12 @@ class AddForm extends React.Component {
     //course form
     return (
       <form className="task-edit" onSubmit={this.createTask}>
-        <p>Date</p>
+        <label>Date: </label>
         <input name="date" ref={this.dateRef} type="date" required />
 
         <p>Select the Course Task Type</p>
-        <select name="type" ref={this.typeRef}>
+        {/* <span>Select the Course Task Type</span> */}
+        <select name="type" ref={this.courseTypeRef}>
           <option value="New Course">New Course</option>
           <option value="Course Maintenance">Course Maintenance</option>
           <option value="Course Live Support">Course Live Support</option>
@@ -114,6 +128,7 @@ class AddForm extends React.Component {
           placeholder="hours"
           required
         />
+        <br />
         <br />
         <button type="submit">Add Task</button>
       </form>
