@@ -10,7 +10,7 @@ input:required {
 }
 .wrapper {
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 12px;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
   grid-template-areas:
@@ -21,9 +21,8 @@ input:required {
 }
 .App-title {
   grid-area: App-title;
-  border: 3px solid gainsboro;
-  padding: 120px;
-  margin: 10px;
+  /* border: 3px solid gainsboro; */
+  height: 120px;
   text-align: center;
   background: #009494;
 }
