@@ -73,7 +73,7 @@ class AddForm extends React.Component {
           </select>
           <br />
 
-          <span>Please input hours for this task</span>
+          <span>Please Input Hours for This Task</span>
           {/* <p>Please input hours for this task</p> */}
           <input
             name="hours"
@@ -136,7 +136,7 @@ class AddForm extends React.Component {
         </select>
         <br />
 
-        <span>Please input hours for this task</span>
+        <span>Please Input Hours for This Task</span>
         {/* <p>Please input hours for this task</p> */}
         <input
           name="hours"

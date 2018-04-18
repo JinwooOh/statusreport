@@ -25,7 +25,8 @@ class Tasks extends React.Component {
     return (
       <div className="summary">
         <h2>Summary</h2>
-        <ul className="tasks">{taskIds.map(this.renderTask)}</ul>
+
+        <ul className="tasks-list">{taskIds.map(this.renderTask)}</ul>
         <p>Total Hours: {this.props.totalHours}</p>
         <button>Submit</button>
       </div>
