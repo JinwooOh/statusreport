@@ -22,7 +22,7 @@ input:required {
 .App-title {
   grid-area: App-title;
   /* border: 3px solid gainsboro; */
-  height: 120px;
+  padding: 30px;
   text-align: center;
   background: #009494;
 }

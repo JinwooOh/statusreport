@@ -20,7 +20,6 @@ class App extends React.Component {
     let totalHours = this.state.totalHours;
     totalHours += parseFloat(hours);
     this.setState({ totalHours });
-    //console.log(Object.keys(this.state.tasks));
   };
   removeTask = key => {
     const tasks = { ...this.state.tasks };
@@ -38,12 +37,13 @@ class App extends React.Component {
       <div className="wrapper">
         <h1 className="App-title">Status Report</h1>
 
-        <TaskSelector selectTask={this.selectTask} />
+        {/* <TaskSelector selectTask={this.selectTask} /> */}
 
         <Forms
           addTask={this.addTask}
           sumHours={this.sumHours}
           taskType={this.state.taskType}
+          selectTask={this.selectTask}
         />
 
         <Tasks

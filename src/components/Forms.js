@@ -7,6 +7,7 @@ class Forms extends Component {
     if (this.props.taskType === "admin") {
       return (
         <div className="form-list">
+          <TaskSelector selectTask={this.props.selectTask} />
           <h2 className="center">Admin task</h2>
           <AddForm
             addTask={this.props.addTask}
@@ -18,8 +19,8 @@ class Forms extends Component {
     }
     return (
       <div className="form-list">
+        <TaskSelector selectTask={this.props.selectTask} />
         <h2 className="center">Course task</h2>
-
         <AddForm
           addTask={this.props.addTask}
           sumHours={this.props.sumHours}

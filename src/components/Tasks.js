@@ -11,11 +11,10 @@ class Tasks extends React.Component {
           <p>{task.type}</p>
           <p>{task.date}</p>
           <p>{task.category}</p>
-
           <p>Program: {task.program}</p>
           <p>Instructor: {task.instructor}</p>
           <p>{task.hours} hours</p>
-          <button onClick={() => this.props.removeTask(key)}>Remove </button>
+          <button onClick={() => this.props.removeTask(key)}>Remove</button>
         </span>
       </li>
     );
