@@ -1,13 +1,36 @@
 import React from "react";
 import Forms from "./Forms";
 import Tasks from "./Tasks";
-import TaskSelector from "./TaskSelector";
+// import TaskSelector from "./TaskSelector";
 class App extends React.Component {
-  state = {
-    tasks: {},
-    totalHours: 0,
-    taskType: "course" //or"admin"
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      tasks: {},
+      totalHours: 0,
+      taskType: "course", //or"admin"
+      date: {}
+    };
+  }
+  componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+  tick() {
+    let getDate = new Date();
+    getDate.toISOString();
+    let now =
+      getDate.toDateString() +
+      " " +
+      getDate.getHours() +
+      " : " +
+      getDate.getMinutes();
+    this.setState({
+      date: now
+    });
+  }
 
   addTask = task => {
     const tasks = { ...this.state.tasks };
@@ -31,6 +54,24 @@ class App extends React.Component {
   selectTask = taskType => {
     this.setState({ taskType });
   };
+  // handleDate = () => {
+  //   let today = new Date();
+  //   //today.toLocaleDateString("en-US");
+  //   let h = today.getHours();
+  //   let m = today.getMinutes();
+  //   let date = today.getDate();
+  //   let month = today.getMonth() + 1; //January is 0!
+  //   let year = today.getFullYear();
+  //   let ampm = h >= 12 ? "pm" : "am";
+  //   if (date < 10) {
+  //     date = "0" + date;
+  //   }
+  //   if (month < 10) {
+  //     month = "0" + month;
+  //   }
+  //   today = month + "/" + date + "/" + year + "/" + h + ":" + m + ampm;
+  //   console.log(today);
+  // };
 
   render() {
     return (
@@ -41,20 +82,20 @@ class App extends React.Component {
           <button>Administration Help Guide</button>
         </div>
         {/* <TaskSelector selectTask={this.selectTask} /> */}
-
         <Forms
           addTask={this.addTask}
           sumHours={this.sumHours}
           taskType={this.state.taskType}
           selectTask={this.selectTask}
         />
-
         <Tasks
           tasks={this.state.tasks}
           removeTask={this.removeTask}
           details={this.state.tasks}
           taskType={this.state.taskType}
           totalHours={this.state.totalHours}
+          handleDate={this.handleDate}
+          date={this.state.date}
         />
       </div>
     );

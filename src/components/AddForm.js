@@ -150,7 +150,7 @@ class AddForm extends React.Component {
         <br />
 
         <div className="center">
-          <button type="submit">Add Task</button>
+          <button type="submit">Add task</button>
         </div>
       </form>
     );

@@ -8,7 +8,7 @@ class Forms extends Component {
       return (
         <div className="form-list">
           <TaskSelector selectTask={this.props.selectTask} />
-          <h2 className="center">Admin task</h2>
+          <h2 className="center">Admin Task</h2>
           <AddForm
             addTask={this.props.addTask}
             sumHours={this.props.sumHours}
@@ -20,7 +20,7 @@ class Forms extends Component {
     return (
       <div className="form-list">
         <TaskSelector selectTask={this.props.selectTask} />
-        <h2 className="center">Course task</h2>
+        <h2 className="center">Course Task</h2>
         <AddForm
           addTask={this.props.addTask}
           sumHours={this.props.sumHours}

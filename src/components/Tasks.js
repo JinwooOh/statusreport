@@ -3,7 +3,6 @@ import React from "react";
 class Tasks extends React.Component {
   renderTask = key => {
     const task = this.props.tasks[key];
-
     return (
       <li key={key}>
         <span>
@@ -25,10 +24,17 @@ class Tasks extends React.Component {
     return (
       <div className="summary">
         <h2>Summary</h2>
-
         <ul className="tasks-list">{taskIds.map(this.renderTask)}</ul>
         <p>Total Hours: {this.props.totalHours}</p>
+        <p>{this.props.date.toString()}</p>
         <button>Submit</button>
+        <button
+          onClick={() => {
+            window.print();
+          }}
+        >
+          Print this page
+        </button>
       </div>
     );
   }
