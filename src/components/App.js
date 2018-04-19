@@ -6,10 +6,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: {},
+      tasks: {}, //task list
       totalHours: 0,
       taskType: "course", //or"admin"
-      date: {}
+      date: {} //to track submit date and time
     };
   }
   componentDidMount() {
@@ -18,6 +18,7 @@ class App extends React.Component {
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
+  //for time tracking
   tick() {
     let getDate = new Date();
     getDate.toISOString();
