@@ -22,12 +22,14 @@ class App extends React.Component {
   tick() {
     let getDate = new Date();
     getDate.toISOString();
-    let now =
-      getDate.toDateString() +
-      " " +
-      getDate.getHours() +
-      " : " +
-      getDate.getMinutes();
+    let ampm = "am";
+    let h = getDate.getHours();
+    if (h >= 12) {
+      h -= 12;
+      ampm = "pm";
+    }
+    let m = getDate.getMinutes();
+    let now = getDate.toDateString() + " " + h + ":" + m + ampm;
     this.setState({
       date: now
     });

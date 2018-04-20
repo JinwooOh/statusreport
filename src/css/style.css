@@ -13,9 +13,12 @@ p {
 body {
   min-height: calc(100vh - 20px);
 }
-ul {
+/* ul {
   padding: 0;
   list-style-type: none;
+} */
+li {
+  height: 30px;
 }
 
 input:required {
@@ -74,6 +77,11 @@ input:required {
 
 .taskSelector p {
   display: inline;
+}
+.tasks-list {
+  text-align: center;
+  list-style-position: inside;
+  padding-bottom: 3px;
 }
 
 /* button setting */

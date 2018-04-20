@@ -3,16 +3,12 @@ import React from "react";
 class Tasks extends React.Component {
   renderTask = key => {
     const task = this.props.tasks[key];
+
     return (
       <li key={key}>
         <span>
-          <p>{task.taskType}</p>
-          <p>{task.type}</p>
-          <p>{task.date}</p>
-          <p>{task.category}</p>
-          <p>Program: {task.program}</p>
-          <p>Instructor: {task.instructor}</p>
-          <p>{task.hours} hours</p>
+          {task.taskType} {task.type} {task.date} {task.category}
+          {task.program} {task.instructor} {task.hours} hours
           <button onClick={() => this.props.removeTask(key)}>Remove</button>
         </span>
       </li>
@@ -20,11 +16,10 @@ class Tasks extends React.Component {
   };
   render() {
     const taskIds = Object.keys(this.props.tasks);
-
     return (
       <div className="summary">
         <h2>Summary</h2>
-        <ul className="tasks-list">{taskIds.map(this.renderTask)}</ul>
+        <ol className="tasks-list">{taskIds.map(this.renderTask)}</ol>
         <p>Total Hours: {this.props.totalHours}</p>
         <p>{this.props.date.toString()}</p>
         <button>Submit</button>
