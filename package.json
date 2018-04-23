@@ -1,24 +1,23 @@
 {
-  "name": "usedshop",
-  "version": "0.1.0",
-  "private": true,
+  "name": "reactexpress",
+  "version": "1.0.0",
+  "description": "Starter kit for creating React and Express apps",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "cd client && npm install",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^1.14.6"
+  },
   "dependencies": {
     "concurrently": "^3.5.1",
-    "express": "^4.16.3",
-    "mysql": "^2.15.0",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
-    "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.4",
-    "serve": "^6.5.3"
-  },
-  "scripts": {
-    "dev": "react-scripts start",
-    "server": "nodemon /src/server.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "start": "serve --single ./build"
+    "express": "^4.16.2",
+    "mysql": "^2.15.0"
   }
 }
