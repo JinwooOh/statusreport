@@ -13,6 +13,7 @@ class App extends React.Component {
       users: []
     };
   }
+  //need to work on localstorage for timer
   componentDidMount() {
     this.timerID = setInterval(() => this.tick(), 1000); //for time
     fetch("/users")
@@ -84,12 +85,11 @@ class App extends React.Component {
     return (
       <div className="wrapper">
         <h1 className="App-title">Status Report</h1>
-        <h1>test</h1>
-        <p>
-          {this.state.users.map(key => {
-            return <p>{key.date}</p>;
+        <div>
+          {this.state.users.map((key, i) => {
+            return <p key={i}>{key.email}</p>;
           })}
-        </p>
+        </div>
         <div className="guide">
           <button>Course Help Guide</button>
           <button>Administration Help Guide</button>

@@ -1,6 +1,5 @@
 const express = require("express");
 const mysql = require("mysql");
-//const router = express.Router();
 
 const connection = mysql.createConnection({
   host: "eipd.dcs.wisc.edu",
@@ -19,10 +18,31 @@ connection.connect(function(err) {
 
 const app = express();
 
+//fetch data
 app.get("/users", (req, res) => {
   connection.query("SELECT * FROM user", function(err, result, fields) {
     if (err) {
-      console.log("Error in this query");
+      console.log("Error in users query");
+    } else {
+      console.log("success");
+      res.json(result);
+    }
+  });
+});
+app.get("/admintable", (req, res) => {
+  connection.query("SELECT * FROM admintable", function(err, result, fields) {
+    if (err) {
+      console.log("Error in admintable query");
+    } else {
+      console.log("success");
+      res.json(result);
+    }
+  });
+});
+app.get("/coursetable", (req, res) => {
+  connection.query("SELECT * FROM coursetable", function(err, result, fields) {
+    if (err) {
+      console.log("Error in coursetable query");
     } else {
       console.log("success");
       res.json(result);
@@ -30,23 +50,5 @@ app.get("/users", (req, res) => {
   });
 });
 
-// connection.connect(function(err) {
-//   if (err) {
-//     console.log("Fail to Connect!");
-//   } else {
-//     console.log("Connected!");
-//   }
-// });
-// connection.query("SELECT * FROM user", function(err, result, fields) {
-//   if (err) {
-//     console.log("Error in this query");
-//   } else {
-//     console.log("success");
-//     console.log(result);
-//   }
-// });
 const port = 5000;
-
 app.listen(port, () => `Server running on port ${port}`);
-
-//connection.end();
