@@ -18,7 +18,7 @@ connection.connect(function(err) {
 
 const app = express();
 
-//fetch data
+//fetch data; we might not need to fetch all data
 app.get("/users", (req, res) => {
   connection.query("SELECT * FROM user", function(err, result, fields) {
     if (err) {
@@ -49,6 +49,24 @@ app.get("/coursetable", (req, res) => {
     }
   });
 });
+
+//post data
+app.post("/submit", (req, res) => {
+  console.log(req.body);
+});
+
+// app.post("/data", function(req, res) {
+//   var username = req.body.name;
+//   connection.query(
+//     "INSERT INTO `names` (name) VALUES (?)",
+//     username.toString(),
+//     function(err, result) {
+//       if (err) throw err;
+//       console.log("1 record inserted");
+//     }
+//   );
+//   res.send(username);
+// });
 
 const port = 5000;
 app.listen(port, () => `Server running on port ${port}`);

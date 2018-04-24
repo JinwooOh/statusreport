@@ -22,7 +22,7 @@ class Tasks extends React.Component {
         <ol className="tasks-list">{taskIds.map(this.renderTask)}</ol>
         <p>Total Hours: {this.props.totalHours}</p>
         <p>{this.props.date.toString()}</p>
-        <button>Submit</button>
+        <button onClick={this.props.handleSubmit}>Submit</button>
         <button
           onClick={() => {
             window.print();

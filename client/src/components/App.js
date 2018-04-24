@@ -10,7 +10,7 @@ class App extends React.Component {
       totalHours: 0,
       taskType: "course", //or"admin"
       date: {}, //to track submit date and time
-      users: []
+      users: [] //test purpose
     };
   }
   //need to work on localstorage for timer
@@ -39,6 +39,19 @@ class App extends React.Component {
       date: now
     });
   }
+  //need to work on this; decide which data to submit
+  handleSubmit = () => {
+    //console.log(this.state.tasks);
+    let data = this.state.totalHours;
+    console.log(data);
+    fetch("/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    }).then(function(data) {
+      console.log(data);
+    });
+  };
 
   addTask = task => {
     const tasks = { ...this.state.tasks };
@@ -110,6 +123,7 @@ class App extends React.Component {
           totalHours={this.state.totalHours}
           handleDate={this.handleDate}
           date={this.state.date}
+          handleSubmit={this.handleSubmit}
         />
       </div>
     );
