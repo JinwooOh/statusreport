@@ -42,14 +42,13 @@ class App extends React.Component {
   //need to work on this; decide which data to submit
   handleSubmit = () => {
     //console.log(this.state.tasks);
-    let data = this.state.totalHours;
-    console.log(data);
+    let data = this.state;
     fetch("/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     }).then(function(data) {
-      console.log(data);
+      console.log(data); //error
     });
   };
 
@@ -75,24 +74,6 @@ class App extends React.Component {
   selectTask = taskType => {
     this.setState({ taskType });
   };
-  // handleDate = () => {
-  //   let today = new Date();
-  //   //today.toLocaleDateString("en-US");
-  //   let h = today.getHours();
-  //   let m = today.getMinutes();
-  //   let date = today.getDate();
-  //   let month = today.getMonth() + 1; //January is 0!
-  //   let year = today.getFullYear();
-  //   let ampm = h >= 12 ? "pm" : "am";
-  //   if (date < 10) {
-  //     date = "0" + date;
-  //   }
-  //   if (month < 10) {
-  //     month = "0" + month;
-  //   }
-  //   today = month + "/" + date + "/" + year + "/" + h + ":" + m + ampm;
-  //   console.log(today);
-  // };
 
   render() {
     return (

@@ -1,5 +1,6 @@
 const express = require("express");
 const mysql = require("mysql");
+const bodyParser = require("body-parser");
 
 const connection = mysql.createConnection({
   host: "eipd.dcs.wisc.edu",
@@ -17,7 +18,8 @@ connection.connect(function(err) {
 });
 
 const app = express();
-
+app.use(bodyParser.json()); //application / json
+app.use(bodyParser.urlencoded({ extended: true }));
 //fetch data; we might not need to fetch all data
 app.get("/users", (req, res) => {
   connection.query("SELECT * FROM user", function(err, result, fields) {
@@ -50,23 +52,25 @@ app.get("/coursetable", (req, res) => {
   });
 });
 
-//post data
+//post data, req.body graps all state data
 app.post("/submit", (req, res) => {
-  console.log(req.body);
-});
+  //console.log(req.body.tasks);
 
-// app.post("/data", function(req, res) {
-//   var username = req.body.name;
-//   connection.query(
-//     "INSERT INTO `names` (name) VALUES (?)",
-//     username.toString(),
-//     function(err, result) {
-//       if (err) throw err;
-//       console.log("1 record inserted");
-//     }
-//   );
-//   res.send(username);
-// });
+  let tasks = req.body.tasks; //json; need to parse this
+  let totalHours = req.body.totalHours; //int
+  let date = req.body.date; //date type is string
+  console.log(tasks);
+
+  //need to be changed after parsing the data
+  connection.query(
+    "INSERT INTO `coursetable` (CompletionDate) VALUES (?)",
+    date,
+    function(err, result) {
+      if (err) throw err;
+      console.log("1 record inserted");
+    }
+  );
+});
 
 const port = 5000;
 app.listen(port, () => `Server running on port ${port}`);
