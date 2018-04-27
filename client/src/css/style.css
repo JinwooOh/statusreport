@@ -18,7 +18,7 @@ body {
   list-style-type: none;
 } */
 li {
-  height: 30px;
+  height: 34px;
 }
 
 input:required {
@@ -82,7 +82,7 @@ input:required {
 .tasks-list {
   text-align: left;
   list-style-position: inside;
-  padding-bottom: 3px;
+  padding-bottom: 42px;
 }
 
 /* button setting */

@@ -5,8 +5,7 @@ const bodyParser = require("body-parser");
 const connection = mysql.createConnection({
   host: "eipd.dcs.wisc.edu",
   user: "eipd_SR17",
-  password: "Lhoy*817",
-  database: "statusReports",
+
   port: 3306
 });
 connection.connect(function(err) {
@@ -55,11 +54,44 @@ app.get("/coursetable", (req, res) => {
 //post data, req.body graps all state data
 app.post("/submit", (req, res) => {
   //console.log(req.body.tasks);
-
-  let tasks = req.body.tasks; //json; need to parse this
-  let totalHours = req.body.totalHours; //int
-  let date = req.body.date; //date type is string
+  const tasks = req.body.tasks; //json; need to parse this
+  const totalHours = req.body.totalHours; //int
+  const date = req.body.date; //date type is string
   console.log(tasks);
+  // Tasks post
+  for (let task in tasks) {
+    if (tasks[task].taskType === "Course Task") {
+      //course task
+      const curTask = tasks[task];
+      const sql =
+        "INSERT INTO `coursetable` (courseProgram, hours, courseTask, completionDate, courseInst, courseCat) VALUES (?)";
+      const values = [
+        curTask.program,
+        curTask.hours,
+        curTask.courseType,
+        curTask.date,
+        curTask.instructor,
+        curTask.category
+      ];
+      connection.query(sql, [values], function(err, result) {
+        if (err) throw err;
+        console.log("Number of records inserted: " + result.affectedRows);
+      });
+      console.log(values);
+    } else {
+      //admin task
+      const curTask = tasks[task];
+      const sql =
+        "INSERT INTO `admintable` (hours, adminCat, completionDate) VALUES (?)";
+      const values = [curTask.hours, curTask.category, curTask.date];
+      connection.query(sql, [values], function(err, result) {
+        if (err) throw err;
+        console.log("Number of records inserted: " + result.affectedRows);
+      });
+      console.log(values);
+    }
+  }
+  // User post
 
   //need to be changed after parsing the data
   connection.query(

@@ -114,7 +114,7 @@ class AddForm extends React.Component {
           name="program"
           ref={this.programRef}
           type="text"
-          placeholder="Programe name"
+          placeholder="Program name"
         />
 
         <span>Select the Instructor</span>

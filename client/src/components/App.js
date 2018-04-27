@@ -20,6 +20,7 @@ class App extends React.Component {
       .then(res => res.json())
       .then(users => this.setState({ users: users }));
   }
+
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
@@ -79,16 +80,16 @@ class App extends React.Component {
     return (
       <div className="wrapper">
         <h1 className="App-title">Status Report</h1>
-        <div>
+        {/* <div>
           {this.state.users.map((key, i) => {
             return <p key={i}>{key.email}</p>;
           })}
-        </div>
+        </div> */}
         <div className="guide">
           <button>Course Help Guide</button>
           <button>Administration Help Guide</button>
         </div>
-        {/* <TaskSelector selectTask={this.selectTask} /> */}
+
         <Forms
           addTask={this.addTask}
           sumHours={this.sumHours}
