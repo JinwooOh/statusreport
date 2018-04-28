@@ -31,7 +31,7 @@ input:required {
   grid-template-rows: auto;
   grid-template-areas:
     "App-title App-title App-title App-title"
-    ". . guide guide"
+    "guide guide guide guide"
     /* "taskSelector taskSelector taskSelector taskSelector" */
     "form form form form "
     "summary summary summary summary";
@@ -46,6 +46,7 @@ input:required {
 }
 .taskSelector {
   grid-area: taskSelector;
+  text-align: center;
   grid-column: 2;
   padding: 10px;
   margin: 10px;
@@ -129,7 +130,6 @@ input[type="submit"]:focus:after {
 .summary button:after {
   background: #ff5729;
 }
-
 /* button setting end */
 
 /* form setting */
@@ -155,7 +155,6 @@ input[type="submit"]:focus:after {
   display: inline-block;
   width: 35%;
 }
-
 .task-edit select {
   padding: 5px;
   min-height: 25px;

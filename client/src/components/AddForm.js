@@ -51,7 +51,7 @@ class AddForm extends React.Component {
       return (
         <form className="task-edit" onSubmit={this.createTask_admin}>
           {/* <label>Date: </label> */}
-          <span>Date: </span>
+          <span>Date </span>
           <input name="date" ref={this.dateRef} type="date" required />
           <br />
 
@@ -95,7 +95,7 @@ class AddForm extends React.Component {
     //course form
     return (
       <form className="task-edit" onSubmit={this.createTask}>
-        <span>Date: </span>
+        <span>Date </span>
         {/* <label>Date: </label> */}
         <input name="date" ref={this.dateRef} type="date" required />
         <br />
