@@ -1,17 +1,34 @@
 import React from "react";
+import { CSSTransition } from "react-transition-group";
 
 class Tasks extends React.Component {
   renderTask = key => {
     const task = this.props.tasks[key];
-
     return (
-      <li key={key}>
-        <span>
-          {task.taskType} {task.type} {task.date} {task.category}
-          {task.program} {task.instructor} {task.hours} hours
-          <button onClick={() => this.props.removeTask(key)}>Remove</button>
-        </span>
-      </li>
+      <CSSTransition
+        in={true}
+        classNames="summary"
+        appear={true}
+        timeout={1000}
+      >
+        <li key={key}>
+          <span>
+            {task.taskType}
+            {": "} {task.type}
+            {"  "} {task.category}
+            {"  "} {task.program}
+            {"  "} {task.instructor}
+            {"  "} {task.date}
+            {"  "} {task.hours} hours
+            <button
+              className="remove-btn"
+              onClick={() => this.props.removeTask(key)}
+            >
+              Remove
+            </button>
+          </span>
+        </li>
+      </CSSTransition>
     );
   };
   render() {

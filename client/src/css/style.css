@@ -1,22 +1,31 @@
+:root {
+  --yellow: #ffc600;
+  --blue: #33b5e5;
+  --darkBlue: #227796;
+  --gray: #e9e9e9;
+  --dGray: #666666;
+}
+
 html {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 16px;
-  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.07);
+  /* text-shadow: 0 2px 0 rgba(0, 0, 0, 0.07); */
+  background: var(--gray);
 }
-h1,
-h2,
-h3,
-p {
-  color: #454445;
+
+h2 {
+  color: var(--blue);
 }
+
 body {
   min-height: calc(100vh - 20px);
 }
-/* ul {
-  padding: 0;
-  list-style-type: none;
-} */
+.main-wrapper {
+  width: 748px;
+  margin: auto;
+  padding-bottom: 30px;
+}
 li {
   height: 34px;
 }
@@ -38,36 +47,34 @@ input:required {
 }
 .App-title {
   grid-area: App-title;
-  border-radius: 3px;
   padding: 30px;
   text-align: center;
-  background: #009494;
-  color: #f5f2dc;
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--dGray);
 }
-.taskSelector {
-  grid-area: taskSelector;
-  text-align: center;
-  grid-column: 2;
-  padding: 10px;
-  margin: 10px;
-}
+
 .form-list {
-  border-radius: 3px;
   grid-area: form;
-  border: 2px solid gainsboro;
-  background: #f5f2dc;
-  /* text-align: center; */
-  padding: 10px;
+  border-radius: 3px;
+  border-top: 5px solid var(--blue);
+  background: white;
+  box-shadow: 0 0 10px #888888;
   margin: 10px;
+  -webkit-animation: fadein 0.5s;
+  animation: fadein 0.5s;
 }
 .summary {
   grid-area: summary;
   border-radius: 3px;
-  border: 2px solid gainsboro;
-  background: #f5f2dc;
+  border-top: 5px solid skyblue;
+  background: white;
+  box-shadow: 0 0 10px #888888;
   text-align: center;
   padding: 10px;
   margin: 10px;
+  -webkit-animation: fadein 1.2s;
+  animation: fadein 1.2s;
 }
 
 .guide {
@@ -76,9 +83,6 @@ input:required {
   justify-self: right;
 }
 
-.taskSelector p {
-  display: inline;
-}
 /* summary */
 .tasks-list {
   text-align: left;
@@ -92,11 +96,9 @@ input[type="submit"] {
   margin-left: 10px;
   background: none;
   border-radius: 3px;
-  border: 1px solid #454445;
-  font-weight: 400;
   font-size: 1.1rem;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
   position: relative;
   z-index: 2;
 }
@@ -105,14 +107,14 @@ input[type="submit"]:after {
   content: "";
   z-index: -1;
   display: block;
-  background: #454445;
+  background: var(--darkBlue);
   position: absolute;
   width: 100%;
   height: 0;
   left: 0;
   top: 0;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
 }
 button:hover,
 input[type="submit"]:hover,
@@ -127,15 +129,32 @@ button:focus:after,
 input[type="submit"]:focus:after {
   height: 100%;
 }
-.summary button:after {
-  background: #ff5729;
+
+.summary button {
+  background: var(--blue);
+  color: white;
 }
+.summary button:after {
+  background: var(--darkBlue);
+}
+.form-list button {
+  background: var(--blue);
+  color: white;
+}
+.taskSelector button {
+  display: inline-block;
+  border-radius: 0;
+  width: 50%;
+  margin: 0;
+  padding: 6px;
+}
+
 /* button setting end */
 
 /* form setting */
 .task-edit {
   padding: 20px;
-  background-color: #f5f2dc;
+  background-color: white;
   margin: auto;
   margin-top: 20px;
   line-height: 30px;
@@ -165,3 +184,60 @@ input[type="submit"]:focus:after {
   text-align: center;
 }
 /* form setting end*/
+
+/* animation */
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.summary-appear {
+  opacity: 0.01;
+  transform: scaleX(1) translateX(30px);
+}
+
+.summary-appear.summary-appear-active {
+  opacity: 1;
+  transition: all 200ms ease-in;
+  transform: scaleX(1) translateX(0);
+}
+.summary-leave {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+.summary-leave.summary-leave-active {
+  opacity: 0.01;
+  transform: scaleX(1) translateX(-30px);
+}
+
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}

@@ -1,26 +1,16 @@
 import React, { Component } from "react";
 import AddForm from "./AddForm";
 import TaskSelector from "./TaskSelector";
+// import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 class Forms extends Component {
   render() {
-    if (this.props.taskType === "admin") {
-      return (
-        <div className="form-list">
-          <TaskSelector selectTask={this.props.selectTask} />
-          <h2 className="center">Admin Task</h2>
-          <AddForm
-            addTask={this.props.addTask}
-            sumHours={this.props.sumHours}
-            taskType={this.props.taskType}
-          />
-        </div>
-      );
-    }
+    let taskType =
+      this.props.taskType === "admin" ? "Admin Task" : "Course Task";
     return (
       <div className="form-list">
         <TaskSelector selectTask={this.props.selectTask} />
-        <h2 className="center">Course Task</h2>
+        <h2 className="center">{taskType}</h2>
         <AddForm
           addTask={this.props.addTask}
           sumHours={this.props.sumHours}

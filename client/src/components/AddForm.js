@@ -17,11 +17,11 @@ class AddForm extends React.Component {
       //course form
       taskType: "Course Task", // type of course
       program: this.programRef.current.value,
-      hours: parseFloat(this.hoursRef.current.value),
       courseType: this.courseTypeRef.current.value,
-      date: this.dateRef.current.value,
       instructor: this.instructorRef.current.value,
-      category: this.categoryRef.current.value
+      category: this.categoryRef.current.value,
+      date: this.dateRef.current.value,
+      hours: parseFloat(this.hoursRef.current.value)
     };
     this.props.sumHours(this.hoursRef.current.value);
     this.props.addTask(task);
@@ -33,30 +33,23 @@ class AddForm extends React.Component {
       //admin form
       taskType: "Adminstration Task",
       category: this.categoryAdminRef.current.value,
-      hours: parseFloat(this.hoursRef.current.value),
-      date: this.dateRef.current.value
+      date: this.dateRef.current.value,
+      hours: parseFloat(this.hoursRef.current.value)
     };
     this.props.sumHours(this.hoursRef.current.value);
     this.props.addTask(task);
     event.currentTarget.reset();
   };
 
-  addDate = () => {
-    const x = document.createElement("INPUT");
-    x.setAttribute("type", "date");
-  };
   render() {
     //admin form
     if (this.props.taskType === "admin") {
       return (
         <form className="task-edit" onSubmit={this.createTask_admin}>
-          {/* <label>Date: </label> */}
           <span>Date </span>
           <input name="date" ref={this.dateRef} type="date" required />
           <br />
-
-          <span>Select One of the Categories</span>
-          {/* <p>Select One of the Categories</p> */}
+          <span>Task Type</span>
           <select name="type" ref={this.categoryAdminRef}>
             <option value="Leave">Leave</option>
             <option value="Meeting">Meeting</option>
@@ -73,8 +66,7 @@ class AddForm extends React.Component {
           </select>
           <br />
 
-          <span>Please Input Hours for This Task</span>
-          {/* <p>Please input hours for this task</p> */}
+          <span>Hours for This Task</span>
           <input
             name="hours"
             ref={this.hoursRef}
@@ -100,7 +92,7 @@ class AddForm extends React.Component {
         <input name="date" ref={this.dateRef} type="date" required />
         <br />
         {/* <p>Select the Course Task Type</p> */}
-        <span>Select the Course Task Type</span>
+        <span>Course Type</span>
         <select name="type" ref={this.courseTypeRef}>
           <option value="New Course">New Course</option>
           <option value="Course Maintenance">Course Maintenance</option>
@@ -109,7 +101,7 @@ class AddForm extends React.Component {
         <br />
 
         {/* <p>Select the Program</p> */}
-        <span>Select the Program</span>
+        <span>Program</span>
         <input
           name="program"
           ref={this.programRef}
@@ -117,7 +109,7 @@ class AddForm extends React.Component {
           placeholder="Program name"
         />
 
-        <span>Select the Instructor</span>
+        <span>Instructor</span>
         {/* <p>Select the Instructor</p> */}
         <input
           name="instructor"
@@ -127,7 +119,7 @@ class AddForm extends React.Component {
         />
         <br />
 
-        <span>Select One of the Categories</span>
+        <span>Task Type</span>
         {/* <p>Select One of the Categories</p> */}
         <select name="type" ref={this.categoryRef}>
           <option value="Content Development">Content Development</option>
@@ -136,7 +128,7 @@ class AddForm extends React.Component {
         </select>
         <br />
 
-        <span>Please Input Hours for This Task</span>
+        <span>Hours for This Task</span>
         {/* <p>Please input hours for this task</p> */}
         <input
           name="hours"

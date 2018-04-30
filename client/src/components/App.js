@@ -16,9 +16,9 @@ class App extends React.Component {
   //need to work on localstorage for timer
   componentDidMount() {
     this.timerID = setInterval(() => this.tick(), 1000); //for time
-    fetch("/users")
-      .then(res => res.json())
-      .then(users => this.setState({ users: users }));
+    // fetch("/users")
+    //   .then(res => res.json())
+    //   .then(users => this.setState({ users: users }));
   }
 
   componentWillUnmount() {
@@ -51,6 +51,12 @@ class App extends React.Component {
     }).then(function(data) {
       console.log(data); //error
     });
+  };
+
+  goToReport = () => {
+    console.log("test repot");
+    this.props.history.push(`/report/`);
+    // 1. stop the form from submitting
   };
 
   addTask = task => {
@@ -86,6 +92,7 @@ class App extends React.Component {
           })}
         </div> */}
         <div className="guide">
+          <button onClick={this.goToReport}>Report</button>
           <button>Course Help Guide</button>
           <button>Administration Help Guide</button>
         </div>
@@ -103,7 +110,6 @@ class App extends React.Component {
           details={this.state.tasks}
           taskType={this.state.taskType}
           totalHours={this.state.totalHours}
-          handleDate={this.handleDate}
           date={this.state.date}
           handleSubmit={this.handleSubmit}
         />
