@@ -40,9 +40,13 @@ class App extends React.Component {
       date: now
     });
   }
-  //need to work on this; decide which data to submit
+
   handleSubmit = () => {
-    //console.log(this.state.tasks);
+    if (this.isEmpty(this.state.tasks)) {
+      alert("You should have at least one task to submit.");
+      console.log("User tries to submit empty task");
+      return;
+    }
     let data = this.state;
     fetch("/submit", {
       method: "POST",
@@ -52,6 +56,10 @@ class App extends React.Component {
       console.log(data); //error
     });
   };
+  //helper method for checking empty object(tasks)
+  isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+  }
 
   goToReport = () => {
     console.log("test repot");

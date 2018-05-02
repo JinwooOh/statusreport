@@ -57,7 +57,7 @@ app.post("/submit", (req, res) => {
   //console.log(req.body.tasks);
   const tasks = req.body.tasks; //json; need to parse this
   const totalHours = req.body.totalHours; //int
-  const date = req.body.date; //date type is string
+  const date = req.body.date; //submit date (date type is string)
   console.log(tasks);
   // Tasks post
   for (let task in tasks) {
@@ -95,15 +95,14 @@ app.post("/submit", (req, res) => {
   }
   // User post
 
-  //need to be changed after parsing the data
-  connection.query(
-    "INSERT INTO `coursetable` (CompletionDate) VALUES (?)",
-    date,
-    function(err, result) {
-      if (err) throw err;
-      console.log("1 record inserted");
-    }
-  );
+  //submit date
+  connection.query("INSERT INTO `user` (date) VALUES (?)", date, function(
+    err,
+    result
+  ) {
+    if (err) throw err;
+    console.log("1 record inserted");
+  });
 });
 
 const port = 5000;

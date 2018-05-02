@@ -1,33 +1,95 @@
 import React, { Component } from "react";
+import Autosuggest from "react-autosuggest";
+
+let userData = [
+  {
+    name: "jinwoo"
+  },
+  {
+    name: "MDolores"
+  },
+  {
+    name: "Meh"
+  }
+];
+
+// Teach Autosuggest how to calculate suggestions for any given input value.
+const getSuggestions = value => {
+  const inputValue = value.trim().toLowerCase();
+  const inputLength = inputValue.length;
+
+  return inputLength === 0
+    ? []
+    : userData.filter(
+        user => user.name.toLowerCase().slice(0, inputLength) === inputValue
+      );
+};
+
+// When suggestion is clicked, Autosuggest needs to populate the input
+// based on the clicked suggestion. Teach Autosuggest how to calculate the
+// input value for every given suggestion.
+const getSuggestionValue = suggestion => suggestion.name;
+
+// Use your imagination to render suggestions.
+const renderSuggestion = suggestion => <div>{suggestion.name}</div>;
 
 class Report extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      value: "",
+      suggestions: [],
       users: [] //test purpose
     };
   }
+
   componentDidMount() {
     fetch("/users")
       .then(res => res.json())
-      .then(users => this.setState({ users: users }));
+      .then(users => {
+        userData = users;
+        this.setState({ users: users });
+      });
   }
+  onChange = (event, { newValue }) => {
+    this.setState({
+      value: newValue
+    });
+  };
+
+  // Autosuggest will call this function every time you need to update suggestions.
+  // You already implemented this logic above, so just use it.
+  onSuggestionsFetchRequested = ({ value }) => {
+    this.setState({
+      suggestions: getSuggestions(value)
+    });
+  };
+
+  // Autosuggest will call this function every time you need to clear suggestions.
+  onSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: []
+    });
+  };
 
   render() {
+    const { value, suggestions } = this.state;
+    // Autosuggest will pass through all these props to the input.
+    const inputProps = {
+      placeholder: "Type instructor name",
+      value,
+      onChange: this.onChange
+    };
     return (
       <div className="form-list">
-        <div>
-          {this.state.users.map((key, i) => {
-            return (
-              <div>
-                <p key={i}>
-                  Name: {key.name} Email: {key.email}
-                  <button>Search</button>
-                </p>
-              </div>
-            );
-          })}
-        </div>
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputProps}
+        />
       </div>
     );
   }
