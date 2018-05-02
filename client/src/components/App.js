@@ -1,6 +1,7 @@
 import React from "react";
 import Forms from "./Forms";
 import Tasks from "./Tasks";
+import Popup from "react-popup";
 // import TaskSelector from "./TaskSelector";
 class App extends React.Component {
   constructor(props) {
@@ -43,7 +44,8 @@ class App extends React.Component {
 
   handleSubmit = () => {
     if (this.isEmpty(this.state.tasks)) {
-      alert("You should have at least one task to submit.");
+      Popup.alert("You should have at least one task to submit.");
+
       console.log("User tries to submit empty task");
       return;
     }
@@ -111,6 +113,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="wrapper">
+        <Popup />
         <h1 className="App-title">Status Report</h1>
         {/* <div>
           {this.state.users.map((key, i) => {
