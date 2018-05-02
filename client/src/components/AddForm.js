@@ -8,16 +8,19 @@ class AddForm extends React.Component {
   dateRef = React.createRef();
   instructorRef = React.createRef();
   categoryRef = React.createRef();
+  courseNumberRef = React.createRef();
   //admin task
   categoryAdminRef = React.createRef();
 
   createTask = event => {
     event.preventDefault();
+    // console.log(this.dateRef.current.value);
     const task = {
       //course form
       taskType: "Course Task", // type of course
       program: this.programRef.current.value,
       courseType: this.courseTypeRef.current.value,
+      courseNumber: this.courseNumberRef.current.value,
       instructor: this.instructorRef.current.value,
       category: this.categoryRef.current.value,
       date: this.dateRef.current.value,
@@ -90,6 +93,7 @@ class AddForm extends React.Component {
         <span>Date </span>
         {/* <label>Date: </label> */}
         <input name="date" ref={this.dateRef} type="date" required />
+
         <br />
         {/* <p>Select the Course Task Type</p> */}
         <span>Course Type</span>
@@ -116,6 +120,16 @@ class AddForm extends React.Component {
           ref={this.instructorRef}
           type="text"
           placeholder="Instructor name"
+        />
+        <br />
+
+        <span>Course Number</span>
+        {/* <p>Select the Instructor</p> */}
+        <input
+          name="course number"
+          ref={this.courseNumberRef}
+          type="text"
+          placeholder="Course number"
         />
         <br />
 

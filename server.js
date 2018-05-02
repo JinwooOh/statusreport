@@ -4,7 +4,10 @@ const bodyParser = require("body-parser");
 
 const connection = mysql.createConnection({
   host: "eipd.dcs.wisc.edu",
-
+  user: "eipd_SR17",
+  password: "Lhoy*817",
+  database: "statusReports",
+  port: 3306
 });
 connection.connect(function(err) {
   if (err) {
@@ -62,13 +65,14 @@ app.post("/submit", (req, res) => {
       //course task
       const curTask = tasks[task];
       const sql =
-        "INSERT INTO `coursetable` (courseProgram, hours, courseTask, completionDate, courseInst, courseCat) VALUES (?)";
+        "INSERT INTO `coursetable` (courseProgram, hours, courseTask, completionDate, courseInst, courseNumber, courseCat) VALUES (?)";
       const values = [
         curTask.program,
         curTask.hours,
         curTask.courseType,
         curTask.date,
         curTask.instructor,
+        curTask.courseNumber,
         curTask.category
       ];
       connection.query(sql, [values], function(err, result) {

@@ -18,7 +18,14 @@ class Report extends Component {
       <div className="form-list">
         <div>
           {this.state.users.map((key, i) => {
-            return <p key={i}>{key.email}</p>;
+            return (
+              <div>
+                <p key={i}>
+                  Name: {key.name} Email: {key.email}
+                  <button>Search</button>
+                </p>
+              </div>
+            );
           })}
         </div>
       </div>

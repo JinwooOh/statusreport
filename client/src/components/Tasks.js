@@ -14,10 +14,11 @@ class Tasks extends React.Component {
         <li key={key}>
           <span>
             {task.taskType}
-            {": "} {task.type}
+            {":  "} {task.type}
             {"  "} {task.category}
             {"  "} {task.program}
             {"  "} {task.instructor}
+            {"  "} {task.courseNumber}
             {"  "} {task.date}
             {"  "} {task.hours} hours
             <button

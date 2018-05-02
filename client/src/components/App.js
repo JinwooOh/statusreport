@@ -58,6 +58,24 @@ class App extends React.Component {
     this.props.history.push(`/report/`);
     // 1. stop the form from submitting
   };
+  // handleDate = () => {
+  //   let today = new Date();
+  //   //today.toLocaleDateString("en-US");
+  //   let h = today.getHours();
+  //   let m = today.getMinutes();
+  //   let date = today.getDate();
+  //   let month = today.getMonth() + 1; //January is 0!
+  //   let year = today.getFullYear();
+  //   let ampm = h >= 12 ? "pm" : "am";
+  //   if (date < 10) {
+  //     date = "0" + date;
+  //   }
+  //   if (month < 10) {
+  //     month = "0" + month;
+  //   }
+  //   today = month + "/" + date + "/" + year + "/" + h + ":" + m + ampm;
+  //   console.log(today);
+  // };
 
   addTask = task => {
     const tasks = { ...this.state.tasks };
@@ -112,6 +130,7 @@ class App extends React.Component {
           totalHours={this.state.totalHours}
           date={this.state.date}
           handleSubmit={this.handleSubmit}
+          handleDate={this.handleDate}
         />
       </div>
     );

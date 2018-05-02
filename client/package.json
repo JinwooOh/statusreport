@@ -23,6 +23,6 @@
     "eject": "react-scripts eject",
     "start": "serve --single ./build"
   },
-
+  "homepage": "https://eipd.dcs.wisc.edu/all-status-reports/",
   "proxy": "http://localhost:5000"
 }
