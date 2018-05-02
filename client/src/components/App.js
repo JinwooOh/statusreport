@@ -44,7 +44,15 @@ class App extends React.Component {
 
   handleSubmit = () => {
     if (this.isEmpty(this.state.tasks)) {
-      Popup.alert("You should have at least one task to submit.");
+      let mySpecialPopup = Popup.register({
+        title: "Alert ",
+        content: "To report, you should add at least one task to summary.",
+        buttons: {
+          right: ["ok"]
+        }
+      });
+      Popup.queue(mySpecialPopup);
+      // Popup.alert("You should have at least one task to submit.");
 
       console.log("User tries to submit empty task");
       return;
@@ -113,7 +121,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        <Popup />
+        <Popup closeBtn={false} />
         <h1 className="App-title">Status Report</h1>
         {/* <div>
           {this.state.users.map((key, i) => {

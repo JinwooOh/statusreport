@@ -328,7 +328,7 @@ input:required {
   height: 100%;
   z-index: 1000;
   overflow: auto;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .mm-popup__close {
@@ -402,9 +402,10 @@ input:required {
 }
 
 .mm-popup__box {
-  width: 350px;
+  width: 340px;
+  text-align: center;
   position: fixed;
-  top: 10%;
+  top: 35%;
   left: 50%;
   margin-left: -175px;
   background: #fff;
@@ -424,14 +425,14 @@ input:required {
 .mm-popup__box__header__title {
   margin: 0;
   font-size: 16px;
-  text-align: left;
+  text-align: center;
   font-weight: 600;
 }
 
 .mm-popup__box__body {
-  padding: 20px;
+  padding: 12px;
   line-height: 1.4;
-  font-size: 14px;
+  font-size: 16px;
   color: #454b4d;
   background: #fff;
   position: relative;
