@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 
 const connection = mysql.createConnection({
   host: "eipd.dcs.wisc.edu",
-  user: "eipd_SR17"
+
 });
 connection.connect(function(err) {
   if (err) {
@@ -48,6 +48,16 @@ app.get("/coursetable", (req, res) => {
     }
   });
 });
+app.get("/subDate", (req, res) => {
+  connection.query("SELECT * FROM subDate", function(err, result, fields) {
+    if (err) {
+      console.log("Error in subDate query");
+    } else {
+      console.log("success");
+      res.json(result);
+    }
+  });
+});
 
 //post data, req.body graps all state data
 app.post("/submit", (req, res) => {
@@ -62,8 +72,9 @@ app.post("/submit", (req, res) => {
       //course task
       const curTask = tasks[task];
       const sql =
-        "INSERT INTO `coursetable` (courseProgram, hours, courseTask, completionDate, courseInst, courseNumber, courseCat) VALUES (?)";
+        "INSERT INTO `coursetable` (subDate, courseProgram, hours, courseTask, completionDate, courseInst, courseNumber, courseCat) VALUES (?)";
       const values = [
+        date,
         curTask.program,
         curTask.hours,
         curTask.courseType,
@@ -81,8 +92,8 @@ app.post("/submit", (req, res) => {
       //admin task
       const curTask = tasks[task];
       const sql =
-        "INSERT INTO `admintable` (hours, adminCat, completionDate) VALUES (?)";
-      const values = [curTask.hours, curTask.category, curTask.date];
+        "INSERT INTO `admintable` (subDate, hours, adminCat, completionDate) VALUES (?)";
+      const values = [date, curTask.hours, curTask.category, curTask.date];
       connection.query(sql, [values], function(err, result) {
         if (err) throw err;
         console.log("Number of records inserted: " + result.affectedRows);
@@ -93,7 +104,7 @@ app.post("/submit", (req, res) => {
   // User post
 
   //submit date
-  connection.query("INSERT INTO `user` (date) VALUES (?)", date, function(
+  connection.query("INSERT INTO `subDate` (subdate) VALUES (?)", date, function(
     err,
     result
   ) {

@@ -1,18 +1,8 @@
 import React, { Component } from "react";
 import Autosuggest from "react-autosuggest";
 
-let userData = [
-  {
-    name: "jinwoo"
-  },
-  {
-    name: "MDolores"
-  },
-  {
-    name: "Meh"
-  }
-];
-
+let userData = [{}];
+let subDateData = [{}];
 // Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
@@ -21,17 +11,17 @@ const getSuggestions = value => {
   return inputLength === 0
     ? []
     : userData.filter(
-        user => user.name.toLowerCase().slice(0, inputLength) === inputValue
+        user => user.email.toLowerCase().slice(0, inputLength) === inputValue
       );
 };
 
 // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
-const getSuggestionValue = suggestion => suggestion.name;
+const getSuggestionValue = suggestion => suggestion.email;
 
 // Use your imagination to render suggestions.
-const renderSuggestion = suggestion => <div>{suggestion.name}</div>;
+const renderSuggestion = suggestion => <div>{suggestion.email}</div>;
 
 class Report extends Component {
   constructor(props) {
@@ -39,7 +29,8 @@ class Report extends Component {
     this.state = {
       value: "",
       suggestions: [],
-      users: [] //test purpose
+      users: [], //test purpose
+      subDate: []
     };
   }
 
@@ -48,7 +39,13 @@ class Report extends Component {
       .then(res => res.json())
       .then(users => {
         userData = users;
-        this.setState({ users: users });
+        this.setState({ users });
+      });
+    fetch("/subDate")
+      .then(res => res.json())
+      .then(subDate => {
+        subDateData = subDate;
+        this.setState({ subDate });
       });
   }
   onChange = (event, { newValue }) => {

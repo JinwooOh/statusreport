@@ -25,7 +25,7 @@ class App extends React.Component {
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
-  //for time tracking
+  //for time tracking (submit date)
   tick() {
     let getDate = new Date();
     getDate.toISOString();
@@ -44,16 +44,15 @@ class App extends React.Component {
 
   handleSubmit = () => {
     if (this.isEmpty(this.state.tasks)) {
+      //popup message
       let mySpecialPopup = Popup.register({
-        title: "Alert ",
+        title: "Alert",
         content: "To report, you should add at least one task to summary.",
         buttons: {
           right: ["ok"]
         }
       });
       Popup.queue(mySpecialPopup);
-      // Popup.alert("You should have at least one task to submit.");
-
       console.log("User tries to submit empty task");
       return;
     }
@@ -64,6 +63,18 @@ class App extends React.Component {
       body: JSON.stringify(data)
     }).then(function(data) {
       console.log(data); //error
+    });
+    //popup message
+    let mySpecialPopup = Popup.register({
+      title: "Status Report",
+      content: "Report submitted. Thank you.",
+      buttons: {
+        right: ["ok"]
+      }
+    });
+    Popup.queue(mySpecialPopup);
+    this.setState({
+      tasks: {}
     });
   };
   //helper method for checking empty object(tasks)
@@ -129,7 +140,7 @@ class App extends React.Component {
           })}
         </div> */}
         <div className="guide">
-          <button onClick={this.goToReport}>Report</button>
+          <button onClick={this.goToReport}>Search</button>
           <button>Course Help Guide</button>
           <button>Administration Help Guide</button>
         </div>
