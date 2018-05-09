@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const connection = mysql.createConnection({
   host: "eipd.dcs.wisc.edu",
 
+  port: 3306
 });
 connection.connect(function(err) {
   if (err) {

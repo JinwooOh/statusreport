@@ -2,6 +2,7 @@ import React from "react";
 import Forms from "./Forms";
 import Tasks from "./Tasks";
 import Popup from "react-popup";
+
 // import TaskSelector from "./TaskSelector";
 class App extends React.Component {
   constructor(props) {
@@ -20,6 +21,16 @@ class App extends React.Component {
     // fetch("/users")
     //   .then(res => res.json())
     //   .then(users => this.setState({ users: users }));
+
+    //time
+    const localStorageRef = localStorage.getItem("date");
+    if (localStorageRef) {
+      this.setState({ date: JSON.parse(localStorageRef) });
+    }
+  }
+  componentDidUpdate() {
+    //time
+    localStorage.setItem("date", JSON.stringify(this.state.date));
   }
 
   componentWillUnmount() {
@@ -81,30 +92,9 @@ class App extends React.Component {
   isEmpty(obj) {
     return Object.keys(obj).length === 0;
   }
-
-  goToReport = () => {
-    console.log("test repot");
-    this.props.history.push(`/report/`);
-    // 1. stop the form from submitting
+  handlePop = () => {
+    console.log("test");
   };
-  // handleDate = () => {
-  //   let today = new Date();
-  //   //today.toLocaleDateString("en-US");
-  //   let h = today.getHours();
-  //   let m = today.getMinutes();
-  //   let date = today.getDate();
-  //   let month = today.getMonth() + 1; //January is 0!
-  //   let year = today.getFullYear();
-  //   let ampm = h >= 12 ? "pm" : "am";
-  //   if (date < 10) {
-  //     date = "0" + date;
-  //   }
-  //   if (month < 10) {
-  //     month = "0" + month;
-  //   }
-  //   today = month + "/" + date + "/" + year + "/" + h + ":" + m + ampm;
-  //   console.log(today);
-  // };
 
   addTask = task => {
     const tasks = { ...this.state.tasks };
@@ -134,15 +124,18 @@ class App extends React.Component {
       <div className="wrapper">
         <Popup closeBtn={false} />
         <h1 className="App-title">Status Report</h1>
-        {/* <div>
-          {this.state.users.map((key, i) => {
-            return <p key={i}>{key.email}</p>;
-          })}
-        </div> */}
+
         <div className="guide">
-          <button onClick={this.goToReport}>Search</button>
-          <button>Course Help Guide</button>
-          <button>Administration Help Guide</button>
+          <button
+            onClick={() => {
+              this.props.history.push(`/report/`);
+            }}
+          >
+            Search
+          </button>
+          <button onClick={this.handlePop}>General Infomation</button>
+          <button onClick={this.handlePop}>Course Help Guide</button>
+          <button onClick={this.handlePop}>Administration Help Guide</button>
         </div>
 
         <Forms

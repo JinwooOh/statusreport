@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Autosuggest from "react-autosuggest";
 
 let userData = [{}];
-let subDateData = [{}];
 // Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
@@ -29,8 +28,7 @@ class Report extends Component {
     this.state = {
       value: "",
       suggestions: [],
-      users: [], //test purpose
-      subDate: []
+      users: [] //test purpose
     };
   }
 
@@ -40,13 +38,8 @@ class Report extends Component {
       .then(users => {
         userData = users;
         this.setState({ users });
-      });
-    fetch("/subDate")
-      .then(res => res.json())
-      .then(subDate => {
-        subDateData = subDate;
-        this.setState({ subDate });
-      });
+      })
+      .catch(error => console.error("fetch error at componentDidMount", error)); //error
   }
   onChange = (event, { newValue }) => {
     this.setState({
