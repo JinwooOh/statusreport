@@ -79,9 +79,18 @@ li {
   padding: 0 10px 10px;
   justify-self: right;
 }
+.nameInput {
+  padding: 6px;
+  min-height: 13px;
+  display: inline-block;
+  width: 20%;
+  text-align: center;
+  font-size: 13px;
+}
 
 /* summary */
 .tasks-list {
+  padding-left: 30px;
   text-align: left;
   list-style-position: inside;
   padding-bottom: 42px;
@@ -131,9 +140,7 @@ input[type="submit"]:focus:after {
   background: var(--blue);
   color: white;
 }
-.summary button:after {
-  background: var(--darkBlue);
-}
+
 .form-list button {
   background: var(--blue);
   color: white;
@@ -145,7 +152,6 @@ input[type="submit"]:focus:after {
   margin: 0;
   padding: 6px;
 }
-
 /* button setting end */
 
 /* form setting */
@@ -522,5 +528,4 @@ input:required {
     margin-top: 10px;
   }
 }
-
-/* Popup component styling*/
+/* Popup component styling end*/

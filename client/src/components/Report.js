@@ -10,17 +10,18 @@ const getSuggestions = value => {
   return inputLength === 0
     ? []
     : userData.filter(
-        user => user.email.toLowerCase().slice(0, inputLength) === inputValue
+        user =>
+          user.instructor.toLowerCase().slice(0, inputLength) === inputValue
       );
 };
 
 // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
-const getSuggestionValue = suggestion => suggestion.email;
+const getSuggestionValue = suggestion => suggestion.instructor;
 
 // Use your imagination to render suggestions.
-const renderSuggestion = suggestion => <div>{suggestion.email}</div>;
+const renderSuggestion = suggestion => <div>{suggestion.instructor}</div>;
 
 class Report extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class Report extends Component {
   }
 
   componentDidMount() {
-    fetch("/users")
+    fetch("/courseinfo")
       .then(res => res.json())
       .then(users => {
         userData = users;

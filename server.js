@@ -3,9 +3,7 @@ const mysql = require("mysql");
 const bodyParser = require("body-parser");
 
 const connection = mysql.createConnection({
-  host: "eipd.dcs.wisc.edu",
-
-  port: 3306
+  host: "eipd.dcs.wisc.edu"
 });
 connection.connect(function(err) {
   if (err) {
@@ -24,7 +22,7 @@ app.get("/users", (req, res) => {
     if (err) {
       console.log("Error in users query");
     } else {
-      console.log("success");
+      console.log("users query success");
       res.json(result);
     }
   });
@@ -34,7 +32,7 @@ app.get("/admintable", (req, res) => {
     if (err) {
       console.log("Error in admintable query");
     } else {
-      console.log("success");
+      console.log("admintable query success");
       res.json(result);
     }
   });
@@ -44,7 +42,7 @@ app.get("/coursetable", (req, res) => {
     if (err) {
       console.log("Error in coursetable query");
     } else {
-      console.log("success");
+      console.log("coursetable query success");
       res.json(result);
     }
   });
@@ -54,7 +52,18 @@ app.get("/subDate", (req, res) => {
     if (err) {
       console.log("Error in subDate query");
     } else {
-      console.log("success");
+      console.log("subDate query success");
+      res.json(result);
+    }
+  });
+});
+//courseinfo
+app.get("/courseinfo", (req, res) => {
+  connection.query("SELECT * FROM courseinfo", function(err, result, fields) {
+    if (err) {
+      console.log("Error in courseinfo query");
+    } else {
+      console.log("courseinfo query success");
       res.json(result);
     }
   });
@@ -114,5 +123,5 @@ app.post("/submit", (req, res) => {
   });
 });
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => `Server running on port ${port}`);

@@ -12,4 +12,5 @@ const Router = () => (
     </Switch>
   </BrowserRouter>
 );
+// basename="/all-status-reports"
 export default Router;

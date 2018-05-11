@@ -12,6 +12,7 @@ class App extends React.Component {
       totalHours: 0,
       taskType: "course", //or"admin"
       date: {}, //to track submit date and time
+      userName: "",
       users: [] //test purpose
     };
   }
@@ -54,11 +55,12 @@ class App extends React.Component {
   }
 
   handleSubmit = () => {
-    if (this.isEmpty(this.state.tasks)) {
+    if (this.isEmpty(this.state.tasks) || this.isEmpty(this.state.userName)) {
       //popup message
       let mySpecialPopup = Popup.register({
         title: "Alert",
-        content: "To report, you should add at least one task to summary.",
+        content:
+          "To report, you should add at least one task to summary, and type your name at the bottom.",
         buttons: {
           right: ["ok"]
         }
@@ -85,7 +87,8 @@ class App extends React.Component {
     });
     Popup.queue(mySpecialPopup);
     this.setState({
-      tasks: {}
+      tasks: {},
+      totalHours: 0
     });
   };
   //helper method for checking empty object(tasks)
