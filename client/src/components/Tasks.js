@@ -5,9 +5,11 @@ import { CSSTransition } from "react-transition-group";
 
 class Tasks extends React.Component {
   nameRef = React.createRef();
+
   handleName = name => {
     name.preventDefault();
     console.log(this.nameRef.current.value);
+    this.props.addUser(this.nameRef.current.value);
   };
   renderTask = key => {
     const task = this.props.tasks[key];
@@ -53,8 +55,12 @@ class Tasks extends React.Component {
         </MuiThemeProvider> */}
 
         <ol className="tasks-list">{taskIds.map(this.renderTask)}</ol>
+
+        <p>Total Hours: {this.props.totalHours}</p>
+        <p>{this.props.date.toString()}</p>
         <input
-          className="nameInput"
+          className="userName"
+          name="userName"
           type="text"
           placeholder="Type your name"
           ref={this.nameRef}
@@ -62,9 +68,6 @@ class Tasks extends React.Component {
             this.handleName(e);
           }}
         />
-        <p>Total Hours: {this.props.totalHours}</p>
-        <p>{this.props.date.toString()}</p>
-
         <button onClick={this.props.handleSubmit}>Submit</button>
         <button
           onClick={() => {

@@ -79,7 +79,7 @@ li {
   padding: 0 10px 10px;
   justify-self: right;
 }
-.nameInput {
+.userName {
   padding: 6px;
   min-height: 13px;
   display: inline-block;
@@ -411,7 +411,7 @@ input:required {
   width: 340px;
   text-align: center;
   position: fixed;
-  top: 35%;
+  top: 23%;
   left: 50%;
   margin-left: -175px;
   background: #fff;
@@ -430,7 +430,7 @@ input:required {
 
 .mm-popup__box__header__title {
   margin: 0;
-  font-size: 16px;
+  font-size: 18px;
   text-align: center;
   font-weight: 600;
 }
@@ -447,6 +447,7 @@ input:required {
 
 .mm-popup__box__body p {
   margin: 0 0 5px;
+  text-align: left;
 }
 
 .mm-popup__box__footer {

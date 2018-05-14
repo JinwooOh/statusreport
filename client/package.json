@@ -7,17 +7,17 @@
     "express": "^4.16.3",
     "material-ui": "^0.20.0",
     "mysql": "^2.15.0",
-    "react": "^16.3.1",
+    "react": "^16.3.2",
     "react-addons-css-transition-group": "^15.6.2",
     "react-autosuggest": "^9.3.4",
-    "react-dom": "^16.3.1",
+    "react-dom": "^16.3.2",
     "react-popup": "^0.9.2",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
     "react-transition-group": "^2.3.1",
     "reactjs-popup": "^1.1.1",
-    "serve": "^6.5.3"
+    "serve": "^6.5.6"
   },
   "scripts": {
     "dev": "react-scripts start",

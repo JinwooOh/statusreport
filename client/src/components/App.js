@@ -88,15 +88,55 @@ class App extends React.Component {
     Popup.queue(mySpecialPopup);
     this.setState({
       tasks: {},
-      totalHours: 0
+      totalHours: 0,
+      userName: ""
     });
   };
   //helper method for checking empty object(tasks)
   isEmpty(obj) {
     return Object.keys(obj).length === 0;
   }
-  handlePop = () => {
-    console.log("test");
+  handlePop = e => {
+    if (e === "general-info") {
+      let mySpecialPopup = Popup.register({
+        title: "Information",
+        content: (
+          <div>
+            <p>AIMS: 608-265-6900</p>
+            <p>
+              Web server link:&nbsp;
+              <a href="https://webhosting.doit.wisc.edu/panel/">Web server</a>
+            </p>
+          </div>
+        ),
+        buttons: {
+          right: ["ok"]
+        }
+      });
+      Popup.queue(mySpecialPopup);
+      return;
+    }
+    if (e === "course-info") {
+      let mySpecialPopup = Popup.register({
+        title: "Information",
+        content: "Bip.. courseInfo.. Bip..",
+        buttons: {
+          right: ["ok"]
+        }
+      });
+      Popup.queue(mySpecialPopup);
+      return;
+    } else {
+      let mySpecialPopup = Popup.register({
+        title: "Information",
+        content: "Bip.. adminInfo.. Bip..",
+        buttons: {
+          right: ["ok"]
+        }
+      });
+      Popup.queue(mySpecialPopup);
+      return;
+    }
   };
 
   addTask = task => {
@@ -104,6 +144,11 @@ class App extends React.Component {
     tasks[`task${Date.now()}`] = task;
     this.setState({
       tasks
+    });
+  };
+  addUser = userName => {
+    this.setState({
+      userName
     });
   };
   sumHours = hours => {
@@ -136,9 +181,15 @@ class App extends React.Component {
           >
             Search
           </button>
-          <button onClick={this.handlePop}>General Infomation</button>
-          <button onClick={this.handlePop}>Course Help Guide</button>
-          <button onClick={this.handlePop}>Administration Help Guide</button>
+          <button onClick={() => this.handlePop("general-info")}>
+            General Infomation
+          </button>
+          <button onClick={() => this.handlePop("course-info")}>
+            Course Help Guide
+          </button>
+          <button onClick={() => this.handlePop("admin-info")}>
+            Administration Help Guide
+          </button>
         </div>
 
         <Forms
@@ -150,11 +201,12 @@ class App extends React.Component {
 
         <Tasks
           tasks={this.state.tasks}
-          removeTask={this.removeTask}
           details={this.state.tasks}
+          date={this.state.date}
+          addUser={this.addUser}
+          removeTask={this.removeTask}
           taskType={this.state.taskType}
           totalHours={this.state.totalHours}
-          date={this.state.date}
           handleSubmit={this.handleSubmit}
           handleDate={this.handleDate}
         />
