@@ -1,25 +1,35 @@
 const express = require("express");
 const mysql = require("mysql");
-const bodyParser = require("body-parser");
+const config = require("config");
+const helmet = require("helmet");
 
+//Database config
 const connection = mysql.createConnection({
-  host: "eipd.dcs.wisc.edu",
-
+  host: config.get("dbConfg.host"),
+  user: config.get("dbConfg.user"),
+  password: config.get("dbConfg.password"),
+  database: config.get("dbConfg.database"),
+  port: config.get("dbConfg.port")
 });
-connection.connect(function (err) {
+
+connection.connect(function(err) {
   if (err) {
-    console.log("Fail to Connect!");
+    console.log("Fail to Connect");
   } else {
     console.log("Connected!");
   }
 });
 
 const app = express();
-app.use(bodyParser.json()); //application / json
-app.use(bodyParser.urlencoded({ extended: true }));
-//fetch data; we might not need to fetch all data
+
+//Middleware settings
+app.use(express.json()); //application / json
+app.use(express.urlencoded({ extended: true }));
+app.use(helmet());
+
+//Fetch data
 app.get("/users", (req, res) => {
-  connection.query("SELECT * FROM user", function (err, result, fields) {
+  connection.query("SELECT * FROM user", function(err, result, fields) {
     if (err) {
       console.log("Error in users query");
     } else {
@@ -28,8 +38,9 @@ app.get("/users", (req, res) => {
     }
   });
 });
+
 app.get("/admintable", (req, res) => {
-  connection.query("SELECT * FROM admintable", function (err, result, fields) {
+  connection.query("SELECT * FROM admintable", function(err, result, fields) {
     if (err) {
       console.log("Error in admintable query");
     } else {
@@ -38,8 +49,9 @@ app.get("/admintable", (req, res) => {
     }
   });
 });
+
 app.get("/coursetable", (req, res) => {
-  connection.query("SELECT * FROM coursetable", function (err, result, fields) {
+  connection.query("SELECT * FROM coursetable", function(err, result, fields) {
     if (err) {
       console.log("Error in coursetable query");
     } else {
@@ -48,8 +60,9 @@ app.get("/coursetable", (req, res) => {
     }
   });
 });
+
 app.get("/subDate", (req, res) => {
-  connection.query("SELECT * FROM subDate", function (err, result, fields) {
+  connection.query("SELECT * FROM subDate", function(err, result, fields) {
     if (err) {
       console.log("Error in subDate query");
     } else {
@@ -58,9 +71,10 @@ app.get("/subDate", (req, res) => {
     }
   });
 });
+
 //courseinfo
 app.get("/courseinfo", (req, res) => {
-  connection.query("SELECT * FROM courseinfo", function (err, result, fields) {
+  connection.query("SELECT * FROM courseinfo", function(err, result, fields) {
     if (err) {
       console.log("Error in courseinfo query");
     } else {
@@ -96,7 +110,7 @@ app.post("/submit", (req, res) => {
         curTask.category,
         userName
       ];
-      connection.query(sql, [values], function (err, result) {
+      connection.query(sql, [values], function(err, result) {
         if (err) throw err;
         console.log("Number of records inserted: " + result.affectedRows);
       });
@@ -113,7 +127,7 @@ app.post("/submit", (req, res) => {
         curTask.date,
         userName
       ];
-      connection.query(sql, [values], function (err, result) {
+      connection.query(sql, [values], function(err, result) {
         if (err) throw err;
         console.log("Number of records inserted: " + result.affectedRows);
       });
@@ -123,7 +137,7 @@ app.post("/submit", (req, res) => {
   // subDate Post: subdate, userID,
   const sql = "INSERT INTO `subDate` (subDate, userID) VALUES (?)";
   const values = [date, userName];
-  connection.query(sql, [values], function (err, result) {
+  connection.query(sql, [values], function(err, result) {
     if (err) throw err;
     console.log("submitdate inserted: " + result.affectedRows);
   });
@@ -131,4 +145,4 @@ app.post("/submit", (req, res) => {
 });
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => `Server running on port ${port}`);
+app.listen(port, () => console.log(`Server running on port ${port}`));
