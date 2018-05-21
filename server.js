@@ -135,11 +135,11 @@ app.post("/submit", (req, res) => {
     }
   }
   // subDate Post: subdate, userID,
-  const sql = "INSERT INTO `subDate` (subDate, userID) VALUES (?)";
-  const values = [date, userName];
+  const sql = "INSERT INTO `subDate` (subDate, userID, totalHours) VALUES (?)";
+  const values = [date, userName, totalHours];
   connection.query(sql, [values], function(err, result) {
     if (err) throw err;
-    console.log("submitdate inserted: " + result.affectedRows);
+    console.log("subDate inserted: " + result.affectedRows);
   });
   console.log(values);
 });

@@ -12,11 +12,10 @@ class App extends React.Component {
       totalHours: 0,
       taskType: "course", //or"admin"
       date: {}, //to track submit date and time
-      userName: "",
-      users: [] //test purpose
+      userName: ""
     };
   }
-  //need to work on localstorage for timer
+
   componentDidMount() {
     this.timerID = setInterval(() => this.tick(), 1000); //for time
     // fetch("/users")
@@ -37,6 +36,7 @@ class App extends React.Component {
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
+
   //for time tracking (submit date)
   tick() {
     let getDate = new Date();
@@ -75,7 +75,7 @@ class App extends React.Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     }).then(function(data) {
-      console.log(data); //error
+      console.log("State: ", data); //error
     });
     //popup message
     let mySpecialPopup = Popup.register({
@@ -201,6 +201,7 @@ class App extends React.Component {
 
         <Tasks
           tasks={this.state.tasks}
+          userName={this.state.userName}
           details={this.state.tasks}
           date={this.state.date}
           addUser={this.addUser}
