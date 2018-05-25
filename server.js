@@ -84,32 +84,53 @@ app.get("/courseinfo", (req, res) => {
   });
 });
 
-//search
-app.get("/search/:userID/:startDate/:endDate", (req, res) => {
+//search by user (coursetble)
+app.get("/search/coursetable/:userID/:startDate/:endDate", (req, res) => {
   console.log(req.params.userID);
   console.log(req.params.startDate);
   console.log(req.params.endDate);
 
-  const name = req.params.userID;
-  res.json(name);
-  // connection.query("SELECT * FROM coursetable", function(err, result, fields) {
-  //   if (err) {
-  //     console.log("Error in coursetable query");
-  //   } else {
-  //     const courseMatch = result.find(c => c.userID === name);
-  //     console.log(courseMatch);
-  //     res.json(result);
-  //   }
-  // });
-  // connection.query("SELECT * FROM admintable", function(err, result, fields) {
-  //   if (err) {
-  //     console.log("Error in admintable query");
-  //   } else {
-  //     const adminMatch = result.find(c => c.userID === name);
-  //     console.log(adminMatch);
-  //     res.json(result);
-  //   }
-  // });
+  const userID = req.params.userID;
+  const startDate = req.params.startDate;
+  const endDate = req.params.endDate;
+  //connection.query("SELECT * FROM coursetable");
+  // res.json(name);
+  connection.query(
+    `SELECT * FROM coursetable
+    WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
+    AND userID='${userID}'`,
+    function(err, result, fields) {
+      if (err) {
+        console.log("Error in coursetable query");
+      } else {
+        console.log(result);
+        res.json(result);
+      }
+    }
+  );
+});
+//search by user (admintable)
+app.get("/search/admintable/:userID/:startDate/:endDate", (req, res) => {
+  console.log(req.params.userID);
+  console.log(req.params.startDate);
+  console.log(req.params.endDate);
+
+  const userID = req.params.userID;
+  const startDate = req.params.startDate;
+  const endDate = req.params.endDate;
+  connection.query(
+    `SELECT * FROM admintable
+    WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
+    AND userID='${userID}'`,
+    function(err, result, fields) {
+      if (err) {
+        console.log("Error in admintable query");
+      } else {
+        console.log(result);
+        res.json(result);
+      }
+    }
+  );
 });
 
 //post data, req.body graps all state data

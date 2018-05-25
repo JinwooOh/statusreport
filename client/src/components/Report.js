@@ -9,9 +9,11 @@ class Report extends Component {
     super(props);
     this.state = {
       searchType: "user", //or program
-      searchOptions: {},
-      admintable: [],
-      coursetable: []
+      searchOptions: {}, //search options from SearchType
+      searchAdmin: [], //result of search by user
+      searchCourse: [], //result search by user
+      admintable: [], //consider to delete...
+      coursetable: [] //consider to delete...
     };
   }
 
@@ -85,13 +87,31 @@ class Report extends Component {
     let startDate = this.state.searchOptions.startDate;
     let endDate = this.state.searchOptions.endDate;
 
-    let url = `/search/${userID}/${startDate}/${endDate}`;
-    fetch(url)
+    let urlCourse = `/search/coursetable/${userID}/${startDate}/${endDate}`;
+    let urlAdmin = `/search/admintable/${userID}/${startDate}/${endDate}`;
+    //search by user
+    fetch(urlCourse)
       .then(res => res.json())
       .then(json => {
         console.info(json);
+        this.setState({
+          searchCourse: json
+        });
       })
       .catch(error => console.error("fetch error at search", error)); //error
+    fetch(urlAdmin)
+      .then(res => res.json())
+      .then(json => {
+        console.info(json);
+        this.setState({
+          searchAdmin: json
+        });
+      })
+      .catch(error => console.error("fetch error at search", error)); //error
+    //clear state
+    this.setState({
+      searchOptions: {}
+    });
   };
 
   render() {
