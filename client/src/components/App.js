@@ -2,6 +2,7 @@ import React from "react";
 import Forms from "./Forms";
 import Tasks from "./Tasks";
 import Popup from "react-popup";
+import { dateNow } from "./Helper";
 
 // import TaskSelector from "./TaskSelector";
 class App extends React.Component {
@@ -17,7 +18,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.timerID = setInterval(() => this.tick(), 1000); //for time
+    this.timerID = setInterval(() => this.updateDate(), 1000); //for time
     // fetch("/users")
     //   .then(res => res.json())
     //   .then(users => this.setState({ users: users }));
@@ -36,23 +37,11 @@ class App extends React.Component {
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
-
-  //for time tracking (submit date)
-  tick() {
-    let getDate = new Date();
-    getDate.toISOString();
-    let ampm = "am";
-    let h = getDate.getHours();
-    if (h >= 12) {
-      h -= 12;
-      ampm = "pm";
-    }
-    let m = getDate.getMinutes();
-    let now = getDate.toDateString() + " " + h + ":" + m + ampm;
+  updateDate = () => {
     this.setState({
-      date: now
+      date: dateNow()
     });
-  }
+  };
 
   handleSubmit = () => {
     if (this.isEmpty(this.state.tasks) || this.isEmpty(this.state.userName)) {
@@ -105,7 +94,13 @@ class App extends React.Component {
             <p>AIMS: 608-265-6900</p>
             <p>
               Web server link:&nbsp;
-              <a href="https://webhosting.doit.wisc.edu/panel/">Web server</a>
+              <a
+                href="https://webhosting.doit.wisc.edu/panel/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Web server
+              </a>
             </p>
           </div>
         ),
@@ -119,7 +114,26 @@ class App extends React.Component {
     if (e === "course-info") {
       let mySpecialPopup = Popup.register({
         title: "Information",
-        content: "Bip.. courseInfo.. Bip..",
+        content: (
+          <div>
+            <h3>CMS Layout</h3>
+            <p>Community of Practice Sites</p>
+            <p>Course Structure</p>
+            <p>Discussions: Create</p>
+            <p>Discussions: Update</p>
+            <p>Gradebook</p>
+            <p>Lectures</p>
+            <p>Lessons/Labs/HTML</p>
+            <p>Module Creation/Organization</p>
+            <p>News Items</p>
+            <p>Quiz: Create</p>
+            <p>Quiz: Update</p>
+            <p>Setup Canvas Site</p>
+            <p>Start Here</p>
+            <p>Unit Content</p>
+            <p>Update Gradebook</p>
+          </div>
+        ),
         buttons: {
           right: ["ok"]
         }
@@ -175,6 +189,7 @@ class App extends React.Component {
 
         <div className="guide">
           <button
+            className="btn-search"
             onClick={() => {
               this.props.history.push(`/report/`);
             }}
@@ -182,7 +197,7 @@ class App extends React.Component {
             Search
           </button>
           <button onClick={() => this.handlePop("general-info")}>
-            General Infomation
+            General Information
           </button>
           <button onClick={() => this.handlePop("course-info")}>
             Course Help Guide
@@ -209,7 +224,6 @@ class App extends React.Component {
           taskType={this.state.taskType}
           totalHours={this.state.totalHours}
           handleSubmit={this.handleSubmit}
-          handleDate={this.handleDate}
         />
       </div>
     );

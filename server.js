@@ -84,6 +84,34 @@ app.get("/courseinfo", (req, res) => {
   });
 });
 
+//search
+app.get("/search/:userID/:startDate/:endDate", (req, res) => {
+  console.log(req.params.userID);
+  console.log(req.params.startDate);
+  console.log(req.params.endDate);
+
+  const name = req.params.userID;
+  res.json(name);
+  // connection.query("SELECT * FROM coursetable", function(err, result, fields) {
+  //   if (err) {
+  //     console.log("Error in coursetable query");
+  //   } else {
+  //     const courseMatch = result.find(c => c.userID === name);
+  //     console.log(courseMatch);
+  //     res.json(result);
+  //   }
+  // });
+  // connection.query("SELECT * FROM admintable", function(err, result, fields) {
+  //   if (err) {
+  //     console.log("Error in admintable query");
+  //   } else {
+  //     const adminMatch = result.find(c => c.userID === name);
+  //     console.log(adminMatch);
+  //     res.json(result);
+  //   }
+  // });
+});
+
 //post data, req.body graps all state data
 app.post("/submit", (req, res) => {
   //console.log(req.body.tasks);

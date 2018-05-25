@@ -152,6 +152,14 @@ input[type="submit"]:focus:after {
   margin: 0;
   padding: 6px;
 }
+
+.btn-search {
+  border: 1px solid var(--darkBlue);
+}
+.btn-back {
+  border: 1px solid var(--darkBlue);
+}
+
 /* button setting end */
 
 /* form setting */
