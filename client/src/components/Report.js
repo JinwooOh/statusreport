@@ -124,6 +124,7 @@ class Report extends Component {
             className="btn-back"
             onClick={() => {
               this.props.history.push(`/`);
+              //this.props.history.push(`/all-status-reports/`);
             }}
           >
             Back to Report Page
@@ -138,18 +139,10 @@ class Report extends Component {
           addSearchOptions={this.addSearchOptions}
           handleSearch={this.handleSearch}
         />
-        <SearchResult />
-        {/* {this.state.admintable.map(admin => {
-          return (
-            <div>
-              <p>{admin.completionDate}</p>
-              <p>{admin.subDate}</p>
-              <p>{admin.hour}</p>
-              <p>{admin.adminCat}</p>
-              <p>{admin.userID}</p>
-            </div>
-          );
-        })} */}
+        <SearchResult
+          searchCourse={this.state.searchCourse}
+          searchAdmin={this.state.searchAdmin}
+        />
       </div>
     );
   }
