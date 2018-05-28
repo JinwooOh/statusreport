@@ -43,7 +43,7 @@ class SearchResult extends React.Component {
     ];
 
     return (
-      <div className="summary">
+      <div className="summary summary--search">
         <h2>Search Result</h2>
         <ReactTable data={data} columns={columns} />
 

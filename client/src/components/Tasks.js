@@ -109,8 +109,8 @@ class Tasks extends React.Component {
     const taskIds = Object.keys(this.props.tasks);
 
     return (
-      <div className="summary">
-        <h2>Summary</h2>
+      <div className="summary summary--report">
+        <h2 className="heading-primary">Summary</h2>
         {/* <MuiThemeProvider>
           <TaskCard
             tasks={this.props.tasks}

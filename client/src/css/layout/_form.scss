@@ -3,7 +3,6 @@
   padding: 2rem;
   background-color: white;
   margin: auto;
-  margin-top: 2rem;
   line-height: 3rem;
 }
 .task-edit span {
@@ -15,13 +14,8 @@
   width: 35%;
   text-align: right;
 }
-.task-edit input {
-  padding: 0.5rem;
-  min-height: 2.5rem;
-  display: inline-block;
-  width: 35%;
-}
-.task-edit select {
+.task-edit input,
+select {
   padding: 0.5rem;
   min-height: 2.5rem;
   display: inline-block;

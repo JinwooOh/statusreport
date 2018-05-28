@@ -33,8 +33,12 @@
   background: white;
   box-shadow: 0 0 1rem #888888;
   margin: 1rem;
-  -webkit-animation: fadein 0.5s;
-  animation: fadein 0.5s;
+  &--search {
+    animation: moveInRight 0.5s;
+  }
+  &--report {
+    animation: moveInLeft 0.5s;
+  }
 }
 .summary {
   grid-area: summary;
@@ -45,6 +49,10 @@
   text-align: center;
   padding: 1rem;
   margin: 1rem;
-  -webkit-animation: fadein 1.2s;
-  animation: fadein 1.2s;
+  &--search {
+    animation: moveInRight 1s;
+  }
+  &--report {
+    animation: moveInLeft 1s;
+  }
 }
