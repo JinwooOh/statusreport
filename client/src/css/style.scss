@@ -1,0 +1,22 @@
+@import "abstracts/variables";
+
+@import "base/_base";
+@import "base/_animation";
+@import "base/_typography";
+
+@import "layout/_grid";
+@import "layout/_summary";
+@import "layout/_form";
+
+@import "components/_buttons";
+
+@import "vendors/_popup";
+@import "vendors/_autosuggestion";
+
+/* summary */
+.tasks-list {
+  padding-left: 3rem;
+  text-align: left;
+  list-style-position: inside;
+  padding-bottom: 4.2rem;
+}

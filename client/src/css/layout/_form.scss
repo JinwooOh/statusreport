@@ -1,0 +1,29 @@
+/* form setting */
+.task-edit {
+  padding: 2rem;
+  background-color: white;
+  margin: auto;
+  margin-top: 2rem;
+  line-height: 3rem;
+}
+.task-edit span {
+  padding: 0.5rem;
+  padding-left: 4rem;
+  padding-right: 2rem;
+  display: inline-block;
+  vertical-align: top;
+  width: 35%;
+  text-align: right;
+}
+.task-edit input {
+  padding: 0.5rem;
+  min-height: 2.5rem;
+  display: inline-block;
+  width: 35%;
+}
+.task-edit select {
+  padding: 0.5rem;
+  min-height: 2.5rem;
+  display: inline-block;
+  width: 35%;
+}

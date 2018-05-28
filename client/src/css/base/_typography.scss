@@ -1,0 +1,28 @@
+h2 {
+  color: $color-blue;
+}
+
+li {
+  height: 3.4rem;
+}
+
+/* input box */
+input[type="text"],
+select {
+  margin: 0.4rem 0;
+  display: inline-block;
+  border: 0.1rem solid #ccc;
+  border-radius: 0.4rem;
+}
+input:required {
+  border: 0.1rem solid #ffa5a5;
+  border-radius: 0.4rem;
+}
+
+/* summary */
+.tasks-list {
+  padding-left: 3rem;
+  text-align: left;
+  list-style-position: inside;
+  padding-bottom: 4.2rem;
+}

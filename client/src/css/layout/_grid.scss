@@ -1,0 +1,50 @@
+.wrapper {
+  display: grid;
+  grid-gap: 0.2rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas:
+    "App-title App-title App-title App-title"
+    "guide guide guide guide"
+    /* "taskSelector taskSelector taskSelector taskSelector" */
+    "form form form form "
+    "summary summary summary summary";
+}
+
+.App-title {
+  grid-area: App-title;
+  padding: 3rem;
+  text-align: center;
+  font-size: 4.8rem;
+  font-weight: 300;
+  color: $color-gray-dark;
+}
+
+.guide {
+  grid-area: guide;
+  padding: 0 1rem 1rem;
+  justify-self: right;
+}
+
+.form-list {
+  grid-area: form;
+  border-radius: 0.3rem;
+  border-top: 0.5rem solid $color-blue;
+  background: white;
+  box-shadow: 0 0 1rem #888888;
+  margin: 1rem;
+  -webkit-animation: fadein 0.5s;
+  animation: fadein 0.5s;
+}
+.summary {
+  grid-area: summary;
+  border-radius: 0.3rem;
+  border-top: 0.5rem solid skyblue;
+  background: white;
+  box-shadow: 0 0 1rem #888888;
+  text-align: center;
+  padding: 1rem;
+  margin: 1rem;
+  -webkit-animation: fadein 1.2s;
+  animation: fadein 1.2s;
+}
