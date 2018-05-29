@@ -13,11 +13,6 @@
 
 .App-title {
   grid-area: App-title;
-  padding: 3rem;
-  text-align: center;
-  font-size: 4.8rem;
-  font-weight: 300;
-  color: $color-gray-dark;
 }
 
 .guide {
@@ -34,10 +29,10 @@
   box-shadow: 0 0 1rem #888888;
   margin: 1rem;
   &--search {
-    animation: moveInRight 0.5s;
+    animation: moveInRight 0.3s;
   }
   &--report {
-    animation: moveInLeft 0.5s;
+    animation: moveInLeft 0.3s;
   }
 }
 .summary {
@@ -50,9 +45,9 @@
   padding: 1rem;
   margin: 1rem;
   &--search {
-    animation: moveInRight 1s;
+    animation: moveInRight 0.5s;
   }
   &--report {
-    animation: moveInLeft 1s;
+    animation: moveInLeft 0.5s;
   }
 }

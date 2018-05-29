@@ -70,8 +70,10 @@ class Tasks extends React.Component {
   };
   renderTask = key => {
     const task = this.props.tasks[key];
+
     return (
       <CSSTransition
+        key={key}
         in={true}
         classNames="summary"
         appear={true}
@@ -87,13 +89,13 @@ class Tasks extends React.Component {
             {"  "} {task.courseNumber}
             {"  "} {task.date}
             {"  "} {task.hours} hours
-            <button
-              className="remove-btn"
-              onClick={() => this.props.removeTask(key)}
-            >
-              Remove
-            </button>
           </span>
+          <button
+            className="remove-btn"
+            onClick={() => this.props.removeTask(key)}
+          >
+            Remove
+          </button>
         </li>
       </CSSTransition>
     );
@@ -119,27 +121,19 @@ class Tasks extends React.Component {
         </MuiThemeProvider> */}
 
         <ol className="tasks-list">{taskIds.map(this.renderTask)}</ol>
+        <div className="summary-info">
+          <p>Total Hours: {this.props.totalHours}</p>
+          <p>{this.props.date.toString()}</p>
+          <Autosuggest
+            suggestions={suggestions}
+            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+            getSuggestionValue={getSuggestionValue}
+            renderSuggestion={renderSuggestion}
+            inputProps={inputProps}
+          />
+        </div>
 
-        <p>Total Hours: {this.props.totalHours}</p>
-        <p>{this.props.date.toString()}</p>
-        <Autosuggest
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          getSuggestionValue={getSuggestionValue}
-          renderSuggestion={renderSuggestion}
-          inputProps={inputProps}
-        />
-        {/* <input
-          className="userName"
-          name="userName"
-          type="text"
-          placeholder="Type your name"
-          ref={this.nameRef}
-          onChange={e => {
-            this.handleName(e);
-          }}
-        /> */}
         <button onClick={this.props.handleSubmit}>Submit</button>
         <button
           onClick={() => {

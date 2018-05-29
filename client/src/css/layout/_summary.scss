@@ -1,23 +1,24 @@
 .summary-appear {
-  opacity: 0.01;
-  transform: scaleX(1) translateX(3rem);
+  //   transform: scaleX(1) translateX(3rem);
+  animation: moveInRight 0.5s;
 }
 
-.summary-appear.summary-appear-active {
-  opacity: 1;
-  transition: all 200ms ease-in;
-  transform: scaleX(1) translateX(0);
-}
-.summary-leave {
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
-  -webkit-transform: translateX(0);
-  transform: translateX(0);
-}
-.summary-leave.summary-leave-active {
-  opacity: 0.01;
-  transform: scaleX(1) translateX(-3rem);
-}
 .summary button {
   font-size: 1.6rem;
 }
+
+// .summary-enter {
+//   opacity: 0.01;
+// }
+// .summary-enter-active {
+//   opacity: 1;
+//   animation: moveInTop 0.2s;
+// }
+
+// .summary-exit {
+//   opacity: 1;
+// }
+// .summary-exit-active {
+//   opacity: 0.01;
+//   transition: opacity 500ms ease-in;
+// }

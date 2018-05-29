@@ -2,9 +2,12 @@ body {
   font-size: 1.6rem;
   font-family: "Lato", sans-serif;
 }
-
-h2 {
-  color: $color-blue;
+.App-title {
+  padding: 3rem;
+  text-align: center;
+  font-size: 5.2rem;
+  font-weight: 300;
+  color: $color-gray-dark;
 }
 
 .heading-primary {
@@ -37,4 +40,9 @@ input:required {
   text-align: left;
   list-style-position: inside;
   padding-bottom: 4.2rem;
+}
+
+.summary-info {
+  line-height: 2.4rem;
+  margin-bottom: 1.2rem;
 }
