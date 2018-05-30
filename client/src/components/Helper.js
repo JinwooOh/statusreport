@@ -30,12 +30,13 @@ export function dateNow() {
   if (s < 10) {
     s = "0" + s;
   }
+
   let now =
     dayName +
     ", " +
     (getDate.getMonth() + 1) +
     "/" +
-    getDate.getDay() +
+    getDate.getDate() +
     "/" +
     getDate.getFullYear() +
     ", " +

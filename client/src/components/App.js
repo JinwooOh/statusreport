@@ -192,7 +192,7 @@ class App extends React.Component {
             className="btn-search"
             onClick={() => {
               this.props.history.push(`/report/`);
-              //this.props.history.push(`/all-status-reports/report/`);
+              // this.props.history.push(`/all-status-reports/report/`);
             }}
           >
             Search

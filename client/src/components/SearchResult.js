@@ -3,49 +3,24 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 class SearchResult extends React.Component {
   render() {
-    const data = [
-      {
-        name: "Poke Linsley",
-        age: 26,
-        friend: {
-          name: "Jason Maurer",
-          age: 23
-        }
-      },
-      {
-        name: "Tanner Linsley",
-        age: 16,
-        friend: {
-          name: "Poke Maurer",
-          age: 43
-        }
-      }
-    ];
-    const columns = [
-      {
-        Header: "Name",
-        accessor: "name" // String-based value accessors!
-      },
-      {
-        Header: "Age",
-        accessor: "age",
-        Cell: props => <span className="number">{props.value}</span> // Custom cell components!
-      },
-      {
-        id: "friendName", // Required because our accessor is not a string
-        Header: "Friend Name",
-        accessor: d => d.friend.name // Custom value accessors!
-      },
-      {
-        Header: props => <span>Friend Age</span>, // Custom header components!
-        accessor: "friend.age"
-      }
+    const courseData = this.props.searchCourse;
+
+    const courseColumns = [
+      { Header: "Name", accessor: "userID" },
+      { Header: "Submission date", accessor: "subDate" },
+      { Header: "Completion date", accessor: "completionDate" },
+      { Header: "Course task", accessor: "courseTask" },
+      { Header: "Course program", accessor: "courseProgram" },
+      { Header: "Course number", accessor: "courseNumber" },
+      { Header: "Instructor", accessor: "courseInst" },
+      { Header: "Course category", accessor: "courseCat" },
+      { Header: "Hours", accessor: "hours" }
     ];
 
     return (
       <div className="summary summary--search">
         <h2 className="heading-primary">Search Result</h2>
-        <ReactTable data={data} columns={columns} />
+        <ReactTable data={courseData} columns={courseColumns} />
 
         {/* <h3>Course Result</h3>
         {this.props.searchCourse.map(key => {

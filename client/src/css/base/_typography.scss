@@ -40,9 +40,23 @@ input:required {
   text-align: left;
   list-style-position: inside;
   padding-bottom: 4.2rem;
+  &-gap {
+    padding: 0.6rem;
+  }
 }
 
 .summary-info {
   line-height: 2.4rem;
   margin-bottom: 1.2rem;
+}
+
+.text-totalHours {
+  display: inline-block;
+  color: $color-blue-dark;
+  &-enter {
+    animation: moveInTop 0.4s;
+  }
+  &-exit {
+    display: none;
+  }
 }

@@ -93,7 +93,6 @@ class AddForm extends React.Component {
         <span>Date </span>
         {/* <label>Date: </label> */}
         <input name="date" ref={this.dateRef} type="date" required />
-
         <br />
         {/* <p>Select the Course Task Type</p> */}
         <span>Course Type</span>
@@ -103,7 +102,6 @@ class AddForm extends React.Component {
           <option value="Course Live Support">Course Live Support</option>
         </select>
         <br />
-
         {/* <p>Select the Program</p> */}
         <span>Program</span>
         <input
@@ -112,7 +110,6 @@ class AddForm extends React.Component {
           type="text"
           placeholder="Program name"
         />
-
         <span>Instructor</span>
         {/* <p>Select the Instructor</p> */}
         <input
@@ -122,7 +119,6 @@ class AddForm extends React.Component {
           placeholder="Instructor name"
         />
         <br />
-
         <span>Course Number</span>
         {/* <p>Select the Instructor</p> */}
         <input
@@ -132,7 +128,6 @@ class AddForm extends React.Component {
           placeholder="Course number"
         />
         <br />
-
         <span>Task Type</span>
         {/* <p>Select One of the Categories</p> */}
         <select name="type" ref={this.categoryRef}>
@@ -141,7 +136,6 @@ class AddForm extends React.Component {
           <option value="Quality Control">Quality Control</option>
         </select>
         <br />
-
         <span>Hours for This Task</span>
         {/* <p>Please input hours for this task</p> */}
         <input
@@ -154,7 +148,6 @@ class AddForm extends React.Component {
         />
         <br />
         <br />
-
         <div className="center">
           <button type="submit">Add task</button>
         </div>
