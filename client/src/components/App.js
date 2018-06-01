@@ -1,10 +1,12 @@
 import React from "react";
-import Forms from "./Forms";
-import Tasks from "./Tasks";
-import Popup from "react-popup";
-import { dateNow } from "./Helper";
+import Forms from "./report/Forms";
+import Tasks from "./report/Tasks";
+import { dateNow } from "./helper/Helper";
 
-// import TaskSelector from "./TaskSelector";
+import AlertPopup from "react-popup";
+import Popup from "./Popup";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +15,8 @@ class App extends React.Component {
       totalHours: 0,
       taskType: "course", //or"admin"
       date: {}, //to track submit date and time
-      userName: ""
+      userName: "",
+      open: false
     };
   }
 
@@ -35,6 +38,7 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
+    console.log("Clock", "componentWillUnmount");
     clearInterval(this.timerID);
   }
   updateDate = () => {
@@ -42,11 +46,19 @@ class App extends React.Component {
       date: dateNow()
     });
   };
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   handleSubmit = () => {
+    //error
     if (this.isEmpty(this.state.tasks) || this.isEmpty(this.state.userName)) {
       //popup message
-      let mySpecialPopup = Popup.register({
+      let mySpecialPopup = AlertPopup.register({
         title: "Alert",
         content:
           "To report, you should add at least one task to summary, and type your name at the bottom.",
@@ -54,10 +66,11 @@ class App extends React.Component {
           right: ["ok"]
         }
       });
-      Popup.queue(mySpecialPopup);
+      AlertPopup.queue(mySpecialPopup);
       console.log("User tries to submit empty task");
       return;
     }
+    //success
     let data = this.state;
     fetch("/submit", {
       method: "POST",
@@ -85,73 +98,6 @@ class App extends React.Component {
   isEmpty(obj) {
     return Object.keys(obj).length === 0;
   }
-  handlePop = e => {
-    if (e === "general-info") {
-      let mySpecialPopup = Popup.register({
-        title: "Information",
-        content: (
-          <div>
-            <p>AIMS: 608-265-6900</p>
-            <p>
-              Web server link:&nbsp;
-              <a
-                href="https://webhosting.doit.wisc.edu/panel/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Web server
-              </a>
-            </p>
-          </div>
-        ),
-        buttons: {
-          right: ["ok"]
-        }
-      });
-      Popup.queue(mySpecialPopup);
-      return;
-    }
-    if (e === "course-info") {
-      let mySpecialPopup = Popup.register({
-        title: "Information",
-        content: (
-          <div>
-            <h3>CMS Layout</h3>
-            <p>Community of Practice Sites</p>
-            <p>Course Structure</p>
-            <p>Discussions: Create</p>
-            <p>Discussions: Update</p>
-            <p>Gradebook</p>
-            <p>Lectures</p>
-            <p>Lessons/Labs/HTML</p>
-            <p>Module Creation/Organization</p>
-            <p>News Items</p>
-            <p>Quiz: Create</p>
-            <p>Quiz: Update</p>
-            <p>Setup Canvas Site</p>
-            <p>Start Here</p>
-            <p>Unit Content</p>
-            <p>Update Gradebook</p>
-          </div>
-        ),
-        buttons: {
-          right: ["ok"]
-        }
-      });
-      Popup.queue(mySpecialPopup);
-      return;
-    } else {
-      let mySpecialPopup = Popup.register({
-        title: "Information",
-        content: "Bip.. adminInfo.. Bip..",
-        buttons: {
-          right: ["ok"]
-        }
-      });
-      Popup.queue(mySpecialPopup);
-      return;
-    }
-  };
 
   addTask = task => {
     const tasks = { ...this.state.tasks };
@@ -184,29 +130,39 @@ class App extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        <Popup closeBtn={false} />
+        <AlertPopup closeBtn={false} />
         <h1 className="App-title">Status Report</h1>
 
+        {/* <Popup closeBtn={false} /> */}
         <div className="guide">
+          <MuiThemeProvider>
+            <div className="guide guide__popup">
+              <Popup title="Course Help Guide" text="sample text" />
+              <Popup title="Administration Help Guide" text="sample text" />
+              <Popup title="General Information" text="sample text" />
+            </div>
+          </MuiThemeProvider>
+
           <button
-            className="btn-search"
+            className="btn btn__search"
             onClick={() => {
               this.props.history.push(`/report/`);
               // this.props.history.push(`/all-status-reports/report/`);
             }}
           >
-            Search
-          </button>
-          <button onClick={() => this.handlePop("general-info")}>
-            General Information
-          </button>
-          <button onClick={() => this.handlePop("course-info")}>
-            Course Help Guide
-          </button>
-          <button onClick={() => this.handlePop("admin-info")}>
-            Administration Help Guide
+            SEARCH
           </button>
         </div>
+
+        {/* <button onClick={() => this.handlePop("general-info")}>
+              General Information
+            </button>
+            <button onClick={() => this.handlePop("course-info")}>
+              Course Help Guide
+            </button>
+            <button onClick={() => this.handlePop("admin-info")}>
+              Administration Help Guide
+            </button> */}
 
         <Forms
           addTask={this.addTask}

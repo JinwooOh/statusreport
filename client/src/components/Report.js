@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import SearchType from "./SearchType";
-import SearchResult from "./SearchResult";
-import Popup from "react-popup";
-import { isEmpty } from "./Helper";
-
+import SearchType from "./search//SearchType";
+import SearchResult from "./search/SearchResult";
+// import Popup from "react-popup";
+import { isEmpty } from "./helper/Helper";
+import Popup from "./Popup";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 class Report extends Component {
   constructor(props) {
     super(props);
@@ -117,21 +118,27 @@ class Report extends Component {
   render() {
     return (
       <div className="wrapper">
-        <Popup closeBtn={false} />
+        {/* <Popup closeBtn={false} /> */}
+
         <h1 className="App-title">Search Database</h1>
         <div className="guide">
+          <MuiThemeProvider>
+            <div className="guide guide__popup">
+              <Popup title="Search Guide" text="sample text" />
+            </div>
+          </MuiThemeProvider>
           <button
-            className="btn-back"
+            className="btn btn__search"
             onClick={() => {
               this.props.history.push(`/`);
               //this.props.history.push(`/all-status-reports/`);
             }}
           >
-            Back to Report Page
+            BACK TO REPORT PAGE
           </button>
-          <button onClick={() => this.handlePop("search-guide")}>
+          {/* <button onClick={() => this.handlePop("search-guide")}>
             Search Guide
-          </button>
+          </button> */}
         </div>
         <SearchType
           selectSearch={this.selectSearch}

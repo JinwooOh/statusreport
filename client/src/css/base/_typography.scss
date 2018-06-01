@@ -5,16 +5,24 @@ body {
 .App-title {
   padding: 3rem;
   text-align: center;
-  font-size: 5.2rem;
+  font-size: 5.6rem;
   font-weight: 300;
-  color: $color-gray-dark;
+  color: $color-primary;
+  animation: moveInTop 0.4s;
 }
 
 .heading-primary {
   margin-top: 1.6rem;
-  color: $color-blue;
-  font-size: 2.2rem;
+  //color: $color-primary;
+  font-size: 2.8rem;
   font-weight: 700;
+  background-image: linear-gradient(
+    to right,
+    $color-primary,
+    $color-tertiary-dark
+  );
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 li {
@@ -26,11 +34,11 @@ input[type="text"],
 select {
   margin: 0.4rem 0;
   display: inline-block;
-  border: 0.1rem solid #ccc;
+  border: 0.1rem solid $color-primary;
   border-radius: 0.4rem;
 }
 input:required {
-  border: 0.1rem solid #ffa5a5;
+  border: 0.1rem solid $color-tertiary-dark;
   border-radius: 0.4rem;
 }
 
@@ -52,7 +60,7 @@ input:required {
 
 .text-totalHours {
   display: inline-block;
-  color: $color-blue-dark;
+  color: $color-primary;
   &-enter {
     animation: moveInTop 0.4s;
   }

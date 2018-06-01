@@ -4,15 +4,18 @@
 
 html {
   font-size: 0.625rem;
-  background: #e9e9e9; }
+  background: linear-gradient(rgba(53, 56, 102, 0.1), rgba(53, 56, 102, 0.3)), url(../img/bg.png); }
 
 body {
   min-height: calc(100vh - 1rem); }
 
 .main-wrapper {
-  width: 90rem;
+  width: 95rem;
   margin: auto;
   padding-bottom: 3rem; }
+
+.container {
+  transition: all 1.2s ease; }
 
 @keyframes fadein {
   from {
@@ -63,15 +66,18 @@ body {
 .App-title {
   padding: 3rem;
   text-align: center;
-  font-size: 5.2rem;
+  font-size: 5.6rem;
   font-weight: 300;
-  color: #666666; }
+  color: #cba6c3;
+  animation: moveInTop 0.4s; }
 
 .heading-primary {
   margin-top: 1.6rem;
-  color: #33b5e5;
-  font-size: 2.2rem;
-  font-weight: 700; }
+  font-size: 2.8rem;
+  font-weight: 700;
+  background-image: linear-gradient(to right, #cba6c3, #353866);
+  -webkit-background-clip: text;
+  color: transparent; }
 
 li {
   padding-top: 0.8rem; }
@@ -81,11 +87,11 @@ input[type="text"],
 select {
   margin: 0.4rem 0;
   display: inline-block;
-  border: 0.1rem solid #ccc;
+  border: 0.1rem solid #cba6c3;
   border-radius: 0.4rem; }
 
 input:required {
-  border: 0.1rem solid #ffa5a5;
+  border: 0.1rem solid #353866;
   border-radius: 0.4rem; }
 
 /* summary */
@@ -103,7 +109,7 @@ input:required {
 
 .text-totalHours {
   display: inline-block;
-  color: #227796; }
+  color: #cba6c3; }
   .text-totalHours-enter {
     animation: moveInTop 0.4s; }
   .text-totalHours-exit {
@@ -123,19 +129,22 @@ input:required {
   grid-template-areas: "App-title App-title App-title App-title" "guide guide guide guide" "form form form form " "summary summary summary summary"; }
 
 .App-title {
-  grid-area: App-title; }
+  grid-area: App-title;
+  color: #353866; }
 
 .guide {
+  display: flex;
   grid-area: guide;
-  padding: 0 1rem 1rem;
+  padding-right: 1rem;
   justify-self: right; }
 
 .form-list {
   grid-area: form;
-  border-radius: 0.3rem;
-  border-top: 0.5rem solid #33b5e5;
-  background: white;
-  box-shadow: 0 0 1rem #888888;
+  border-radius: 3px;
+  overflow: hidden;
+  border-top: 0.5rem solid #353866;
+  background: #f8faff;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
   margin: 1rem; }
   .form-list--search {
     animation: moveInRight 0.3s; }
@@ -144,10 +153,10 @@ input:required {
 
 .summary {
   grid-area: summary;
-  border-radius: 0.3rem;
-  border-top: 0.5rem solid skyblue;
-  background: white;
-  box-shadow: 0 0 1rem #888888;
+  border-radius: 3px;
+  border-top: 0.5rem solid #353866;
+  background: #f8faff;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
   text-align: center;
   padding: 1rem;
   margin: 1rem; }
@@ -159,13 +168,10 @@ input:required {
 .summary-appear {
   animation: moveInRight 0.5s; }
 
-.summary button {
-  font-size: 1.6rem; }
-
 /* form setting */
 .task-edit {
   padding: 2rem;
-  background-color: white;
+  background-color: #f8faff;
   margin: auto;
   line-height: 3rem; }
 
@@ -185,76 +191,51 @@ select {
   display: inline-block;
   width: 35%; }
 
-/* button setting */
-button,
-input[type="submit"] {
-  padding: 0.5rem;
-  margin-left: 1rem;
-  background: none;
-  border-radius: 3px;
-  font-size: 1.1rem;
-  -webkit-transition: all 0.1s;
-  transition: all 0.1s;
-  position: relative;
-  z-index: 2; }
+.btn {
+  font-size: 1.4rem;
+  font-weight: 500; }
+  .btn__report, .btn__summary, .btn__taskSelector, .btn__remove, .btn__search {
+    position: relative;
+    outline: 0;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border: 0.1rem solid #cba6c3;
+    border-radius: 1.2rem;
+    transition: all 0.2s;
+    background-color: #cba6c3;
+    color: #fff; }
+    .btn__report:hover, .btn__summary:hover, .btn__taskSelector:hover, .btn__remove:hover, .btn__search:hover {
+      border: 0.1rem solid #aaabd3; }
+  .btn__guide {
+    padding: 0.4rem;
+    margin: 0 auto; }
+  .btn__summary {
+    padding: 1rem 2rem;
+    margin: 0.4rem; }
+  .btn__taskSelector {
+    width: 50%;
+    margin: 0 auto;
+    padding: 1.2rem;
+    border-radius: 0; }
+    .btn__taskSelector:hover {
+      border: 0.1rem solid #aaabd3; }
+  .btn__remove {
+    padding: 0.3rem 0.8rem;
+    margin: 0.4rem;
+    font-weight: 100; }
+  .btn:hover {
+    background: #aaabd3;
+    transform: translateY(-0.3rem);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
+    .btn:hover::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0; }
+  .btn:active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
 
-button:after,
-input[type="submit"]:after {
-  content: "";
-  z-index: -1;
-  display: block;
-  background: #227796;
-  position: absolute;
-  width: 100%;
-  height: 0;
-  left: 0;
-  top: 0;
-  -webkit-transition: all 0.1s;
-  transition: all 0.1s; }
-
-button:hover,
-input[type="submit"]:hover,
-button:focus,
-input[type="submit"]:focus {
-  color: #fff;
-  outline: 0; }
-
-button:hover:after,
-input[type="submit"]:hover:after,
-button:focus:after,
-input[type="submit"]:focus:after {
-  height: 100%; }
-
-.summary button {
-  background: #33b5e5;
-  color: white; }
-
-.form-list--report button,
-.form-list--search button {
-  background: #33b5e5;
-  color: white; }
-
-.taskSelector button {
-  font-size: 1.6rem;
-  display: inline-block;
-  border-radius: 0;
-  width: 50%;
-  margin: 0;
-  padding: 0.6rem; }
-
-.guide button {
-  font-size: 1.6rem; }
-
-.btn-search {
-  border: 0.1rem solid #227796; }
-
-.btn-back {
-  border: 0.1rem solid #227796; }
-
-.guide button {
-  font-size: 1.6rem; }
-
-/* button setting end */
 /* Popup component styling*/
 .mm-popup {
   display: none; }
