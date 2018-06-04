@@ -63,28 +63,28 @@ class Tasks extends React.Component {
 
   handleName = (name) => {
     name.preventDefault();
-    // console.log(this.nameRef.current.value);
     console.log(this.state.value);
+    console.log(this.state.users);
     this.props.addUser(this.state.value);
   };
 
   renderTask = (key) => {
     const task = this.props.tasks[key];
     // loop through each task's category for the gap
-    const renderItem = Object.keys(task).map((i) => {
-      if (task[i] === '') {
+    const renderItem = Object.keys(task).map((key) => {
+      if (task[key] === '') {
         return '';
-      } else if (i === 'taskType') {
+      } else if (key === 'taskType') {
         return (
-          <span key={i} className="tasks-list-gap">
-            {task[i]}
+          <span key={key} className="tasks-list-gap">
+            {task[key]}
             {': '}
           </span>
         );
-      } else if (i === 'hours') {
+      } else if (key === 'hours') {
         return (
-          <span key={i} className="tasks-list-gap">
-            {task[i]} hours
+          <span key={key} className="tasks-list-gap">
+            {task[key]} hours
           </span>
         );
       }

@@ -1,6 +1,6 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import AlertPopup from 'react-popup';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 

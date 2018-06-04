@@ -1,3 +1,5 @@
+// text for popup message
+// used for Popup API argument
 import React from 'react';
 
 export function coursehelp() {
@@ -171,8 +173,8 @@ export function adminhelp() {
         </h3>
         <div className="message__text--body">
           <ul>
-            <li>1-1 Meeting with Director</li>
-            <li>1-1 Meeting with Manager</li>
+            <li>Meeting with Director</li>
+            <li>Meeting with Manager</li>
             <li>Prep</li>
             <li>Team Meeting</li>
             <li>Work Group Meetings</li>
@@ -289,6 +291,26 @@ export function generalhelp() {
         <div className="message__text--body">
           <ul>
             <li>AIMS: 608-265-6900</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function search() {
+  return (
+    <div className="message">
+      <h2 className="message__heading">Search Guide</h2>
+
+      <div className="message__text">
+        <h3 className="message__text--title">
+          <span className="message__text--title-span">Usage</span>
+        </h3>
+
+        <div className="message__text--body">
+          <ul>
+            <li>1. ...</li>
           </ul>
         </div>
       </div>

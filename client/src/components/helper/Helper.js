@@ -28,7 +28,6 @@ export function dateNow() {
     1}/${getDate.getDate()}/${getDate.getFullYear()}, ${h}:${m}:${s} ${ampm}`;
   return now;
 }
-
 export function isEmpty(obj) {
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) return false;

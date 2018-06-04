@@ -12,7 +12,7 @@ class SearchForm extends React.Component {
     const options = {
       startDate: this.startDateRef.current.value,
       endDate: this.endDateRef.current.value,
-      user: this.userRef.current.value,
+      userID: this.userRef.current.value,
     };
     this.props.addSearchOptions(options);
     event.currentTarget.reset();
@@ -21,8 +21,8 @@ class SearchForm extends React.Component {
     event.preventDefault();
     const options = {
       startDate: this.startDateRef.current.value,
-      endtDate: this.endDateRef.current.value,
-      program: this.programRef.current.value,
+      endDate: this.endDateRef.current.value,
+      courseProgram: this.programRef.current.value,
     };
     this.props.addSearchOptions(options);
     event.currentTarget.reset();

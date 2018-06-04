@@ -1,42 +1,47 @@
-import React, { Component } from "react";
-import SearchType from "./search//SearchType";
-import SearchResult from "./search/SearchResult";
+/* eslint react/prop-types: 0 */
+import React, { Component } from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import SearchType from './search//SearchType';
+import SearchResult from './search/SearchResult';
 // import Popup from "react-popup";
-import { isEmpty } from "./helper/Helper";
-import Popup from "./Popup";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import { isEmpty } from './helper/Helper';
+import { search } from './helper/Message';
+import Popup from './Popup';
+
 class Report extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchType: "user", //or program
-      searchOptions: {}, //search options from SearchType
-      searchAdmin: [], //result of search by user
-      searchCourse: [], //result search by user
-      admintable: [], //consider to delete...
-      coursetable: [] //consider to delete...
+      searchType: 'user', // or program
+      searchOptions: {}, // search options from SearchType
+      searchAdmin: [], // result of search by user
+      searchCourse: [], // result search by user
+      searchProgram: [], // result search by user
+
+      admintable: [], // consider to delete...
+      coursetable: [], // consider to delete...
     };
   }
 
   componentDidMount() {
-    //fetch admintable from database
-    fetch("/admintable")
+    // fetch admintable from database
+    fetch('/admintable')
       .then(res => res.json())
-      .then(admintable => {
+      .then((admintable) => {
         this.setState({ admintable });
       })
-      .catch(error => console.error("fetch error at admintable", error)); //error
-    //fetch coursetable from database
-    fetch("/coursetable")
+      .catch(error => console.error('fetch error at admintable', error)); // error
+    // fetch coursetable from database
+    fetch('/coursetable')
       .then(res => res.json())
-      .then(coursetable => {
+      .then((coursetable) => {
         this.setState({ coursetable });
       })
-      .catch(error => console.error("fetch error at coursetable", error)); //error
+      .catch(error => console.error('fetch error at coursetable', error)); // error
 
-    //localStorage for admintable/coursetable
-    const localStorageRefAdmin = localStorage.getItem("admintable");
-    const localStorageRefCourse = localStorage.getItem("coursetable");
+    // localStorage for admintable/coursetable
+    const localStorageRefAdmin = localStorage.getItem('admintable');
+    const localStorageRefCourse = localStorage.getItem('coursetable');
     if (localStorageRefAdmin) {
       this.setState({ admintable: JSON.parse(localStorageRefAdmin) });
     }
@@ -46,72 +51,69 @@ class Report extends Component {
   }
 
   componentDidUpdate() {
-    //localStorage for admintable/coursetable
-    localStorage.setItem("adminTable", JSON.stringify(this.state.admintable));
-    localStorage.setItem("courseTable", JSON.stringify(this.state.coursetable));
-    //ready for search
+    // localStorage for admintable/coursetable
+    localStorage.setItem('adminTable', JSON.stringify(this.state.admintable));
+    localStorage.setItem('courseTable', JSON.stringify(this.state.coursetable));
+    // ready for search
+
     if (!isEmpty(this.state.searchOptions)) {
       this.handleSearch();
     }
   }
 
-  selectSearch = searchType => {
+  selectSearch = (searchType) => {
     this.setState({ searchType });
   };
-  addSearchOptions = searchOptions => {
+  addSearchOptions = (searchOptions) => {
     this.setState({
-      searchOptions
+      searchOptions,
     });
-  };
-  handlePop = e => {
-    if (e === "search-guide") {
-      let mySpecialPopup = Popup.register({
-        title: "Information",
-        content: (
-          <div>
-            <p>1. Select search type</p>
-            <p>2. Fills inputs</p>
-            <p>3. Clicks the "Search" button </p>
-          </div>
-        ),
-        buttons: {
-          right: ["ok"]
-        }
-      });
-      Popup.queue(mySpecialPopup);
-      return;
-    }
   };
 
   handleSearch = () => {
-    let userID = this.state.searchOptions.user;
-    let startDate = this.state.searchOptions.startDate;
-    let endDate = this.state.searchOptions.endDate;
+    const {
+      userID, startDate, endDate, courseProgram,
+    } = this.state.searchOptions;
 
-    let urlCourse = `/search/coursetable/${userID}/${startDate}/${endDate}`;
-    let urlAdmin = `/search/admintable/${userID}/${startDate}/${endDate}`;
-    //search by user
-    fetch(urlCourse)
-      .then(res => res.json())
-      .then(json => {
-        console.info(json);
-        this.setState({
-          searchCourse: json
-        });
-      })
-      .catch(error => console.error("fetch error at search", error)); //error
-    fetch(urlAdmin)
-      .then(res => res.json())
-      .then(json => {
-        console.info(json);
-        this.setState({
-          searchAdmin: json
-        });
-      })
-      .catch(error => console.error("fetch error at search", error)); //error
-    //clear state
+    // Search user
+    if (this.state.searchType === 'user') {
+      const urlCourse = `/search/coursetable/${userID}/${startDate}/${endDate}`;
+      const urlAdmin = `/search/admintable/${userID}/${startDate}/${endDate}`;
+      fetch(urlCourse)
+        .then(res => res.json())
+        .then((json) => {
+          console.info(json);
+          this.setState({
+            searchCourse: json,
+          });
+        })
+        .catch(error => console.error('fetch error at search', error)); // error
+      fetch(urlAdmin)
+        .then(res => res.json())
+        .then((json) => {
+          console.info(json);
+          this.setState({
+            searchAdmin: json,
+          });
+        })
+        .catch(error => console.error('fetch error at search', error)); // error
+    } else {
+      // Search program
+      const urlProgram = `/search/program/${courseProgram}/${startDate}/${endDate}`;
+      fetch(urlProgram)
+        .then(res => res.json())
+        .then((json) => {
+          console.info(json);
+          this.setState({
+            searchProgram: json,
+          });
+        })
+        .catch(error => console.error('fetch error at search', error)); // error
+    }
+
+    // clear state
     this.setState({
-      searchOptions: {}
+      searchOptions: {},
     });
   };
 
@@ -124,13 +126,13 @@ class Report extends Component {
         <div className="guide">
           <MuiThemeProvider>
             <div className="guide guide__popup">
-              <Popup title="Search Guide" text="sample text" />
+              <Popup title="Search Guide" text={search()} />
             </div>
           </MuiThemeProvider>
           <button
             className="btn btn__search"
             onClick={() => {
-              this.props.history.push(`/`);
+              this.props.history.push('/');
               // this.props.history.push(`/all-status-reports/`);
             }}
           >
@@ -149,6 +151,8 @@ class Report extends Component {
         <SearchResult
           searchCourse={this.state.searchCourse}
           searchAdmin={this.state.searchAdmin}
+          searchProgram={this.state.searchProgram}
+          searchType={this.state.searchType}
         />
       </div>
     );

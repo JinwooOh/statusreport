@@ -135,6 +135,7 @@ app.get("/search/coursetable/:userID/:startDate/:endDate", (req, res) => {
     }
   );
 });
+
 //search by user (admintable)
 app.get("/search/admintable/:userID/:startDate/:endDate", (req, res) => {
   console.log(req.params.userID);
@@ -151,6 +152,31 @@ app.get("/search/admintable/:userID/:startDate/:endDate", (req, res) => {
     function(err, result, fields) {
       if (err) {
         console.log("Error in admintable query");
+      } else {
+        console.log(result);
+        res.json(result);
+      }
+    }
+  );
+});
+
+//search by user (program)
+app.get("/search/program/:courseProgram/:startDate/:endDate", (req, res) => {
+  console.log("program search start: ");
+  console.log(req.params.courseProgram);
+  console.log(req.params.startDate);
+  console.log(req.params.endDate);
+  const { courseProgram, startDate, endDate } = req.params;
+  // const userID = req.params.userID;
+  // const startDate = req.params.startDate;
+  // const endDate = req.params.endDate;
+  connection.query(
+    `SELECT * FROM coursetable
+    WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
+    AND courseProgram='${courseProgram}'`,
+    function(err, result, fields) {
+      if (err) {
+        console.log("Error in program query");
       } else {
         console.log(result);
         res.json(result);
