@@ -131,7 +131,7 @@ class Report extends Component {
             className="btn btn__search"
             onClick={() => {
               this.props.history.push(`/`);
-              //this.props.history.push(`/all-status-reports/`);
+              // this.props.history.push(`/all-status-reports/`);
             }}
           >
             BACK TO REPORT PAGE

@@ -1,18 +1,14 @@
-import React, { Component } from "react";
+/* eslint react/prop-types: 0 */
+import React, { Component } from 'react';
+
 class TaskSelector extends Component {
   render() {
     return (
       <div className="taskSelector">
-        <button
-          className="btn btn__taskSelector"
-          onClick={() => this.props.selectTask("course")}
-        >
+        <button className="btn btn__taskSelector" onClick={() => this.props.selectTask('course')}>
           Course
         </button>
-        <button
-          className="btn btn__taskSelector"
-          onClick={() => this.props.selectTask("admin")}
-        >
+        <button className="btn btn__taskSelector" onClick={() => this.props.selectTask('admin')}>
           Administration
         </button>
       </div>

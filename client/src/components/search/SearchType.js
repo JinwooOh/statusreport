@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import SearchSelector from "./SearchSelector";
-import SearchForm from "./SearchForm";
+/* eslint react/prop-types: 0 */
+import React, { Component } from 'react';
+import SearchSelector from './SearchSelector';
+import SearchForm from './SearchForm';
 
 class SearchType extends Component {
   render() {
-    let searchType =
-      this.props.searchType === "user" ? "Search by User" : "Search by Program";
+    const searchType = this.props.searchType === 'user' ? 'Search by User' : 'Search by Program';
     return (
       <div className="form-list form-list--search">
         <SearchSelector selectSearch={this.props.selectSearch} />

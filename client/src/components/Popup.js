@@ -1,17 +1,20 @@
-import React from "react";
-import Dialog from "material-ui/Dialog";
-import FlatButton from "material-ui/FlatButton";
-import RaisedButton from "material-ui/RaisedButton";
+/* eslint react/prop-types: 0 */
+import React from 'react';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const customContentStyle = {
+  width: '60%',
   wrapper: {
-    padding: "0.2rem"
+    padding: '0.2rem',
   },
   button: {
-    borderRadius: "1.2rem",
-    backgroundColor: "#cba6c3",
-    boxShadow: "0 1rem 2rem rgba(#fff, 0.2)"
-  }
+    borderRadius: '1.2rem',
+    backgroundColor: '#a40a3c',
+    boxShadow: '0 1rem 2rem rgba(#fff, 0.2)',
+    color: 'white',
+  },
 };
 /**
  * Dialog with action buttons. The actions are passed in as an array of React objects,
@@ -21,7 +24,7 @@ const customContentStyle = {
  */
 export default class Popup extends React.Component {
   state = {
-    open: false
+    open: false,
   };
 
   handleOpen = () => {
@@ -34,14 +37,14 @@ export default class Popup extends React.Component {
 
   render() {
     const actions = [
-      <FlatButton label="OK" primary={true} onClick={this.handleClose} />
+      <FlatButton style={customContentStyle.button} label="OK" onClick={this.handleClose} />,
     ];
-    const text = this.props.text;
+    const { text } = this.props;
 
     return (
       <div style={customContentStyle.wrapper}>
         <RaisedButton
-          primary={true}
+          primary
           buttonStyle={customContentStyle.button}
           style={customContentStyle.button}
           overlayStyle={customContentStyle.button}
@@ -51,6 +54,7 @@ export default class Popup extends React.Component {
         />
         <Dialog
           title={this.props.title}
+          autoScrollBodyContent
           actions={actions}
           modal={false}
           open={this.state.open}

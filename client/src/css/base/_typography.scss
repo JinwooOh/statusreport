@@ -5,9 +5,10 @@ body {
 .App-title {
   padding: 3rem;
   text-align: center;
+  letter-spacing: 1rem;
   font-size: 5.6rem;
   font-weight: 300;
-  color: $color-primary;
+  color: $color-tertiary-dark;
   animation: moveInTop 0.4s;
 }
 
@@ -15,14 +16,8 @@ body {
   margin-top: 1.6rem;
   //color: $color-primary;
   font-size: 2.8rem;
-  font-weight: 700;
-  background-image: linear-gradient(
-    to right,
-    $color-primary,
-    $color-tertiary-dark
-  );
-  -webkit-background-clip: text;
-  color: transparent;
+  font-weight: 300;
+  color: $color-tertiary-dark;
 }
 
 li {
@@ -66,5 +61,24 @@ input:required {
   }
   &-exit {
     display: none;
+  }
+}
+
+// table
+.table {
+  &__p {
+    text-align: left;
+    padding: 0.3rem 1.5rem;
+    margin: 0 auto;
+    font-size: 2rem;
+    font-weight: 300;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    border-radius: 0.3rem;
+    background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary, 0.3),
+      rgba($color-tertiary-light, 0.3)
+    );
   }
 }

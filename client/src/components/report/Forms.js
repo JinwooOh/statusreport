@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import AddForm from "./AddForm";
-import TaskSelector from "./TaskSelector";
+/* eslint react/prop-types: 0 */
+import React, { Component } from 'react';
+import AddForm from './AddForm';
+import TaskSelector from './TaskSelector';
 
 class Forms extends Component {
   render() {
-    let taskType =
-      this.props.taskType === "admin" ? "Admin Task" : "Course Task";
+    const taskType = this.props.taskType === 'admin' ? 'Admin Task' : 'Course Task';
     return (
       <div className="form-list form-list--report">
         <TaskSelector selectTask={this.props.selectTask} />

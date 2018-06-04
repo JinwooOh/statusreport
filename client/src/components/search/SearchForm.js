@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint react/prop-types: 0 */
+import React from 'react';
 
 class SearchForm extends React.Component {
   programRef = React.createRef();
@@ -6,32 +7,32 @@ class SearchForm extends React.Component {
   startDateRef = React.createRef();
   endDateRef = React.createRef();
 
-  createSearch_user = event => {
+  createSearchUser = (event) => {
     event.preventDefault();
     const options = {
       startDate: this.startDateRef.current.value,
       endDate: this.endDateRef.current.value,
-      user: this.userRef.current.value
+      user: this.userRef.current.value,
     };
     this.props.addSearchOptions(options);
     event.currentTarget.reset();
   };
-  createSearch_program = event => {
+  createSearchProgram = (event) => {
     event.preventDefault();
     const options = {
       startDate: this.startDateRef.current.value,
       endtDate: this.endDateRef.current.value,
-      program: this.programRef.current.value
+      program: this.programRef.current.value,
     };
     this.props.addSearchOptions(options);
     event.currentTarget.reset();
   };
 
   render() {
-    //program search
-    if (this.props.searchType === "program") {
+    // program search
+    if (this.props.searchType === 'program') {
       return (
-        <form className="task-edit" onSubmit={this.createSearch_program}>
+        <form className="task-edit" onSubmit={this.createSearchProgram}>
           <span>Start Date </span>
           <input name="date" ref={this.startDateRef} type="date" required />
           <span>End Date </span>
@@ -53,21 +54,15 @@ class SearchForm extends React.Component {
       );
     }
 
-    //user search
+    // user search
     return (
-      <form className="task-edit" onSubmit={this.createSearch_user}>
+      <form className="task-edit" onSubmit={this.createSearchUser}>
         <span>Start Date </span>
         <input name="date" ref={this.startDateRef} type="date" required />
         <span>End Date </span>
         <input name="date" ref={this.endDateRef} type="date" required />
         <span>User name</span>
-        <input
-          name="user"
-          ref={this.userRef}
-          type="text"
-          placeholder="User name"
-          required
-        />
+        <input name="user" ref={this.userRef} type="text" placeholder="User name" required />
 
         <br />
         <br />

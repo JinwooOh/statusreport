@@ -13,7 +13,6 @@
 
 .App-title {
   grid-area: App-title;
-  color: $color-tertiary-dark;
 }
 
 .guide {
@@ -27,7 +26,7 @@
   grid-area: form;
   border-radius: 3px;
   overflow: hidden;
-  border-top: 0.5rem solid $color-tertiary-dark;
+  border-top: 0.4rem solid $color-tertiary-dark;
   background: $color-tertiary-light;
   box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
   margin: 1rem;

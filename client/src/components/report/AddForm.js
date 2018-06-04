@@ -1,7 +1,8 @@
-import React from "react";
+/* eslint react/prop-types: 0 */
+import React from 'react';
 
 class AddForm extends React.Component {
-  //course task
+  // Course task
   programRef = React.createRef();
   hoursRef = React.createRef();
   courseTypeRef = React.createRef();
@@ -9,35 +10,35 @@ class AddForm extends React.Component {
   instructorRef = React.createRef();
   categoryRef = React.createRef();
   courseNumberRef = React.createRef();
-  //admin task
+  // admin task
   categoryAdminRef = React.createRef();
 
-  createTask = event => {
+  createTask = (event) => {
     event.preventDefault();
     // console.log(this.dateRef.current.value);
     const task = {
-      //course form
-      taskType: "Course Task", // type of course
+      // course form
+      taskType: 'Course Task', // type of course
       program: this.programRef.current.value,
       courseType: this.courseTypeRef.current.value,
       courseNumber: this.courseNumberRef.current.value,
       instructor: this.instructorRef.current.value,
       category: this.categoryRef.current.value,
       date: this.dateRef.current.value,
-      hours: parseFloat(this.hoursRef.current.value)
+      hours: parseFloat(this.hoursRef.current.value),
     };
     this.props.sumHours(this.hoursRef.current.value);
     this.props.addTask(task);
     event.currentTarget.reset();
   };
-  createTask_admin = event => {
+  createTaskAdmin = (event) => {
     event.preventDefault();
     const task = {
-      //admin form
-      taskType: "Adminstration Task",
+      // admin form
+      taskType: 'Adminstration Task',
       category: this.categoryAdminRef.current.value,
       date: this.dateRef.current.value,
-      hours: parseFloat(this.hoursRef.current.value)
+      hours: parseFloat(this.hoursRef.current.value),
     };
     this.props.sumHours(this.hoursRef.current.value);
     this.props.addTask(task);
@@ -45,10 +46,10 @@ class AddForm extends React.Component {
   };
 
   render() {
-    //admin form
-    if (this.props.taskType === "admin") {
+    // admin form
+    if (this.props.taskType === 'admin') {
       return (
-        <form className="task-edit" onSubmit={this.createTask_admin}>
+        <form className="task-edit" onSubmit={this.createTaskAdmin}>
           <span>Date </span>
           <input name="date" ref={this.dateRef} type="date" required />
           <br />
@@ -57,9 +58,7 @@ class AddForm extends React.Component {
             <option value="Leave">Leave</option>
             <option value="Meeting">Meeting</option>
             <option value="Project Management">Project Management</option>
-            <option value="Professional Development">
-              Professional Development
-            </option>
+            <option value="Professional Development">Professional Development</option>
             <option value="Purchasing">Purchasing</option>
             <option value="Reporting">Reporting</option>
             <option value="Support">Support</option>
@@ -89,7 +88,7 @@ class AddForm extends React.Component {
       );
     }
 
-    //course form
+    // course form
     return (
       <form className="task-edit" onSubmit={this.createTask}>
         <span>Date </span>
@@ -106,12 +105,7 @@ class AddForm extends React.Component {
         <br />
         {/* <p>Select the Program</p> */}
         <span>Program</span>
-        <input
-          name="program"
-          ref={this.programRef}
-          type="text"
-          placeholder="Program name"
-        />
+        <input name="program" ref={this.programRef} type="text" placeholder="Program name" />
         <span>Instructor</span>
         {/* <p>Select the Instructor</p> */}
         <input

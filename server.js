@@ -4,21 +4,47 @@ const config = require("config");
 const helmet = require("helmet");
 
 //Database config
-const connection = mysql.createConnection({
+const db_config = {
   host: config.get("dbConfg.host"),
   user: config.get("dbConfg.user"),
   password: config.get("dbConfg.password"),
   database: config.get("dbConfg.database"),
   port: config.get("dbConfg.port")
-});
+};
+//disconnection: https://github.com/mysqljs/mysql#server-disconnects
 
-connection.connect(function(err) {
-  if (err) {
-    console.log("Fail to Connect");
-  } else {
-    console.log("Connected!");
-  }
-});
+var connection;
+function handleDisconnect() {
+  // Recreate the connection, since
+  // the old one cannot be reused.
+  connection = mysql.createConnection(db_config);
+  connection.connect(function(err) {
+    // The server is either down
+    // or restarting (takes a while sometimes).
+    if (err) {
+      // We introduce a delay before attempting to reconnect,
+      // to avoid a hot loop, and to allow our node script to
+      // process asynchronous requests in the meantime.
+      console.log("error when connecting to db:", err);
+      setTimeout(handleDisconnect, 2000);
+    }
+  });
+  // If you're also serving http, display a 503 error.
+  connection.on("error", function(err) {
+    console.log("db error", err);
+    if (err.code === "PROTOCOL_CONNECTION_LOST") {
+      // Connection to the MySQL server is usually
+      // lost due to either server restart, or a
+      handleDisconnect();
+    } else {
+      // connnection idle timeout (the wait_timeout
+      // server variable configures this)
+      throw err;
+    }
+  });
+}
+
+handleDisconnect();
 
 const app = express();
 
