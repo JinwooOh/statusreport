@@ -57,14 +57,13 @@ class AddForm extends React.Component {
           <select name="type" ref={this.categoryAdminRef}>
             <option value="Leave">Leave</option>
             <option value="Meeting">Meeting</option>
-            <option value="Project Management">Project Management</option>
             <option value="Professional Development">Professional Development</option>
+            <option value="Project Management">Project Management</option>
             <option value="Purchasing">Purchasing</option>
             <option value="Reporting">Reporting</option>
-            <option value="Support">Support</option>
             <option value="Students">Students</option>
+            <option value="Support">Support</option>
             <option value="Special Projects">Special Projects</option>
-            <option value="Travel">Travel</option>
           </select>
           <br />
 
@@ -128,6 +127,9 @@ class AddForm extends React.Component {
         {/* <p>Select One of the Categories</p> */}
         <select name="type" ref={this.categoryRef}>
           <option value="Content Development">Content Development</option>
+          <option value="Faculty Consultation">Faculty Consultation</option>
+          <option value="CMS Layout">CMS Layout</option>
+          <option value="ISD Time">ISD Time</option>
           <option value="Media Production">Media Production</option>
           <option value="Quality Control">Quality Control</option>
         </select>

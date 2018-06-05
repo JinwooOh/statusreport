@@ -8,7 +8,6 @@ class SearchResult extends React.Component {
     const courseData = this.props.searchCourse;
     const adminData = this.props.searchAdmin;
     const programData = this.props.searchProgram;
-    console.log(programData);
     const courseColumns = [
       { Header: 'Name', accessor: 'userID' },
       { Header: 'Report date', accessor: 'subDate' },
@@ -30,11 +29,11 @@ class SearchResult extends React.Component {
     ];
     const programColumns = [
       { Header: 'Program', accessor: 'courseProgram' },
+      { Header: 'Program Number', accessor: 'courseNumber' },
       { Header: 'Name', accessor: 'userID' },
+      { Header: 'Instructor', accessor: 'courseInst' },
       { Header: 'Report date', accessor: 'subDate' },
       { Header: 'Completion date', accessor: 'completionDate' },
-      { Header: 'Number', accessor: 'courseNumber' },
-      { Header: 'Instructor', accessor: 'courseInst' },
       { Header: 'Hours', accessor: 'hours' },
     ];
 

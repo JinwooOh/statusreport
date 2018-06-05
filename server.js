@@ -185,6 +185,13 @@ app.get("/search/program/:courseProgram/:startDate/:endDate", (req, res) => {
   );
 });
 
+app.get(
+  "/search/programNumber/:courseNumber/:startDate/:endDate",
+  (req, res) => {
+    console.log("program Number search start: ");
+  }
+);
+
 //post data, req.body graps all state data
 app.post("/submit", (req, res) => {
   //console.log(req.body.tasks);
@@ -202,12 +209,12 @@ app.post("/submit", (req, res) => {
         "INSERT INTO `coursetable` (subDate, courseProgram, hours, courseTask, completionDate, courseInst, courseNumber, courseCat, userID) VALUES (?)";
       const values = [
         date,
-        curTask.program,
+        curTask.program.toString().toUpperCase(),
         curTask.hours,
         curTask.courseType,
         curTask.date,
         curTask.instructor,
-        curTask.courseNumber,
+        curTask.courseNumber.toString().toUpperCase(),
         curTask.category,
         userName
       ];

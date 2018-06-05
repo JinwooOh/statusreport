@@ -305,12 +305,27 @@ export function search() {
 
       <div className="message__text">
         <h3 className="message__text--title">
-          <span className="message__text--title-span">Usage</span>
+          <span className="message__text--title-span">Usage user search</span>
         </h3>
 
         <div className="message__text--body">
           <ul>
-            <li>1. ...</li>
+            <li>Start Date: the first day a user reports</li>
+            <li>End Date: the last day a user reports</li>
+            <li>User search shows both course and admin tasks</li>
+          </ul>
+        </div>
+
+        <h3 className="message__text--title">
+          <span className="message__text--title-span">Usage program search</span>
+        </h3>
+
+        <div className="message__text--body">
+          <ul>
+            <li>Start Date: the first day a user reports</li>
+            <li>End Date: the last day a user reports</li>
+            <li>Program: </li>
+            <li>Program Number: </li>
           </ul>
         </div>
       </div>

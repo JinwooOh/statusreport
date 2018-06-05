@@ -1,12 +1,21 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
+// import Autosuggest from 'react-autosuggest';
 
 class SearchForm extends React.Component {
+  // search type: either program or program number
+  state = {
+    selectValue: 'Program',
+  };
+
   programRef = React.createRef();
   userRef = React.createRef();
   startDateRef = React.createRef();
   endDateRef = React.createRef();
 
+  handleChange = (e) => {
+    this.setState({ selectValue: e.target.value });
+  };
   createSearchUser = (event) => {
     event.preventDefault();
     const options = {
@@ -19,11 +28,24 @@ class SearchForm extends React.Component {
   };
   createSearchProgram = (event) => {
     event.preventDefault();
-    const options = {
-      startDate: this.startDateRef.current.value,
-      endDate: this.endDateRef.current.value,
-      courseProgram: this.programRef.current.value,
-    };
+    let options = {};
+    if (this.state.selectValue === 'Program') {
+      options = {
+        startDate: this.startDateRef.current.value,
+        endDate: this.endDateRef.current.value,
+        courseProgram: this.programRef.current.value,
+      };
+      this.props.programSearchType('Program');
+    } else {
+      options = {
+        startDate: this.startDateRef.current.value,
+        endDate: this.endDateRef.current.value,
+        courseNumber: this.programRef.current.value,
+      };
+      this.props.programSearchType('Program Number');
+    }
+
+    console.log(options);
     this.props.addSearchOptions(options);
     event.currentTarget.reset();
   };
@@ -37,7 +59,14 @@ class SearchForm extends React.Component {
           <input name="date" ref={this.startDateRef} type="date" required />
           <span>End Date </span>
           <input name="date" ref={this.endDateRef} type="date" required />
-          <span>Program</span>
+
+          <span>Search Type </span>
+          <select name="type" value={this.state.selectValue} onChange={this.handleChange}>
+            <option value="Program">Program Name</option>
+            <option value="Program Number">Program Number</option>
+          </select>
+
+          <span>Name or Number</span>
           <input
             name="program"
             ref={this.programRef}
@@ -45,6 +74,7 @@ class SearchForm extends React.Component {
             placeholder="Program name"
             required
           />
+
           <br />
           <br />
           <div className="center">

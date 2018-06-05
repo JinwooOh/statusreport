@@ -14,6 +14,7 @@ class SearchType extends Component {
           searchType={this.props.searchType}
           addSearchOptions={this.props.addSearchOptions}
           handleSearch={this.props.handleSearch}
+          programSearchType={this.props.programSearchType}
         />
       </div>
     );

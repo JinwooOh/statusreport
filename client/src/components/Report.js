@@ -17,6 +17,7 @@ class Report extends Component {
       searchAdmin: [], // result of search by user
       searchCourse: [], // result search by user
       searchProgram: [], // result search by user
+      programSearchType: 'Program', // flag for program search, program number serarch
 
       admintable: [], // consider to delete...
       coursetable: [], // consider to delete...
@@ -69,10 +70,12 @@ class Report extends Component {
       searchOptions,
     });
   };
-
+  programSearchType = (programSearchType) => {
+    this.setState({ programSearchType });
+  };
   handleSearch = () => {
     const {
-      userID, startDate, endDate, courseProgram,
+      userID, startDate, endDate, courseProgram, courseNumber,
     } = this.state.searchOptions;
 
     // Search user
@@ -82,7 +85,7 @@ class Report extends Component {
       fetch(urlCourse)
         .then(res => res.json())
         .then((json) => {
-          console.info(json);
+          console.info('Course result:', json);
           this.setState({
             searchCourse: json,
           });
@@ -91,7 +94,7 @@ class Report extends Component {
       fetch(urlAdmin)
         .then(res => res.json())
         .then((json) => {
-          console.info(json);
+          console.info('Admin result:', json);
           this.setState({
             searchAdmin: json,
           });
@@ -99,11 +102,15 @@ class Report extends Component {
         .catch(error => console.error('fetch error at search', error)); // error
     } else {
       // Search program
-      const urlProgram = `/search/program/${courseProgram}/${startDate}/${endDate}`;
+
+      const urlProgram =
+        this.state.programSearchType === 'Program'
+          ? `/search/program/${courseProgram}/${startDate}/${endDate}`
+          : `/search/programNumber/${courseNumber}/${startDate}/${endDate}`;
       fetch(urlProgram)
         .then(res => res.json())
         .then((json) => {
-          console.info(json);
+          console.info('Program result:', json);
           this.setState({
             searchProgram: json,
           });
@@ -133,7 +140,7 @@ class Report extends Component {
             className="btn btn__search"
             onClick={() => {
               this.props.history.push('/');
-              // this.props.history.push(`/all-status-reports/`);
+              // this.props.history.push('/all-status-reports/');
             }}
           >
             BACK TO REPORT PAGE
@@ -147,6 +154,7 @@ class Report extends Component {
           searchType={this.state.searchType}
           addSearchOptions={this.addSearchOptions}
           handleSearch={this.handleSearch}
+          programSearchType={this.programSearchType}
         />
         <SearchResult
           searchCourse={this.state.searchCourse}
