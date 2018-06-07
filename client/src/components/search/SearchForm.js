@@ -44,8 +44,6 @@ class SearchForm extends React.Component {
       };
       this.props.programSearchType('Program Number');
     }
-
-    console.log(options);
     this.props.addSearchOptions(options);
     event.currentTarget.reset();
   };
@@ -62,8 +60,8 @@ class SearchForm extends React.Component {
 
           <span>Search Type </span>
           <select name="type" value={this.state.selectValue} onChange={this.handleChange}>
-            <option value="Program">Program Name</option>
-            <option value="Program Number">Program Number</option>
+            <option value="Program">Course Name</option>
+            <option value="Program Number">Course Number</option>
           </select>
 
           <span>Name or Number</span>
@@ -71,7 +69,7 @@ class SearchForm extends React.Component {
             name="program"
             ref={this.programRef}
             type="text"
-            placeholder="Program name"
+            placeholder="Name / Number"
             required
           />
 

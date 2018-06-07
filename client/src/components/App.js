@@ -68,6 +68,24 @@ class App extends React.Component {
     }
     // success
     const data = this.state;
+    // check if user name is in database. If not, add a new userto database
+    fetch('/users')
+      .then(res => res.json())
+      .then((users) => {
+        const match = users.find(o => o.name === data.userName);
+        // case where there is no user in the database
+        if (match === undefined) {
+          fetch('/addUser', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          }).then((body) => {
+            console.log('State: ', body); // error
+          });
+        }
+      })
+      .catch(error => console.error('fetch error at users ', error)); // error
+
     fetch('/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

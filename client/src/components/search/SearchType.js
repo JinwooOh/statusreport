@@ -5,7 +5,7 @@ import SearchForm from './SearchForm';
 
 class SearchType extends Component {
   render() {
-    const searchType = this.props.searchType === 'user' ? 'Search by User' : 'Search by Program';
+    const searchType = this.props.searchType === 'user' ? 'Search by User' : 'Search by Course';
     return (
       <div className="form-list form-list--search">
         <SearchSelector selectSearch={this.props.selectSearch} />

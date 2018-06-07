@@ -83,7 +83,7 @@ input[type="text"],
 select {
   margin: 0.4rem 0;
   display: inline-block;
-  border: 0.1rem solid #a40a3c;
+  border: 0.1rem solid #000;
   border-radius: 0.4rem; }
 
 input:required {
@@ -133,7 +133,7 @@ input:required {
   grid-gap: 0.2rem;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
-  grid-template-areas: "App-title App-title App-title App-title" "guide guide guide guide" "form form form form " "summary summary summary summary"; }
+  grid-template-areas: "App-title App-title App-title App-title" "guide guide guide guide" "form form form form " "summary summary summary summary" "searchSummary searchSummary searchSummary searchSummary"; }
 
 .App-title {
   grid-area: App-title; }
@@ -144,14 +144,18 @@ input:required {
   padding-right: 1rem;
   justify-self: right; }
 
-.form-list {
-  grid-area: form;
+.form-list,
+.summary,
+.searchSummary {
   border-radius: 3px;
-  overflow: hidden;
-  border-top: 0.4rem solid #140107;
+  border-top: 0.5rem solid #140107;
   background: #f8faff;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
   margin: 1rem; }
+
+.form-list {
+  grid-area: form;
+  overflow: hidden; }
   .form-list--search {
     animation: moveInRight 0.3s; }
   .form-list--report {
@@ -159,17 +163,19 @@ input:required {
 
 .summary {
   grid-area: summary;
-  border-radius: 3px;
-  border-top: 0.5rem solid #140107;
-  background: #f8faff;
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
   text-align: center;
-  padding: 1rem;
-  margin: 1rem; }
+  padding: 1rem; }
   .summary--search {
     animation: moveInRight 0.5s; }
   .summary--report {
     animation: moveInLeft 0.5s; }
+
+.searchSummary {
+  grid-area: searchSummary;
+  text-align: center;
+  padding: 1rem; }
+  .searchSummary--report {
+    animation: moveInRight 0.5s; }
 
 .summary-appear {
   animation: moveInRight 0.5s; }
@@ -236,7 +242,7 @@ select {
     margin: 0.4rem;
     font-weight: 100; }
   .btn:hover {
-    background: #6b0848;
+    background-color: #6b0848;
     transform: translateY(-0.3rem);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
     .btn:hover::after {

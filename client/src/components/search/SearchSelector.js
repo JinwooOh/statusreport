@@ -12,7 +12,7 @@ class SearchSelector extends Component {
           className="btn btn__taskSelector"
           onClick={() => this.props.selectSearch('program')}
         >
-          Program
+          Course
         </button>
       </div>
     );

@@ -160,7 +160,7 @@ app.get("/search/admintable/:userID/:startDate/:endDate", (req, res) => {
   );
 });
 
-//search by user (program)
+//search by user (program name)
 app.get("/search/program/:courseProgram/:startDate/:endDate", (req, res) => {
   console.log("program search start: ");
   console.log(req.params.courseProgram);
@@ -176,7 +176,7 @@ app.get("/search/program/:courseProgram/:startDate/:endDate", (req, res) => {
     AND courseProgram='${courseProgram}'`,
     function(err, result, fields) {
       if (err) {
-        console.log("Error in program query");
+        console.log("Error in program(name) query");
       } else {
         console.log(result);
         res.json(result);
@@ -185,12 +185,43 @@ app.get("/search/program/:courseProgram/:startDate/:endDate", (req, res) => {
   );
 });
 
+//search by user (program number)
 app.get(
   "/search/programNumber/:courseNumber/:startDate/:endDate",
   (req, res) => {
     console.log("program Number search start: ");
+    console.log(req.params.courseNumber);
+    console.log(req.params.startDate);
+    console.log(req.params.endDate);
+    const { courseNumber, startDate, endDate } = req.params;
+
+    connection.query(
+      `SELECT * FROM coursetable
+      WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
+      AND courseNumber='${courseNumber}'`,
+      function(err, result, fields) {
+        if (err) {
+          console.log("Error in program(number) query");
+        } else {
+          console.log(result);
+          res.json(result);
+        }
+      }
+    );
   }
 );
+
+//add new user to the database
+app.post("/addUser", (req, res) => {
+  const userName = req.body.userName;
+  console.log(userName);
+  const sql = "INSERT INTO `user` (name) VALUES (?)";
+  const values = [userName];
+  connection.query(sql, [values], function(err, result) {
+    if (err) throw err;
+    console.log("new user is added" + result.affectedRows);
+  });
+});
 
 //post data, req.body graps all state data
 app.post("/submit", (req, res) => {

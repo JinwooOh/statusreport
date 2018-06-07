@@ -324,8 +324,8 @@ export function search() {
           <ul>
             <li>Start Date: the first day a user reports</li>
             <li>End Date: the last day a user reports</li>
-            <li>Program: </li>
-            <li>Program Number: </li>
+            <li>Select search type: by Course name or number</li>
+            <li>Type name or number</li>
           </ul>
         </div>
       </div>

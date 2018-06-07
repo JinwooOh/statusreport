@@ -8,6 +8,8 @@ class SearchResult extends React.Component {
     const courseData = this.props.searchCourse;
     const adminData = this.props.searchAdmin;
     const programData = this.props.searchProgram;
+
+    // User table
     const courseColumns = [
       { Header: 'Name', accessor: 'userID' },
       { Header: 'Report date', accessor: 'subDate' },
@@ -27,9 +29,11 @@ class SearchResult extends React.Component {
       { Header: 'Admin category', accessor: 'adminCat' },
       { Header: 'Hours', accessor: 'hours' },
     ];
+
+    // Course table
     const programColumns = [
-      { Header: 'Program', accessor: 'courseProgram' },
-      { Header: 'Program Number', accessor: 'courseNumber' },
+      { Header: 'Course', accessor: 'courseProgram' },
+      { Header: 'Course Number', accessor: 'courseNumber' },
       { Header: 'Name', accessor: 'userID' },
       { Header: 'Instructor', accessor: 'courseInst' },
       { Header: 'Report date', accessor: 'subDate' },
@@ -51,7 +55,7 @@ class SearchResult extends React.Component {
     return (
       <div className="summary summary--search">
         <h2 className="heading-primary">Search Result</h2>
-        <p className="table__p">Program</p>
+        <p className="table__p">Course</p>
         <ReactTable data={programData} columns={programColumns} defaultPageSize={10} />
       </div>
     );

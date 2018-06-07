@@ -7,6 +7,7 @@ import SearchResult from './search/SearchResult';
 import { isEmpty } from './helper/Helper';
 import { search } from './helper/Message';
 import Popup from './Popup';
+import SearchSummary from './search/SearchSummary';
 
 class Report extends Component {
   constructor(props) {
@@ -14,11 +15,17 @@ class Report extends Component {
     this.state = {
       searchType: 'user', // or program
       searchOptions: {}, // search options from SearchType
+
       searchAdmin: [], // result of search by user
       searchCourse: [], // result search by user
       searchProgram: [], // result search by user
       programSearchType: 'Program', // flag for program search, program number serarch
 
+      totalHours: {
+        admin: 0,
+        course: 0,
+        program: 0,
+      }, // total hours for admin task, course task and course
       admintable: [], // consider to delete...
       coursetable: [], // consider to delete...
     };
@@ -86,8 +93,15 @@ class Report extends Component {
         .then(res => res.json())
         .then((json) => {
           console.info('Course result:', json);
+          // calculate total hours for course task
+          let totalHoursCourse = 0;
+          Object.keys(json).forEach((key) => {
+            totalHoursCourse += json[key].hours;
+          });
+          // setState both searchCourse and totalHours
           this.setState({
             searchCourse: json,
+            totalHours: { ...this.state.totalHours, course: totalHoursCourse },
           });
         })
         .catch(error => console.error('fetch error at search', error)); // error
@@ -95,14 +109,18 @@ class Report extends Component {
         .then(res => res.json())
         .then((json) => {
           console.info('Admin result:', json);
+          let totalHoursAdmin = 0;
+          Object.keys(json).forEach((key) => {
+            totalHoursAdmin += json[key].hours;
+          });
           this.setState({
             searchAdmin: json,
+            totalHours: { ...this.state.totalHours, admin: totalHoursAdmin },
           });
         })
         .catch(error => console.error('fetch error at search', error)); // error
     } else {
       // Search program
-
       const urlProgram =
         this.state.programSearchType === 'Program'
           ? `/search/program/${courseProgram}/${startDate}/${endDate}`
@@ -111,8 +129,13 @@ class Report extends Component {
         .then(res => res.json())
         .then((json) => {
           console.info('Program result:', json);
+          let totalHoursProgram = 0;
+          Object.keys(json).forEach((key) => {
+            totalHoursProgram += json[key].hours;
+          });
           this.setState({
             searchProgram: json,
+            totalHours: { ...this.state.totalHours, program: totalHoursProgram },
           });
         })
         .catch(error => console.error('fetch error at search', error)); // error
@@ -121,6 +144,7 @@ class Report extends Component {
     // clear state
     this.setState({
       searchOptions: {},
+      totalHours: {},
     });
   };
 
@@ -156,12 +180,14 @@ class Report extends Component {
           handleSearch={this.handleSearch}
           programSearchType={this.programSearchType}
         />
+
         <SearchResult
           searchCourse={this.state.searchCourse}
           searchAdmin={this.state.searchAdmin}
           searchProgram={this.state.searchProgram}
           searchType={this.state.searchType}
         />
+        <SearchSummary />
       </div>
     );
   }
