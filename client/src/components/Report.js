@@ -20,12 +20,13 @@ class Report extends Component {
       searchCourse: [], // result search by user
       searchProgram: [], // result search by user
       programSearchType: 'Program', // flag for program search, program number serarch
-
+      // keep tracking total hours from the result of search
       totalHours: {
-        admin: 0,
-        course: 0,
-        program: 0,
-      }, // total hours for admin task, course task and course
+        admin: 0, // for user search
+        course: 0, // for user search
+        program: 0, // for course search
+      },
+      summaryInfo: [], // summary info for searchSummary component
       admintable: [], // consider to delete...
       coursetable: [], // consider to delete...
     };
@@ -33,6 +34,7 @@ class Report extends Component {
 
   componentDidMount() {
     // fetch admintable from database
+    // consider to delete...
     fetch('/admintable')
       .then(res => res.json())
       .then((admintable) => {
@@ -140,8 +142,17 @@ class Report extends Component {
         })
         .catch(error => console.error('fetch error at search', error)); // error
     }
-    // clear state
+
     this.setState({
+      // update summary info
+      summaryInfo: {
+        userID,
+        startDate,
+        endDate,
+        courseProgram,
+        courseNumber,
+      },
+      // clear state
       searchOptions: {},
     });
   };
@@ -185,10 +196,13 @@ class Report extends Component {
           searchProgram={this.state.searchProgram}
           searchType={this.state.searchType}
         />
-        <SearchSummary searchType={this.state.searchType} totalHours={this.state.totalHours} />
+        <SearchSummary
+          searchType={this.state.searchType}
+          totalHours={this.state.totalHours}
+          summaryInfo={this.state.summaryInfo}
+        />
       </div>
     );
   }
 }
-
 export default Report;

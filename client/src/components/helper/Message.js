@@ -317,7 +317,7 @@ export function search() {
         </div>
 
         <h3 className="message__text--title">
-          <span className="message__text--title-span">Usage program search</span>
+          <span className="message__text--title-span">Usage course search</span>
         </h3>
 
         <div className="message__text--body">

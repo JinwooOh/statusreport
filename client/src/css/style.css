@@ -3,14 +3,20 @@
   margin: 0; }
 
 html {
-  font-size: 0.625rem;
+  font-size: 62.5%;
   background: linear-gradient(rgba(20, 1, 7, 0.1), rgba(20, 1, 7, 0.3)), url(../img/bg.png); }
+  @media only screen and (max-width: 56.25em) {
+    html {
+      font-size: 50%; } }
+  @media only screen and (min-width: 112.5em) {
+    html {
+      font-size: 75%; } }
 
 body {
   min-height: calc(100vh - 1rem); }
 
 .main-wrapper {
-  width: 100rem;
+  max-width: 100rem;
   margin: auto;
   padding-bottom: 3rem; }
 
