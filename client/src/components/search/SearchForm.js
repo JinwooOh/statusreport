@@ -59,10 +59,12 @@ class SearchForm extends React.Component {
           <input name="date" ref={this.endDateRef} type="date" required />
 
           <span>Search Type </span>
-          <select name="type" value={this.state.selectValue} onChange={this.handleChange}>
-            <option value="Program">Course Name</option>
-            <option value="Program Number">Course Number</option>
-          </select>
+          <div className="select-custom">
+            <select name="type" value={this.state.selectValue} onChange={this.handleChange}>
+              <option value="Program">Course Name</option>
+              <option value="Program Number">Course Number</option>
+            </select>
+          </div>
 
           <span>Name or Number</span>
           <input

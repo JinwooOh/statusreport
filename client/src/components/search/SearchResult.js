@@ -8,7 +8,6 @@ class SearchResult extends React.Component {
     const courseData = this.props.searchCourse;
     const adminData = this.props.searchAdmin;
     const programData = this.props.searchProgram;
-
     // User table
     const courseColumns = [
       { Header: 'Name', accessor: 'userID' },

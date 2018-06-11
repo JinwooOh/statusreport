@@ -140,11 +140,9 @@ class Report extends Component {
         })
         .catch(error => console.error('fetch error at search', error)); // error
     }
-
     // clear state
     this.setState({
       searchOptions: {},
-      totalHours: {},
     });
   };
 
@@ -187,7 +185,7 @@ class Report extends Component {
           searchProgram={this.state.searchProgram}
           searchType={this.state.searchType}
         />
-        <SearchSummary />
+        <SearchSummary searchType={this.state.searchType} totalHours={this.state.totalHours} />
       </div>
     );
   }

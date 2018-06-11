@@ -229,6 +229,7 @@ app.post("/submit", (req, res) => {
   const tasks = req.body.tasks;
   const totalHours = req.body.totalHours; //int
   const date = req.body.date; //submit date (date type is string)
+
   const userName = req.body.userName; //userName
   console.log(tasks);
   // coursetable or admintable post

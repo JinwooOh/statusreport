@@ -10,7 +10,7 @@ body {
   min-height: calc(100vh - 1rem); }
 
 .main-wrapper {
-  width: 95rem;
+  width: 100rem;
   margin: auto;
   padding-bottom: 3rem; }
 
@@ -193,15 +193,27 @@ input:required {
   padding-right: 2rem;
   display: inline-block;
   vertical-align: top;
-  width: 35%;
+  width: 32.5rem;
   text-align: right; }
 
-.task-edit input,
-select {
+.task-edit input {
   padding: 0.5rem;
   min-height: 2.5rem;
   display: inline-block;
-  width: 35%; }
+  width: 32.5rem; }
+
+.select-custom {
+  display: inline-block;
+  background: #fff;
+  height: 3.5rem;
+  overflow: hidden;
+  width: 33.5rem; }
+  .select-custom select {
+    background: transparent;
+    font-size: 1.2rem;
+    height: 3rem;
+    padding: 0.5rem;
+    width: 33.5rem; }
 
 .btn {
   font-size: 1.4rem;
@@ -273,7 +285,7 @@ select {
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
     border-radius: 0.3rem;
-    background-image: linear-gradient(to right bottom, rgba(164, 10, 60, 0.85), rgba(248, 250, 255, 0.85)); }
+    background-image: linear-gradient(to right bottom, rgba(164, 10, 60, 0.35), rgba(248, 250, 255, 0.35)); }
   .message__text--body {
     text-align: justify; }
     .message__text--body ul {

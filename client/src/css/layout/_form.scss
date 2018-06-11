@@ -11,13 +11,26 @@
   padding-right: 2rem;
   display: inline-block;
   vertical-align: top;
-  width: 35%;
+  width: 32.5rem;
   text-align: right;
 }
-.task-edit input,
-select {
+.task-edit input {
   padding: 0.5rem;
   min-height: 2.5rem;
   display: inline-block;
-  width: 35%;
+  width: 32.5rem;
+}
+.select-custom {
+  display: inline-block;
+  background: $color-white;
+  height: 3.5rem;
+  overflow: hidden;
+  width: 33.5rem;
+  select {
+    background: transparent;
+    font-size: 1.2rem;
+    height: 3rem;
+    padding: 0.5rem;
+    width: 33.5rem;
+  }
 }

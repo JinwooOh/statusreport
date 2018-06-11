@@ -51,20 +51,32 @@ class AddForm extends React.Component {
       return (
         <form className="task-edit" onSubmit={this.createTaskAdmin}>
           <span>Date </span>
-          <input name="date" ref={this.dateRef} type="date" required />
+          <input
+            type="date"
+            name="date"
+            id="date"
+            ref={this.dateRef}
+            required
+            min={
+              new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+            }
+            max={new Date().toISOString().split('T')[0]}
+          />
           <br />
           <span>Task Type</span>
-          <select name="type" ref={this.categoryAdminRef}>
-            <option value="Leave">Leave</option>
-            <option value="Meeting">Meeting</option>
-            <option value="Professional Development">Professional Development</option>
-            <option value="Project Management">Project Management</option>
-            <option value="Purchasing">Purchasing</option>
-            <option value="Reporting">Reporting</option>
-            <option value="Students">Students</option>
-            <option value="Support">Support</option>
-            <option value="Special Projects">Special Projects</option>
-          </select>
+          <div className="select-custom">
+            <select name="type" ref={this.categoryAdminRef}>
+              <option value="Leave">Leave</option>
+              <option value="Meeting">Meeting</option>
+              <option value="Professional Development">Professional Development</option>
+              <option value="Project Management">Project Management</option>
+              <option value="Purchasing">Purchasing</option>
+              <option value="Reporting">Reporting</option>
+              <option value="Students">Students</option>
+              <option value="Support">Support</option>
+              <option value="Special Projects">Special Projects</option>
+            </select>
+          </div>
           <br />
 
           <span>Hours for This Task</span>
@@ -92,15 +104,26 @@ class AddForm extends React.Component {
       <form className="task-edit" onSubmit={this.createTask}>
         <span>Date </span>
         {/* <label>Date: </label> */}
-        <input name="date" ref={this.dateRef} type="date" required />
+        <input
+          name="date"
+          ref={this.dateRef}
+          type="date"
+          min={
+            new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+          }
+          max={new Date().toISOString().split('T')[0]}
+          required
+        />
         <br />
         {/* <p>Select the Course Task Type</p> */}
         <span>Course Type</span>
-        <select name="type" ref={this.courseTypeRef}>
-          <option value="New Course">New Course</option>
-          <option value="Course Maintenance">Course Maintenance</option>
-          <option value="Course Live Support">Course Live Support</option>
-        </select>
+        <div className="select-custom">
+          <select name="type" ref={this.courseTypeRef}>
+            <option value="New Course">New Course</option>
+            <option value="Course Maintenance">Course Maintenance</option>
+            <option value="Course Live Support">Course Live Support</option>
+          </select>
+        </div>
         <br />
         {/* <p>Select the Program</p> */}
         <span>Program</span>
@@ -125,14 +148,16 @@ class AddForm extends React.Component {
         <br />
         <span>Task Type</span>
         {/* <p>Select One of the Categories</p> */}
-        <select name="type" ref={this.categoryRef}>
-          <option value="Content Development">Content Development</option>
-          <option value="Faculty Consultation">Faculty Consultation</option>
-          <option value="CMS Layout">CMS Layout</option>
-          <option value="ISD Time">ISD Time</option>
-          <option value="Media Production">Media Production</option>
-          <option value="Quality Control">Quality Control</option>
-        </select>
+        <div className="select-custom">
+          <select name="type" ref={this.categoryRef}>
+            <option value="Content Development">Content Development</option>
+            <option value="Faculty Consultation">Faculty Consultation</option>
+            <option value="CMS Layout">CMS Layout</option>
+            <option value="ISD Time">ISD Time</option>
+            <option value="Media Production">Media Production</option>
+            <option value="Quality Control">Quality Control</option>
+          </select>
+        </div>
         <br />
         <span>Hours for This Task</span>
         {/* <p>Please input hours for this task</p> */}
