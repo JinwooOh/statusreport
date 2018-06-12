@@ -13,12 +13,23 @@
   vertical-align: top;
   width: 32.5rem;
   text-align: right;
+  margin-bottom: 0.5rem;
+  @include respond(tab-port) {
+    padding: 0;
+    width: 100%;
+    text-align: center;
+  }
 }
+
 .task-edit input {
   padding: 0.5rem;
   min-height: 2.5rem;
   display: inline-block;
   width: 32.5rem;
+  @include respond(tab-port) {
+    display: block;
+    margin: 0 auto;
+  }
 }
 .select-custom {
   display: inline-block;
@@ -32,5 +43,9 @@
     height: 3rem;
     padding: 0.5rem;
     width: 33.5rem;
+  }
+  @include respond(tab-port) {
+    display: block;
+    margin: 0 auto;
   }
 }

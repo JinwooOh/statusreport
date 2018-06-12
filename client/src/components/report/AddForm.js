@@ -62,7 +62,7 @@ class AddForm extends React.Component {
             }
             max={new Date().toISOString().split('T')[0]}
           />
-          <br />
+
           <span>Task Type</span>
           <div className="select-custom">
             <select name="type" ref={this.categoryAdminRef}>
@@ -77,7 +77,6 @@ class AddForm extends React.Component {
               <option value="Special Projects">Special Projects</option>
             </select>
           </div>
-          <br />
 
           <span>Hours for This Task</span>
           <input
@@ -88,8 +87,6 @@ class AddForm extends React.Component {
             placeholder="hours"
             required
           />
-          <br />
-          <br />
           <div className="center">
             <button className="btn btn__summary" type="submit">
               Add Task
@@ -114,7 +111,7 @@ class AddForm extends React.Component {
           max={new Date().toISOString().split('T')[0]}
           required
         />
-        <br />
+
         {/* <p>Select the Course Task Type</p> */}
         <span>Course Type</span>
         <div className="select-custom">
@@ -124,7 +121,7 @@ class AddForm extends React.Component {
             <option value="Course Live Support">Course Live Support</option>
           </select>
         </div>
-        <br />
+
         {/* <p>Select the Program</p> */}
         <span>Program</span>
         <input name="program" ref={this.programRef} type="text" placeholder="Program name" />
@@ -136,7 +133,7 @@ class AddForm extends React.Component {
           type="text"
           placeholder="Instructor name"
         />
-        <br />
+
         <span>Course Number</span>
         {/* <p>Select the Instructor</p> */}
         <input
@@ -145,7 +142,7 @@ class AddForm extends React.Component {
           type="text"
           placeholder="Course number"
         />
-        <br />
+
         <span>Task Type</span>
         {/* <p>Select One of the Categories</p> */}
         <div className="select-custom">
@@ -158,7 +155,7 @@ class AddForm extends React.Component {
             <option value="Quality Control">Quality Control</option>
           </select>
         </div>
-        <br />
+
         <span>Hours for This Task</span>
         {/* <p>Please input hours for this task</p> */}
         <input
@@ -169,8 +166,7 @@ class AddForm extends React.Component {
           step="0.25"
           required
         />
-        <br />
-        <br />
+
         <div className="center">
           <button className="btn btn__summary">Add task</button>
         </div>

@@ -4,18 +4,42 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
-const customContentStyle = {
-  width: '60%',
-  wrapper: {
-    padding: '0.2rem',
-  },
-  button: {
-    borderRadius: '1.2rem',
-    backgroundColor: '#a40a3c',
-    boxShadow: '0 1rem 2rem rgba(#fff, 0.2)',
-    color: 'white',
-  },
-};
+// const dropzoneStyles =
+// window.screen.availWidth < 780 ?
+// { 'width': '150px', 'height': '150px', 'border': 'none', 'borderRadius': '50%' }
+// : { 'width': '200px', 'height': '200px', 'border': 'none', 'borderRadius': '50%' };
+
+const customContentStyle =
+  window.screen.availWidth >= 900
+    ? {
+      width: '60%',
+      wrapper: {
+        padding: '0.2rem',
+      },
+      button: {
+        borderRadius: '1.2rem',
+        backgroundColor: '#a40a3c',
+        boxShadow: '0 1rem 2rem rgba(#fff, 0.2)',
+        color: 'white',
+      },
+    }
+    : {
+      width: '90%',
+      wrapper: {
+        padding: '0.2rem',
+      },
+      button: {
+        borderRadius: '1.2rem',
+        backgroundColor: '#a40a3c',
+        boxShadow: '0 1rem 2rem rgba(#fff, 0.2)',
+        color: 'white',
+        padding: '0',
+      },
+      label: {
+        fontSize: '1.4rem',
+        fontWeight: '500',
+      },
+    };
 /**
  * Dialog with action buttons. The actions are passed in as an array of React objects,
  * in this example [FlatButtons](/#/components/flat-button).
@@ -51,6 +75,7 @@ export default class Popup extends React.Component {
           className="btn btn__guide"
           label={this.props.title}
           onClick={this.handleOpen}
+          labelStyle={customContentStyle.label}
         />
         <Dialog
           title={this.props.title}

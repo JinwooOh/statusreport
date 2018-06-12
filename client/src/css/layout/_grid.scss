@@ -1,5 +1,6 @@
 .wrapper {
   display: grid;
+
   grid-gap: 0.2rem;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
@@ -17,10 +18,21 @@
 }
 
 .guide {
-  display: flex;
+  display: inline-flex;
+  flex-wrap: wrap;
   grid-area: guide;
-  padding-right: 1rem;
-  justify-self: right;
+  padding-left: 1.3rem;
+  padding-right: 1.3rem;
+  justify-content: flex-end;
+  &__popup {
+    margin-bottom: 0.4rem;
+  }
+}
+.guide > .btn__search {
+  @include respond(phone) {
+    width: 100%;
+    margin: 0 auto;
+  }
 }
 .form-list,
 .summary,

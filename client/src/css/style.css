@@ -5,6 +5,9 @@
 html {
   font-size: 62.5%;
   background: linear-gradient(rgba(20, 1, 7, 0.1), rgba(20, 1, 7, 0.3)), url(../img/bg.png); }
+  @media only screen and (max-width: 75em) {
+    html {
+      font-size: 56.25%; } }
   @media only screen and (max-width: 56.25em) {
     html {
       font-size: 50%; } }
@@ -106,8 +109,7 @@ input:required {
     padding: 0.6rem; }
 
 .summary-info {
-  line-height: 2.4rem;
-  margin-bottom: 1.2rem; }
+  line-height: 2.8rem; }
 
 .text-totalHours {
   display: inline-block;
@@ -145,10 +147,19 @@ input:required {
   grid-area: App-title; }
 
 .guide {
-  display: flex;
+  display: inline-flex;
+  flex-wrap: wrap;
   grid-area: guide;
-  padding-right: 1rem;
-  justify-self: right; }
+  padding-left: 1.3rem;
+  padding-right: 1.3rem;
+  justify-content: flex-end; }
+  .guide__popup {
+    margin-bottom: 0.4rem; }
+
+@media only screen and (max-width: 37.5em) {
+  .guide > .btn__search {
+    width: 100%;
+    margin: 0 auto; } }
 
 .form-list,
 .summary,
@@ -200,13 +211,23 @@ input:required {
   display: inline-block;
   vertical-align: top;
   width: 32.5rem;
-  text-align: right; }
+  text-align: right;
+  margin-bottom: 0.5rem; }
+  @media only screen and (max-width: 56.25em) {
+    .task-edit span {
+      padding: 0;
+      width: 100%;
+      text-align: center; } }
 
 .task-edit input {
   padding: 0.5rem;
   min-height: 2.5rem;
   display: inline-block;
   width: 32.5rem; }
+  @media only screen and (max-width: 56.25em) {
+    .task-edit input {
+      display: block;
+      margin: 0 auto; } }
 
 .select-custom {
   display: inline-block;
@@ -220,6 +241,10 @@ input:required {
     height: 3rem;
     padding: 0.5rem;
     width: 33.5rem; }
+  @media only screen and (max-width: 56.25em) {
+    .select-custom {
+      display: block;
+      margin: 0 auto; } }
 
 .btn {
   font-size: 1.4rem;
@@ -241,9 +266,13 @@ input:required {
   .btn__guide {
     padding: 0.4rem;
     margin: 0 auto; }
+  @media only screen and (max-width: 56.25em) {
+    .btn__search {
+      display: block; } }
   .btn__summary {
     padding: 1rem 2rem;
-    margin: 0.4rem; }
+    margin: 0.4rem;
+    margin-top: 2.4rem; }
   .btn__taskSelector {
     width: 50%;
     margin: 0 auto;

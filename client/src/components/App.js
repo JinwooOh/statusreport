@@ -7,7 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Forms from './report/Forms';
 import Tasks from './report/Tasks';
 import { dateNow } from './helper/Helper';
-import { coursehelp, adminhelp, generalhelp } from './helper/Message';
+import { coursehelp, adminhelp } from './helper/Message';
 
 import Popup from './Popup';
 
@@ -147,10 +147,10 @@ class App extends React.Component {
         {/* <Popup closeBtn={false} /> */}
         <div className="guide">
           <MuiThemeProvider>
-            <div className="guide guide__popup">
-              <Popup title="Course Help Guide" text={coursehelp()} />
-              <Popup title="Administration Help Guide" text={adminhelp()} />
-              <Popup title="General Information" text={generalhelp()} />
+            <div className="guide  guide__popup ">
+              <Popup title="Course Guide" text={coursehelp()} />
+              <Popup title="Admin Guide" text={adminhelp()} />
+              {/* <Popup className="btn__general" title="General" text={generalhelp()} /> */}
             </div>
           </MuiThemeProvider>
 

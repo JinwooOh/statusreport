@@ -27,9 +27,15 @@
     padding: 0.4rem;
     margin: 0 auto;
   }
+  &__search {
+    @include respond(tab-port) {
+      display: block;
+    }
+  }
   &__summary {
     padding: 1rem 2rem;
     margin: 0.4rem;
+    margin-top: 2.4rem;
   }
 
   &__taskSelector {

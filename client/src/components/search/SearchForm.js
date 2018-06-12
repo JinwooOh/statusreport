@@ -75,8 +75,6 @@ class SearchForm extends React.Component {
             required
           />
 
-          <br />
-          <br />
           <div className="center">
             <button className="btn btn__summary">Search</button>
           </div>
@@ -94,8 +92,6 @@ class SearchForm extends React.Component {
         <span>User name</span>
         <input name="user" ref={this.userRef} type="text" placeholder="User name" required />
 
-        <br />
-        <br />
         <div className="center">
           <button className="btn btn__summary">Search</button>
         </div>
