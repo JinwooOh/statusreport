@@ -10,7 +10,6 @@ let userData = [{}];
 const getSuggestions = (value) => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
-
   return inputLength === 0
     ? []
     : userData.filter(user => user.name.toLowerCase().slice(0, inputLength) === inputValue);
@@ -25,11 +24,10 @@ class Tasks extends React.Component {
     this.state = {
       value: '',
       suggestions: [],
+      noSuggestions: false,
       users: [],
     };
   }
-
-  // nameRef = React.createRef();
 
   componentDidMount() {
     // get user info from database for Autosugesstion
@@ -48,10 +46,13 @@ class Tasks extends React.Component {
       value: newValue,
     });
   };
-  // Autosugesstion methods start
   onSuggestionsFetchRequested = ({ value }) => {
+    const suggestions = getSuggestions(value);
+    const isInputBlank = value.trim() === '';
+    const noSuggestions = !isInputBlank && suggestions.length === 0;
     this.setState({
       suggestions: getSuggestions(value),
+      noSuggestions,
     });
   };
   onSuggestionsClearRequested = () => {
@@ -71,26 +72,26 @@ class Tasks extends React.Component {
   renderTask = (key) => {
     const task = this.props.tasks[key];
     // loop through each task's category for the gap
-    const renderItem = Object.keys(task).map((key) => {
-      if (task[key] === '') {
+    const renderItem = Object.keys(task).map((item) => {
+      if (task[item] === '') {
         return '';
-      } else if (key === 'taskType') {
+      } else if (item === 'taskType') {
         return (
-          <span key={key} className="tasks-list-gap">
-            {task[key]}
+          <span key={item} className="tasks-list-gap">
+            {task[item]}
             {': '}
           </span>
         );
-      } else if (key === 'hours') {
+      } else if (item === 'hours') {
         return (
-          <span key={key} className="tasks-list-gap">
-            {task[key]} hours
+          <span key={item} className="tasks-list-gap">
+            {task[item]} hours
           </span>
         );
       }
       return (
-        <span key={key} className="tasks-list-gap">
-          {task[key]}
+        <span key={item} className="tasks-list-gap">
+          {task[item]}
         </span>
       );
     });
@@ -107,7 +108,7 @@ class Tasks extends React.Component {
   };
 
   render() {
-    const { value, suggestions } = this.state;
+    const { value, suggestions, noSuggestions } = this.state;
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
       placeholder: 'Type your name',
@@ -138,7 +139,6 @@ class Tasks extends React.Component {
               <span className="text-totalHours">{this.props.totalHours}</span>
             </CSSTransition>
           </TransitionGroup>
-
           <p>{this.props.date.toString()}</p>
           <Autosuggest
             suggestions={suggestions}
@@ -148,6 +148,7 @@ class Tasks extends React.Component {
             renderSuggestion={renderSuggestion}
             inputProps={inputProps}
           />
+          {noSuggestions && <p className="no-suggestion">No name in the database</p>}
         </div>
 
         <button className="btn btn__summary" onClick={this.props.handleSubmit}>

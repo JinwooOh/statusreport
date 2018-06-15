@@ -23,6 +23,10 @@ body {
   margin: auto;
   padding-bottom: 3rem; }
 
+::selection {
+  background-color: #a40a3c;
+  color: #fff; }
+
 @keyframes fadein {
   from {
     opacity: 0; }
@@ -110,6 +114,11 @@ input:required {
 
 .summary-info {
   line-height: 2.8rem; }
+
+.no-suggestion {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #a40a3c; }
 
 .text-totalHours {
   display: inline-block;
@@ -249,7 +258,7 @@ input:required {
 .btn {
   font-size: 1.4rem;
   font-weight: 500; }
-  .btn__report, .btn__summary, .btn__taskSelector, .btn__remove, .btn__search {
+  .btn__report, .btn__summary, .btn__taskSelector, .btn__remove, .btn__search, .btn__notFound {
     position: relative;
     outline: 0;
     text-transform: uppercase;
@@ -261,7 +270,7 @@ input:required {
     transition: all 0.2s;
     background-color: #a40a3c;
     color: #fff; }
-    .btn__report:hover, .btn__summary:hover, .btn__taskSelector:hover, .btn__remove:hover, .btn__search:hover {
+    .btn__report:hover, .btn__summary:hover, .btn__taskSelector:hover, .btn__remove:hover, .btn__search:hover, .btn__notFound:hover {
       border: 0.1rem solid #6b0848; }
   .btn__guide {
     padding: 0.4rem;
@@ -333,6 +342,22 @@ input:required {
         margin-left: 2rem; }
         .message__text--body ul li:not(:last-child) {
           border-bottom: 1px solid #a40a3c; }
+
+.notFound {
+  display: block;
+  text-align: center; }
+  .notFound__title {
+    padding-top: 15rem;
+    padding-bottom: 3rem;
+    margin: 2rem;
+    width: auto;
+    font-weight: 400;
+    font-size: 5.2rem;
+    text-transform: uppercase; }
+  .notFound__message {
+    margin-bottom: 2rem;
+    font-size: 2.4rem;
+    color: #140107; }
 
 /* Popup component styling*/
 .mm-popup {

@@ -54,7 +54,7 @@ class App extends React.Component {
     // error
     if (this.isEmpty(this.state.tasks) || this.isEmpty(this.state.userName)) {
       // popup message
-      const mySpecialPopup = AlertPopup.register({
+      const errorSubmitPopup = AlertPopup.register({
         title: 'Alert',
         content:
           'To report, you should add at least one task to summary, and type your name at the bottom.',
@@ -62,18 +62,19 @@ class App extends React.Component {
           right: ['ok'],
         },
       });
-      AlertPopup.queue(mySpecialPopup);
+      AlertPopup.queue(errorSubmitPopup);
       console.log('User tries to submit empty task');
       return;
     }
     // success
     const data = this.state;
-    // check if user name is in database. If not, add a new userto database
+    // check if user name is in database. If not, add a new user to database
     fetch('/users')
       .then(res => res.json())
       .then((users) => {
         const match = users.find(o => o.name === data.userName);
         // case where there is no user in the database
+        // then add new user to the database
         if (match === undefined) {
           fetch('/addUser', {
             method: 'POST',
@@ -85,7 +86,7 @@ class App extends React.Component {
         }
       })
       .catch(error => console.error('fetch error at users ', error)); // error
-
+    // submit the tasks
     fetch('/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -94,14 +95,15 @@ class App extends React.Component {
       console.log('State: ', body); // error
     });
     // popup message
-    const mySpecialPopup = AlertPopup.register({
+    const submitPopup = AlertPopup.register({
       title: 'Status Report',
       content: 'Report submitted. Thank you.',
       buttons: {
         right: ['ok'],
       },
     });
-    AlertPopup.queue(mySpecialPopup);
+    AlertPopup.queue(submitPopup);
+    // reset the state relate to submit the form
     this.setState({
       tasks: {},
       totalHours: 0,
@@ -144,21 +146,23 @@ class App extends React.Component {
         <AlertPopup closeBtn={false} />
         <h1 className="App-title">Status Report</h1>
 
-        {/* <Popup closeBtn={false} /> */}
         <div className="guide">
           <MuiThemeProvider>
             <div className="guide  guide__popup ">
               <Popup title="Course Guide" text={coursehelp()} />
               <Popup title="Admin Guide" text={adminhelp()} />
-              {/* <Popup className="btn__general" title="General" text={generalhelp()} /> */}
             </div>
           </MuiThemeProvider>
 
           <button
             className="btn btn__search"
             onClick={() => {
-              this.props.history.push('/report/');
-              // this.props.history.push('/all-status-reports/report/');
+              if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                this.props.history.push('/report/');
+              } else {
+                // production
+                this.props.history.push('/all-status-reports/report/');
+              }
             }}
           >
             SEARCH

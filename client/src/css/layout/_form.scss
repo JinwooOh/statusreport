@@ -26,6 +26,11 @@
   min-height: 2.5rem;
   display: inline-block;
   width: 32.5rem;
+  // &:required + span:after {
+  //   color: red;
+  //   content: "*";
+  //   padding-left: 5px;
+  // }
   @include respond(tab-port) {
     display: block;
     margin: 0 auto;

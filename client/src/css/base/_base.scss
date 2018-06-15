@@ -30,7 +30,11 @@ body {
 
 .main-wrapper {
   max-width: 100rem;
-
   margin: auto;
   padding-bottom: 3rem;
+}
+
+::selection {
+  background-color: $color-primary;
+  color: $color-white;
 }

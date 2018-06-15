@@ -51,6 +51,11 @@ input:required {
 .summary-info {
   line-height: 2.8rem;
 }
+.no-suggestion {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: $color-primary;
+}
 
 .text-totalHours {
   display: inline-block;

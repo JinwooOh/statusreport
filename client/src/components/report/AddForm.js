@@ -15,7 +15,6 @@ class AddForm extends React.Component {
 
   createTask = (event) => {
     event.preventDefault();
-    // console.log(this.dateRef.current.value);
     const task = {
       // course form
       taskType: 'Course Task', // type of course
@@ -100,7 +99,6 @@ class AddForm extends React.Component {
     return (
       <form className="task-edit" onSubmit={this.createTask}>
         <span>Date </span>
-        {/* <label>Date: </label> */}
         <input
           name="date"
           ref={this.dateRef}
@@ -112,7 +110,6 @@ class AddForm extends React.Component {
           required
         />
 
-        {/* <p>Select the Course Task Type</p> */}
         <span>Course Type</span>
         <div className="select-custom">
           <select name="type" ref={this.courseTypeRef}>
@@ -122,20 +119,10 @@ class AddForm extends React.Component {
           </select>
         </div>
 
-        {/* <p>Select the Program</p> */}
-        <span>Program</span>
+        <span>Course Name</span>
         <input name="program" ref={this.programRef} type="text" placeholder="Program name" />
-        <span>Instructor</span>
-        {/* <p>Select the Instructor</p> */}
-        <input
-          name="instructor"
-          ref={this.instructorRef}
-          type="text"
-          placeholder="Instructor name"
-        />
 
         <span>Course Number</span>
-        {/* <p>Select the Instructor</p> */}
         <input
           name="course number"
           ref={this.courseNumberRef}
@@ -143,8 +130,15 @@ class AddForm extends React.Component {
           placeholder="Course number"
         />
 
+        <span>Instructor</span>
+        <input
+          name="instructor"
+          ref={this.instructorRef}
+          type="text"
+          placeholder="Instructor name"
+        />
+
         <span>Task Type</span>
-        {/* <p>Select One of the Categories</p> */}
         <div className="select-custom">
           <select name="type" ref={this.categoryRef}>
             <option value="Content Development">Content Development</option>
@@ -157,7 +151,6 @@ class AddForm extends React.Component {
         </div>
 
         <span>Hours for This Task</span>
-        {/* <p>Please input hours for this task</p> */}
         <input
           name="hours"
           ref={this.hoursRef}

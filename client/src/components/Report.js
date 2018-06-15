@@ -172,8 +172,12 @@ class Report extends Component {
           <button
             className="btn btn__search"
             onClick={() => {
-              this.props.history.push('/');
-              // this.props.history.push('/all-status-reports/');
+              if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                this.props.history.push('/');
+              } else {
+                // production code
+                this.props.history.push('/all-status-reports/');
+              }
             }}
           >
             BACK TO REPORT PAGE
