@@ -1,7 +1,106 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
+import Autosuggest from 'react-autosuggest';
+// import theme from '../../css/autoSuggestion_theme.css';
+
+let courseData = [];
+// Autosuggestion helpers start
+function escapeRegexCharacters(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function getSuggestions(value) {
+  const escapedValue = escapeRegexCharacters(value.trim());
+  const regex = new RegExp(`^${escapedValue}`, 'i');
+  return courseData.filter(course => regex.test(course.courseName) || regex.test(course.courseNumber));
+}
+
+function getSuggestionCourseName(suggestion) {
+  return suggestion.courseName;
+}
+
+function getSuggestionCourseNumber(suggestion) {
+  return suggestion.courseNumber;
+}
+function renderSuggestion(suggestion) {
+  return (
+    <React.Fragment>
+      {suggestion.courseName} - {suggestion.courseNumber}
+    </React.Fragment>
+  );
+}
+// Autosuggestion helpers end
 
 class AddForm extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      courseNameValue: '',
+      courseNameSuggestions: [],
+      courseNumberValue: '',
+      courseNumberSuggestions: [],
+    };
+  }
+  componentDidMount() {
+    // get user info from database for Autosugesstion
+    fetch('/search/courseinfo')
+      .then(res => res.json())
+      .then(result => {
+        courseData = result
+      })
+      .catch(error => console.error('fetch error at componentDidMount', error)); // error
+  }
+
+  // Autosuggestion method start
+  onCourseNameChange = (event, { newValue }) => {
+    this.setState({
+      courseNameValue: newValue,
+    });
+  };
+
+  onCourseNumberChange = (event, { newValue }) => {
+    this.setState({
+      courseNumberValue: newValue,
+    });
+  };
+
+  onCourseNameSuggestionsFetchRequested = ({ value }) => {
+    this.setState({
+      courseNameSuggestions: getSuggestions(value),
+    });
+  };
+
+  onCourseNameSuggestionsClearRequested = () => {
+    this.setState({
+      courseNameSuggestions: [],
+    });
+  };
+
+  onCourseNameSuggestionSelected = (event, { suggestion }) => {
+    this.setState({
+      courseNumberValue: suggestion.courseNumber,
+    });
+  };
+
+  onCourseNumberSuggestionsFetchRequested = ({ value }) => {
+    this.setState({
+      courseNumberSuggestions: getSuggestions(value),
+    });
+  };
+
+  onCourseNumberSuggestionsClearRequested = () => {
+    this.setState({
+      courseNumberSuggestions: [],
+    });
+  };
+
+  onCourseNumberSuggestionSelected = (event, { suggestion }) => {
+    this.setState({
+      courseNameValue: suggestion.courseName,
+    });
+  };
+  // Autosuggestion method end
+
   // Course task
   programRef = React.createRef();
   hoursRef = React.createRef();
@@ -18,9 +117,9 @@ class AddForm extends React.Component {
     const task = {
       // course form
       taskType: 'Course Task', // type of course
-      program: this.programRef.current.value,
+      program: this.state.courseNameValue, // this.programRef.current.value,
+      courseNumber: this.state.courseNumberValue, // this.courseNumberRef.current.value,
       courseType: this.courseTypeRef.current.value,
-      courseNumber: this.courseNumberRef.current.value,
       instructor: this.instructorRef.current.value,
       category: this.categoryRef.current.value,
       date: this.dateRef.current.value,
@@ -45,6 +144,22 @@ class AddForm extends React.Component {
   };
 
   render() {
+    const {
+      courseNameValue,
+      courseNameSuggestions,
+      courseNumberValue,
+      courseNumberSuggestions,
+    } = this.state;
+    const courseNameInputProps = {
+      placeholder: 'Course name',
+      value: courseNameValue,
+      onChange: this.onCourseNameChange,
+    };
+    const courseNumberInputProps = {
+      placeholder: 'Course number',
+      value: courseNumberValue,
+      onChange: this.onCourseNumberChange,
+    };
     // admin form
     if (this.props.taskType === 'admin') {
       return (
@@ -120,15 +235,35 @@ class AddForm extends React.Component {
         </div>
 
         <span>Course Name</span>
-        <input name="program" ref={this.programRef} type="text" placeholder="Program name" />
+        <Autosuggest
+          id="courseName"
+          suggestions={courseNameSuggestions}
+          onSuggestionsFetchRequested={this.onCourseNameSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onCourseNameSuggestionsClearRequested}
+          onSuggestionSelected={this.onCourseNameSuggestionSelected}
+          getSuggestionValue={getSuggestionCourseName}
+          renderSuggestion={renderSuggestion}
+          inputProps={courseNameInputProps}
+        />
+        {/* <input name="program" ref={this.programRef} type="text" placeholder="Program name" /> */}
 
         <span>Course Number</span>
-        <input
+        <Autosuggest
+          id="courseNumber"
+          suggestions={courseNumberSuggestions}
+          onSuggestionsFetchRequested={this.onCourseNumberSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onCourseNumberSuggestionsClearRequested}
+          onSuggestionSelected={this.onCourseNumberSuggestionSelected}
+          getSuggestionValue={getSuggestionCourseNumber}
+          renderSuggestion={renderSuggestion}
+          inputProps={courseNumberInputProps}
+        />
+        {/* <input
           name="course number"
           ref={this.courseNumberRef}
           type="text"
           placeholder="Course number"
-        />
+        /> */}
 
         <span>Instructor</span>
         <input

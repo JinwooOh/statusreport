@@ -211,6 +211,19 @@ app.get(
   }
 );
 
+// Search course info
+app.get("/search/courseinfo", (req, res) => {
+  connection.query("SELECT * FROM courseinfo", function(err, result, fields) {
+    if (err) {
+      console.log("Error in courseinfo query");
+    } else {
+      console.log("courseinfo query success");
+      res.json(result);
+    }
+  });
+});
+
+
 //add new user to the database
 app.post("/addUser", (req, res) => {
   const userName = req.body.userName;
@@ -222,6 +235,9 @@ app.post("/addUser", (req, res) => {
     console.log("new user is added" + result.affectedRows);
   });
 });
+
+//add new courseinfo to the database
+app.post("/addCourseinfo");
 
 //post data, req.body graps all state data
 app.post("/submit", (req, res) => {
@@ -283,6 +299,7 @@ app.post("/submit", (req, res) => {
   });
   console.log(values);
 });
+
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));

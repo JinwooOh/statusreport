@@ -15,7 +15,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: {}, // task list
+      tasks: {}, //task list
       totalHours: 0,
       taskType: 'course', // or"admin"
       date: {}, // to track submit date and time
@@ -94,7 +94,7 @@ class App extends React.Component {
     }).then((body) => {
       console.log('State: ', body); // error
     });
-    // popup message
+    // success popup message
     const submitPopup = AlertPopup.register({
       title: 'Status Report',
       content: 'Report submitted. Thank you.',
@@ -141,6 +141,11 @@ class App extends React.Component {
   };
 
   render() {
+    Object.keys(this.state.tasks).forEach(
+      (key)=>{
+        console.log(this.state.tasks[key]);
+      }
+    )
     return (
       <div className="wrapper">
         <AlertPopup closeBtn={false} />

@@ -1,6 +1,11 @@
 /* autosuggestion  */
 .react-autosuggest__container {
+  display: inline-block;
   position: relative;
+  @include respond(tab-port) {
+    display: block;
+    margin: 0 auto;
+  }
 }
 .react-autosuggest__input {
   height: 1.2rem;
@@ -10,7 +15,7 @@
   font-size: 1.3rem;
   border: 0.1rem solid #aaa;
   border-radius: 0.4rem;
-  text-align: center;
+  text-align: left;
 }
 
 .react-autosuggest__input--focused {
