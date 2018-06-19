@@ -140,6 +140,7 @@ class Tasks extends React.Component {
             </CSSTransition>
           </TransitionGroup>
           <p>{this.props.date.toString()}</p>
+
           <Autosuggest
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}

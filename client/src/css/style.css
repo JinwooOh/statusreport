@@ -552,7 +552,7 @@ input:required {
   font-size: 1.2rem;
   border: 0.1rem solid #aaa;
   border-radius: 0.4rem;
-  text-align: left; }
+  width: 16rem; }
 
 .react-autosuggest__input--focused {
   outline: none; }
@@ -568,7 +568,7 @@ input:required {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 18rem;
+  width: auto;
   top: 5.1rem;
   border: 0.1rem solid #aaa;
   background-color: #fff;
@@ -576,6 +576,9 @@ input:required {
   border-bottom-left-radius: 0.4rem;
   border-bottom-right-radius: 0.4rem;
   z-index: 2; }
+  @media only screen and (max-width: 56.25em) {
+    .react-autosuggest__suggestions-container--open {
+      width: 50%; } }
 
 .react-autosuggest__suggestions-list {
   margin: 0;
@@ -587,6 +590,7 @@ input:required {
   padding: 1rem 2rem; }
 
 .react-autosuggest__suggestion--highlighted {
-  background-color: #ddd; }
+  background-image: linear-gradient(to right bottom, rgba(164, 10, 60, 0.35), rgba(248, 250, 255, 0.35));
+  color: #140107; }
 
 /* autosuggestion end  */

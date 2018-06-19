@@ -13,7 +13,7 @@
   font-size: 1.2rem;
   border: 0.1rem solid #aaa;
   border-radius: 0.4rem;
-  text-align: left;
+  width: 16rem;
 }
 
 .react-autosuggest__input--focused {
@@ -33,7 +33,10 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 18rem;
+  width: auto;
+  @include respond(tab-port) {
+    width: 50%;
+  }
   top: 5.1rem;
   border: 0.1rem solid #aaa;
   background-color: #fff;
@@ -55,6 +58,11 @@
 }
 
 .react-autosuggest__suggestion--highlighted {
-  background-color: #ddd;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba($color-primary, 0.35),
+    rgba($color-tertiary-light, 0.35)
+  );
+  color: $color-tertiary-dark;
 }
 /* autosuggestion end  */
