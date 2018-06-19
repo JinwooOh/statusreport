@@ -109,6 +109,7 @@ class AddForm extends React.Component {
   instructorRef = React.createRef();
   categoryRef = React.createRef();
   courseNumberRef = React.createRef();
+  semesterRef = React.createRef();
   // admin task
   categoryAdminRef = React.createRef();
 
@@ -117,12 +118,13 @@ class AddForm extends React.Component {
     const task = {
       // course form
       taskType: 'Course Task', // type of course
+      date: this.dateRef.current.value,
+      courseType: this.courseTypeRef.current.value,
       program: this.state.courseNameValue, // this.programRef.current.value,
       courseNumber: this.state.courseNumberValue, // this.courseNumberRef.current.value,
-      courseType: this.courseTypeRef.current.value,
+      semester: this.semesterRef.current.value,
       instructor: this.instructorRef.current.value,
       category: this.categoryRef.current.value,
-      date: this.dateRef.current.value,
       hours: parseFloat(this.hoursRef.current.value),
     };
     this.props.sumHours(this.hoursRef.current.value);
@@ -258,12 +260,14 @@ class AddForm extends React.Component {
           renderSuggestion={renderSuggestion}
           inputProps={courseNumberInputProps}
         />
-        {/* <input
-          name="course number"
-          ref={this.courseNumberRef}
+
+        <span>Semester</span>
+        <input
+          name="semester"
+          ref={this.semesterRef}
           type="text"
-          placeholder="Course number"
-        /> */}
+          placeholder="e.g. Spring 2018"
+        />
 
         <span>Instructor</span>
         <input

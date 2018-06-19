@@ -213,7 +213,7 @@ app.get(
 
 // Search course info
 app.get("/search/courseinfo", (req, res) => {
-  connection.query("SELECT * FROM courseinfo", function(err, result, fields) {
+  connection.query("SELECT DISTINCT courseName, courseNumber FROM courseinfo", function(err, result, fields) {
     if (err) {
       console.log("Error in courseinfo query");
     } else {
@@ -227,7 +227,6 @@ app.get("/search/courseinfo", (req, res) => {
 //add new user to the database
 app.post("/addUser", (req, res) => {
   const userName = req.body.userName;
-  console.log(userName);
   const sql = "INSERT INTO `user` (name) VALUES (?)";
   const values = [userName];
   connection.query(sql, [values], function(err, result) {
@@ -237,7 +236,20 @@ app.post("/addUser", (req, res) => {
 });
 
 //add new courseinfo to the database
-app.post("/addCourseinfo");
+app.post("/addCourseinfo", (req, res) => {
+  const courseName = req.body.courseName;
+  const courseNumber = req.body.courseNumber;
+  const semesterTerm = req.body.semesterTerm;
+
+  const sql = "INSERT INTO `courseinfo` (courseName, courseNumber, semesterTerm) VALUES (?)";
+  const values = [courseName, courseNumber, semesterTerm];
+
+  connection.query(sql, [values], function(err, result) {
+  if (err) throw err;
+    console.log("new courseinfo is added: " + result.affectedRows);
+    console.log(courseName, 'and' ,courseNumber);
+  });
+});
 
 //post data, req.body graps all state data
 app.post("/submit", (req, res) => {
@@ -254,7 +266,7 @@ app.post("/submit", (req, res) => {
       //course task
       const curTask = tasks[task];
       const sql =
-        "INSERT INTO `coursetable` (subDate, courseProgram, hours, courseTask, completionDate, courseInst, courseNumber, courseCat, userID) VALUES (?)";
+        "INSERT INTO `coursetable` (subDate, courseProgram, hours, courseTask, completionDate, courseInst, courseNumber, courseCat, semester, userID) VALUES (?)";
       const values = [
         date,
         curTask.program.toString().toUpperCase(),
@@ -264,6 +276,7 @@ app.post("/submit", (req, res) => {
         curTask.instructor,
         curTask.courseNumber.toString().toUpperCase(),
         curTask.category,
+        curTask.semester,
         userName
       ];
       connection.query(sql, [values], function(err, result) {

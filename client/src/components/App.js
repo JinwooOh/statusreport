@@ -86,6 +86,37 @@ class App extends React.Component {
         }
       })
       .catch(error => console.error('fetch error at users ', error)); // error
+
+    // check if the database courseinformation that a use typed
+    Object.keys(this.state.tasks).forEach(
+      (key)=>{
+        const inputCourseName = this.state.tasks[key].program;
+        const inputCourseNumber = this.state.tasks[key].courseNumber;
+        const inputSemester = this.state.tasks[key].semester;
+        fetch('/courseinfo')
+      .then(res => res.json())
+      .then((courses) => {
+        // const matchName = courses.find(course => course.courseName === inputCourseName);
+        const matchNumber = courses.find(course => course.courseNumber === inputCourseNumber);
+        if(matchNumber === undefined){
+          const data = {
+            courseName: inputCourseName,
+            courseNumber: inputCourseNumber,
+            semesterTerm: inputSemester // can be empty
+          };
+          fetch('/addCourseinfo', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          }).then((body) => {
+            console.log('State: ', body); // error
+          });
+        }
+      })
+      .catch(error => console.error('fetch error at users ', error)); // error
+      }
+    )
+
     // submit the tasks
     fetch('/submit', {
       method: 'POST',
@@ -141,11 +172,6 @@ class App extends React.Component {
   };
 
   render() {
-    Object.keys(this.state.tasks).forEach(
-      (key)=>{
-        console.log(this.state.tasks[key]);
-      }
-    )
     return (
       <div className="wrapper">
         <AlertPopup closeBtn={false} />

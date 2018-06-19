@@ -33,6 +33,7 @@ class SearchResult extends React.Component {
     const programColumns = [
       { Header: 'Course', accessor: 'courseProgram' },
       { Header: 'Course Number', accessor: 'courseNumber' },
+      { Header: 'Semester', accessor: 'semester' },
       { Header: 'Name', accessor: 'userID' },
       { Header: 'Instructor', accessor: 'courseInst' },
       { Header: 'Report date', accessor: 'subDate' },
