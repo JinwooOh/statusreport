@@ -294,7 +294,7 @@ class AddForm extends React.Component {
           name="hours"
           ref={this.hoursRef}
           type="number"
-          placeholder="hours"
+          placeholder="Hours"
           step="0.25"
           required
         />

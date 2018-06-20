@@ -1,17 +1,114 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
-// import Autosuggest from 'react-autosuggest';
+import Autosuggest from 'react-autosuggest';
+let courseData = [];
+// Autosuggestion helpers start
+function escapeRegexCharacters(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function getSuggestions(value) {
+  const escapedValue = escapeRegexCharacters(value.trim());
+  const regex = new RegExp(`^${escapedValue}`, 'i');
+  return courseData.filter(course => regex.test(course.program) || regex.test(course.courseNumber));
+}
+
+
+
+// Autosuggestion helpers end
 
 class SearchForm extends React.Component {
-  // search type: either program name or course number
-  state = {
-    selectValue: 'Program',
-  };
-
+  constructor() {
+    super();
+    this.state = {
+      selectValue: 'Program',
+      //autosuggestion states
+      programValue: '',
+      programSuggestions: [],
+      courseNumberValue: '',
+      courseNumberSuggestions: [],
+    };
+  }
   programRef = React.createRef();
   userRef = React.createRef();
   startDateRef = React.createRef();
   endDateRef = React.createRef();
+
+  componentDidMount() {
+    // get user info from database for Autosugesstion
+    fetch('/search/courseinfo')
+      .then(res => res.json())
+      .then(result => {
+        courseData = result
+      })
+      .catch(error => console.error('fetch error at componentDidMount', error)); // error
+  }
+
+// Autosuggestion method start
+renderSuggestion =(suggestion)=>{
+  if(this.state.selectValue === 'Program'){
+    return (
+      <React.Fragment>
+        {suggestion.program}
+      </React.Fragment>
+    )
+  }else{
+    return (
+      <React.Fragment>
+        {suggestion.courseNumber}
+      </React.Fragment>
+    )
+  }
+}
+getSuggestionprogram =(suggestion)=>{
+  return this.state.selectValue === 'Program'
+  ? suggestion.program : suggestion.courseNumber;
+}
+onprogramChange = (event, { newValue }) => {
+  this.setState({
+    programValue: newValue,
+  });
+};
+onCourseNumberChange = (event, { newValue }) => {
+  this.setState({
+    courseNumberValue: newValue,
+  });
+};
+onprogramSuggestionsFetchRequested = ({ value }) => {
+  this.setState({
+    programSuggestions: getSuggestions(value),
+  });
+};
+onprogramSuggestionsClearRequested = () => {
+  this.setState({
+    programSuggestions: [],
+  });
+};
+
+onprogramSuggestionSelected = (event, { suggestion }) => {
+  this.setState({
+    courseNumberValue: suggestion.courseNumber,
+  });
+};
+
+onCourseNumberSuggestionsFetchRequested = ({ value }) => {
+  this.setState({
+    courseNumberSuggestions: getSuggestions(value),
+  });
+};
+
+onCourseNumberSuggestionsClearRequested = () => {
+  this.setState({
+    courseNumberSuggestions: [],
+  });
+};
+
+onCourseNumberSuggestionSelected = (event, { suggestion }) => {
+  this.setState({
+    programValue: suggestion.program,
+  });
+};
+// Autosuggestion method end
 
   handleChange = (e) => {
     this.setState({ selectValue: e.target.value });
@@ -33,14 +130,14 @@ class SearchForm extends React.Component {
       options = {
         startDate: this.startDateRef.current.value,
         endDate: this.endDateRef.current.value,
-        courseProgram: this.programRef.current.value,
+        courseProgram: this.state.programValue
       };
       this.props.programSearchType('Program');
     } else {
       options = {
         startDate: this.startDateRef.current.value,
         endDate: this.endDateRef.current.value,
-        courseNumber: this.programRef.current.value,
+        courseNumber: this.state.programValue
       };
       this.props.programSearchType('Program Number');
     }
@@ -49,6 +146,15 @@ class SearchForm extends React.Component {
   };
 
   render() {
+    const {
+      programValue,
+      programSuggestions,
+    } = this.state;
+    const programInputProps = {
+      placeholder: this.state.selectValue === 'Program' ? "Program" : "Course Number",
+      value: programValue,
+      onChange: this.onprogramChange,
+    };
     // program search
     if (this.props.searchType === 'program') {
       return (
@@ -67,12 +173,15 @@ class SearchForm extends React.Component {
           </div>
 
           <span>{this.state.selectValue === 'Program' ? "Program" : "Course Number"}</span>
-          <input
-            name="program"
-            ref={this.programRef}
-            type="text"
-            placeholder={this.state.selectValue === 'Program' ? "Program" : "Course Number"}
-            required
+          <Autosuggest
+            id="program"
+            suggestions={programSuggestions}
+            onSuggestionsFetchRequested={this.onprogramSuggestionsFetchRequested}
+            onSuggestionsClearRequested={this.onprogramSuggestionsClearRequested}
+            onSuggestionSelected={this.onprogramSuggestionSelected}
+            getSuggestionValue={this.getSuggestionprogram}
+            renderSuggestion={this.renderSuggestion}
+            inputProps={programInputProps}
           />
 
           <div className="center">
