@@ -1,6 +1,5 @@
 /* eslint react/prop-types: 0 */
 import React, { Fragment } from 'react';
-// summaryInfo: [userID, startDate, endDate, courseProgram, courseNumber]
 class SearchSummary extends React.Component {
   // it has 3 cases to render
   renderSearchInfo = () => {
@@ -29,7 +28,7 @@ class SearchSummary extends React.Component {
     // course search with course name
     return (
       <Fragment>
-        <li>Course name: {this.props.summaryInfo.courseProgram}</li>
+        <li>Program: {this.props.summaryInfo.courseProgram}</li>
         <li>
           Search range from {this.props.summaryInfo.startDate} to {this.props.summaryInfo.endDate}{' '}
         </li>

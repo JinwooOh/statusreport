@@ -12,11 +12,11 @@ function escapeRegexCharacters(str) {
 function getSuggestions(value) {
   const escapedValue = escapeRegexCharacters(value.trim());
   const regex = new RegExp(`^${escapedValue}`, 'i');
-  return courseData.filter(course => regex.test(course.courseName) || regex.test(course.courseNumber));
+  return courseData.filter(course => regex.test(course.program) || regex.test(course.courseNumber));
 }
 
-function getSuggestionCourseName(suggestion) {
-  return suggestion.courseName;
+function getSuggestionprogram(suggestion) {
+  return suggestion.program;
 }
 
 function getSuggestionCourseNumber(suggestion) {
@@ -25,7 +25,7 @@ function getSuggestionCourseNumber(suggestion) {
 function renderSuggestion(suggestion) {
   return (
     <React.Fragment>
-      {suggestion.courseName} - {suggestion.courseNumber}
+      {suggestion.program} - {suggestion.courseNumber}
     </React.Fragment>
   );
 }
@@ -35,8 +35,8 @@ class AddForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      courseNameValue: '',
-      courseNameSuggestions: [],
+      programValue: '',
+      programSuggestions: [],
       courseNumberValue: '',
       courseNumberSuggestions: [],
     };
@@ -52,9 +52,9 @@ class AddForm extends React.Component {
   }
 
   // Autosuggestion method start
-  onCourseNameChange = (event, { newValue }) => {
+  onprogramChange = (event, { newValue }) => {
     this.setState({
-      courseNameValue: newValue,
+      programValue: newValue,
     });
   };
 
@@ -64,19 +64,19 @@ class AddForm extends React.Component {
     });
   };
 
-  onCourseNameSuggestionsFetchRequested = ({ value }) => {
+  onprogramSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      courseNameSuggestions: getSuggestions(value),
+      programSuggestions: getSuggestions(value),
     });
   };
 
-  onCourseNameSuggestionsClearRequested = () => {
+  onprogramSuggestionsClearRequested = () => {
     this.setState({
-      courseNameSuggestions: [],
+      programSuggestions: [],
     });
   };
 
-  onCourseNameSuggestionSelected = (event, { suggestion }) => {
+  onprogramSuggestionSelected = (event, { suggestion }) => {
     this.setState({
       courseNumberValue: suggestion.courseNumber,
     });
@@ -96,7 +96,7 @@ class AddForm extends React.Component {
 
   onCourseNumberSuggestionSelected = (event, { suggestion }) => {
     this.setState({
-      courseNameValue: suggestion.courseName,
+      programValue: suggestion.program,
     });
   };
   // Autosuggestion method end
@@ -120,7 +120,7 @@ class AddForm extends React.Component {
       taskType: 'Course Task', // type of course
       date: this.dateRef.current.value,
       courseType: this.courseTypeRef.current.value,
-      program: this.state.courseNameValue, // this.programRef.current.value,
+      program: this.state.programValue, // this.programRef.current.value,
       courseNumber: this.state.courseNumberValue, // this.courseNumberRef.current.value,
       semester: this.semesterRef.current.value,
       instructor: this.instructorRef.current.value,
@@ -147,15 +147,15 @@ class AddForm extends React.Component {
 
   render() {
     const {
-      courseNameValue,
-      courseNameSuggestions,
+      programValue,
+      programSuggestions,
       courseNumberValue,
       courseNumberSuggestions,
     } = this.state;
-    const courseNameInputProps = {
-      placeholder: 'Course name',
-      value: courseNameValue,
-      onChange: this.onCourseNameChange,
+    const programInputProps = {
+      placeholder: 'Program name',
+      value: programValue,
+      onChange: this.onprogramChange,
     };
     const courseNumberInputProps = {
       placeholder: 'Course number',
@@ -236,16 +236,16 @@ class AddForm extends React.Component {
           </select>
         </div>
 
-        <span>Course Name</span>
+        <span>Program</span>
         <Autosuggest
-          id="courseName"
-          suggestions={courseNameSuggestions}
-          onSuggestionsFetchRequested={this.onCourseNameSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onCourseNameSuggestionsClearRequested}
-          onSuggestionSelected={this.onCourseNameSuggestionSelected}
-          getSuggestionValue={getSuggestionCourseName}
+          id="program"
+          suggestions={programSuggestions}
+          onSuggestionsFetchRequested={this.onprogramSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onprogramSuggestionsClearRequested}
+          onSuggestionSelected={this.onprogramSuggestionSelected}
+          getSuggestionValue={getSuggestionprogram}
           renderSuggestion={renderSuggestion}
-          inputProps={courseNameInputProps}
+          inputProps={programInputProps}
         />
         {/* <input name="program" ref={this.programRef} type="text" placeholder="Program name" /> */}
 

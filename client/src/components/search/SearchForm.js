@@ -3,7 +3,7 @@ import React from 'react';
 // import Autosuggest from 'react-autosuggest';
 
 class SearchForm extends React.Component {
-  // search type: either program or program number
+  // search type: either program name or course number
   state = {
     selectValue: 'Program',
   };
@@ -61,17 +61,17 @@ class SearchForm extends React.Component {
           <span>Search Type </span>
           <div className="select-custom">
             <select name="type" value={this.state.selectValue} onChange={this.handleChange}>
-              <option value="Program">Course Name</option>
-              <option value="Program Number">Course Number</option>
+              <option value="Program">Program name</option>
+              <option value="Program Number">Course number</option>
             </select>
           </div>
 
-          <span>Name or Number</span>
+          <span>{this.state.selectValue === 'Program' ? "Program" : "Course Number"}</span>
           <input
             name="program"
             ref={this.programRef}
             type="text"
-            placeholder="Name / Number"
+            placeholder={this.state.selectValue === 'Program' ? "Program" : "Course Number"}
             required
           />
 

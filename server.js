@@ -213,7 +213,7 @@ app.get(
 
 // Search course info
 app.get("/search/courseinfo", (req, res) => {
-  connection.query("SELECT DISTINCT courseName, courseNumber FROM courseinfo", function(err, result, fields) {
+  connection.query("SELECT DISTINCT program, courseNumber FROM courseinfo", function(err, result, fields) {
     if (err) {
       console.log("Error in courseinfo query");
     } else {
@@ -237,17 +237,17 @@ app.post("/addUser", (req, res) => {
 
 //add new courseinfo to the database
 app.post("/addCourseinfo", (req, res) => {
-  const courseName = req.body.courseName;
+  const program = req.body.program;
   const courseNumber = req.body.courseNumber;
   const semesterTerm = req.body.semesterTerm;
 
-  const sql = "INSERT INTO `courseinfo` (courseName, courseNumber, semesterTerm) VALUES (?)";
-  const values = [courseName, courseNumber, semesterTerm];
+  const sql = "INSERT INTO `courseinfo` (program, courseNumber, semesterTerm) VALUES (?)";
+  const values = [program, courseNumber, semesterTerm];
 
   connection.query(sql, [values], function(err, result) {
   if (err) throw err;
     console.log("new courseinfo is added: " + result.affectedRows);
-    console.log(courseName, 'and' ,courseNumber);
+    console.log(program, 'and' ,courseNumber);
   });
 });
 

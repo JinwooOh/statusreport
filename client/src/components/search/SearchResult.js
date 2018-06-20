@@ -2,7 +2,6 @@
 import React from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-
 class SearchResult extends React.Component {
   render() {
     const courseData = this.props.searchCourse;
@@ -14,13 +13,12 @@ class SearchResult extends React.Component {
       { Header: 'Report date', accessor: 'subDate' },
       { Header: 'Completion date', accessor: 'completionDate' },
       { Header: 'Course task', accessor: 'courseTask' },
-      { Header: 'Course program', accessor: 'courseProgram' },
+      { Header: 'Program', accessor: 'courseProgram' },
       { Header: 'Course number', accessor: 'courseNumber' },
       { Header: 'Instructor', accessor: 'courseInst' },
       { Header: 'Course category', accessor: 'courseCat' },
       { Header: 'Hours', accessor: 'hours' },
     ];
-
     const adminColumns = [
       { Header: 'Name', accessor: 'userID' },
       { Header: 'Report date', accessor: 'subDate' },
@@ -31,7 +29,7 @@ class SearchResult extends React.Component {
 
     // Course table
     const programColumns = [
-      { Header: 'Course', accessor: 'courseProgram' },
+      { Header: 'Program', accessor: 'courseProgram' },
       { Header: 'Course Number', accessor: 'courseNumber' },
       { Header: 'Semester', accessor: 'semester' },
       { Header: 'Name', accessor: 'userID' },
@@ -61,5 +59,4 @@ class SearchResult extends React.Component {
     );
   }
 }
-
 export default SearchResult;
