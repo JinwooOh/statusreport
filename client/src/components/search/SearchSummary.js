@@ -1,5 +1,6 @@
 /* eslint react/prop-types: 0 */
 import React, { Fragment } from 'react';
+
 class SearchSummary extends React.Component {
   // it has 3 cases to render
   renderSearchInfo = () => {

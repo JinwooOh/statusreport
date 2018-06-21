@@ -7,7 +7,7 @@ import Autosuggest from 'react-autosuggest';
 
 // Autosugesstion
 let userData = [{}];
-const getSuggestions = (value) => {
+const getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
   return inputLength === 0
@@ -33,7 +33,7 @@ class Tasks extends React.Component {
     // get user info from database for Autosugesstion
     fetch('/users')
       .then(res => res.json())
-      .then((users) => {
+      .then(users => {
         userData = users;
         this.setState({ users });
       })
@@ -62,17 +62,17 @@ class Tasks extends React.Component {
   };
   // Autosugesstion methods end
 
-  handleName = (name) => {
+  handleName = name => {
     name.preventDefault();
     console.log(this.state.value);
     console.log(this.state.users);
     this.props.addUser(this.state.value);
   };
 
-  renderTask = (key) => {
+  renderTask = key => {
     const task = this.props.tasks[key];
     // loop through each task's category for the gap
-    const renderItem = Object.keys(task).map((item) => {
+    const renderItem = Object.keys(task).map(item => {
       if (task[item] === '') {
         return '';
       } else if (item === 'taskType') {

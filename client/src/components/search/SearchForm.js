@@ -1,6 +1,7 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
+
 let courseData = [];
 // Autosuggestion helpers start
 function escapeRegexCharacters(str) {
@@ -12,9 +13,6 @@ function getSuggestions(value) {
   const regex = new RegExp(`^${escapedValue}`, 'i');
   return courseData.filter(course => regex.test(course.program) || regex.test(course.courseNumber));
 }
-
-
-
 // Autosuggestion helpers end
 
 class SearchForm extends React.Component {
@@ -22,98 +20,60 @@ class SearchForm extends React.Component {
     super();
     this.state = {
       selectValue: 'Program',
-      //autosuggestion states
+      // autosuggestion states
       programValue: '',
       programSuggestions: [],
-      courseNumberValue: '',
-      courseNumberSuggestions: [],
     };
   }
-  programRef = React.createRef();
-  userRef = React.createRef();
-  startDateRef = React.createRef();
-  endDateRef = React.createRef();
 
   componentDidMount() {
     // get user info from database for Autosugesstion
     fetch('/search/courseinfo')
       .then(res => res.json())
       .then(result => {
-        courseData = result
+        courseData = result;
+      })
+      .catch(error => console.error('fetch error at componentDidMount', error)); // error
+
+    fetch('/search/courseinfo')
+      .then(res => res.json())
+      .then(result => {
+        courseData = result;
       })
       .catch(error => console.error('fetch error at componentDidMount', error)); // error
   }
 
-// Autosuggestion method start
-renderSuggestion =(suggestion)=>{
-  if(this.state.selectValue === 'Program'){
-    return (
-      <React.Fragment>
-        {suggestion.program}
-      </React.Fragment>
-    )
-  }else{
-    return (
-      <React.Fragment>
-        {suggestion.courseNumber}
-      </React.Fragment>
-    )
-  }
-}
-getSuggestionprogram =(suggestion)=>{
-  return this.state.selectValue === 'Program'
-  ? suggestion.program : suggestion.courseNumber;
-}
-onprogramChange = (event, { newValue }) => {
-  this.setState({
-    programValue: newValue,
-  });
-};
-onCourseNumberChange = (event, { newValue }) => {
-  this.setState({
-    courseNumberValue: newValue,
-  });
-};
-onprogramSuggestionsFetchRequested = ({ value }) => {
-  this.setState({
-    programSuggestions: getSuggestions(value),
-  });
-};
-onprogramSuggestionsClearRequested = () => {
-  this.setState({
-    programSuggestions: [],
-  });
-};
+  // Autosuggestion method start
+  onprogramChange = (event, { newValue }) => {
+    this.setState({
+      programValue: newValue,
+    });
+  };
 
-onprogramSuggestionSelected = (event, { suggestion }) => {
-  this.setState({
-    courseNumberValue: suggestion.courseNumber,
-  });
-};
+  onprogramSuggestionsFetchRequested = ({ value }) => {
+    this.setState({
+      programSuggestions: getSuggestions(value),
+    });
+  };
+  onprogramSuggestionsClearRequested = () => {
+    this.setState({
+      programSuggestions: [],
+    });
+  };
 
-onCourseNumberSuggestionsFetchRequested = ({ value }) => {
-  this.setState({
-    courseNumberSuggestions: getSuggestions(value),
-  });
-};
+  getSuggestionprogram = suggestion =>
+    this.state.selectValue === 'Program' ? suggestion.program : suggestion.courseNumber;
+  // Autosuggestion method end
 
-onCourseNumberSuggestionsClearRequested = () => {
-  this.setState({
-    courseNumberSuggestions: [],
-  });
-};
+  programRef = React.createRef();
+  userRef = React.createRef();
+  startDateRef = React.createRef();
+  endDateRef = React.createRef();
 
-onCourseNumberSuggestionSelected = (event, { suggestion }) => {
-  this.setState({
-    programValue: suggestion.program,
-  });
-};
-// Autosuggestion method end
-
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({ selectValue: e.target.value });
   };
-  createSearchUser = (event) => {
+  createSearchUser = event => {
     event.preventDefault();
     const options = {
       startDate: this.startDateRef.current.value,
@@ -123,21 +83,21 @@ onCourseNumberSuggestionSelected = (event, { suggestion }) => {
     this.props.addSearchOptions(options);
     event.currentTarget.reset();
   };
-  createSearchProgram = (event) => {
+  createSearchProgram = event => {
     event.preventDefault();
     let options = {};
     if (this.state.selectValue === 'Program') {
       options = {
         startDate: this.startDateRef.current.value,
         endDate: this.endDateRef.current.value,
-        courseProgram: this.state.programValue
+        courseProgram: this.state.programValue,
       };
       this.props.programSearchType('Program');
     } else {
       options = {
         startDate: this.startDateRef.current.value,
         endDate: this.endDateRef.current.value,
-        courseNumber: this.state.programValue
+        courseNumber: this.state.programValue,
       };
       this.props.programSearchType('Program Number');
     }
@@ -145,13 +105,17 @@ onCourseNumberSuggestionSelected = (event, { suggestion }) => {
     event.currentTarget.reset();
   };
 
+  renderSuggestion = suggestion => {
+    if (this.state.selectValue === 'Program') {
+      return <React.Fragment>{suggestion.program}</React.Fragment>;
+    }
+    return <React.Fragment>{suggestion.courseNumber}</React.Fragment>;
+  };
+
   render() {
-    const {
-      programValue,
-      programSuggestions,
-    } = this.state;
+    const { programValue, programSuggestions } = this.state;
     const programInputProps = {
-      placeholder: this.state.selectValue === 'Program' ? "Program" : "Course Number",
+      placeholder: this.state.selectValue === 'Program' ? 'Program' : 'Course Number',
       value: programValue,
       onChange: this.onprogramChange,
     };
@@ -172,7 +136,7 @@ onCourseNumberSuggestionSelected = (event, { suggestion }) => {
             </select>
           </div>
 
-          <span>{this.state.selectValue === 'Program' ? "Program" : "Course Number"}</span>
+          <span>{this.state.selectValue === 'Program' ? 'Program' : 'Course Number'}</span>
           <Autosuggest
             id="program"
             suggestions={programSuggestions}
@@ -182,6 +146,7 @@ onCourseNumberSuggestionSelected = (event, { suggestion }) => {
             getSuggestionValue={this.getSuggestionprogram}
             renderSuggestion={this.renderSuggestion}
             inputProps={programInputProps}
+            required
           />
 
           <div className="center">

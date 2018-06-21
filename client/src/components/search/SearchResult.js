@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
+
 class SearchResult extends React.Component {
   render() {
     const courseData = this.props.searchCourse;

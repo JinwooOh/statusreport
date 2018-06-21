@@ -15,7 +15,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: {}, //task list
+      tasks: {}, // task list
       totalHours: 0,
       taskType: 'course', // or"admin"
       date: {}, // to track submit date and time
@@ -71,7 +71,7 @@ class App extends React.Component {
     // check if user name is in database. If not, add a new user to database
     fetch('/users')
       .then(res => res.json())
-      .then((users) => {
+      .then(users => {
         const match = users.find(o => o.name === data.userName);
         // case where there is no user in the database
         // then add new user to the database
@@ -80,7 +80,7 @@ class App extends React.Component {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
-          }).then((body) => {
+          }).then(body => {
             console.log('State: ', body); // error
           });
         }
@@ -88,41 +88,42 @@ class App extends React.Component {
       .catch(error => console.error('fetch error at users ', error)); // error
 
     // check if the database courseinformation that a use typed
-    Object.keys(this.state.tasks).forEach(
-      (key)=>{
+
+    Object.keys(this.state.tasks).forEach(key => {
+      if (this.state.tasks[key].taskType === 'Course Task') {
         const inputCourseName = this.state.tasks[key].program;
         const inputCourseNumber = this.state.tasks[key].courseNumber;
         const inputSemester = this.state.tasks[key].semester;
         fetch('/courseinfo')
-      .then(res => res.json())
-      .then((courses) => {
-        // const matchName = courses.find(course => course.courseName === inputCourseName);
-        const matchNumber = courses.find(course => course.courseNumber === inputCourseNumber);
-        if(matchNumber === undefined){
-          const data = {
-            courseName: inputCourseName,
-            courseNumber: inputCourseNumber,
-            semesterTerm: inputSemester // can be empty
-          };
-          fetch('/addCourseinfo', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-          }).then((body) => {
-            console.log('State: ', body); // error
-          });
-        }
-      })
-      .catch(error => console.error('fetch error at users ', error)); // error
+          .then(res => res.json())
+          .then(courses => {
+            // const matchName = courses.find(course => course.courseName === inputCourseName);
+            const matchNumber = courses.find(course => course.courseNumber === inputCourseNumber);
+            if (matchNumber === undefined) {
+              const data = {
+                program: inputCourseName,
+                courseNumber: inputCourseNumber,
+                semesterTerm: inputSemester, // can be empty
+              };
+              fetch('/addCourseinfo', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+              }).then(body => {
+                console.log('State: ', body); // error
+              });
+            }
+          })
+          .catch(error => console.error('fetch error at users ', error)); // error
       }
-    )
+    });
 
     // submit the tasks
     fetch('/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
-    }).then((body) => {
+    }).then(body => {
       console.log('State: ', body); // error
     });
     // success popup message
@@ -144,30 +145,30 @@ class App extends React.Component {
   // helper method for checking empty object(tasks)
   isEmpty = obj => Object.keys(obj).length === 0;
 
-  addTask = (task) => {
+  addTask = task => {
     const tasks = { ...this.state.tasks };
     tasks[`task${Date.now()}`] = task;
     this.setState({
       tasks,
     });
   };
-  addUser = (userName) => {
+  addUser = userName => {
     this.setState({
       userName,
     });
   };
-  sumHours = (hours) => {
+  sumHours = hours => {
     const totalHours = this.state.totalHours + parseFloat(hours);
     this.setState({ totalHours });
   };
-  removeTask = (key) => {
+  removeTask = key => {
     const tasks = { ...this.state.tasks };
     const totalHours = this.state.totalHours - tasks[key].hours;
     delete tasks[key];
     this.setState({ tasks });
     this.setState({ totalHours });
   };
-  selectTask = (taskType) => {
+  selectTask = taskType => {
     this.setState({ taskType });
   };
 

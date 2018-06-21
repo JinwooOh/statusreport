@@ -37,14 +37,14 @@ class Report extends Component {
     // consider to delete...
     fetch('/admintable')
       .then(res => res.json())
-      .then((admintable) => {
+      .then(admintable => {
         this.setState({ admintable });
       })
       .catch(error => console.error('fetch error at admintable', error)); // error
     // fetch coursetable from database
     fetch('/coursetable')
       .then(res => res.json())
-      .then((coursetable) => {
+      .then(coursetable => {
         this.setState({ coursetable });
       })
       .catch(error => console.error('fetch error at coursetable', error)); // error
@@ -71,21 +71,19 @@ class Report extends Component {
     }
   }
 
-  selectSearch = (searchType) => {
+  selectSearch = searchType => {
     this.setState({ searchType });
   };
-  addSearchOptions = (searchOptions) => {
+  addSearchOptions = searchOptions => {
     this.setState({
       searchOptions,
     });
   };
-  programSearchType = (programSearchType) => {
+  programSearchType = programSearchType => {
     this.setState({ programSearchType });
   };
   handleSearch = () => {
-    const {
-      userID, startDate, endDate, courseProgram, courseNumber,
-    } = this.state.searchOptions;
+    const { userID, startDate, endDate, courseProgram, courseNumber } = this.state.searchOptions;
 
     // Search user
     if (this.state.searchType === 'user') {
@@ -93,11 +91,11 @@ class Report extends Component {
       const urlAdmin = `/search/admintable/${userID}/${startDate}/${endDate}`;
       fetch(urlCourse)
         .then(res => res.json())
-        .then((json) => {
+        .then(json => {
           console.info('Course result:', json);
           // calculate total hours for course task
           let totalHoursCourse = 0;
-          Object.keys(json).forEach((key) => {
+          Object.keys(json).forEach(key => {
             totalHoursCourse += json[key].hours;
           });
           // setState both searchCourse and totalHours
@@ -109,10 +107,10 @@ class Report extends Component {
         .catch(error => console.error('fetch error at search', error)); // error
       fetch(urlAdmin)
         .then(res => res.json())
-        .then((json) => {
+        .then(json => {
           console.info('Admin result:', json);
           let totalHoursAdmin = 0;
-          Object.keys(json).forEach((key) => {
+          Object.keys(json).forEach(key => {
             totalHoursAdmin += json[key].hours;
           });
           this.setState({
@@ -129,10 +127,10 @@ class Report extends Component {
           : `/search/programNumber/${courseNumber}/${startDate}/${endDate}`;
       fetch(urlProgram)
         .then(res => res.json())
-        .then((json) => {
+        .then(json => {
           console.info('Program result:', json);
           let totalHoursProgram = 0;
-          Object.keys(json).forEach((key) => {
+          Object.keys(json).forEach(key => {
             totalHoursProgram += json[key].hours;
           });
           this.setState({

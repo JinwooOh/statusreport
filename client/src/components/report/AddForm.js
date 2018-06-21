@@ -46,7 +46,7 @@ class AddForm extends React.Component {
     fetch('/search/courseinfo')
       .then(res => res.json())
       .then(result => {
-        courseData = result
+        courseData = result;
       })
       .catch(error => console.error('fetch error at componentDidMount', error)); // error
   }
@@ -113,7 +113,7 @@ class AddForm extends React.Component {
   // admin task
   categoryAdminRef = React.createRef();
 
-  createTask = (event) => {
+  createTask = event => {
     event.preventDefault();
     const task = {
       // course form
@@ -131,7 +131,7 @@ class AddForm extends React.Component {
     this.props.addTask(task);
     event.currentTarget.reset();
   };
-  createTaskAdmin = (event) => {
+  createTaskAdmin = event => {
     event.preventDefault();
     const task = {
       // admin form
@@ -173,10 +173,10 @@ class AddForm extends React.Component {
             id="date"
             ref={this.dateRef}
             required
-            min={
-              new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
-            }
-            max={new Date().toISOString().split('T')[0]}
+            // min={
+            //   new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+            // }
+            // max={new Date().toISOString().split('T')[0]}
           />
 
           <span>Task Type</span>
@@ -220,10 +220,10 @@ class AddForm extends React.Component {
           name="date"
           ref={this.dateRef}
           type="date"
-          min={
-            new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
-          }
-          max={new Date().toISOString().split('T')[0]}
+          // min={
+          //   new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
+          // }
+          // max={new Date().toISOString().split('T')[0]}
           required
         />
 
@@ -262,12 +262,7 @@ class AddForm extends React.Component {
         />
 
         <span>Semester</span>
-        <input
-          name="semester"
-          ref={this.semesterRef}
-          type="text"
-          placeholder="e.g. Spring 2018"
-        />
+        <input name="semester" ref={this.semesterRef} type="text" placeholder="e.g. Spring 2018" />
 
         <span>Instructor</span>
         <input
