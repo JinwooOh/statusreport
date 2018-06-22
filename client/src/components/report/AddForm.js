@@ -1,7 +1,6 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
-// import theme from '../../css/autoSuggestion_theme.css';
 
 let courseData = [];
 // Autosuggestion helpers start

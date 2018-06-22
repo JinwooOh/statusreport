@@ -12,34 +12,34 @@ import RaisedButton from 'material-ui/RaisedButton';
 const customContentStyle =
   window.screen.availWidth >= 900
     ? {
-      width: '60%',
-      wrapper: {
-        padding: '0.2rem',
-      },
-      button: {
-        borderRadius: '1.2rem',
-        backgroundColor: '#a40a3c',
-        boxShadow: '0 1rem 2rem rgba(#fff, 0.2)',
-        color: 'white',
-      },
-    }
+        width: '60%',
+        wrapper: {
+          padding: '0.2rem',
+        },
+        button: {
+          borderRadius: '1.2rem',
+          backgroundColor: '#a40a3c',
+          boxShadow: '0 1rem 2rem rgba(#fff, 0.2)',
+          color: 'white',
+        },
+      }
     : {
-      width: '90%',
-      wrapper: {
-        padding: '0.2rem',
-      },
-      button: {
-        borderRadius: '1.2rem',
-        backgroundColor: '#a40a3c',
-        boxShadow: '0 1rem 2rem rgba(#fff, 0.2)',
-        color: 'white',
-        padding: '0',
-      },
-      label: {
-        fontSize: '1.4rem',
-        fontWeight: '500',
-      },
-    };
+        width: '90%',
+        wrapper: {
+          padding: '0.2rem',
+        },
+        button: {
+          borderRadius: '1.2rem',
+          backgroundColor: '#a40a3c',
+          boxShadow: '0 1rem 2rem rgba(#fff, 0.2)',
+          color: 'white',
+          padding: '0',
+        },
+        label: {
+          fontSize: '1.4rem',
+          fontWeight: '500',
+        },
+      };
 /**
  * Dialog with action buttons. The actions are passed in as an array of React objects,
  * in this example [FlatButtons](/#/components/flat-button).

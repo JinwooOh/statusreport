@@ -5,7 +5,7 @@ import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
 class TaskCard extends React.Component {
-  renderTask = (key) => {
+  renderTask = key => {
     const task = this.props.tasks[key];
     // admin task card
     if (task.taskType === 'Adminstration Task') {
