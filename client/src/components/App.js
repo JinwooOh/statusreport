@@ -25,10 +25,6 @@ class App extends React.Component {
 
   componentDidMount() {
     this.timerID = setInterval(() => this.updateDate(), 1000); // for time
-    // fetch("/users")
-    //   .then(res => res.json())
-    //   .then(users => this.setState({ users: users }));
-
     // time
     const localStorageRef = localStorage.getItem('date');
     if (localStorageRef) {

@@ -27,28 +27,27 @@ class Report extends Component {
         program: 0, // for course search
       },
       summaryInfo: [], // summary info for searchSummary component
-      admintable: [], // consider to delete...
-      coursetable: [], // consider to delete...
+      // admintable: [], // consider to delete...
+      // coursetable: [], // consider to delete...
     };
   }
 
   componentDidMount() {
     // fetch admintable from database
     // consider to delete...
-    fetch('/admintable')
-      .then(res => res.json())
-      .then(admintable => {
-        this.setState({ admintable });
-      })
-      .catch(error => console.error('fetch error at admintable', error)); // error
-    // fetch coursetable from database
-    fetch('/coursetable')
-      .then(res => res.json())
-      .then(coursetable => {
-        this.setState({ coursetable });
-      })
-      .catch(error => console.error('fetch error at coursetable', error)); // error
-
+    // fetch('/admintable')
+    //   .then(res => res.json())
+    //   .then(admintable => {
+    //     this.setState({ admintable });
+    //   })
+    //   .catch(error => console.error('fetch error at admintable', error)); // error
+    // // fetch coursetable from database
+    // fetch('/coursetable')
+    //   .then(res => res.json())
+    //   .then(coursetable => {
+    //     this.setState({ coursetable });
+    //   })
+    //   .catch(error => console.error('fetch error at coursetable', error)); // error
     // // localStorage for admintable/coursetable
     // const localStorageRefAdmin = localStorage.getItem('admintable');
     // const localStorageRefCourse = localStorage.getItem('coursetable');
@@ -61,11 +60,10 @@ class Report extends Component {
   }
 
   componentDidUpdate() {
-    // localStorage for admintable/coursetable
-    localStorage.setItem('adminTable', JSON.stringify(this.state.admintable));
-    localStorage.setItem('courseTable', JSON.stringify(this.state.coursetable));
+    // // localStorage for admintable/coursetable
+    // localStorage.setItem('adminTable', JSON.stringify(this.state.admintable));
+    // localStorage.setItem('courseTable', JSON.stringify(this.state.coursetable));
     // ready for search
-
     if (!isEmpty(this.state.searchOptions)) {
       this.handleSearch();
     }
