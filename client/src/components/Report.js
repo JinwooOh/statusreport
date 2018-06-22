@@ -49,15 +49,15 @@ class Report extends Component {
       })
       .catch(error => console.error('fetch error at coursetable', error)); // error
 
-    // localStorage for admintable/coursetable
-    const localStorageRefAdmin = localStorage.getItem('admintable');
-    const localStorageRefCourse = localStorage.getItem('coursetable');
-    if (localStorageRefAdmin) {
-      this.setState({ admintable: JSON.parse(localStorageRefAdmin) });
-    }
-    if (localStorageRefCourse) {
-      this.setState({ coursetable: JSON.parse(localStorageRefCourse) });
-    }
+    // // localStorage for admintable/coursetable
+    // const localStorageRefAdmin = localStorage.getItem('admintable');
+    // const localStorageRefCourse = localStorage.getItem('coursetable');
+    // if (localStorageRefAdmin) {
+    //   this.setState({ admintable: JSON.parse(localStorageRefAdmin) });
+    // }
+    // if (localStorageRefCourse) {
+    //   this.setState({ coursetable: JSON.parse(localStorageRefCourse) });
+    // }
   }
 
   componentDidUpdate() {
@@ -93,11 +93,19 @@ class Report extends Component {
         .then(res => res.json())
         .then(json => {
           console.info('Course result:', json);
-          // calculate total hours for course task
+
           let totalHoursCourse = 0;
-          Object.keys(json).forEach(key => {
-            totalHoursCourse += json[key].hours;
+          json.forEach(course => {
+            // date formatting
+            const compDate = course.completionDate;
+            const dateFormat = new Date(compDate);
+            const formatted = `${dateFormat.getMonth() +
+              1}/${dateFormat.getDate()}/${dateFormat.getFullYear()}`;
+            course.completionDate = formatted;
+            // calculate total hours for course task
+            totalHoursCourse += course.hours;
           });
+
           // setState both searchCourse and totalHours
           this.setState({
             searchCourse: json,
@@ -109,10 +117,19 @@ class Report extends Component {
         .then(res => res.json())
         .then(json => {
           console.info('Admin result:', json);
+
           let totalHoursAdmin = 0;
-          Object.keys(json).forEach(key => {
-            totalHoursAdmin += json[key].hours;
+          json.forEach(course => {
+            // date formatting
+            const compDate = course.completionDate;
+            const dateFormat = new Date(compDate);
+            const formatted = `${dateFormat.getMonth() +
+              1}/${dateFormat.getDate()}/${dateFormat.getFullYear()}`;
+            course.completionDate = formatted;
+            // calculate total hours for admin task
+            totalHoursAdmin += course.hours;
           });
+
           this.setState({
             searchAdmin: json,
             totalHours: { ...this.state.totalHours, admin: totalHoursAdmin },

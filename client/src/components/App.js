@@ -100,7 +100,7 @@ class App extends React.Component {
             // const matchName = courses.find(course => course.courseName === inputCourseName);
             const matchNumber = courses.find(course => course.courseNumber === inputCourseNumber);
             if (matchNumber === undefined) {
-              const data = {
+              const newCourse = {
                 program: inputCourseName,
                 courseNumber: inputCourseNumber,
                 semesterTerm: inputSemester, // can be empty
@@ -108,7 +108,7 @@ class App extends React.Component {
               fetch('/addCourseinfo', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
+                body: JSON.stringify(newCourse),
               }).then(body => {
                 console.log('State: ', body); // error
               });

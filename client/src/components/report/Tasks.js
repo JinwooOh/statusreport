@@ -2,6 +2,7 @@
 import React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Autosuggest from 'react-autosuggest';
+import { dateFormat } from '../helper/Helper';
 // import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 // import TaskCard from "./TaskCard";
 
@@ -86,6 +87,12 @@ class Tasks extends React.Component {
         return (
           <span key={item} className="tasks-list-gap">
             {task[item]} hours
+          </span>
+        );
+      } else if (item === 'date') {
+        return (
+          <span key={item} className="tasks-list-gap">
+            {dateFormat(task[item])}
           </span>
         );
       }

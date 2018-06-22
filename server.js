@@ -118,8 +118,6 @@ app.get('/search/coursetable/:userID/:startDate/:endDate', (req, res) => {
 
   const {userID, startDate, endDate} = req.params;
 
-  // connection.query("SELECT * FROM coursetable");
-  // res.json(name);
   connection.query(
     `SELECT * FROM coursetable
     WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'

@@ -1,7 +1,10 @@
 /* eslint react/prop-types: 0 */
 import React, { Fragment } from 'react';
+import { dateFormat } from '../helper/Helper';
 
 class SearchSummary extends React.Component {
+  // Replace date format for yyyy-mm-dd to mm/dd/yyyy
+
   // it has 3 cases to render
   renderSearchInfo = () => {
     // user search
@@ -10,7 +13,8 @@ class SearchSummary extends React.Component {
         <Fragment>
           <li>Name: {this.props.summaryInfo.userID}</li>
           <li>
-            Search range from {this.props.summaryInfo.startDate} to {this.props.summaryInfo.endDate}{' '}
+            Search range from {dateFormat(this.props.summaryInfo.startDate)} to{' '}
+            {dateFormat(this.props.summaryInfo.endDate)}{' '}
           </li>
         </Fragment>
       );
@@ -21,7 +25,8 @@ class SearchSummary extends React.Component {
         <Fragment>
           <li>Course number: {this.props.summaryInfo.courseNumber}</li>
           <li>
-            Search range from {this.props.summaryInfo.startDate} to {this.props.summaryInfo.endDate}{' '}
+            Search range from {dateFormat(this.props.summaryInfo.startDate)} to{' '}
+            {dateFormat(this.props.summaryInfo.endDate)}{' '}
           </li>
         </Fragment>
       );

@@ -267,7 +267,7 @@ export function adminhelp() {
         <div className="message__text--body">
           <ul>
             <li>DTE</li>
-            <li>IE Initiative</li>
+            <li>EI Initiative</li>
             <li>Status Reporting Database</li>
             <li>Teach Online@UW</li>
             <li>Other</li>
