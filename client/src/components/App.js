@@ -93,6 +93,7 @@ class App extends React.Component {
         fetch('/courseinfo')
           .then(res => res.json())
           .then(courses => {
+            console.log('course info:', courses);
             // const matchName = courses.find(course => course.courseName === inputCourseName);
             const matchNumber = courses.find(course => course.courseNumber === inputCourseNumber);
             if (matchNumber === undefined) {
@@ -105,9 +106,11 @@ class App extends React.Component {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newCourse),
-              }).then(body => {
-                console.log('State: ', body); // error
-              });
+              })
+                .then(body => {
+                  console.log('State: ', body); // error
+                })
+                .catch(error => console.error('fetch error at users ', error)); // error
             }
           })
           .catch(error => console.error('fetch error at users ', error)); // error
@@ -119,9 +122,11 @@ class App extends React.Component {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
-    }).then(body => {
-      console.log('State: ', body); // error
-    });
+    })
+      .then(body => {
+        console.log('State: ', body); // error
+      })
+      .catch(error => console.error('fetch error at submit', error)); // error
     // success popup message
     const submitPopup = AlertPopup.register({
       title: 'Status Report',

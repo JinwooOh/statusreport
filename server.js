@@ -245,7 +245,7 @@ app.post('/addCourseinfo', (req, res) => {
   connection.query(sql, [values], (err, result) => {
     if (err) throw err;
     console.log(`new courseinfo is added: ${result.affectedRows}`);
-    console.log(program, 'and', courseNumber);
+    console.log(program, ' and ', courseNumber);
   });
 });
 
