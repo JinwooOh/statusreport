@@ -7,7 +7,6 @@ let courseData = [];
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
-
 function getSuggestions(value) {
   const escapedValue = escapeRegexCharacters(value.trim());
   const regex = new RegExp(`^${escapedValue}`, 'i');
@@ -45,7 +44,6 @@ class SearchForm extends React.Component {
 
   onprogramSuggestionsFetchRequested = ({ value }) => {
     const suggestion = getSuggestions(value);
-
     // unique Program name to render in auto-suggestion container
     const flags = new Set();
     const newSuggestion = suggestion.filter(course => {

@@ -235,8 +235,8 @@ app.post('/addUser', (req, res) => {
 
 // add new courseinfo to the database
 app.post('/addCourseinfo', (req, res) => {
-  const program = req.body.program;
-  const courseNumber = req.body.courseNumber;
+  const program = req.body.program.toString().toUpperCase();
+  const courseNumber = req.body.courseNumber.toString().toUpperCase();
   const semesterTerm = req.body.semesterTerm;
 
   const sql = 'INSERT INTO `courseinfo` (program, courseNumber, semesterTerm) VALUES (?)';
