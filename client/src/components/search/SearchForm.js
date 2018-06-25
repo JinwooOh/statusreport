@@ -34,13 +34,6 @@ class SearchForm extends React.Component {
         courseData = result;
       })
       .catch(error => console.error('fetch error at componentDidMount', error)); // error
-
-    fetch('/search/courseinfo')
-      .then(res => res.json())
-      .then(result => {
-        courseData = result;
-      })
-      .catch(error => console.error('fetch error at componentDidMount', error)); // error
   }
 
   // Autosuggestion method start
@@ -51,8 +44,20 @@ class SearchForm extends React.Component {
   };
 
   onprogramSuggestionsFetchRequested = ({ value }) => {
+    const suggestion = getSuggestions(value);
+
+    // unique Program name to render in auto-suggestion container
+    const flags = new Set();
+    const newSuggestion = suggestion.filter(course => {
+      if (flags.has(course.program)) {
+        return false;
+      }
+      flags.add(course.program);
+      return true;
+    });
+
     this.setState({
-      programSuggestions: getSuggestions(value),
+      programSuggestions: newSuggestion,
     });
   };
   onprogramSuggestionsClearRequested = () => {
