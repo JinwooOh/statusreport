@@ -1,5 +1,5 @@
-/* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SearchType from './search//SearchType';
 import SearchResult from './search/SearchResult';
@@ -222,3 +222,6 @@ class Report extends Component {
   }
 }
 export default Report;
+Report.propTypes = {
+  history: PropTypes.object.isRequired,
+};

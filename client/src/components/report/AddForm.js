@@ -1,5 +1,5 @@
-/* eslint react/prop-types: 0 */
 import React from 'react';
+import PropTypes from 'prop-types';
 import Autosuggest from 'react-autosuggest';
 
 let courseData = [];
@@ -302,3 +302,8 @@ class AddForm extends React.Component {
 }
 
 export default AddForm;
+AddForm.propTypes = {
+  sumHours: PropTypes.func.isRequired,
+  addTask: PropTypes.func.isRequired,
+  taskType: PropTypes.string.isRequired,
+};

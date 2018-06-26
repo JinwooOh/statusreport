@@ -5,23 +5,7 @@ import { dateFormat } from '../helper/Helper';
 import UserSuggestion from '../helper/UserSuggestion';
 
 class Tasks extends React.Component {
-  // Autosugesstion
-  constructor(props) {
-    super(props);
-    this.state = {
-      users: [],
-    };
-  }
-
-  handleUserName = userName => this.props.addUser(userName);
-
-  // consider to delete
-  handleName = name => {
-    name.preventDefault();
-    console.log(this.state.value);
-    console.log(this.state.users);
-    this.props.addUser(this.state.value);
-  };
+  handleUserName = userName => this.props.addUser(userName); // props to App
 
   renderTask = key => {
     const task = this.props.tasks[key];
@@ -105,5 +89,4 @@ class Tasks extends React.Component {
     );
   }
 }
-
 export default Tasks;

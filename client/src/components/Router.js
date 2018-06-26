@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import App from './App';
 import Report from './Report';
 import NotFound from './NotFound';
+
 // import NotFound from "./NotFound";
 const baseUrl = process.env.PUBLIC_URL;
 const Router = () => (

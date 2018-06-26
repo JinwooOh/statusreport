@@ -1,5 +1,5 @@
-/* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import AddForm from './AddForm';
 import TaskSelector from './TaskSelector';
 
@@ -21,3 +21,9 @@ class Forms extends Component {
 }
 
 export default Forms;
+Forms.propTypes = {
+  sumHours: PropTypes.func.isRequired,
+  addTask: PropTypes.func.isRequired,
+  selectTask: PropTypes.func.isRequired,
+  taskType: PropTypes.string.isRequired,
+};

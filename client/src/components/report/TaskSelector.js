@@ -1,5 +1,5 @@
-/* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class TaskSelector extends Component {
   render() {
@@ -17,3 +17,6 @@ class TaskSelector extends Component {
 }
 
 export default TaskSelector;
+TaskSelector.propTypes = {
+  selectTask: PropTypes.func.isRequired,
+};
