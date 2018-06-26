@@ -1,6 +1,7 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
+import UserSuggestion from '../helper/UserSuggestion';
 
 let courseData = [];
 // Autosuggestion helpers start
@@ -41,7 +42,6 @@ class SearchForm extends React.Component {
       programValue: newValue,
     });
   };
-
   onprogramSuggestionsFetchRequested = ({ value }) => {
     const suggestion = getSuggestions(value);
     // unique Program name to render in auto-suggestion container
@@ -63,7 +63,6 @@ class SearchForm extends React.Component {
       programSuggestions: [],
     });
   };
-
   getSuggestionprogram = suggestion =>
     this.state.selectValue === 'Program' ? suggestion.program : suggestion.courseNumber;
   // Autosuggestion method end
@@ -168,7 +167,7 @@ class SearchForm extends React.Component {
         <input name="date" ref={this.endDateRef} type="date" required />
         <span>User name</span>
         <input name="user" ref={this.userRef} type="text" placeholder="User name" required />
-
+        <UserSuggestion />
         <div className="center">
           <button className="btn btn__summary">Search</button>
         </div>

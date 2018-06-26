@@ -63,6 +63,7 @@ class Tasks extends React.Component {
   };
   // Autosugesstion methods end
 
+  // consider to delete
   handleName = name => {
     name.preventDefault();
     console.log(this.state.value);
