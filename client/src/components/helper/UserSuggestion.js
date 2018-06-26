@@ -1,5 +1,5 @@
-/* eslint react/prop-types: 0 */
 import React from 'react';
+import PropTypes from 'prop-types';
 import Autosuggest from 'react-autosuggest';
 
 // Autosugesstion
@@ -79,3 +79,6 @@ class UserSuggestion extends React.Component {
   }
 }
 export default UserSuggestion;
+UserSuggestion.propTypes = {
+  handleUserName: PropTypes.func.isRequired,
+};

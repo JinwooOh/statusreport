@@ -1,5 +1,5 @@
-/* eslint react/prop-types: 0 */
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
@@ -61,3 +61,9 @@ class SearchResult extends React.Component {
   }
 }
 export default SearchResult;
+SearchResult.propTypes = {
+  searchCourse: PropTypes.array.isRequired,
+  searchAdmin: PropTypes.array.isRequired,
+  searchProgram: PropTypes.array.isRequired,
+  searchType: PropTypes.string.isRequired,
+};

@@ -1,5 +1,5 @@
-/* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import SearchSelector from './SearchSelector';
 import SearchForm from './SearchForm';
 
@@ -22,3 +22,10 @@ class SearchType extends Component {
 }
 
 export default SearchType;
+SearchType.propTypes = {
+  searchType: PropTypes.string.isRequired,
+  selectSearch: PropTypes.func.isRequired,
+  addSearchOptions: PropTypes.func.isRequired,
+  handleSearch: PropTypes.func.isRequired,
+  programSearchType: PropTypes.func.isRequired,
+};

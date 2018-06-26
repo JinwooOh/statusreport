@@ -1,5 +1,5 @@
-/* eslint react/prop-types: 0 */
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { dateFormat } from '../helper/Helper';
 
 class SearchSummary extends React.Component {
@@ -99,3 +99,12 @@ class SearchSummary extends React.Component {
   }
 }
 export default SearchSummary;
+SearchSummary.propTypes = {
+  searchType: PropTypes.string.isRequired,
+  totalHours: PropTypes.shape({
+    admin: PropTypes.number,
+    course: PropTypes.number,
+    program: PropTypes.number,
+  }).isRequired,
+  summaryInfo: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+};

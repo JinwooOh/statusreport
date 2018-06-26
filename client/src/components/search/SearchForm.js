@@ -1,6 +1,6 @@
-/* eslint react/prop-types: 0 */
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
+import PropTypes from 'prop-types';
 import UserSuggestion from '../helper/UserSuggestion';
 
 let courseData = [];
@@ -178,3 +178,8 @@ class SearchForm extends React.Component {
 }
 
 export default SearchForm;
+SearchForm.propTypes = {
+  addSearchOptions: PropTypes.func.isRequired,
+  programSearchType: PropTypes.func.isRequired,
+  searchType: PropTypes.string.isRequired,
+};
