@@ -1,8 +1,6 @@
+/* eslint react/prop-types: 0 */
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
-
-// import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-// import TaskCard from "./TaskCard";
 
 // Autosugesstion
 let userData = [{}];
@@ -37,6 +35,7 @@ class UserSuggestion extends React.Component {
 
   // Autosugesstion methods start
   onChange = (event, { newValue }) => {
+    this.props.handleUserName(newValue);
     this.setState({
       value: newValue,
     });

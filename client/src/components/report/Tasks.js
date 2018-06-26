@@ -1,67 +1,19 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import Autosuggest from 'react-autosuggest';
 import { dateFormat } from '../helper/Helper';
-// import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-// import TaskCard from "./TaskCard";
-
-// Autosugesstion
-let userData = [{}];
-const getSuggestions = value => {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
-  return inputLength === 0
-    ? []
-    : userData.filter(user => user.name.toLowerCase().slice(0, inputLength) === inputValue);
-};
-const getSuggestionValue = suggestion => suggestion.name;
-const renderSuggestion = suggestion => <div>{suggestion.name}</div>;
+import UserSuggestion from '../helper/UserSuggestion';
 
 class Tasks extends React.Component {
   // Autosugesstion
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      suggestions: [],
-      noSuggestions: false,
       users: [],
     };
   }
 
-  componentDidMount() {
-    // get user info from database for Autosugesstion
-    fetch('/users')
-      .then(res => res.json())
-      .then(users => {
-        userData = users;
-        this.setState({ users });
-      })
-      .catch(error => console.error('fetch error at componentDidMount', error)); // error
-  }
-  // Autosugesstion methods start
-  onChange = (event, { newValue }) => {
-    this.props.addUser(newValue);
-    this.setState({
-      value: newValue,
-    });
-  };
-  onSuggestionsFetchRequested = ({ value }) => {
-    const suggestions = getSuggestions(value);
-    const isInputBlank = value.trim() === '';
-    const noSuggestions = !isInputBlank && suggestions.length === 0;
-    this.setState({
-      suggestions: getSuggestions(value),
-      noSuggestions,
-    });
-  };
-  onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: [],
-    });
-  };
-  // Autosugesstion methods end
+  handleUserName = userName => this.props.addUser(userName);
 
   // consider to delete
   handleName = name => {
@@ -116,25 +68,11 @@ class Tasks extends React.Component {
   };
 
   render() {
-    const { value, suggestions, noSuggestions } = this.state;
-    // Autosuggest will pass through all these props to the input.
-    const inputProps = {
-      placeholder: 'Type your name',
-      value,
-      onChange: this.onChange,
-    };
     const taskIds = Object.keys(this.props.tasks);
     const count = this.props.totalHours;
     return (
       <div className="summary summary--report">
         <h2 className="heading-primary">Summary</h2>
-        {/* <MuiThemeProvider>
-          <TaskCard
-            tasks={this.props.tasks}
-            removeTask={this.props.removeTask}
-          />
-        </MuiThemeProvider> */}
-
         <ol className="tasks-list">{taskIds.map(this.renderTask)}</ol>
         <div className="summary-info">
           <p style={{ display: 'inline' }}>Total Hours: </p>
@@ -149,15 +87,7 @@ class Tasks extends React.Component {
           </TransitionGroup>
           <p>{this.props.date.toString()}</p>
 
-          <Autosuggest
-            suggestions={suggestions}
-            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            inputProps={inputProps}
-          />
-          {noSuggestions && <p className="no-suggestion">No name in the database</p>}
+          <UserSuggestion handleUserName={this.handleUserName} required />
         </div>
 
         <button className="btn btn__summary" onClick={this.props.handleSubmit}>

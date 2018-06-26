@@ -23,6 +23,7 @@ class SearchForm extends React.Component {
       // autosuggestion states
       programValue: '',
       programSuggestions: [],
+      userName: '',
     };
   }
 
@@ -68,7 +69,7 @@ class SearchForm extends React.Component {
   // Autosuggestion method end
 
   programRef = React.createRef();
-  userRef = React.createRef();
+  // userRef = React.createRef();
   startDateRef = React.createRef();
   endDateRef = React.createRef();
 
@@ -80,7 +81,7 @@ class SearchForm extends React.Component {
     const options = {
       startDate: this.startDateRef.current.value,
       endDate: this.endDateRef.current.value,
-      userID: this.userRef.current.value,
+      userID: this.state.userName,
     };
     this.props.addSearchOptions(options);
     event.currentTarget.reset();
@@ -107,6 +108,7 @@ class SearchForm extends React.Component {
     event.currentTarget.reset();
   };
 
+  handleUserName = userName => this.setState({ userName });
   renderSuggestion = suggestion => {
     if (this.state.selectValue === 'Program') {
       return <React.Fragment>{suggestion.program}</React.Fragment>;
@@ -166,8 +168,7 @@ class SearchForm extends React.Component {
         <span>End Date </span>
         <input name="date" ref={this.endDateRef} type="date" required />
         <span>User name</span>
-        <input name="user" ref={this.userRef} type="text" placeholder="User name" required />
-        <UserSuggestion />
+        <UserSuggestion handleUserName={this.handleUserName} required />
         <div className="center">
           <button className="btn btn__summary">Search</button>
         </div>

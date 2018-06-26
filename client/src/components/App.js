@@ -83,8 +83,7 @@ class App extends React.Component {
       })
       .catch(error => console.error('fetch error at users ', error)); // error
 
-    // check if the database courseinformation that a use typed
-
+    // check if the database has courseinformation that a use typed
     Object.keys(this.state.tasks).forEach(key => {
       if (this.state.tasks[key].taskType === 'Course Task') {
         const inputCourseName = this.state.tasks[key].program;
