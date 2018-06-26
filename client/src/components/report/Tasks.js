@@ -5,7 +5,7 @@ import { dateFormat } from '../helper/Helper';
 import UserSuggestion from '../helper/UserSuggestion';
 
 class Tasks extends React.Component {
-  handleUserName = userName => this.props.addUser(userName); // props to App
+  handleUserName = userName => this.props.addUser(userName.trim()); // props to App
 
   renderTask = key => {
     const task = this.props.tasks[key];
