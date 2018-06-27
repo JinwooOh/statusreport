@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "ajv": "^6.5.1",
     "ajv-keywords": "^3.2.0",
     "concurrently": "^3.5.1",
     "eslint-config-react-app": "^2.1.0",
@@ -38,7 +39,7 @@
   "homepage": "https://wwwtest.eipd.dcs.wisc.edu/all-status-reports",
   "proxy": "http://localhost:5000",
   "devDependencies": {
-    "babel-eslint": "^8.2.3",
+    "babel-eslint": "^8.2.5",
     "npm-run-all": "^4.1.3"
   }
 }

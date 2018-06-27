@@ -144,8 +144,15 @@ class Report extends Component {
         .then(json => {
           //  console.info('Program result:', json);
           let totalHoursProgram = 0;
-          Object.keys(json).forEach(key => {
-            totalHoursProgram += json[key].hours;
+          json.forEach(course => {
+            // date formatting
+            const compDate = course.completionDate;
+            const dateFormat = new Date(compDate);
+            const formatted = `${dateFormat.getMonth() +
+              1}/${dateFormat.getDate()}/${dateFormat.getFullYear()}`;
+            course.completionDate = formatted;
+            // calculate total hours for course task
+            totalHoursProgram += course.hours;
           });
           this.setState({
             searchProgram: json,

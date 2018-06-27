@@ -290,6 +290,7 @@ class AddForm extends React.Component {
           type="number"
           placeholder="Hours"
           step="0.25"
+          min="0.25"
           required
         />
 
