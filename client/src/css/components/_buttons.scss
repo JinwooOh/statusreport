@@ -24,6 +24,25 @@
       border: 0.1rem solid $color-secondary;
     }
   }
+
+  // hover effect
+  &__summary,
+  &__notFound {
+    &::after {
+      content: "";
+      background-color: $color-primary;
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      border-radius: 1.2rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transition: all 0.4s;
+    }
+  }
+
   &__guide {
     padding: 0.4rem;
     margin: 0 auto;
@@ -39,22 +58,6 @@
     margin-top: 2.4rem;
   }
 
-  &__taskSelector {
-    width: 50%;
-    margin: 0 auto;
-    padding: 1.2rem;
-    border-radius: 0;
-    &:not(:last-child) {
-      border-right: 0.1rem solid $color-tertiary-dark;
-    }
-
-    &:hover {
-      border: 0.1rem solid $color-secondary;
-      &:not(:last-child) {
-        border-right: 0.1rem solid $color-tertiary-dark;
-      }
-    }
-  }
   &__remove {
     padding: 0.3rem 0.8rem;
     margin: 0.4rem;
@@ -74,5 +77,28 @@
   &:active {
     transform: translateY(-0.1rem);
     box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+  }
+  &__taskSelector {
+    width: 50%;
+    margin: 0 auto;
+    padding: 1.2rem;
+    border-radius: 0;
+    border-bottom-left-radius: 5px 5px;
+    border-bottom-right-radius: 5px 5px;
+
+    &:not(:last-child) {
+      border-right: 0.1rem solid $color-tertiary-dark;
+    }
+
+    &:hover {
+      border: 0.1rem solid $color-secondary;
+      &:not(:last-child) {
+        border-right: 0.1rem solid $color-tertiary-dark;
+      }
+      background-color: $color-secondary;
+      transform: scaleY(1.1);
+
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+    }
   }
 }

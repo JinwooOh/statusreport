@@ -210,6 +210,10 @@ input:required {
   color: red; }
 
 /* form setting */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px white inset;
+  box-shadow: 0 0 0 30px white inset; }
+
 .task-edit {
   padding: 2rem;
   background-color: #f8faff;
@@ -235,7 +239,8 @@ input:required {
   padding: 0.5rem;
   min-height: 2.5rem;
   display: inline-block;
-  width: 32.5rem; }
+  width: 32.5rem;
+  outline: none; }
   @media only screen and (max-width: 56.25em) {
     .task-edit input {
       display: block;
@@ -275,6 +280,18 @@ input:required {
     color: #fff; }
     .btn__report:hover, .btn__summary:hover, .btn__taskSelector:hover, .btn__remove:hover, .btn__search:hover, .btn__notFound:hover {
       border: 0.1rem solid #6b0848; }
+  .btn__summary::after, .btn__notFound::after {
+    content: "";
+    background-color: #a40a3c;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 1.2rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s; }
   .btn__guide {
     padding: 0.4rem;
     margin: 0 auto; }
@@ -285,17 +302,6 @@ input:required {
     padding: 1rem 2rem;
     margin: 0.4rem;
     margin-top: 2.4rem; }
-  .btn__taskSelector {
-    width: 50%;
-    margin: 0 auto;
-    padding: 1.2rem;
-    border-radius: 0; }
-    .btn__taskSelector:not(:last-child) {
-      border-right: 0.1rem solid #140107; }
-    .btn__taskSelector:hover {
-      border: 0.1rem solid #6b0848; }
-      .btn__taskSelector:hover:not(:last-child) {
-        border-right: 0.1rem solid #140107; }
   .btn__remove {
     padding: 0.3rem 0.8rem;
     margin: 0.4rem;
@@ -310,6 +316,22 @@ input:required {
   .btn:active {
     transform: translateY(-0.1rem);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+  .btn__taskSelector {
+    width: 50%;
+    margin: 0 auto;
+    padding: 1.2rem;
+    border-radius: 0;
+    border-bottom-left-radius: 5px 5px;
+    border-bottom-right-radius: 5px 5px; }
+    .btn__taskSelector:not(:last-child) {
+      border-right: 0.1rem solid #140107; }
+    .btn__taskSelector:hover {
+      border: 0.1rem solid #6b0848;
+      background-color: #6b0848;
+      transform: scaleY(1.1);
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
+      .btn__taskSelector:hover:not(:last-child) {
+        border-right: 0.1rem solid #140107; }
 
 .message__heading {
   font-size: 2.8rem;

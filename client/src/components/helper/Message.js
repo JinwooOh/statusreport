@@ -365,7 +365,11 @@ export function naminghelp() {
 
         <div className="message__text--body">
           <ul>
-            <li>GIS333</li>
+            <li>
+              GIS: GIS378 GIS572 GIS579 GIS777 GIS778 GEOG575 GEOG574 GEOG576 GEOG370 GEOG377
+              GEOG378 GEOG579 GEOG777 GEOG778 GEO378 GEO579 GEO572
+            </li>
+            <li>PHS:PHS650 PHS714 PHS780 PHS785 PHS789 PHS879</li>
           </ul>
         </div>
       </div>

@@ -1,4 +1,10 @@
 /* form setting */
+
+//remove input background color for chrome autocomplete
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px white inset;
+  box-shadow: 0 0 0 30px white inset;
+}
 .task-edit {
   padding: 2rem;
   background-color: $color-tertiary-light;
@@ -26,6 +32,7 @@
   min-height: 2.5rem;
   display: inline-block;
   width: 32.5rem;
+  outline: none;
   // &:required + span:after {
   //   color: red;
   //   content: "*";
