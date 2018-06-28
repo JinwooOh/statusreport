@@ -1,4 +1,10 @@
 .summary-appear {
-  //   transform: scaleX(1) translateX(3rem);
-  animation: moveInRight 0.5s;
+  animation: moveInRight 0.3s;
+}
+.summary {
+  &__list {
+    &:hover {
+      color: red;
+    }
+  }
 }

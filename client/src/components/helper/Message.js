@@ -336,7 +336,7 @@ export function search() {
 export function naminghelp() {
   return (
     <div className="message">
-      <h2 className="message__heading">💩Naming Guide(BETA)💩</h2>
+      <h2 className="message__heading">Naming Guide(BETA)</h2>
 
       <div className="message__text">
         <h3 className="message__text--title">

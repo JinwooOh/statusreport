@@ -41,7 +41,7 @@ class Tasks extends React.Component {
     });
     return (
       <CSSTransition key={key} in classNames="summary" appear timeout={1000}>
-        <li key={key}>
+        <li className="summary__list" key={key}>
           {renderItem}
           <button className="btn btn__remove" onClick={() => this.props.removeTask(key)}>
             Remove

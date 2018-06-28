@@ -204,7 +204,10 @@ input:required {
     animation: moveInRight 0.5s; }
 
 .summary-appear {
-  animation: moveInRight 0.5s; }
+  animation: moveInRight 0.3s; }
+
+.summary__list:hover {
+  color: red; }
 
 /* form setting */
 .task-edit {

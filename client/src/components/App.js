@@ -141,6 +141,7 @@ class App extends React.Component {
       userName: '',
     });
   };
+
   // helper method for checking empty object(tasks)
   isEmpty = obj => Object.keys(obj).length === 0;
 
