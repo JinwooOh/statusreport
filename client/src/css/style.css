@@ -16,10 +16,10 @@ html {
       font-size: 75%; } }
 
 body {
-  min-height: calc(100vh - 1rem); }
+  min-height: 100vh; }
 
 .main-wrapper {
-  max-width: 100rem;
+  max-width: 110rem;
   margin: auto;
   padding-bottom: 3rem; }
 
@@ -155,21 +155,6 @@ input:required {
 .App-title {
   grid-area: App-title; }
 
-.guide {
-  display: inline-flex;
-  flex-wrap: wrap;
-  grid-area: guide;
-  padding-left: 1.3rem;
-  padding-right: 1.3rem;
-  justify-content: flex-end; }
-  .guide__popup {
-    margin-bottom: 0.4rem; }
-
-@media only screen and (max-width: 37.5em) {
-  .guide > .btn__search {
-    width: 100%;
-    margin: 0 auto; } }
-
 .form-list,
 .summary,
 .searchSummary {
@@ -207,7 +192,7 @@ input:required {
   animation: moveInRight 0.3s; }
 
 .summary__list:hover {
-  color: red; }
+  color: #a40a3c; }
 
 /* form setting */
 input:-webkit-autofill {
@@ -226,7 +211,7 @@ input:-webkit-autofill {
   padding-right: 2rem;
   display: inline-block;
   vertical-align: top;
-  width: 32.5rem;
+  width: 33rem;
   text-align: right;
   margin-bottom: 0.5rem; }
   @media only screen and (max-width: 56.25em) {
@@ -253,6 +238,7 @@ input:-webkit-autofill {
   overflow: hidden;
   width: 33.5rem; }
   .select-custom select {
+    outline: none;
     background: transparent;
     font-size: 1.2rem;
     height: 3rem;
@@ -266,7 +252,7 @@ input:-webkit-autofill {
 .btn {
   font-size: 1.4rem;
   font-weight: 500; }
-  .btn__report, .btn__summary, .btn__taskSelector, .btn__remove, .btn__search, .btn__notFound {
+  .btn__report, .btn__summary, .btn__taskSelector, .btn__remove, .btn__search, .btn__notFound, .btn__guide {
     position: relative;
     outline: 0;
     text-transform: uppercase;
@@ -278,7 +264,7 @@ input:-webkit-autofill {
     transition: all 0.2s;
     background-color: #a40a3c;
     color: #fff; }
-    .btn__report:hover, .btn__summary:hover, .btn__taskSelector:hover, .btn__remove:hover, .btn__search:hover, .btn__notFound:hover {
+    .btn__report:hover, .btn__summary:hover, .btn__taskSelector:hover, .btn__remove:hover, .btn__search:hover, .btn__notFound:hover, .btn__guide:hover {
       border: 0.1rem solid #6b0848; }
   .btn__summary::after, .btn__notFound::after {
     content: "";
@@ -292,11 +278,8 @@ input:-webkit-autofill {
     left: 0;
     z-index: -1;
     transition: all 0.4s; }
-  .btn__guide {
-    padding: 0.4rem;
-    margin: 0 auto; }
   @media only screen and (max-width: 56.25em) {
-    .btn__search {
+    .btn__search, .btn__guide {
       display: block; } }
   .btn__summary {
     padding: 1rem 2rem;
@@ -383,6 +366,23 @@ input:-webkit-autofill {
     margin-bottom: 2rem;
     font-size: 2.4rem;
     color: #140107; }
+
+.guide {
+  grid-area: guide;
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 0 1.3rem;
+  justify-content: flex-end; }
+  .guide__popup {
+    display: flex; }
+    @media only screen and (max-width: 37.5em) {
+      .guide__popup {
+        padding-bottom: 1rem; } }
+
+@media only screen and (max-width: 37.5em) {
+  .btn__search {
+    width: 100%;
+    margin: 0 auto; } }
 
 /* Popup component styling*/
 .mm-popup {

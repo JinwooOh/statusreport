@@ -7,7 +7,8 @@
   &__taskSelector,
   &__remove,
   &__search,
-  &__notFound {
+  &__notFound,
+  &__guide {
     position: relative;
     outline: 0;
     text-transform: uppercase;
@@ -19,13 +20,10 @@
     transition: all 0.2s;
     background-color: $color-primary;
     color: $color-text;
-
     &:hover {
       border: 0.1rem solid $color-secondary;
     }
   }
-
-  // hover effect
   &__summary,
   &__notFound {
     &::after {
@@ -43,11 +41,8 @@
     }
   }
 
+  &__search,
   &__guide {
-    padding: 0.4rem;
-    margin: 0 auto;
-  }
-  &__search {
     @include respond(tab-port) {
       display: block;
     }

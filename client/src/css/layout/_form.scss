@@ -17,7 +17,7 @@ input:-webkit-autofill {
   padding-right: 2rem;
   display: inline-block;
   vertical-align: top;
-  width: 32.5rem;
+  width: 33rem;
   text-align: right;
   margin-bottom: 0.5rem;
   @include respond(tab-port) {
@@ -50,6 +50,7 @@ input:-webkit-autofill {
   overflow: hidden;
   width: 33.5rem;
   select {
+    outline: none;
     background: transparent;
     font-size: 1.2rem;
     height: 3rem;

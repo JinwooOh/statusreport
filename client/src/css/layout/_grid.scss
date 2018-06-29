@@ -16,23 +16,6 @@
   grid-area: App-title;
 }
 
-.guide {
-  display: inline-flex;
-  flex-wrap: wrap;
-  grid-area: guide;
-  padding-left: 1.3rem;
-  padding-right: 1.3rem;
-  justify-content: flex-end;
-  &__popup {
-    margin-bottom: 0.4rem;
-  }
-}
-.guide > .btn__search {
-  @include respond(phone) {
-    width: 100%;
-    margin: 0 auto;
-  }
-}
 .form-list,
 .summary,
 .searchSummary {

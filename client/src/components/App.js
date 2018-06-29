@@ -180,7 +180,7 @@ class App extends React.Component {
 
         <div className="guide">
           <MuiThemeProvider>
-            <div className="guide  guide__popup ">
+            <div className="guide__popup">
               <Popup title="Course Guide" text={coursehelp()} />
               <Popup title="Admin Guide" text={adminhelp()} />
               <Popup title="Naming Guide" text={naminghelp()} />

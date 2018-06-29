@@ -23,13 +23,11 @@ html {
     ),
     url(../img/bg.png);
 }
-
 body {
-  min-height: calc(100vh - 1rem);
+  min-height: 100vh;
 }
-
 .main-wrapper {
-  max-width: 100rem;
+  max-width: 110rem;
   margin: auto;
   padding-bottom: 3rem;
 }
