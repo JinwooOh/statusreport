@@ -278,9 +278,14 @@ input:-webkit-autofill {
     left: 0;
     z-index: -1;
     transition: all 0.4s; }
-  @media only screen and (max-width: 56.25em) {
-    .btn__search, .btn__guide {
-      display: block; } }
+  .btn__search {
+    margin-left: auto; }
+    @media only screen and (max-width: 56.25em) {
+      .btn__search {
+        display: block; } }
+  @media only screen and (max-width: 37.5em) {
+    .btn__guide {
+      padding: 1.6rem; } }
   .btn__summary {
     padding: 1rem 2rem;
     margin: 0.4rem;
@@ -328,6 +333,8 @@ input:-webkit-autofill {
 .message__text {
   margin-bottom: 1.6rem; }
   .message__text--title {
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
     text-align: justify;
     font-weight: 300;
     font-size: 2.2rem;
@@ -369,15 +376,17 @@ input:-webkit-autofill {
 
 .guide {
   grid-area: guide;
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
-  padding: 0 1.3rem;
-  justify-content: flex-end; }
+  padding: 0 1.3rem; }
   .guide__popup {
     display: flex; }
     @media only screen and (max-width: 37.5em) {
       .guide__popup {
-        padding-bottom: 1rem; } }
+        width: 100%;
+        margin-bottom: 1rem;
+        justify-content: center;
+        align-items: center; } }
 
 @media only screen and (max-width: 37.5em) {
   .btn__search {

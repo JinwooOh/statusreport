@@ -10,7 +10,7 @@ import FlatButton from 'material-ui/FlatButton';
 const customContentStyle =
   window.screen.availWidth >= 900
     ? {
-        width: '65%',
+        width: '68%',
         wrapper: {
           padding: '0.2rem',
         },

@@ -1,13 +1,16 @@
 .guide {
   grid-area: guide;
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   padding: 0 1.3rem;
-  justify-content: flex-end;
+
   &__popup {
     display: flex;
     @include respond(phone) {
-      padding-bottom: 1rem;
+      width: 100%;
+      margin-bottom: 1rem;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

@@ -41,10 +41,15 @@
     }
   }
 
-  &__search,
-  &__guide {
+  &__search {
+    margin-left: auto;
     @include respond(tab-port) {
       display: block;
+    }
+  }
+  &__guide {
+    @include respond(phone) {
+      padding: 1.6rem;
     }
   }
   &__summary {
