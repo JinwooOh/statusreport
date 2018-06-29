@@ -184,7 +184,7 @@ class Report extends Component {
         <h1 className="App-title">Search Database</h1>
         <div className="guide">
           <MuiThemeProvider>
-            <div className="guide guide__popup">
+            <div className="guide__popup">
               <Popup title="Search Guide" text={search()} />
             </div>
           </MuiThemeProvider>
