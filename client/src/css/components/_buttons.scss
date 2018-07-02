@@ -51,6 +51,12 @@
     @include respond(phone) {
       padding: 1.6rem;
     }
+    &--inPopup {
+      display: block;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      width: 20%;
+    }
   }
   &__summary {
     padding: 1rem 2rem;

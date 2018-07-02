@@ -1,7 +1,7 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+
 // const dropzoneStyles =
 // window.screen.availWidth < 780 ?
 // { 'width': '150px', 'height': '150px', 'border': 'none', 'borderRadius': '50%' }
@@ -11,6 +11,7 @@ const customContentStyle =
   window.screen.availWidth >= 900
     ? {
         width: '68%',
+        borderRadius: '100px',
         wrapper: {
           padding: '0.2rem',
         },
@@ -42,7 +43,9 @@ export default class Popup extends React.Component {
 
   render() {
     const actions = [
-      <FlatButton style={customContentStyle.button} label="OK" onClick={this.handleClose} />,
+      <button className="btn btn__guide btn__guide--inPopup" onClick={this.handleClose}>
+        OK
+      </button>,
     ];
     const { text } = this.props;
 

@@ -25,7 +25,7 @@ body {
 
 ::selection {
   background-color: #a40a3c;
-  color: #fff; }
+  color: #fbfbfb; }
 
 @keyframes fadein {
   from {
@@ -233,7 +233,7 @@ input:-webkit-autofill {
 
 .select-custom {
   display: inline-block;
-  background: #fff;
+  background: #fbfbfb;
   height: 3.5rem;
   overflow: hidden;
   width: 33.5rem; }
@@ -263,9 +263,9 @@ input:-webkit-autofill {
     border-radius: 1.2rem;
     transition: all 0.2s;
     background-color: #a40a3c;
-    color: #fff; }
+    color: #fbfbfb; }
     .btn__report:hover, .btn__summary:hover, .btn__taskSelector:hover, .btn__remove:hover, .btn__search:hover, .btn__notFound:hover, .btn__guide:hover {
-      border: 0.1rem solid #6b0848; }
+      border: 0.1rem solid #006660; }
   .btn__summary::after, .btn__notFound::after {
     content: "";
     background-color: #a40a3c;
@@ -286,6 +286,11 @@ input:-webkit-autofill {
   @media only screen and (max-width: 37.5em) {
     .btn__guide {
       padding: 1.6rem; } }
+  .btn__guide--inPopup {
+    display: block;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    width: 20%; }
   .btn__summary {
     padding: 1rem 2rem;
     margin: 0.4rem;
@@ -295,7 +300,7 @@ input:-webkit-autofill {
     margin: 0.4rem;
     font-weight: 100; }
   .btn:hover {
-    background-color: #6b0848;
+    background-color: #006660;
     transform: translateY(-0.3rem);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
     .btn:hover::after {
@@ -314,8 +319,8 @@ input:-webkit-autofill {
     .btn__taskSelector:not(:last-child) {
       border-right: 0.1rem solid #140107; }
     .btn__taskSelector:hover {
-      border: 0.1rem solid #6b0848;
-      background-color: #6b0848;
+      border: 0.1rem solid #006660;
+      background-color: #006660;
       transform: scaleY(1.1);
       box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
       .btn__taskSelector:hover:not(:last-child) {
