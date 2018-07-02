@@ -1,0 +1,79 @@
+<h1>Status Report Documentation</h1>
+<h2>Overview</h2>
+<p>Status Report is the web application to replace spreadsheet based reporting system in Online Program Development</p>
+<h2>Usage</h2>
+<h4>Reporting</h4>
+<ol>
+<li>To report the work or task simply fills out the forms. The course-related form is &quot;COURSE&quot; and Administration related form is &quot;ADMINISTRATION.&quot; Once filling out the form, click &quot;ADD TASK&quot; and the task will go to Summary. A task can be added to Summary more than one.</li>
+<li>Review the tasks that are added to Summary.</li>
+<li>Type your name on the input box. Your name should be showed up automatically</li>
+<li>If everything looks good, click the &quot;SUBMIT&quot; button.</li>
+</ol>
+<h4>Searching</h4>
+<ul>
+<li>Two searching options are provided: search by user and search by course. Choose one of the options to search.</li>
+<li>User Search:
+<ol>
+<li>Type valid start date and end date. The dates are based on task completion dates not reporting dates.</li>
+<li>Type username. The username should be showed up automatically.</li>
+<li>Course task will show up in Course task table and admin task will show up in Admin task table</li>
+</ol>
+</li>
+<li>Course Search
+<ol>
+<li>Type valid start date and end date. The dates are based on task completion dates not reporting dates.</li>
+<li>Choose search type</li>
+<li>Type valid program name or course number</li>
+</ol>
+</li>
+</ul>
+<h4>TIP:</h4>
+<ul>
+<li>If you are not sure about task category about your task, check course and admin guide on top of the application.</li>
+<li>To have consistent program name and course number, please reference naming guide before entering program name or course number</li>
+</ul>
+<hr>
+<h1>For Developer</h1>
+<h2>Stack</h2>
+<h4>Front-End: React</h4>
+<h4>CSS Preprocessor: SASS</h4>
+<ul>
+<li>(followed the 7-1 pattern <a href="https://sass-guidelin.es/#the-7-1-pattern">Information about 7-1</a>)</li>
+</ul>
+<h4>Back-End: Node, Express</h4>
+<h4>Database: MySql</h4>
+<h4>API</h4>
+<ul>
+<li>material-ui: Dialog component is used to handle popup menu.</li>
+<li>react-autosuggest: it is used throughout the application to handle auto-completion.</li>
+<li>react-table: it is used in search page to show the data in the table.</li>
+<li>react-transition-group: it is used to animate components.</li>
+</ul>
+<hr>
+<h2>File structure</h2>
+<p>The application has two main pages which are Report page and Search Page.</p>
+<h4>&quot;src&quot; folder has three folders: component, css and img</h4>
+<ul>
+<li>&quot;component&quot; contains javascript files for React.
+<ul>
+<li>in &quot;component&quot; folder it has three folders: &quot;helper&quot;, &quot;report&quot;, &quot;search&quot;</li>
+<li>to change, message on popup menus such as course guide and admin guide, modify Message.js file in helper folder.</li>
+</ul>
+</li>
+<li>&quot;css&quot; contains all of the files that are related to styling.</li>
+<li>&quot;img&quot; contain one png file for the background image.</li>
+</ul>
+<hr>
+<h2>Server/Database Information</h2>
+<h4>Test server</h4>
+<ul>
+<li>host: wwwtest.eipd.dcs.wisc.edu</li>
+<li>user: status_report</li>
+<li>database: status_report</li>
+<li>port: 3306</li>
+<li>password: Ask server maintainer</li>
+</ul>
+<h4>Production server</h4>
+<ul>
+<li>Ask server maintainer</li>
+</ul>
