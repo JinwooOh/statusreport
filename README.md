@@ -6,14 +6,14 @@ Status Report is the web application to replace spreadsheet based reporting syst
 
 ## Usage
 
-### Reporting
+#### Reporting
 
 1.  To report the work or task simply fills out the forms. The course-related form is "COURSE" and Administration related form is "ADMINISTRATION." Once filling out the form, click "ADD TASK" and the task will go to Summary. A task can be added to Summary more than one.
 2.  Review the tasks that are added to Summary.
 3.  Type your name on the input box. Your name should be showed up automatically
 4.  If everything looks good, click the "SUBMIT" button.
 
-### Searching
+#### Searching
 
 - Two searching options are provided: search by user and search by course. Choose one of the options to search.
 - User Search:
@@ -25,7 +25,7 @@ Status Report is the web application to replace spreadsheet based reporting syst
   2.  Choose search type
   3.  Type valid program name or course number
 
-### TIP:
+#### TIP:
 
 - If you are not sure about task category about your task, check course and admin guide on top of the application.
 - To have consistent program name and course number, please reference naming guide before entering program name or course number
@@ -36,19 +36,22 @@ Status Report is the web application to replace spreadsheet based reporting syst
 
 ## Stack
 
-### Front-End: React
+#### Front-End: React
 
-### Back-End: Node, Express
+#### CSS Preprocessor: SASS
 
-### Database: MySql
+- (followed the 7-1 pattern [Information about 7-1](https://sass-guidelin.es/#the-7-1-pattern))
 
-### API
+#### Back-End: Node, Express
+
+#### Database: MySql
+
+#### API
 
 - material-ui: Dialog component is used to handle popup menu.
 - react-autosuggest: it is used throughout the application to handle auto-completion.
 - react-table: it is used in search page to show the data in the table.
 - react-transition-group: it is used to animate components.
-- CSS Preprocessor: SASS (followed the 7-1 pattern [Information about 7-1](https://sass-guidelin.es/#the-7-1-pattern))
 
 ---
 
@@ -56,7 +59,7 @@ Status Report is the web application to replace spreadsheet based reporting syst
 
 The application has two main pages which are Report page and Search Page.
 
-### "src" folder has three folders: component, css and img
+#### "src" folder has three folders: component, css and img
 
 - "component" contains javascript files for React.
   - in "component" folder it has three folders: "helper", "report", "search"
@@ -68,7 +71,7 @@ The application has two main pages which are Report page and Search Page.
 
 ## Server/Database Information
 
-### Test server
+#### Test server
 
 - host: wwwtest.eipd.dcs.wisc.edu
 - user: status_report
@@ -76,6 +79,6 @@ The application has two main pages which are Report page and Search Page.
 - port: 3306
 - password: Ask server maintainer
 
-### Production server
+#### Production server
 
 - Ask server maintainer
