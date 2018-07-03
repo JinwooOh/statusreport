@@ -11,10 +11,78 @@
       "course": ["PHS650 PHS714 PHS780 PHS785 PHS789 PHS879"]
     },
     {
-      "program": "CLINICAL NUTRITION",
+      "program": "CLINICAL NUTRITION(NS)",
       "course": [
         "NS650 NS651 NS652 NS653 NS670 NS671 NS710 NS711 NS715 NS720 NS721 NS725"
       ]
+    },
+    {
+      "program": "PCOE",
+      "course": [
+        "PCOE110 PCOE120 PCOE125 PCOE130 PCOE140 PCOE150 PCOE160 PCOEOrientation PCOEePortfolio"
+      ]
+    },
+    {
+      "program": "MATH",
+      "course": ["MATH319 MATH340"]
+    },
+    {
+      "program": "ECONOMICS",
+      "course": ["ECON101"]
+    },
+    {
+      "program": "ECE",
+      "course": ["ECE332"]
+    },
+    {
+      "program": "POLS",
+      "course": ["POLS700 POLS701 POLS702"]
+    },
+    {
+      "program": "SW",
+      "course": ["SW612 SW644 SW646 SW650 SW712"]
+    },
+    {
+      "program": "AAE",
+      "course": ["AAE360 AAE474 AAE770 AAE771"]
+    },
+    {
+      "program": "OTD",
+      "course": [
+        "KINES508 KINES785 OTD811 OTD812 OTD813 OTD814 OTD871 OTD872 OTD881 OTD890"
+      ]
+    },
+    {
+      "program": "ENVST",
+      "course": ["ENVST400 ENVST951 ENVST972 ENVST978 ENVST979"]
+    },
+    {
+      "program": "EPD",
+      "course": ["EPD700 EPD702 EPD704 EPD708 EPD784 EPD785"]
+    },
+    {
+      "program": "ES",
+      "course": ["ES843"]
+    },
+    {
+      "program": "FoOT",
+      "course": ["FoOT"]
+    },
+    {
+      "program": "FS",
+      "course": ["FS120"]
+    },
+    {
+      "program": "GPH",
+      "course": ["GPH640"]
+    },
+    {
+      "program": "InterEGR",
+      "course": ["InterEGR601"]
+    },
+    {
+      "program": "GEODESIGN(LA)",
+      "course": ["LA631"]
     },
     {
       "program": "BSE",
@@ -29,18 +97,28 @@
       "course": ["STATS679"]
     },
     {
-      "program": "SW",
-      "course": ["SW612 SW644 SW646 SW650 SW712"]
+      "program": "SC_FISC",
+      "course": ["SC_FISC038-014"]
     },
     {
-      "program": "AAE",
-      "course": ["AAE360 AAE474 AAE770 AAE771"]
+      "program": "LIS",
+      "course": ["LIS611 LIS612 LIS613 LIS614"]
     },
     {
-      "program": "OTD",
-      "course": [
-        "KINES508 OTD811 OTD812 OTD813 OTD814 OTD871 OTD872 OTD881 OTD890"
-      ]
+      "program": "MSW",
+      "course": ["SW442"]
+    },
+    {
+      "program": "MPH",
+      "course": ["MPH780"]
+    },
+    {
+      "program": "Environmental Conservation(ES)",
+      "course": ["ES951 ES978 ES987 ES979"]
+    },
+    {
+      "program": "MUSIC",
+      "course": ["MUSIC151"]
     }
   ]
 }

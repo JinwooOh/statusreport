@@ -334,7 +334,9 @@ export function search() {
   );
 }
 
+// pull the data from naming.json file
 export function naminghelp() {
+  const nameLen = naming.name.length;
   return (
     <div className="message">
       <h2 className="message__heading">Naming Guide(BETA)</h2>
@@ -353,12 +355,15 @@ export function naminghelp() {
         <h3 className="message__text--title">
           <span className="message__text--title-span">Program Name List</span>
         </h3>
-
         <div className="message__text--body">
           <ul>
-            <li>
-              {naming.name.map(p => {
-                return `${p.program} `;
+            <li style={{wordSpacing: "5px"}}>
+              {naming.name.map((p, i) => {
+                if(nameLen === i+1){//last element
+                  return `${p.program} `;
+                }else{
+                  return `${p.program}, `;
+                }
               })}
             </li>
           </ul>
@@ -372,8 +377,8 @@ export function naminghelp() {
           <ul>
             {naming.name.map(p => {
               return (
-                <li>
-                  {p.program}: {p.course}{' '}
+                <li style={{wordSpacing: "5px"}}>
+                  {p.program}: {p.course}
                 </li>
               );
             })}
