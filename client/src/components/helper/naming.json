@@ -25,6 +25,10 @@
       "course": ["CBE252"]
     },
     {
+      "program": "STATS",
+      "course": ["STATS679"]
+    },
+    {
       "program": "SW",
       "course": ["SW612 SW644 SW646 SW650 SW712"]
     },
