@@ -31,8 +31,10 @@
       );
     }
 
-    &--body {
-      // text-align: justify;
+    // body: popup
+    // summary: searchSummary
+    &--body,
+    &--summary {
       ul {
         list-style: none;
         width: auto;
@@ -47,6 +49,9 @@
           }
         }
       }
+    }
+    &--summary {
+      text-align: justify;
     }
   }
 }

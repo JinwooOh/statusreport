@@ -350,16 +350,18 @@ input:-webkit-autofill {
     -webkit-box-decoration-break: clone;
     border-radius: 0.3rem;
     background-image: linear-gradient(to right bottom, rgba(164, 10, 60, 0.35), rgba(248, 250, 255, 0.35)); }
-  .message__text--body ul {
+  .message__text--body ul, .message__text--summary ul {
     list-style: none;
     width: auto; }
-    .message__text--body ul li {
+    .message__text--body ul li, .message__text--summary ul li {
       font-size: 1.6rem;
       padding: 1rem;
       margin-right: 2rem;
       margin-left: 2rem; }
-      .message__text--body ul li:not(:last-child) {
+      .message__text--body ul li:not(:last-child), .message__text--summary ul li:not(:last-child) {
         border-bottom: 1px solid #a40a3c; }
+  .message__text--summary {
+    text-align: justify; }
 
 .notFound {
   display: block;

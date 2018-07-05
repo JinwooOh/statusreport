@@ -52,7 +52,7 @@ class SearchSummary extends React.Component {
             <span className="message__text--title-span">Search Information</span>
           </h3>
 
-          <div className="message__text--body">
+          <div className="message__text--summary">
             <ul>
               {this.props.summaryInfo.length === 0 ? (
                 <Fragment /> // render nothing
