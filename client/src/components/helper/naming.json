@@ -23,15 +23,15 @@
       ]
     },
     {
-      "program": "MATH",
+      "program": "Math",
       "course": ["MATH319 MATH340"]
     },
     {
-      "program": "ECONOMICS",
+      "program": "Economics",
       "course": ["ECON101"]
     },
     {
-      "program": "ECE",
+      "program": "Electrical and Computer Engineering(ECE)",
       "course": ["ECE332"]
     },
     {
@@ -81,19 +81,19 @@
       "course": ["InterEGR601"]
     },
     {
-      "program": "GEODESIGN(LA)",
+      "program": "Geodesign(LA)",
       "course": ["LA631"]
     },
     {
-      "program": "BSE",
+      "program": "Biological Systems Engineering(BSE)",
       "course": ["BSE367"]
     },
     {
-      "program": "CBE",
+      "program": "Chemical & Biological Engineering(CBE)",
       "course": ["CBE252"]
     },
     {
-      "program": "STATS",
+      "program": "Statistics(STATS)",
       "course": ["STATS679"]
     },
     {
@@ -101,11 +101,11 @@
       "course": ["SC_FISC038-014"]
     },
     {
-      "program": "LIS",
+      "program": "User Experience Design",
       "course": ["LIS611 LIS612 LIS613 LIS614"]
     },
     {
-      "program": "MSW",
+      "program": "Master of Social Work(MSW)",
       "course": ["SW442"]
     },
     {
