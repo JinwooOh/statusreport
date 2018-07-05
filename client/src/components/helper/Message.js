@@ -336,7 +336,22 @@ export function search() {
 
 // pull the data from naming.json file
 export function naminghelp() {
-  const nameLen = naming.name.length;
+  const json = naming;
+  // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  //   json = naming;
+  // } else {
+  //   // production
+  //   const url = 'https://wwwtest.eipd.dcs.wisc.edu/all-status-reports/naming.json';
+  //   fetch(url)
+  //     .then(res => res.json())
+  //     .then(out => {
+  //       console.log('Checkout this JSON! ', out);
+  //       json = out;
+  //     })
+  //     .catch(err => {
+  //       throw err;
+  //     });
+  // }
   return (
     <div className="message">
       <h2 className="message__heading">Naming Guide(BETA)</h2>
@@ -357,13 +372,10 @@ export function naminghelp() {
         </h3>
         <div className="message__text--body">
           <ul>
-            <li style={{wordSpacing: "5px"}}>
-              {naming.name.map((p, i) => {
-                if(nameLen === i+1){//last element
-                  return `${p.program} `;
-                }else{
-                  return `${p.program}, `;
-                }
+            <li style={{ wordSpacing: '5px' }}>
+              {json.name.map((p, i) => {
+                const result = json.name.length === i + 1 ? `${p.program} ` : `${p.program}, `;
+                return result;
               })}
             </li>
           </ul>
@@ -375,9 +387,9 @@ export function naminghelp() {
 
         <div className="message__text--body">
           <ul>
-            {naming.name.map(p => {
+            {json.name.map((p, i) => {
               return (
-                <li style={{wordSpacing: "5px"}}>
+                <li key={i} style={{ wordSpacing: '5px' }}>
                   {p.program}: {p.course}
                 </li>
               );

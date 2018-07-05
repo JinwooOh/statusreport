@@ -1,17 +1,17 @@
 {
   "name": [
     {
-      "program": "GIS",
+      "program": "Geographic Information Systems(GIS)",
       "course": [
         "GIS579 GIS777 GIS778 GEOG575 GEOG574 GEOG576 GEOG370 GEOG377 GEOG378 GEOG579 GEOG777 GEOG778 GEO378 GEO579 GEO572"
       ]
     },
     {
-      "program": "PHS",
+      "program": "Population Health Sciences(PHS)",
       "course": ["PHS650 PHS714 PHS780 PHS785 PHS789 PHS879"]
     },
     {
-      "program": "CLINICAL NUTRITION(NS)",
+      "program": "Clinical Nutrition(NS)",
       "course": [
         "NS650 NS651 NS652 NS653 NS670 NS671 NS710 NS711 NS715 NS720 NS721 NS725"
       ]
@@ -35,29 +35,29 @@
       "course": ["ECE332"]
     },
     {
-      "program": "POLS",
+      "program": "Political Science(POLS)",
       "course": ["POLS700 POLS701 POLS702"]
     },
     {
-      "program": "SW",
+      "program": "Social Work(SW)",
       "course": ["SW612 SW644 SW646 SW650 SW712"]
     },
     {
-      "program": "AAE",
+      "program": "Agricultural & Applied Economics(AAE)",
       "course": ["AAE360 AAE474 AAE770 AAE771"]
     },
     {
-      "program": "OTD",
+      "program": "Doctor of Occupational Therapy(OTD)",
       "course": [
         "KINES508 KINES785 OTD811 OTD812 OTD813 OTD814 OTD871 OTD872 OTD881 OTD890"
       ]
     },
     {
-      "program": "ENVST",
+      "program": "Environmental Conservation(ENVST)",
       "course": ["ENVST400 ENVST951 ENVST972 ENVST978 ENVST979"]
     },
     {
-      "program": "EPD",
+      "program": "Engineering Professional Development(EPD)",
       "course": ["EPD700 EPD702 EPD704 EPD708 EPD784 EPD785"]
     },
     {
@@ -69,11 +69,11 @@
       "course": ["FoOT"]
     },
     {
-      "program": "FS",
+      "program": "Food Science(FS)",
       "course": ["FS120"]
     },
     {
-      "program": "GPH",
+      "program": "Foundations for Global Health Practice(GPH)",
       "course": ["GPH640"]
     },
     {
@@ -109,7 +109,7 @@
       "course": ["SW442"]
     },
     {
-      "program": "MPH",
+      "program": "Public Health Principles and Practice(MPH)",
       "course": ["MPH780"]
     },
     {
