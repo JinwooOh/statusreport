@@ -69,7 +69,7 @@ class SearchSummary extends React.Component {
               <span className="message__text--title-span">Total hours</span>
             </h3>
 
-            <div className="message__text--body">
+            <div className="message__text--summary">
               <ul>
                 {this.props.searchType === 'user' ? (
                   <Fragment>
