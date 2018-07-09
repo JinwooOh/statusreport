@@ -335,8 +335,9 @@ export function search() {
 }
 
 // pull the data from naming.json file
-export function naminghelp() {
+export function naminghelp(nameList) {
   const json = naming;
+
   // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
   //   json = naming;
   // } else {
@@ -373,7 +374,7 @@ export function naminghelp() {
         <div className="message__text--body">
           <ul>
             <li style={{ wordSpacing: '5px' }}>
-              {json.name.map((p, i) => {
+              {nameList.map((p, i) => {
                 const result = json.name.length === i + 1 ? `${p.program} ` : `${p.program}, `;
                 return result;
               })}
@@ -387,7 +388,7 @@ export function naminghelp() {
 
         <div className="message__text--body">
           <ul>
-            {json.name.map((p, i) => {
+            {nameList.map((p, i) => {
               return (
                 <li key={i} style={{ wordSpacing: '5px' }}>
                   {p.program}: {p.course}

@@ -2,6 +2,17 @@ const express = require('express');
 const mysql = require('mysql');
 const config = require('config');
 const helmet = require('helmet');
+//json server
+// const jsonServer = require('json-server')
+// const server = jsonServer.create()
+// const router = jsonServer.router('db.json')
+// const middlewares = jsonServer.defaults()
+// const jsonport = process.env.PORT || 5001;
+// server.use(middlewares)
+// server.use(router)
+// server.listen(jsonport, () => {
+//   console.log('JSON Server is running')
+// })
 
 // Database config
 const db_config = {
@@ -54,6 +65,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 
 // Fetch data
+app.get('/name', (req, res) => {
+  connection.query('SELECT * FROM coursenaming', (err, result, fields) => {
+    if (err) {
+      console.log('Error in users query');
+    } else {
+      console.log('course naming query success');
+      res.json(result);
+    }
+  });
+});
+
 app.get('/users', (req, res) => {
   connection.query('SELECT * FROM user', (err, result, fields) => {
     if (err) {
@@ -64,6 +86,7 @@ app.get('/users', (req, res) => {
     }
   });
 });
+
 
 app.get('/admintable', (req, res) => {
   connection.query('SELECT * FROM admintable', (err, result, fields) => {

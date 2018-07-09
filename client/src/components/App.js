@@ -19,6 +19,7 @@ class App extends React.Component {
       taskType: 'course', // or"admin"
       date: {}, // to track submit date and time
       userName: '',
+      nameList: [],
     };
   }
 
@@ -29,6 +30,12 @@ class App extends React.Component {
     if (localStorageRef) {
       this.setState({ date: JSON.parse(localStorageRef) });
     }
+    fetch('/name')
+      .then(response => response.json())
+      .then(findresponse => {
+        this.setState({ nameList: [...findresponse] });
+      })
+      .catch(err => console.log(err));
   }
   componentDidUpdate() {
     // time
@@ -183,7 +190,7 @@ class App extends React.Component {
             <div className="guide__popup">
               <Popup title="Course Guide" text={coursehelp()} />
               <Popup title="Admin Guide" text={adminhelp()} />
-              <Popup title="Naming Guide" text={naminghelp()} />
+              <Popup title="Naming Guide" text={naminghelp(this.state.nameList)} />
             </div>
           </MuiThemeProvider>
 
