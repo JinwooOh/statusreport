@@ -8,14 +8,22 @@ class SearchSummary extends React.Component {
   // it has 3 cases to render
   renderSearchInfo = () => {
     // user search
+
+    // calculate dates between two dates
+    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+    const firstDate = new Date(this.props.summaryInfo.startDate);
+    const secondDate = new Date(this.props.summaryInfo.endDate);
+    const diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / oneDay));
+
     if (this.props.searchType === 'user') {
       return (
         <Fragment>
           <li>Name: {this.props.summaryInfo.userID}</li>
           <li>
             Search range from {dateFormat(this.props.summaryInfo.startDate)} to{' '}
-            {dateFormat(this.props.summaryInfo.endDate)}{' '}
+            {dateFormat(this.props.summaryInfo.endDate)}
           </li>
+          <li>Number of days: {diffDays}</li>
         </Fragment>
       );
     }
@@ -28,6 +36,7 @@ class SearchSummary extends React.Component {
             Search range from {dateFormat(this.props.summaryInfo.startDate)} to{' '}
             {dateFormat(this.props.summaryInfo.endDate)}{' '}
           </li>
+          <li>Number of days: {diffDays}</li>
         </Fragment>
       );
     }
@@ -38,6 +47,7 @@ class SearchSummary extends React.Component {
         <li>
           Search range from {this.props.summaryInfo.startDate} to {this.props.summaryInfo.endDate}{' '}
         </li>
+        <li>Number of days: {diffDays}</li>
       </Fragment>
     );
   };
