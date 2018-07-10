@@ -3,9 +3,35 @@ import PropTypes from 'prop-types';
 import { dateFormat } from '../helper/Helper';
 
 class SearchSummary extends React.Component {
-  // Replace date format for yyyy-mm-dd to mm/dd/yyyy
+  renderCourseTotal = () => {
+    // Extract unique courseNumber as Object
+    let courseNumberListTemp = []; //
+    courseNumberListTemp = [...new Set(this.props.searchProgram.map(task => task.courseNumber))];
 
-  // it has 3 cases to render
+    const courseNumberList = courseNumberListTemp.reduce((obj, v) => {
+      obj[v] = 0;
+      return obj;
+    }, {});
+
+    // calculate each courseNumber total hour
+    this.props.searchProgram.map(task => {
+      for (const property in courseNumberList) {
+        if (task.courseNumber === property) {
+          courseNumberList[property] += task.hours;
+        }
+      }
+    });
+
+    return Object.keys(courseNumberList).map(key => {
+      return (
+        <li>
+          {key} : {courseNumberList[key]}
+        </li>
+      );
+    });
+  };
+
+  // Replace date format for yyyy-mm-dd to mm/dd/yyyy
   renderSearchInfo = () => {
     // user search
 
@@ -40,7 +66,7 @@ class SearchSummary extends React.Component {
         </Fragment>
       );
     }
-    // course search with course name
+    // course search with program name
     return (
       <Fragment>
         <li>Program: {this.props.summaryInfo.courseProgram}</li>
@@ -88,6 +114,7 @@ class SearchSummary extends React.Component {
                   </Fragment>
                 ) : (
                   <Fragment>
+                    {this.renderCourseTotal()}
                     <li>Course Total Hours: {this.props.totalHours.program} </li>
                   </Fragment>
                 )}

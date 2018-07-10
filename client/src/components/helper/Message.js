@@ -355,19 +355,9 @@ export function naminghelp(nameList) {
   // }
   return (
     <div className="message">
-      <h2 className="message__heading">Naming Guide(BETA)</h2>
+      <h2 className="message__heading">Naming Guide</h2>
 
       <div className="message__text">
-        <h3 className="message__text--title">
-          <span className="message__text--title-span">Naming General Rules</span>
-        </h3>
-
-        <div className="message__text--body">
-          <ul>
-            <li>...</li>
-          </ul>
-        </div>
-
         <h3 className="message__text--title">
           <span className="message__text--title-span">Program Name List</span>
         </h3>
