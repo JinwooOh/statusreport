@@ -69,7 +69,6 @@ class App extends React.Component {
         },
       });
       AlertPopup.queue(errorSubmitPopup);
-      console.log('User tries to submit empty task');
       return;
     }
     // success

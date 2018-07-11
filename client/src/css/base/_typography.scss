@@ -2,6 +2,10 @@ body {
   font-size: 1.6rem;
   font-family: "Lato", sans-serif;
 }
+li {
+  padding-top: 0.8rem;
+}
+
 .App-title {
   padding: 2.4rem;
   text-align: center;
@@ -14,25 +18,19 @@ body {
 
 .heading-primary {
   margin-top: 1.6rem;
-  //color: $color-primary;
+  // color: $color-primary;
   font-size: 2.8rem;
   font-weight: 300;
   color: $color-tertiary-dark;
 }
 
-li {
-  padding-top: 0.8rem;
-}
-
 /* input box */
 input[type="text"],
+input[type="number"],
+input[type="date"],
 select {
-  margin: 0.4rem 0;
+
   display: inline-block;
-  border: 0.1rem solid $color-black;
-  border-radius: 0.4rem;
-}
-input:required {
   border: 0.1rem solid $color-tertiary-dark;
   border-radius: 0.4rem;
 }
