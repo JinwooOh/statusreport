@@ -337,28 +337,12 @@ export function search() {
 // pull the data from naming.json file
 export function naminghelp(nameList) {
   const json = naming;
-
-  // if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-  //   json = naming;
-  // } else {
-  //   // production
-  //   const url = 'https://wwwtest.eipd.dcs.wisc.edu/all-status-reports/naming.json';
-  //   fetch(url)
-  //     .then(res => res.json())
-  //     .then(out => {
-  //       console.log('Checkout this JSON! ', out);
-  //       json = out;
-  //     })
-  //     .catch(err => {
-  //       throw err;
-  //     });
-  // }
   return (
     <div className="message">
       <h2 className="message__heading">Naming Guide</h2>
 
       <div className="message__text">
-        <h3 className="message__text--title">
+        {/* <h3 className="message__text--title">
           <span className="message__text--title-span">Program Name List</span>
         </h3>
         <div className="message__text--body">
@@ -370,17 +354,17 @@ export function naminghelp(nameList) {
               })}
             </li>
           </ul>
-        </div>
+        </div> */}
 
         <h3 className="message__text--title">
-          <span className="message__text--title-span">Course Number List</span>
+          <span className="message__text--title-span">Program / Course Number List</span>
         </h3>
 
         <div className="message__text--body">
           <ul>
             {nameList.map((p, i) => {
               return (
-                <li key={i} style={{ wordSpacing: '5px' }}>
+                <li key={i} style={{ wordSpacing: '3px' }}>
                   {p.program}: {p.course}
                 </li>
               );

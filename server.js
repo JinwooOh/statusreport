@@ -66,7 +66,7 @@ app.use(helmet());
 
 // Fetch data
 app.get('/name', (req, res) => {
-  connection.query('SELECT * FROM coursenaming', (err, result, fields) => {
+  connection.query('SELECT * FROM coursenaming ORDER BY program', (err, result, fields) => {
     if (err) {
       console.log('Error in users query');
     } else {

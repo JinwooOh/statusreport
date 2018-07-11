@@ -28,12 +28,16 @@ class App extends React.Component {
     // time
     const localStorageRef = localStorage.getItem('date');
     if (localStorageRef) {
-      this.setState({ date: JSON.parse(localStorageRef) });
+      this.setState({
+        date: JSON.parse(localStorageRef),
+      });
     }
     fetch('/name')
       .then(response => response.json())
       .then(findresponse => {
-        this.setState({ nameList: [...findresponse] });
+        this.setState({
+          nameList: [...findresponse],
+        });
       })
       .catch(err => console.log(err));
   }
@@ -80,7 +84,9 @@ class App extends React.Component {
         if (match === undefined) {
           fetch('/addUser', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+            },
             body: JSON.stringify(data),
           }).then(body => {
             console.log('State: ', body); // error
@@ -109,7 +115,9 @@ class App extends React.Component {
               };
               fetch('/addCourseinfo', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                  'Content-Type': 'application/json',
+                },
                 body: JSON.stringify(newCourse),
               })
                 .then(body => {
@@ -121,11 +129,12 @@ class App extends React.Component {
           .catch(error => console.error('fetch error at users ', error)); // error
       }
     });
-
     // submit the tasks
     fetch('/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(data),
     })
       .then(body => {

@@ -33,8 +33,9 @@ class SearchSummary extends React.Component {
 
   // Replace date format for yyyy-mm-dd to mm/dd/yyyy
   renderSearchInfo = () => {
-    // user search
-
+    // ///////////////
+    // user search //
+    // ///////////////
     // calculate dates between two dates
     const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
     const firstDate = new Date(this.props.summaryInfo.startDate);
@@ -53,6 +54,9 @@ class SearchSummary extends React.Component {
         </Fragment>
       );
     }
+    // /////////////////
+    // course search //
+    // /////////////////
     // course search with course number
     if (this.props.summaryInfo.courseProgram === undefined) {
       return (
