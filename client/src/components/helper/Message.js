@@ -1,7 +1,7 @@
 // text for popup message
 // used for Popup API argument
 import React from 'react';
-import naming from './naming.json';
+// import naming from './naming.json';
 
 export function coursehelp() {
   return (
@@ -336,7 +336,7 @@ export function search() {
 
 // pull the data from naming.json file
 export function naminghelp(nameList) {
-  const json = naming;
+  // const json = naming;
   return (
     <div className="message">
       <h2 className="message__heading">Naming Guide</h2>

@@ -14,7 +14,7 @@ class SearchSummary extends React.Component {
     }, {});
 
     // calculate each courseNumber total hour
-    this.props.searchProgram.map(task => {
+    this.props.searchProgram.forEach(task => {
       for (const property in courseNumberList) {
         if (task.courseNumber === property) {
           courseNumberList[property] += task.hours;
@@ -148,4 +148,5 @@ SearchSummary.propTypes = {
     program: PropTypes.number,
   }).isRequired,
   summaryInfo: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+  searchProgram: PropTypes.array.isRequired,
 };

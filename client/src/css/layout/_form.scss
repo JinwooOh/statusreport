@@ -25,6 +25,9 @@ input:-webkit-autofill {
       display: block;
       margin: 0 auto;
     }
+    &:focus{
+      border: 0.2rem solid $color-primary;
+    }
   }
   & span {
     padding: 0.5rem;
@@ -67,5 +70,7 @@ input:-webkit-autofill {
   color: red;
   content: "*";
   padding-left: 5px;
+  font-size: 1.8rem;
+  font-weight: 700;
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Autosuggest from 'react-autosuggest';
+import AlertPopup from 'react-popup';
 
 let courseData = [];
 // Autosuggestion helpers start
@@ -114,9 +115,18 @@ class AddForm extends React.Component {
 
   createTask = event => {
     event.preventDefault();
-    // if (this.state.courseNumberValue === '') {
-    //   return;
-    // }
+    if (this.state.courseNumberValue === '') {
+      const errorSubmitPopup = AlertPopup.register({
+        title: 'Failed to add a task',
+        content:
+          'Check required fields of the form: Date, Course Number and Hours for This Task should be filled.',
+        buttons: {
+          right: ['ok'],
+        },
+      });
+      AlertPopup.queue(errorSubmitPopup);
+      return;
+    }
     const task = {
       // course form
       taskType: 'Course Task', // type of course
