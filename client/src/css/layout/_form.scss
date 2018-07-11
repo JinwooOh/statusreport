@@ -1,10 +1,23 @@
 /* form setting */
 
-//remove input background color for chrome autocomplete
-input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px white inset;
-  box-shadow: 0 0 0 30px white inset;
+input{
+  //remove input background color for chrome autocomplete
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px white inset;
+    box-shadow: 0 0 0 30px white inset;
+  }
+  &:focus{
+    border: 1.5px solid $color-primary;
+  }
 }
+.requiredField::before{
+  color: red;
+  content: "*";
+  padding-right: 3px;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
 .task-edit {
   padding: 2rem;
   background-color: $color-tertiary-light;
@@ -16,17 +29,10 @@ input:-webkit-autofill {
     display: inline-block;
     width: 32.5rem;
     outline: none;
-    // &:required::after {
-    //   color: red;
-    //   content: "*";
-    //   padding-left: 5px;
-    // }
+
     @include respond(tab-port) {
       display: block;
       margin: 0 auto;
-    }
-    &:focus{
-      border: 0.2rem solid $color-primary;
     }
   }
   & span {
@@ -66,11 +72,5 @@ input:-webkit-autofill {
   }
 }
 
-.requiredField::before{
-  color: red;
-  content: "*";
-  padding-left: 5px;
-  font-size: 1.8rem;
-  font-weight: 700;
-}
+
 
