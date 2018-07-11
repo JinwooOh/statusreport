@@ -114,6 +114,9 @@ class AddForm extends React.Component {
 
   createTask = event => {
     event.preventDefault();
+    // if (this.state.courseNumberValue === '') {
+    //   return;
+    // }
     const task = {
       // course form
       taskType: 'Course Task', // type of course
@@ -165,7 +168,7 @@ class AddForm extends React.Component {
     if (this.props.taskType === 'admin') {
       return (
         <form className="task-edit" onSubmit={this.createTaskAdmin}>
-          <span>Date </span>
+          <span className="requiredField">Date </span>
           <input
             type="date"
             name="date"
@@ -193,7 +196,7 @@ class AddForm extends React.Component {
             </select>
           </div>
 
-          <span>Hours for This Task</span>
+          <span className="requiredField">Hours for This Task</span>
           <input
             name="hours"
             ref={this.hoursRef}
@@ -214,7 +217,7 @@ class AddForm extends React.Component {
     // course form
     return (
       <form className="task-edit" onSubmit={this.createTask}>
-        <span>Date </span>
+        <span className="requiredField">Date </span>
         <input
           name="date"
           ref={this.dateRef}
@@ -248,7 +251,7 @@ class AddForm extends React.Component {
         />
         {/* <input name="program" ref={this.programRef} type="text" placeholder="Program name" /> */}
 
-        <span>Course Number</span>
+        <span className="requiredField">Course Number</span>
         <Autosuggest
           id="courseNumber"
           suggestions={courseNumberSuggestions}
@@ -283,7 +286,7 @@ class AddForm extends React.Component {
           </select>
         </div>
 
-        <span>Hours for This Task</span>
+        <span className="requiredField">Hours for This Task</span>
         <input
           name="hours"
           ref={this.hoursRef}

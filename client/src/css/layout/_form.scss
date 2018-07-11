@@ -62,3 +62,10 @@ input:-webkit-autofill {
     margin: 0 auto;
   }
 }
+
+.requiredField::before{
+  color: red;
+  content: "*";
+  padding-left: 5px;
+}
+
