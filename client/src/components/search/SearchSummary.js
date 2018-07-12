@@ -8,8 +8,19 @@ class SearchSummary extends React.Component {
     let courseNumberListTemp = []; //
     courseNumberListTemp = [...new Set(this.props.searchProgram.map(task => task.courseNumber))];
 
+    // Array to Obj
     const courseNumberList = courseNumberListTemp.reduce((obj, v) => {
-      obj[v] = 0;
+      obj[v] = {
+        total: 0,
+        list: [
+          { name: 'Faculty Consultation', total: 0 },
+          { name: 'Content Development', total: 0 },
+          { name: 'CMS Layout', total: 0 },
+          { name: 'ISD Time', total: 0 },
+          { name: 'Media Production', total: 0 },
+          { name: 'Quality Control', total: 0 },
+        ],
+      };
       return obj;
     }, {});
 
@@ -17,15 +28,27 @@ class SearchSummary extends React.Component {
     this.props.searchProgram.forEach(task => {
       for (const property in courseNumberList) {
         if (task.courseNumber === property) {
-          courseNumberList[property] += task.hours;
+          // total hours for a course
+          courseNumberList[property].total += task.hours;
+          // total hours for each course category
+          const result = courseNumberList[property].list.find(cat => cat.name === task.courseCat);
+          result.total += task.hours;
         }
       }
     });
+    console.log(courseNumberList);
 
-    return Object.keys(courseNumberList).map(key => {
+    return Object.keys(courseNumberList).map((key, index) => {
       return (
-        <li>
-          {key} : {courseNumberList[key]}
+        <li key={index}>
+          {key} : {courseNumberList[key].total}{' '}
+          {courseNumberList[key].list.map(cat => {
+            return (
+              <p>
+                {cat.name}: {cat.total}
+              </p>
+            );
+          })}
         </li>
       );
     });

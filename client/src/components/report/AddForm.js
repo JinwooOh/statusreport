@@ -190,7 +190,6 @@ class AddForm extends React.Component {
             // }
             // max={new Date().toISOString().split('T')[0]}
           />
-
           <span className="requiredField">Task Type</span>
           <div className="select-custom">
             <select name="type" ref={this.categoryAdminRef}>
@@ -239,7 +238,7 @@ class AddForm extends React.Component {
           required
         />
 
-        <span>Course Type</span>
+        <span className="requiredField">Course Type</span>
         <div className="select-custom">
           <select name="type" ref={this.courseTypeRef}>
             <option value="New Course">New Course</option>
@@ -284,7 +283,7 @@ class AddForm extends React.Component {
           placeholder="Instructor name"
         />
 
-        <span>Task Type</span>
+        <span className="requiredField">Task Type</span>
         <div className="select-custom">
           <select name="type" ref={this.categoryRef}>
             <option value="Content Development">Content Development</option>
