@@ -8,16 +8,17 @@ class SearchResult extends React.Component {
     const courseData = this.props.searchCourse;
     const adminData = this.props.searchAdmin;
     const programData = this.props.searchProgram;
-    // User table
+    // User table for user search
     const courseColumns = [
       { Header: 'Name', accessor: 'userID' },
-      { Header: 'Report date', accessor: 'subDate' },
-      { Header: 'Completion date', accessor: 'completionDate' },
-      { Header: 'Course task', accessor: 'courseTask' },
       { Header: 'Program', accessor: 'courseProgram' },
       { Header: 'Course number', accessor: 'courseNumber' },
+      { Header: 'Course task', accessor: 'courseTask' },
+      { Header: 'Semester', accessor: 'semester' },
       { Header: 'Instructor', accessor: 'courseInst' },
       { Header: 'Course category', accessor: 'courseCat' },
+      { Header: 'Report date', accessor: 'subDate' },
+      { Header: 'Completion date', accessor: 'completionDate' },
       { Header: 'Hours', accessor: 'hours' },
     ];
     const adminColumns = [
@@ -28,13 +29,15 @@ class SearchResult extends React.Component {
       { Header: 'Hours', accessor: 'hours' },
     ];
 
-    // Course table
+    // Course table for course search
     const programColumns = [
       { Header: 'Program', accessor: 'courseProgram' },
       { Header: 'Course Number', accessor: 'courseNumber' },
-      { Header: 'Semester', accessor: 'semester' },
+      { Header: 'Course task', accessor: 'courseTask' },
       { Header: 'Name', accessor: 'userID' },
+      { Header: 'Semester', accessor: 'semester' },
       { Header: 'Instructor', accessor: 'courseInst' },
+      { Header: 'Course category', accessor: 'courseCat' },
       { Header: 'Report date', accessor: 'subDate' },
       { Header: 'Completion date', accessor: 'completionDate' },
       { Header: 'Hours', accessor: 'hours' },
