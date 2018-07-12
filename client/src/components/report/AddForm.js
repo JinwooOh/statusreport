@@ -191,7 +191,7 @@ class AddForm extends React.Component {
             // max={new Date().toISOString().split('T')[0]}
           />
 
-          <span>Task Type</span>
+          <span className="requiredField">Task Type</span>
           <div className="select-custom">
             <select name="type" ref={this.categoryAdminRef}>
               <option value="Leave">Leave</option>
