@@ -39,22 +39,20 @@ class SearchSummary extends React.Component {
 
     return Object.keys(courseNumberList).map((key, index) => {
       return (
-        <div>
-          <li key={index}>
-            <div className="searchSummary__courseNumber">
-              <span className="searchSummary__courseNumber--heading">
-                {key} : {courseNumberList[key].total}{' '}
-              </span>
-            </div>
-            {courseNumberList[key].list.map(cat => {
-              return (
-                <p className="searchSummary__courseCat">
-                  {cat.name}: {cat.total}
-                </p>
-              );
-            })}
-          </li>
-        </div>
+        <li key={index}>
+          <div className="searchSummary__courseNumber">
+            <span className="searchSummary__courseNumber--heading">
+              {key} : {courseNumberList[key].total}{' '}
+            </span>
+          </div>
+          {courseNumberList[key].list.map((cat, i) => {
+            return (
+              <p key={i} className="searchSummary__courseCat">
+                {cat.name}: {cat.total}
+              </p>
+            );
+          })}
+        </li>
       );
     });
   };
@@ -87,9 +85,9 @@ class SearchSummary extends React.Component {
             Course Total Hours: {this.props.totalHours.course}
           </span>
         </div>
-        {userCourse.list.map(cat => {
+        {userCourse.list.map((cat, i) => {
           return (
-            <li>
+            <li key={i}>
               <p className="searchSummary__courseCat">
                 {cat.name}: {cat.total}
               </p>
@@ -129,9 +127,9 @@ class SearchSummary extends React.Component {
             Administration Total Hours: {this.props.totalHours.admin}
           </span>
         </div>
-        {userAdmin.list.map(cat => {
+        {userAdmin.list.map((cat, i) => {
           return (
-            <li>
+            <li key={i}>
               <p className="searchSummary__courseCat">
                 {cat.name}: {cat.total}
               </p>
@@ -217,31 +215,27 @@ class SearchSummary extends React.Component {
         <div className="message">
           <div className="message__text">
             <h3 className="message__text--title">
-              <span className="message__text--title-span">Total hours</span>
+              <span className="message__text--title-span">Total Hours</span>
             </h3>
 
             <div className="message__text--summary">
               <ul>
                 {this.props.searchType === 'user' ? (
                   <Fragment>
-                    <li>
-                      {this.props.totalHours.course === 0 ? '' : this.renderUserCourseTotal()}
-                    </li>
+                    {this.props.totalHours.course === 0 ? '' : this.renderUserCourseTotal()}
 
-                    <li>{this.props.totalHours.admin === 0 ? '' : this.renderUserAdminTotal()}</li>
+                    {this.props.totalHours.admin === 0 ? '' : this.renderUserAdminTotal()}
                   </Fragment>
                 ) : (
                   <Fragment>
-                    <li>
-                      {this.props.totalHours.program === 0 ? (
-                        ''
-                      ) : (
-                        <div>
-                          Course Total Hours: {this.props.totalHours.program}
-                          {this.renderCourseTotal()}
-                        </div>
-                      )}
-                    </li>
+                    {this.props.totalHours.program === 0 ? (
+                      ''
+                    ) : (
+                      <div>
+                        Course Total Hours: {this.props.totalHours.program}
+                        {this.renderCourseTotal()}
+                      </div>
+                    )}
                   </Fragment>
                 )}
               </ul>
@@ -270,5 +264,7 @@ SearchSummary.propTypes = {
     program: PropTypes.number,
   }).isRequired,
   summaryInfo: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+  searchCourse: PropTypes.array.isRequired,
+  searchAdmin: PropTypes.array.isRequired,
   searchProgram: PropTypes.array.isRequired,
 };
