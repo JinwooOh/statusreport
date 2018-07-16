@@ -118,8 +118,7 @@ class AddForm extends React.Component {
     if (this.state.courseNumberValue === '') {
       const errorSubmitPopup = AlertPopup.register({
         title: 'Failed to add a task',
-        content:
-          'Check required fields of the form: Date, Course Number and Hours for This Task should be filled.',
+        content: 'Check the required fields of the form. Required field has red *.',
         buttons: {
           right: ['ok'],
         },

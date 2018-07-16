@@ -224,6 +224,8 @@ class Report extends Component {
           totalHours={this.state.totalHours}
           summaryInfo={this.state.summaryInfo}
           searchProgram={this.state.searchProgram}
+          searchCourse={this.state.searchCourse}
+          searchAdmin={this.state.searchAdmin}
         />
       </div>
     );

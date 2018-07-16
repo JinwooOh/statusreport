@@ -193,6 +193,18 @@ select {
 .summary__list:hover {
   color: #a40a3c; }
 
+.searchSummary__courseNumber--heading {
+  padding: 0.3rem 1.5rem;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  border-radius: 0.3rem;
+  background-image: linear-gradient(to right bottom, rgba(57, 84, 98, 0.35), rgba(248, 250, 255, 0.35)); }
+
+.searchSummary__courseCat {
+  display: inline-block;
+  margin: 0 auto;
+  padding: 0 0.6rem; }
+
 /* form setting */
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 30px white inset;

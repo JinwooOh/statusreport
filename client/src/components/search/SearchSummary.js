@@ -36,22 +36,110 @@ class SearchSummary extends React.Component {
         }
       }
     });
-    console.log(courseNumberList);
 
     return Object.keys(courseNumberList).map((key, index) => {
       return (
-        <li key={index}>
-          {key} : {courseNumberList[key].total}{' '}
-          {courseNumberList[key].list.map(cat => {
-            return (
-              <p>
-                {cat.name}: {cat.total}
-              </p>
-            );
-          })}
-        </li>
+        <div>
+          <li key={index}>
+            <div className="searchSummary__courseNumber">
+              <span className="searchSummary__courseNumber--heading">
+                {key} : {courseNumberList[key].total}{' '}
+              </span>
+            </div>
+            {courseNumberList[key].list.map(cat => {
+              return (
+                <p className="searchSummary__courseCat">
+                  {cat.name}: {cat.total}
+                </p>
+              );
+            })}
+          </li>
+        </div>
       );
     });
+  };
+
+  renderUserCourseTotal = () => {
+    const userCourse = {
+      list: [
+        { name: 'Faculty Consultation', total: 0 },
+        { name: 'Content Development', total: 0 },
+        { name: 'CMS Layout', total: 0 },
+        { name: 'ISD Time', total: 0 },
+        { name: 'Media Production', total: 0 },
+        { name: 'Quality Control', total: 0 },
+      ],
+    };
+    this.props.searchCourse.forEach(task => {
+      for (const property of userCourse.list) {
+        if (property.name === task.courseCat) {
+          // total hours for each course category
+          const result = userCourse.list.find(cat => cat.name === task.courseCat);
+          result.total += task.hours;
+        }
+      }
+    });
+
+    return (
+      <div>
+        <div className="searchSummary__courseNumber">
+          <span className="searchSummary__courseNumber--heading">
+            Course Total Hours: {this.props.totalHours.course}
+          </span>
+        </div>
+        {userCourse.list.map(cat => {
+          return (
+            <li>
+              <p className="searchSummary__courseCat">
+                {cat.name}: {cat.total}
+              </p>
+            </li>
+          );
+        })}
+      </div>
+    );
+  };
+  renderUserAdminTotal = () => {
+    const userAdmin = {
+      list: [
+        { name: 'Leave', total: 0 },
+        { name: 'Meeting', total: 0 },
+        { name: 'Professional Development', total: 0 },
+        { name: 'Project Management', total: 0 },
+        { name: 'Purchasing', total: 0 },
+        { name: 'Reporting', total: 0 },
+        { name: 'Students', total: 0 },
+        { name: 'Support', total: 0 },
+        { name: 'Special Projects', total: 0 },
+      ],
+    };
+    this.props.searchAdmin.forEach(task => {
+      for (const property of userAdmin.list) {
+        if (property.name === task.adminCat) {
+          // total hours for each course category
+          const result = userAdmin.list.find(cat => cat.name === task.adminCat);
+          result.total += task.hours;
+        }
+      }
+    });
+    return (
+      <div>
+        <div className="searchSummary__courseNumber">
+          <span className="searchSummary__courseNumber--heading">
+            Administration Total Hours: {this.props.totalHours.admin}
+          </span>
+        </div>
+        {userAdmin.list.map(cat => {
+          return (
+            <li>
+              <p className="searchSummary__courseCat">
+                {cat.name}: {cat.total}
+              </p>
+            </li>
+          );
+        })}
+      </div>
+    );
   };
 
   // Replace date format for yyyy-mm-dd to mm/dd/yyyy
@@ -136,13 +224,24 @@ class SearchSummary extends React.Component {
               <ul>
                 {this.props.searchType === 'user' ? (
                   <Fragment>
-                    <li>Course Total Hours: {this.props.totalHours.course} </li>
-                    <li>Administration Total Hours: {this.props.totalHours.admin}</li>
+                    <li>
+                      {this.props.totalHours.course === 0 ? '' : this.renderUserCourseTotal()}
+                    </li>
+
+                    <li>{this.props.totalHours.admin === 0 ? '' : this.renderUserAdminTotal()}</li>
                   </Fragment>
                 ) : (
                   <Fragment>
-                    {this.renderCourseTotal()}
-                    <li>Course Total Hours: {this.props.totalHours.program} </li>
+                    <li>
+                      {this.props.totalHours.program === 0 ? (
+                        ''
+                      ) : (
+                        <div>
+                          Course Total Hours: {this.props.totalHours.program}
+                          {this.renderCourseTotal()}
+                        </div>
+                      )}
+                    </li>
                   </Fragment>
                 )}
               </ul>
