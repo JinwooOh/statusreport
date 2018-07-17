@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Dialog from 'material-ui/Dialog';
 
 class EditName extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      open: false,
+      curName: {},
       nameList: [], // for naming guide
+      program: '', // updated name by user
+      course: '', // updated name by user
     };
   }
-
   componentDidMount() {
     fetch('/name')
       .then(response => response.json())
@@ -19,9 +24,70 @@ class EditName extends React.Component {
       })
       .catch(err => console.log(err));
   }
+  programRef = React.createRef();
+  courseRef = React.createRef();
+
+  handleOpen = p => {
+    this.setState({ open: true, curName: p });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+  createNewName = event => {
+    event.preventDefault();
+    this.setState({
+      program: this.programRef.current.value,
+      course: this.courseRef.current.value,
+    });
+    event.currentTarget.reset();
+  };
+  // inside of the dialog popup
+  handleEdit = () => {
+    return (
+      <div className="message">
+        <h2 className="message__heading">Current name</h2>
+        <p>Program: {this.state.curName.program}</p>
+        <p>Courses: {this.state.curName.course}</p>
+
+        <h2 className="message__heading">Edit name</h2>
+
+        <form className="task-edit" onSubmit={this.createNewName}>
+          <span>Program</span>
+          <input name="Program" ref={this.programRef} type="text" placeholder="Program name" />
+
+          <span>Course</span>
+          <input name="Course" ref={this.courseRef} type="text" placeholder="Course name" />
+          <div className="center">
+            <button className="btn btn__summary" type="submit">
+              Change Name
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+  };
+
   render() {
+    const actions = [
+      <button className="btn btn__guide btn__guide--inPopup" onClick={this.handleClose}>
+        OK
+      </button>,
+    ];
     return (
       <div className="wrapper">
+        <MuiThemeProvider>
+          <Dialog
+            title="Edit the Name"
+            autoScrollBodyContent
+            actions={actions}
+            modal={false}
+            open={this.state.open}
+            onRequestClose={this.handleClose}
+          >
+            {this.handleEdit()}
+          </Dialog>
+        </MuiThemeProvider>
         <h1 className="App-title">Edit Naming Guide </h1>
         <div className="guide">
           <button
@@ -45,12 +111,14 @@ class EditName extends React.Component {
                   {this.state.nameList.map((p, i) => {
                     return (
                       <li key={i} style={{ wordSpacing: '3px' }}>
-                        {p.program}: {p.course} <button className="btn btn__remove">Edit</button>
+                        {p.program}: {p.course}{' '}
+                        <button className="btn btn__remove" onClick={() => this.handleOpen(p)}>
+                          Edit
+                        </button>
                       </li>
                     );
                   })}
                 </ul>
-
                 <div className="center">
                   <button className="btn btn__summary">Add New Course</button>
                 </div>
@@ -62,7 +130,6 @@ class EditName extends React.Component {
     );
   }
 }
-
 export default EditName;
 EditName.propTypes = {
   history: PropTypes.object.isRequired,

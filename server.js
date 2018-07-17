@@ -335,6 +335,10 @@ app.post('/submit', (req, res) => {
   console.log(values);
 });
 
+app.put('/editname', (req, res)=>{
+  console.log(req);
+});
+
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
