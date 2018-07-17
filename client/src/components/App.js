@@ -5,6 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Forms from './report/Forms';
 import Tasks from './report/Tasks';
+
 import { dateNow } from './helper/Helper';
 import { coursehelp, adminhelp, naminghelp } from './helper/Message';
 
@@ -19,7 +20,7 @@ class App extends React.Component {
       taskType: 'course', // or"admin"
       date: {}, // to track submit date and time
       userName: '',
-      nameList: [],
+      nameList: [], // for naming guide
     };
   }
 
@@ -94,7 +95,7 @@ class App extends React.Component {
       })
       .catch(error => console.error('fetch error at users ', error)); // error
 
-    // check if the database has courseinformation that a use typed
+    // check if the database has courseinformation that a user typed
     Object.keys(this.state.tasks).forEach(key => {
       if (this.state.tasks[key].taskType === 'Course Task') {
         const inputCourseName = this.state.tasks[key].program;

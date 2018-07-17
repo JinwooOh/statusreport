@@ -257,6 +257,7 @@ app.post('/addUser', (req, res) => {
 });
 
 // add new courseinfo to the database
+// used in App.js
 app.post('/addCourseinfo', (req, res) => {
   const program = req.body.program.toString().toUpperCase();
   const courseNumber = req.body.courseNumber.toString().toUpperCase();

@@ -340,22 +340,7 @@ export function naminghelp(nameList) {
   return (
     <div className="message">
       <h2 className="message__heading">Naming Guide</h2>
-
       <div className="message__text">
-        {/* <h3 className="message__text--title">
-          <span className="message__text--title-span">Program Name List</span>
-        </h3>
-        <div className="message__text--body">
-          <ul>
-            <li style={{ wordSpacing: '5px' }}>
-              {nameList.map((p, i) => {
-                const result = json.name.length === i + 1 ? `${p.program} ` : `${p.program}, `;
-                return result;
-              })}
-            </li>
-          </ul>
-        </div> */}
-
         <h3 className="message__text--title">
           <span className="message__text--title-span">Program / Course Number List</span>
         </h3>
