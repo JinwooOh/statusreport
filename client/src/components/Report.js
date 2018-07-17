@@ -102,7 +102,6 @@ class Report extends Component {
             // calculate total hours for course task
             totalHoursCourse += course.hours;
           });
-
           // setState both searchCourse and totalHours
           this.setState({
             searchCourse: json,
@@ -114,7 +113,6 @@ class Report extends Component {
         .then(res => res.json())
         .then(json => {
           // console.info('Admin result:', json);
-
           let totalHoursAdmin = 0;
           json.forEach(course => {
             // date formatting
@@ -129,7 +127,8 @@ class Report extends Component {
 
           this.setState({
             searchAdmin: json,
-            totalHours: { ...this.state.totalHours, admin: totalHoursAdmin },
+            searchProgram: [],
+            totalHours: { ...this.state.totalHours, admin: totalHoursAdmin, program: 0 },
           });
         })
         .catch(error => console.error('fetch error at search', error)); // error
@@ -154,9 +153,17 @@ class Report extends Component {
             // calculate total hours for course task
             totalHoursProgram += course.hours;
           });
+          // make sure to reset previous result of user search
           this.setState({
             searchProgram: json,
-            totalHours: { ...this.state.totalHours, program: totalHoursProgram },
+            searchAdmin: [],
+            searchCourse: [],
+            totalHours: {
+              ...this.state.totalHours,
+              program: totalHoursProgram,
+              course: 0,
+              admin: 0,
+            },
           });
         })
         .catch(error => console.error('fetch error at search', error)); // error
