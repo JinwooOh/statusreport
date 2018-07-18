@@ -95,12 +95,15 @@ class App extends React.Component {
       })
       .catch(error => console.error('fetch error at users ', error)); // error
 
+    let hasCourseDb = true;
+
     // check if the database has courseinformation that a user typed
+    // If yes, add new course to courseinfo table
     Object.keys(this.state.tasks).forEach(key => {
       if (this.state.tasks[key].taskType === 'Course Task') {
-        const inputCourseName = this.state.tasks[key].program;
         const inputCourseNumber = this.state.tasks[key].courseNumber;
-        const inputSemester = this.state.tasks[key].semester;
+        // const inputCourseName = this.state.tasks[key].program;
+        // const inputSemester = this.state.tasks[key].semester;
         fetch('/courseinfo')
           .then(res => res.json())
           .then(courses => {
@@ -108,27 +111,32 @@ class App extends React.Component {
             // const matchName = courses.find(course => course.courseName === inputCourseName);
             const matchNumber = courses.find(course => course.courseNumber === inputCourseNumber);
             if (matchNumber === undefined) {
-              const newCourse = {
-                program: inputCourseName,
-                courseNumber: inputCourseNumber,
-                semesterTerm: inputSemester, // can be empty
-              };
-              fetch('/addCourseinfo', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newCourse),
-              })
-                .then(body => {
-                  console.log('State: ', body); // error
-                })
-                .catch(error => console.error('fetch error at users ', error)); // error
+              hasCourseDb = false;
+              // const newCourse = {
+              //   program: inputCourseName,
+              //   courseNumber: inputCourseNumber,
+              //   semesterTerm: inputSemester, // can be empty
+              // };
+              // fetch('/addCourseinfo', {
+              //   method: 'POST',
+              //   headers: {
+              //     'Content-Type': 'application/json',
+              //   },
+              //   body: JSON.stringify(newCourse),
+              // })
+              //   .then(body => {
+              //     console.log('State: ', body); // error
+              //   })
+              //   .catch(error => console.error('fetch error at users ', error)); // error
             }
           })
           .catch(error => console.error('fetch error at users ', error)); // error
       }
     });
+    if (!hasCourseDb) {
+      console.log('fail to submit');
+      return;
+    }
     // submit the tasks
     fetch('/submit', {
       method: 'POST',
@@ -223,6 +231,7 @@ class App extends React.Component {
           sumHours={this.sumHours}
           taskType={this.state.taskType}
           selectTask={this.selectTask}
+          nameList={this.state.nameList}
         />
 
         <Tasks

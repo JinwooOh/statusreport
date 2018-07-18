@@ -14,6 +14,7 @@ class Forms extends Component {
           addTask={this.props.addTask}
           sumHours={this.props.sumHours}
           taskType={this.props.taskType}
+          nameList={this.props.nameList}
         />
       </div>
     );
@@ -26,4 +27,5 @@ Forms.propTypes = {
   addTask: PropTypes.func.isRequired,
   selectTask: PropTypes.func.isRequired,
   taskType: PropTypes.string.isRequired,
+  nameList: PropTypes.array.isRequired,
 };

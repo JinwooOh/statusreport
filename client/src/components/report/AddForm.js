@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Autosuggest from 'react-autosuggest';
 import AlertPopup from 'react-popup';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Popup from '../Popup';
+import { naminghelp } from '../helper/Message';
 
 let courseData = [];
 // Autosuggestion helpers start
@@ -39,6 +42,8 @@ class AddForm extends React.Component {
       programSuggestions: [],
       courseNumberValue: '',
       courseNumberSuggestions: [],
+      noSuggestionsP: false,
+      noSuggestionsC: false,
     };
   }
   componentDidMount() {
@@ -65,8 +70,12 @@ class AddForm extends React.Component {
   };
 
   onprogramSuggestionsFetchRequested = ({ value }) => {
+    const suggestions = getSuggestions(value);
+    const isInputBlank = value.trim() === '';
+    const noSuggestionsP = !isInputBlank && suggestions.length === 0;
     this.setState({
       programSuggestions: getSuggestions(value),
+      noSuggestionsP,
     });
   };
 
@@ -83,8 +92,12 @@ class AddForm extends React.Component {
   };
 
   onCourseNumberSuggestionsFetchRequested = ({ value }) => {
+    const suggestions = getSuggestions(value);
+    const isInputBlank = value.trim() === '';
+    const noSuggestionsC = !isInputBlank && suggestions.length === 0;
     this.setState({
       courseNumberSuggestions: getSuggestions(value),
+      noSuggestionsC,
     });
   };
 
@@ -115,6 +128,38 @@ class AddForm extends React.Component {
 
   createTask = event => {
     event.preventDefault();
+    const that = this;
+    if (this.state.noSuggestionsC || this.state.noSuggestionsP) {
+      AlertPopup.registerPlugin('prompt', function() {
+        this.create({
+          title: 'Failed to add a task',
+          content: (
+            <div className="errorPop">
+              <p>
+                To add task, please select valid program name or course number from naming guide. If
+                you want to add new course or program that is not in the database, contact
+                <a href="mailto:eipdstatusreporting@lists.wisc.edu">
+                  {' '}
+                  eipdstatusreporting@lists.wisc.edu.
+                </a>
+              </p>
+              <div className="errorPop--namingguide">
+                <MuiThemeProvider>
+                  <Popup title="Naming Guide" text={naminghelp(that.props.nameList)} />
+                </MuiThemeProvider>
+              </div>
+            </div>
+          ),
+          buttons: {
+            right: ['ok'],
+          },
+        });
+      });
+      AlertPopup.plugins().prompt('', 'Type your name', value => {
+        AlertPopup.alert(`You typed: ${value}`);
+      });
+      return;
+    }
     if (this.state.courseNumberValue === '') {
       const errorSubmitPopup = AlertPopup.register({
         title: 'Failed to add a task',
@@ -162,6 +207,8 @@ class AddForm extends React.Component {
       programSuggestions,
       courseNumberValue,
       courseNumberSuggestions,
+      noSuggestionsP,
+      noSuggestionsC,
     } = this.state;
     const programInputProps = {
       placeholder: 'Program name',
@@ -257,7 +304,12 @@ class AddForm extends React.Component {
           renderSuggestion={renderSuggestion}
           inputProps={programInputProps}
         />
-        {/* <input name="program" ref={this.programRef} type="text" placeholder="Program name" /> */}
+
+        {noSuggestionsP && (
+          <div>
+            <p className="no-suggestion--form">The program name is not in the database</p>
+          </div>
+        )}
 
         <span className="requiredField">Course Number</span>
         <Autosuggest
@@ -270,6 +322,9 @@ class AddForm extends React.Component {
           renderSuggestion={renderSuggestion}
           inputProps={courseNumberInputProps}
         />
+        {noSuggestionsC && (
+          <p className="no-suggestion--form">The course name is not in the database</p>
+        )}
 
         <span>Semester</span>
         <input name="semester" ref={this.semesterRef} type="text" placeholder="e.g. Spring 2018" />

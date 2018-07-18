@@ -336,7 +336,16 @@ app.post('/submit', (req, res) => {
 });
 
 app.put('/editname', (req, res)=>{
-  console.log(req);
+  // connection.query('SELECT DISTINCT program, courseNumber FROM courseinfo', (err, result, fields) => {
+  //   if (err) {
+  //     console.log('Error in courseinfo query');
+  //   } else {
+  //     console.log('courseinfo query success');
+  //     res.json(result);
+  //   }
+  // });
+  console.log('updating-', req.body);
+  res.sendStatus(200);
 });
 
 

@@ -27,8 +27,7 @@
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/css -o src/css",
-    "watch-css":
-      "npm run build-css && node-sass-chokidar src/css -o src/css --watch --recursive",
+    "watch-css": "npm run build-css && node-sass-chokidar src/css -o src/css --watch --recursive",
     "devserver": "react-scripts start",
     "dev": "npm-run-all --parallel watch-css devserver",
     "server": "nodemon /src/server.js",

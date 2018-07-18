@@ -115,9 +115,26 @@ select {
 .no-suggestion {
   display: flex;
   justify-content: center;
+  line-height: 1.6rem;
   font-size: 1.6rem;
   font-weight: 700;
   color: #a40a3c; }
+  @media only screen and (max-width: 56.25em) {
+    .no-suggestion {
+      padding: 0.8rem; } }
+  .no-suggestion--form {
+    display: flex;
+    justify-content: center;
+    line-height: 1.6rem;
+    margin-left: 4rem;
+    padding-bottom: 1.8rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #a40a3c; }
+    @media only screen and (max-width: 56.25em) {
+      .no-suggestion--form {
+        padding: 0.8rem;
+        margin-left: 0rem; } }
 
 .text-totalHours {
   display: inline-block;
@@ -417,6 +434,10 @@ input:focus {
     width: 100%;
     margin: 0 auto; } }
 
+.errorPop--namingguide {
+  margin-top: 2rem;
+  text-align: center; }
+
 /* Popup component styling*/
 .mm-popup {
   display: none; }
@@ -499,7 +520,6 @@ input:focus {
 
 .mm-popup__box {
   width: 34rem;
-  text-align: center;
   position: fixed;
   top: 23%;
   left: 50%;
@@ -519,12 +539,11 @@ input:focus {
 .mm-popup__box__header__title {
   margin: 0;
   font-size: 1.8rem;
-  text-align: center;
   font-weight: 600; }
 
 .mm-popup__box__body {
   padding: 1.2rem;
-  line-height: 1.4;
+  line-height: 1.6;
   font-size: 1.6rem;
   color: #454b4d;
   background: #fff;
@@ -537,13 +556,30 @@ input:focus {
 
 .mm-popup__box__footer {
   overflow: hidden;
-  padding: 4rem 2rem 2rem; }
-
-.mm-popup__box__footer__right-space {
-  float: right; }
+  padding: 1rem 2rem 2rem; }
 
 .mm-popup__box__footer__right-space .mm-popup__btn {
-  margin-left: 0.5rem; }
+  display: block;
+  margin: 0 auto;
+  padding: 0 3rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  outline: 0;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 0.1rem solid #a40a3c;
+  border-radius: 1.2rem;
+  transition: all 0.2s;
+  background-color: #a40a3c;
+  color: #fbfbfb; }
+  .mm-popup__box__footer__right-space .mm-popup__btn:hover {
+    background-color: #395462;
+    transform: translateY(-0.3rem);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+    border: 0.1rem solid #395462; }
+    .mm-popup__box__footer__right-space .mm-popup__btn:hover::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0; }
 
 .mm-popup__box__footer__left-space {
   float: left; }

@@ -36,10 +36,27 @@ class EditName extends React.Component {
   };
   createNewName = event => {
     event.preventDefault();
+    // it might not need to update state
     this.setState({
       program: this.programRef.current.value,
       course: this.courseRef.current.value,
     });
+    const data = {
+      program: this.programRef.current.value,
+      course: this.courseRef.current.value,
+      curName: this.state.curName,
+    };
+    fetch('/editname', {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(() => {
+      console.log('updated'); // error
+    });
+
     event.currentTarget.reset();
   };
   // inside of the dialog popup
