@@ -335,16 +335,17 @@ app.post('/submit', (req, res) => {
   console.log(values);
 });
 
-app.put('/editname', (req, res)=>{
-  // connection.query('SELECT DISTINCT program, courseNumber FROM courseinfo', (err, result, fields) => {
-  //   if (err) {
-  //     console.log('Error in courseinfo query');
-  //   } else {
-  //     console.log('courseinfo query success');
-  //     res.json(result);
-  //   }
-  // });
-  console.log('updating-', req.body);
+// naming guide edit
+app.put('/editname/:nameId', (req, res)=>{
+  const nameId = req.params.nameId;
+  const newName = {program: req.body.program, course: req.body.course};
+
+  connection.query('UPDATE coursenaming SET ? WHERE id = ?', [{ program: req.body.program, course: req.body.course }, nameId], (err, result) => {
+    if (err) throw err;
+    console.log('new program name: ', req.body.program, " new course name: ", req.body.course, "are updated.");
+  });
+
+
   res.sendStatus(200);
 });
 

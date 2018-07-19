@@ -34,6 +34,7 @@ class EditName extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
   createNewName = event => {
     event.preventDefault();
     // it might not need to update state
@@ -46,7 +47,10 @@ class EditName extends React.Component {
       course: this.courseRef.current.value,
       curName: this.state.curName,
     };
-    fetch('/editname', {
+    // updating new name
+    const nameId = this.state.curName.id;
+    const urlName = `/editname/${nameId}`;
+    fetch(urlName, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
@@ -56,9 +60,18 @@ class EditName extends React.Component {
     }).then(() => {
       console.log('updated'); // error
     });
-
+    // refetch to rerender updated nameList
+    fetch('/name')
+      .then(response => response.json())
+      .then(findresponse => {
+        this.setState({
+          nameList: [...findresponse],
+        });
+      })
+      .catch(err => console.log(err));
     event.currentTarget.reset();
   };
+
   // inside of the dialog popup
   handleEdit = () => {
     return (
@@ -132,6 +145,7 @@ class EditName extends React.Component {
                         <button className="btn btn__remove" onClick={() => this.handleOpen(p)}>
                           Edit
                         </button>
+                        <button className="btn btn__remove">remove</button>
                       </li>
                     );
                   })}
