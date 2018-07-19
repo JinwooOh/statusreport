@@ -335,7 +335,7 @@ app.post('/submit', (req, res) => {
   console.log(values);
 });
 
-// naming guide edit
+// naming guide edit start ...
 app.put('/editname/:nameId', (req, res)=>{
   const nameId = req.params.nameId;
   const newName = {program: req.body.program, course: req.body.course};
@@ -345,12 +345,27 @@ app.put('/editname/:nameId', (req, res)=>{
   });
   res.sendStatus(200);
 });
-
 app.post('/newname', (req, res)=>{
-  const newName = {program: req.body.program, course: req.body.course};
-  console.log(newName);
+  const sql = 'INSERT INTO `coursenaming` (program, course) VALUES (?)';
+  const values = [req.body.program, req.body.course]
+
+  connection.query(sql, [values], (err, result) => {
+    if (err) throw err;
+    console.log(`new coursename is added: ${result.affectedRows}`);
+    console.log(req.body.program, ' and ', req.body.course);
+  });
+
   res.sendStatus(200);
 });
+app.delete('/deletename/:nameId', (req, res)=>{
+  console.log(req.params.nameId);
+  connection.query('DELETE FROM coursenaming WHERE id= ?', [req.params.nameId], function(err, result) {
+    if (err) throw err;
+    console.log("deleted.");
+  });
+  res.sendStatus(200);
+});
+// naming guide edit end...
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));

@@ -11,6 +11,7 @@ class EditName extends React.Component {
       curName: {},
       nameList: [], // for naming guide
       type: '',
+      success: false,
     };
   }
   componentDidMount() {
@@ -27,7 +28,7 @@ class EditName extends React.Component {
   courseRef = React.createRef();
 
   handleOpen = (p, type) => {
-    this.setState({ open: true, curName: p, type });
+    this.setState({ open: true, curName: p, type, success: false });
   };
 
   handleClose = () => {
@@ -66,7 +67,37 @@ class EditName extends React.Component {
         });
       })
       .catch(err => console.log(err));
-    event.currentTarget.reset();
+
+    this.setState({
+      success: true,
+    });
+  };
+  handleDeleteName = () => {
+    const data = this.state.curName;
+    const nameId = this.state.curName.id;
+    const urlName = `/deletename/${nameId}`;
+    fetch(urlName, {
+      method: 'delete',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(() => {
+      console.log('deleted');
+    });
+    // refetch to rerender updated nameList
+    fetch('/name')
+      .then(response => response.json())
+      .then(findresponse => {
+        this.setState({
+          nameList: [...findresponse],
+        });
+      })
+      .catch(err => console.log(err));
+    this.setState({
+      success: true,
+    });
   };
 
   handleAddNewName = event => {
@@ -85,7 +116,6 @@ class EditName extends React.Component {
     }).then(body => {
       console.log('State: ', body); // error
     });
-
     // refetch to rerender updated nameList
     fetch('/name')
       .then(response => response.json())
@@ -95,15 +125,17 @@ class EditName extends React.Component {
         });
       })
       .catch(err => console.log(err));
-    event.currentTarget.reset();
 
-    event.currentTarget.reset();
+    this.setState({
+      success: true,
+    });
   };
 
   // inside of the dialog popup
   handleEdit = () => {
     if (this.state.type.type === 'edit') {
       return (
+        // edit course form
         <div className="message">
           <h2 className="message__heading">Current name</h2>
           <p>Program: {this.state.curName.program}</p>
@@ -121,11 +153,30 @@ class EditName extends React.Component {
               <button className="btn btn__summary" type="submit">
                 Change Name
               </button>
+              {this.state.success ? <p>Success!</p> : ''}
             </div>
           </form>
         </div>
       );
+    } else if (this.state.type.type === 'delete') {
+      return (
+        <div className="message">
+          <h2 className="message__heading">Current name</h2>
+          <p>Program: {this.state.curName.program}</p>
+          <p>Courses: {this.state.curName.course}</p>
+          <h2>Are You Sure you want to remove this name from naming guide?</h2>
+
+          <button className="btn btn__summary" onClick={() => this.handleDeleteName()}>
+            Delete Name
+          </button>
+          {this.state.success ? <p>Success!</p> : ''}
+          <button className="btn btn__summary" onClick={() => this.handleClose()}>
+            Cancle
+          </button>
+        </div>
+      );
     }
+    // add new course form
     return (
       <div className="message">
         <h2 className="message__heading">New Name</h2>
@@ -140,6 +191,7 @@ class EditName extends React.Component {
             <button className="btn btn__summary" type="submit">
               Add New Course
             </button>
+            {this.state.success ? <p>Success!</p> : ''}
           </div>
         </form>
       </div>
@@ -148,8 +200,8 @@ class EditName extends React.Component {
 
   render() {
     const actions = [
-      <button className="btn btn__guide btn__guide--inPopup" onClick={this.handleClose}>
-        OK
+      <button className="btn btn__summary" onClick={this.handleClose}>
+        Close
       </button>,
     ];
     return (
@@ -196,7 +248,12 @@ class EditName extends React.Component {
                         >
                           Edit
                         </button>
-                        <button className="btn btn__remove">remove</button>
+                        <button
+                          className="btn btn__remove"
+                          onClick={() => this.handleOpen(p, { type: 'delete' })}
+                        >
+                          remove
+                        </button>
                       </li>
                     );
                   })}
