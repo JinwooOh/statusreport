@@ -339,16 +339,18 @@ app.post('/submit', (req, res) => {
 app.put('/editname/:nameId', (req, res)=>{
   const nameId = req.params.nameId;
   const newName = {program: req.body.program, course: req.body.course};
-
   connection.query('UPDATE coursenaming SET ? WHERE id = ?', [{ program: req.body.program, course: req.body.course }, nameId], (err, result) => {
     if (err) throw err;
     console.log('new program name: ', req.body.program, " new course name: ", req.body.course, "are updated.");
   });
-
-
   res.sendStatus(200);
 });
 
+app.post('/newname', (req, res)=>{
+  const newName = {program: req.body.program, course: req.body.course};
+  console.log(newName);
+  res.sendStatus(200);
+});
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));

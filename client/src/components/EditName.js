@@ -10,8 +10,7 @@ class EditName extends React.Component {
       open: false,
       curName: {},
       nameList: [], // for naming guide
-      program: '', // updated name by user
-      course: '', // updated name by user
+      type: '',
     };
   }
   componentDidMount() {
@@ -27,21 +26,18 @@ class EditName extends React.Component {
   programRef = React.createRef();
   courseRef = React.createRef();
 
-  handleOpen = p => {
-    this.setState({ open: true, curName: p });
+  handleOpen = (p, type) => {
+    this.setState({ open: true, curName: p, type });
   };
 
   handleClose = () => {
     this.setState({ open: false });
   };
 
-  createNewName = event => {
+  handleEditName = event => {
     event.preventDefault();
     // it might not need to update state
-    this.setState({
-      program: this.programRef.current.value,
-      course: this.courseRef.current.value,
-    });
+
     const data = {
       program: this.programRef.current.value,
       course: this.courseRef.current.value,
@@ -58,8 +54,9 @@ class EditName extends React.Component {
       },
       body: JSON.stringify(data),
     }).then(() => {
-      console.log('updated'); // error
+      console.log('updated');
     });
+
     // refetch to rerender updated nameList
     fetch('/name')
       .then(response => response.json())
@@ -72,17 +69,68 @@ class EditName extends React.Component {
     event.currentTarget.reset();
   };
 
+  handleAddNewName = event => {
+    event.preventDefault();
+    const data = {
+      program: this.programRef.current.value,
+      course: this.courseRef.current.value,
+    };
+
+    fetch('/newname', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(body => {
+      console.log('State: ', body); // error
+    });
+
+    // refetch to rerender updated nameList
+    fetch('/name')
+      .then(response => response.json())
+      .then(findresponse => {
+        this.setState({
+          nameList: [...findresponse],
+        });
+      })
+      .catch(err => console.log(err));
+    event.currentTarget.reset();
+
+    event.currentTarget.reset();
+  };
+
   // inside of the dialog popup
   handleEdit = () => {
+    if (this.state.type.type === 'edit') {
+      return (
+        <div className="message">
+          <h2 className="message__heading">Current name</h2>
+          <p>Program: {this.state.curName.program}</p>
+          <p>Courses: {this.state.curName.course}</p>
+
+          <h2 className="message__heading">New Name</h2>
+
+          <form className="task-edit" onSubmit={this.handleEditName}>
+            <span>Program</span>
+            <input name="Program" ref={this.programRef} type="text" placeholder="Program name" />
+
+            <span>Course</span>
+            <input name="Course" ref={this.courseRef} type="text" placeholder="Course name" />
+            <div className="center">
+              <button className="btn btn__summary" type="submit">
+                Change Name
+              </button>
+            </div>
+          </form>
+        </div>
+      );
+    }
     return (
       <div className="message">
-        <h2 className="message__heading">Current name</h2>
-        <p>Program: {this.state.curName.program}</p>
-        <p>Courses: {this.state.curName.course}</p>
+        <h2 className="message__heading">New Name</h2>
 
-        <h2 className="message__heading">Edit name</h2>
-
-        <form className="task-edit" onSubmit={this.createNewName}>
+        <form className="task-edit" onSubmit={this.handleAddNewName}>
           <span>Program</span>
           <input name="Program" ref={this.programRef} type="text" placeholder="Program name" />
 
@@ -90,7 +138,7 @@ class EditName extends React.Component {
           <input name="Course" ref={this.courseRef} type="text" placeholder="Course name" />
           <div className="center">
             <button className="btn btn__summary" type="submit">
-              Change Name
+              Add New Course
             </button>
           </div>
         </form>
@@ -142,7 +190,10 @@ class EditName extends React.Component {
                     return (
                       <li key={i} style={{ wordSpacing: '3px' }}>
                         {p.program}: {p.course}{' '}
-                        <button className="btn btn__remove" onClick={() => this.handleOpen(p)}>
+                        <button
+                          className="btn btn__remove"
+                          onClick={() => this.handleOpen(p, { type: 'edit' })}
+                        >
                           Edit
                         </button>
                         <button className="btn btn__remove">remove</button>
@@ -151,7 +202,12 @@ class EditName extends React.Component {
                   })}
                 </ul>
                 <div className="center">
-                  <button className="btn btn__summary">Add New Course</button>
+                  <button
+                    className="btn btn__summary"
+                    onClick={() => this.handleOpen({ program: '', course: '' }, { type: 'new' })}
+                  >
+                    Add New Course
+                  </button>
                 </div>
               </div>
             </div>
