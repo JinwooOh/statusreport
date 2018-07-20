@@ -362,6 +362,10 @@ input:focus {
       .btn__taskSelector:hover:not(:last-child) {
         border-right: 0.1rem solid #140107; }
 
+.popupbtn--container {
+  display: flex;
+  justify-content: center; }
+
 .message__heading {
   font-size: 2.8rem;
   font-weight: 300;
@@ -398,6 +402,16 @@ input:focus {
         border-bottom: 1px solid #a40a3c; }
   .message__text--summary {
     text-align: justify; }
+
+.message__warning {
+  margin-top: 2rem;
+  font-size: 2.2rem;
+  font-weight: 600; }
+  .message__warning--success {
+    display: flex;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: 600; }
 
 .notFound {
   display: block;
@@ -437,6 +451,20 @@ input:focus {
 .errorPop--namingguide {
   margin-top: 2rem;
   text-align: center; }
+
+.naming-edit {
+  margin: 0 auto;
+  line-height: 3rem; }
+  .naming-edit input {
+    padding: 0.5rem;
+    min-height: 2.5rem;
+    display: inline-block;
+    width: 95%;
+    outline: none; }
+    @media only screen and (max-width: 56.25em) {
+      .naming-edit input {
+        width: 95%;
+        margin: 0 auto; } }
 
 /* Popup component styling*/
 .mm-popup {

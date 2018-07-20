@@ -143,7 +143,7 @@ class EditName extends React.Component {
 
           <h2 className="message__heading">New Name</h2>
 
-          <form className="task-edit" onSubmit={this.handleEditName}>
+          <form className="naming-edit" onSubmit={this.handleEditName}>
             <span>Program</span>
             <input name="Program" ref={this.programRef} type="text" placeholder="Program name" />
 
@@ -153,7 +153,7 @@ class EditName extends React.Component {
               <button className="btn btn__summary" type="submit">
                 Change Name
               </button>
-              {this.state.success ? <p>Success!</p> : ''}
+              {this.state.success ? <p className="message__warning--success">Success!</p> : ''}
             </div>
           </form>
         </div>
@@ -164,15 +164,25 @@ class EditName extends React.Component {
           <h2 className="message__heading">Current name</h2>
           <p>Program: {this.state.curName.program}</p>
           <p>Courses: {this.state.curName.course}</p>
-          <h2>Are You Sure you want to remove this name from naming guide?</h2>
+          <p className="message__warning">
+            Are You Sure you want to remove this name from naming guide?
+          </p>
 
-          <button className="btn btn__summary" onClick={() => this.handleDeleteName()}>
-            Delete Name
-          </button>
-          {this.state.success ? <p>Success!</p> : ''}
-          <button className="btn btn__summary" onClick={() => this.handleClose()}>
-            Cancle
-          </button>
+          <div className="popupbtn--container">
+            <button
+              className="btn btn__summary popupbtn--delete"
+              onClick={() => this.handleDeleteName()}
+            >
+              Delete Name
+            </button>
+            <button
+              className="btn btn__summary popupbtn--cancle"
+              onClick={() => this.handleClose()}
+            >
+              Cancle
+            </button>
+          </div>
+          {this.state.success ? <p className="message__warning--success">Success!</p> : ''}
         </div>
       );
     }
@@ -181,7 +191,7 @@ class EditName extends React.Component {
       <div className="message">
         <h2 className="message__heading">New Name</h2>
 
-        <form className="task-edit" onSubmit={this.handleAddNewName}>
+        <form className="naming-edit" onSubmit={this.handleAddNewName}>
           <span>Program</span>
           <input name="Program" ref={this.programRef} type="text" placeholder="Program name" />
 
@@ -191,7 +201,7 @@ class EditName extends React.Component {
             <button className="btn btn__summary" type="submit">
               Add New Course
             </button>
-            {this.state.success ? <p>Success!</p> : ''}
+            {this.state.success ? <p className="message__warning--success">Success!</p> : ''}
           </div>
         </form>
       </div>
@@ -208,7 +218,7 @@ class EditName extends React.Component {
       <div className="wrapper">
         <MuiThemeProvider>
           <Dialog
-            title="Edit the Name"
+            title="Edit Naming Guide"
             autoScrollBodyContent
             actions={actions}
             modal={false}

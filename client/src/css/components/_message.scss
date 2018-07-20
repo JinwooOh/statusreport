@@ -30,7 +30,6 @@
         rgba($color-tertiary-light, 0.35)
       );
     }
-
     // body: popup
     // summary: searchSummary
     &--body,
@@ -52,6 +51,17 @@
     }
     &--summary {
       text-align: justify;
+    }
+  }
+  &__warning{
+    margin-top: 2rem;
+    font-size: 2.2rem;
+    font-weight: 600;
+    &--success{
+      display: flex;
+      justify-content: center;
+      font-size: 2.2rem;
+      font-weight: 600;
     }
   }
 }

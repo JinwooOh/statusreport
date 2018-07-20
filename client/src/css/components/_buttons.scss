@@ -1,7 +1,6 @@
 .btn {
   font-size: 1.4rem;
   font-weight: 500;
-
   &__report,
   &__summary,
   &__taskSelector,
@@ -107,4 +106,9 @@
       box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
     }
   }
+
+}
+.popupbtn--container{
+  display: flex;
+  justify-content: center;
 }
