@@ -7,7 +7,8 @@
   &__remove,
   &__search,
   &__notFound,
-  &__guide {
+  &__guide,
+  &__editname {
     position: relative;
     outline: 0;
     text-transform: uppercase;
@@ -44,6 +45,15 @@
     margin-left: auto;
     @include respond(tab-port) {
       display: block;
+    }
+  }
+  &__editname{
+    @include respond(tab-port) {
+      display: block;
+    }
+    @include respond(phone) {
+      width: 100%;
+      margin-bottom: 1rem;
     }
   }
   &__guide {
@@ -106,8 +116,9 @@
       box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
     }
   }
-
 }
+
+//editname popup
 .popupbtn--container{
   display: flex;
   justify-content: center;

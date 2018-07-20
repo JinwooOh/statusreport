@@ -212,6 +212,19 @@ class App extends React.Component {
           </MuiThemeProvider>
 
           <button
+            className="btn btn__editname"
+            onClick={() => {
+              if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                this.props.history.push('/editname/');
+              } else {
+                // production
+                this.props.history.push('/all-status-reports/editname/');
+              }
+            }}
+          >
+            Edit Name
+          </button>
+          <button
             className="btn btn__search"
             onClick={() => {
               if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
