@@ -2,17 +2,10 @@ const express = require('express');
 const mysql = require('mysql');
 const config = require('config');
 const helmet = require('helmet');
-//json server
-// const jsonServer = require('json-server')
-// const server = jsonServer.create()
-// const router = jsonServer.router('db.json')
-// const middlewares = jsonServer.defaults()
-// const jsonport = process.env.PORT || 5001;
-// server.use(middlewares)
-// server.use(router)
-// server.listen(jsonport, () => {
-//   console.log('JSON Server is running')
-// })
+
+const jwt = require('jsonwebtoken');
+const exjwt = require('express-jwt');
+const bodyParser = require('body-parser');
 
 // Database config
 const db_config = {
@@ -22,8 +15,8 @@ const db_config = {
   database: config.get('dbConfg.database'),
   port: config.get('dbConfg.port')
 };
-// disconnection: https://github.com/mysqljs/mysql#server-disconnects
 
+// disconnection: https://github.com/mysqljs/mysql#server-disconnects
 let connection;
 function handleDisconnect() {
   // Recreate the connection, since
@@ -63,6 +56,70 @@ const app = express();
 app.use(express.json()); // application / json
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-type,Authorization');
+  next();
+});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const jwtMW = exjwt({
+  secret: 'keyboard cat 4 ever'
+});
+
+let users = [
+  {
+      id: 1,
+      username: 'test',
+      password: 'asdf123'
+  },
+  {
+      id: 2,
+      username: 'test2',
+      password: 'asdf12345'
+  }
+];
+
+// LOGIN ROUTE
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  // Use your DB ORM logic here to find user and compare password
+  for (let user of users) { // I am using a simple array users which i made above
+      if (username == user.username && password == user.password /* Use your password hash checking logic here !*/) {
+          //If all credentials are correct do this
+          let token = jwt.sign({ id: user.id, username: user.username }, 'keyboard cat 4 ever', { expiresIn: 129600 }); // Sigining the token
+          res.json({
+              sucess: true,
+              err: null,
+              token
+          });
+          break;
+      }
+      else {
+          res.status(401).json({
+              sucess: false,
+              token: null,
+              err: 'Username or password is incorrect'
+          });
+      }
+  }
+});
+
+app.get('/', jwtMW /* Using the express jwt MW here */, (req, res) => {
+  res.send('You are authenticated'); //Sending some response when authenticated
+});
+
+// Error handling
+app.use(function (err, req, res, next) {
+  if (err.name === 'UnauthorizedError') { // Send the error rather than to show it on the console
+      res.status(401).send(err);
+  }
+  else {
+      next(err);
+  }
+});
+
 
 // Fetch data
 app.get('/name', (req, res) => {
