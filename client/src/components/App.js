@@ -215,10 +215,10 @@ class App extends React.Component {
             className="btn btn__editname"
             onClick={() => {
               if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                this.props.history.push('/editname/');
+                this.props.history.push('/login/');
               } else {
                 // production
-                this.props.history.push('/all-status-reports/editname/');
+                this.props.history.push('/all-status-reports/login/');
               }
             }}
           >
