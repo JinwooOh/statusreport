@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Dialog from 'material-ui/Dialog';
+import withAuth from './withAuth';
 
 class EditName extends React.Component {
   constructor(props) {
@@ -284,7 +285,7 @@ class EditName extends React.Component {
     );
   }
 }
-export default EditName;
+export default withAuth(EditName);
 EditName.propTypes = {
   history: PropTypes.object.isRequired,
 };
