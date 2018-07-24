@@ -19,7 +19,12 @@ class Login extends Component {
     e.preventDefault();
     this.Auth.login(this.state.username, this.state.password)
       .then(res => {
-        this.props.history.replace('/editname');
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+          this.props.history.push('/editname/');
+        } else {
+          // production
+          this.props.history.push('/all-status-reports/editname/');
+        }
       })
       .catch(err => {
         alert(err);

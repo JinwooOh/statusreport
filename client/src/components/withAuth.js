@@ -13,7 +13,12 @@ export default function withAuth(AuthComponent) {
     }
     componentWillMount() {
       if (!Auth.loggedIn()) {
-        this.props.history.replace('/login');
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+          this.props.history.push('/login/');
+        } else {
+          // production
+          this.props.history.push('/all-status-reports/login/');
+        }
       } else {
         try {
           const profile = Auth.getProfile();
@@ -22,7 +27,12 @@ export default function withAuth(AuthComponent) {
           });
         } catch (err) {
           Auth.logout();
-          this.props.history.replace('/login');
+          if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+            this.props.history.push('/login/');
+          } else {
+            // production
+            this.props.history.push('/all-status-reports/login/');
+          }
         }
       }
     }

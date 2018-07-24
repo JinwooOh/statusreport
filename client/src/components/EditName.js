@@ -37,7 +37,12 @@ class EditName extends React.Component {
 
   handleLogout = () => {
     Auth.logout();
-    this.props.history.replace('/login');
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      this.props.history.push('/login/');
+    } else {
+      // production
+      this.props.history.push('/all-status-reports/login/');
+    }
   };
 
   handleClose = () => {
@@ -63,12 +68,12 @@ class EditName extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
-    }).then(() => {
-      console.log('updated');
-    });
-
-    // refetch to rerender updated nameList
-    fetch('/name')
+    })
+      .then(() => {
+        console.log('updated');
+        // refetch to rerender updated nameList
+        return fetch('/name');
+      })
       .then(response => response.json())
       .then(findresponse => {
         this.setState({
@@ -92,11 +97,12 @@ class EditName extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
-    }).then(() => {
-      console.log('deleted');
-    });
-    // refetch to rerender updated nameList
-    fetch('/name')
+    })
+      .then(() => {
+        console.log('deleted');
+        // refetch to rerender updated nameList
+        return fetch('/name');
+      })
       .then(response => response.json())
       .then(findresponse => {
         this.setState({
@@ -104,6 +110,7 @@ class EditName extends React.Component {
         });
       })
       .catch(err => console.log(err));
+
     this.setState({
       success: true,
     });
@@ -122,11 +129,12 @@ class EditName extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
-    }).then(body => {
-      console.log('State: ', body); // error
-    });
-    // refetch to rerender updated nameList
-    fetch('/name')
+    })
+      .then(body => {
+        console.log('State: ', body);
+        // refetch to rerender updated nameList
+        return fetch('/name');
+      })
       .then(response => response.json())
       .then(findresponse => {
         this.setState({
