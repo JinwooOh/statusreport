@@ -28,7 +28,7 @@ export default class AuthService {
     return !!token && !this.isTokenExpired(token); // handwaiving here
   }
 
-  isTokenExpired(token) {
+  isTokenExpired = token => {
     try {
       const decoded = decode(token);
       if (decoded.exp < Date.now() / 1000) {
@@ -38,26 +38,26 @@ export default class AuthService {
     } catch (err) {
       return false;
     }
-  }
+  };
 
-  setToken(idToken) {
+  setToken = idToken => {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
-  }
+  };
 
-  getToken() {
+  getToken = () => {
     // Retrieves the user token from localStorage
     return localStorage.getItem('id_token');
-  }
+  };
 
-  logout() {
+  logout = () => {
     // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token');
-  }
+  };
 
-  getProfile() {
+  getProfile = () => {
     return decode(this.getToken());
-  }
+  };
 
   fetch(url, options) {
     // performs api calls sending the required authentication headers
@@ -78,7 +78,7 @@ export default class AuthService {
       .then(response => response.json());
   }
 
-  _checkStatus(response) {
+  _checkStatus = response => {
     // raises an error in case response status is not a success
     if (response.status >= 200 && response.status < 300) {
       return response;
@@ -86,5 +86,5 @@ export default class AuthService {
     const error = new Error(response.statusText);
     error.response = response;
     throw error;
-  }
+  };
 }

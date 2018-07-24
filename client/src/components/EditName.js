@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Dialog from 'material-ui/Dialog';
 import withAuth from './withAuth';
+import AuthService from './AuthService';
+
+const Auth = new AuthService();
 
 class EditName extends React.Component {
   constructor(props) {
@@ -30,6 +33,11 @@ class EditName extends React.Component {
 
   handleOpen = (p, type) => {
     this.setState({ open: true, curName: p, type, success: false });
+  };
+
+  handleLogout = () => {
+    Auth.logout();
+    this.props.history.replace('/login');
   };
 
   handleClose = () => {
@@ -231,6 +239,9 @@ class EditName extends React.Component {
         </MuiThemeProvider>
         <h1 className="App-title">Edit Naming Guide </h1>
         <div className="guide">
+          <button type="button" className="form-submit" onClick={() => this.handleLogout()}>
+            Logout
+          </button>
           <button
             className="btn btn__search"
             onClick={() => {
