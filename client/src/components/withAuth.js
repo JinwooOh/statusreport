@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import AuthService from './AuthService';
-
+// higher order componenet
 export default function withAuth(AuthComponent) {
   const Auth = new AuthService('http://localhost:8080');
   return class AuthWrapped extends Component {
@@ -35,3 +36,7 @@ export default function withAuth(AuthComponent) {
     }
   };
 }
+
+withAuth.propTypes = {
+  history: PropTypes.object.isRequired,
+};

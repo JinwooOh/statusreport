@@ -1,8 +1,9 @@
 import decode from 'jwt-decode';
+import PropTypes from 'prop-types';
 
 export default class AuthService {
   constructor(domain) {
-    this.domain = domain || 'http://localhost:8080';
+    this.domain = domain || 'http://localhost:5000';
     this.fetch = this.fetch.bind(this);
     this.login = this.login.bind(this);
     this.getProfile = this.getProfile.bind(this);
@@ -88,3 +89,6 @@ export default class AuthService {
     throw error;
   };
 }
+AuthService.propTypes = {
+  history: PropTypes.object.isRequired,
+};

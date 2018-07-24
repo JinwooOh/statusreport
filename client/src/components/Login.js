@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import AuthService from './AuthService';
 
 class Login extends Component {
@@ -8,6 +9,8 @@ class Login extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.Auth = new AuthService();
   }
+
+  // Add redirection if we are already loggedIn
   componentWillMount() {
     if (this.Auth.loggedIn()) this.props.history.replace('/');
   }
@@ -40,6 +43,7 @@ class Login extends Component {
               name="username"
               type="text"
               onChange={this.handleChange}
+              required
             />
             <input
               className="form-item"
@@ -47,6 +51,7 @@ class Login extends Component {
               name="password"
               type="password"
               onChange={this.handleChange}
+              required
             />
             <input className="form-submit" value="SUBMIT" type="submit" />
           </form>
@@ -55,5 +60,7 @@ class Login extends Component {
     );
   }
 }
-
 export default Login;
+Login.propTypes = {
+  history: PropTypes.object.isRequired,
+};

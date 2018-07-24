@@ -13,7 +13,7 @@ const db_config = {
   user: config.get('dbConfg.user'),
   password: config.get('dbConfg.password'),
   database: config.get('dbConfg.database'),
-  port: config.get('dbConfg.port')
+  port: config.get('dbConfg.port'),
 };
 
 // disconnection: https://github.com/mysqljs/mysql#server-disconnects
@@ -34,7 +34,7 @@ function handleDisconnect() {
     }
   });
   // If you're also serving http, display a 503 error.
-  connection.on('error', (err) => {
+  connection.on('error', err => {
     console.log('db error', err);
     if (err.code === 'PROTOCOL_CONNECTION_LOST') {
       // Connection to the MySQL server is usually
@@ -65,61 +65,95 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const jwtMW = exjwt({
-  secret: 'keyboard cat 4 ever'
+  secret: 'keyboard cat 4 ever',
 });
 
-let users = [
-  {
-      id: 1,
-      username: 'test',
-      password: 'asdf123'
-  },
-  {
-      id: 2,
-      username: 'test2',
-      password: 'asdf12345'
-  }
-];
+// let users = [
+//   {
+//       id: 1,
+//       username: 'test',
+//       password: 'asdf123'
+//   },
+//   {
+//       id: 2,
+//       username: 'test2',
+//       password: 'asdf12345'
+//   }
+// ];
 
 // LOGIN ROUTE
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
-  // Use your DB ORM logic here to find user and compare password
-  for (let user of users) { // I am using a simple array users which i made above
-      if (username == user.username && password == user.password /* Use your password hash checking logic here !*/) {
-          //If all credentials are correct do this
-          let token = jwt.sign({ id: user.id, username: user.username }, 'keyboard cat 4 ever', { expiresIn: 129600 }); // Sigining the token
-          res.json({
-              sucess: true,
-              err: null,
-              token
-          });
-          break;
+
+  connection.query('SELECT * FROM user WHERE name = ?', [username], (err, result, fields) => {
+    if (err) {
+      res.send({
+        code: 400,
+        failed: 'error ocurred',
+      });
+    } else if (result.length > 0) {
+      if (result[0].password === password) {
+        const token = jwt.sign(
+          { id: result[0].id, username: result[0].name },
+          'keyboard cat 4 ever',
+          { expiresIn: 129600 }
+        ); // Sigining the token
+        res.json({
+          sucess: true,
+          err: null,
+          token,
+        });
+      } else {
+        res.status(401).json({
+          sucess: false,
+          token: null,
+          err: 'Username or password is incorrect',
+        });
       }
-      else {
-          res.status(401).json({
-              sucess: false,
-              token: null,
-              err: 'Username or password is incorrect'
-          });
-      }
-  }
+    } else {
+      res.status(401).json({
+        sucess: false,
+        token: null,
+        err: 'Username or password is incorrect',
+      });
+    }
+  });
+
+  // // Use your DB ORM logic here to find user and compare password
+  // for (let user of users) { // I am using a simple array users which i made above
+  //     if (username == user.username && password == user.password /* Use your password hash checking logic here !*/) {
+  //         //If all credentials are correct do this
+  //         let token = jwt.sign({ id: user.id, username: user.username }, 'keyboard cat 4 ever', { expiresIn: 129600 }); // Sigining the token
+  //         res.json({
+  //             sucess: true,
+  //             err: null,
+  //             token
+  //         });
+  //         break;
+  //     }
+  //     else {
+  //         res.status(401).json({
+  //             sucess: false,
+  //             token: null,
+  //             err: 'Username or password is incorrect'
+  //         });
+  //     }
+  // }
 });
 
 app.get('/', jwtMW /* Using the express jwt MW here */, (req, res) => {
-  res.send('You are authenticated'); //Sending some response when authenticated
+  res.send('You are authenticated'); // Sending some response when authenticated
 });
 
 // Error handling
-app.use(function (err, req, res, next) {
-  if (err.name === 'UnauthorizedError') { // Send the error rather than to show it on the console
-      res.status(401).send(err);
-  }
-  else {
-      next(err);
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    // Send the error rather than to show it on the console
+    res.status(401).send(err);
+  } else {
+    next(err);
   }
 });
-
 
 // Fetch data
 app.get('/name', (req, res) => {
@@ -143,7 +177,6 @@ app.get('/users', (req, res) => {
     }
   });
 });
-
 
 app.get('/admintable', (req, res) => {
   connection.query('SELECT * FROM admintable', (err, result, fields) => {
@@ -196,7 +229,7 @@ app.get('/search/coursetable/:userID/:startDate/:endDate', (req, res) => {
   console.log(req.params.startDate);
   console.log(req.params.endDate);
 
-  const {userID, startDate, endDate} = req.params;
+  const { userID, startDate, endDate } = req.params;
 
   connection.query(
     `SELECT * FROM coursetable
@@ -219,9 +252,7 @@ app.get('/search/admintable/:userID/:startDate/:endDate', (req, res) => {
   console.log(req.params.startDate);
   console.log(req.params.endDate);
 
-  const userID = req.params.userID;
-  const startDate = req.params.startDate;
-  const endDate = req.params.endDate;
+  const { userID, startDate, endDate } = req.params.userID;
   connection.query(
     `SELECT * FROM admintable
     WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
@@ -264,47 +295,46 @@ app.get('/search/program/:courseProgram/:startDate/:endDate', (req, res) => {
 });
 
 // search by user (program number)
-app.get(
-  '/search/programNumber/:courseNumber/:startDate/:endDate',
-  (req, res) => {
-    console.log('program Number search start: ');
-    console.log(req.params.courseNumber);
-    console.log(req.params.startDate);
-    console.log(req.params.endDate);
-    const { courseNumber, startDate, endDate } = req.params;
+app.get('/search/programNumber/:courseNumber/:startDate/:endDate', (req, res) => {
+  console.log('program Number search start: ');
+  console.log(req.params.courseNumber);
+  console.log(req.params.startDate);
+  console.log(req.params.endDate);
+  const { courseNumber, startDate, endDate } = req.params;
 
-    connection.query(
-      `SELECT * FROM coursetable
+  connection.query(
+    `SELECT * FROM coursetable
       WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
       AND courseNumber='${courseNumber}'`,
-      (err, result, fields) => {
-        if (err) {
-          console.log('Error in program(number) query');
-        } else {
-          console.log(result);
-          res.json(result);
-        }
+    (err, result, fields) => {
+      if (err) {
+        console.log('Error in program(number) query');
+      } else {
+        console.log(result);
+        res.json(result);
       }
-    );
-  }
-);
+    }
+  );
+});
 
 // Search course info
 app.get('/search/courseinfo', (req, res) => {
-  connection.query('SELECT DISTINCT program, courseNumber FROM courseinfo', (err, result, fields) => {
-    if (err) {
-      console.log('Error in courseinfo query');
-    } else {
-      console.log('courseinfo query success');
-      res.json(result);
+  connection.query(
+    'SELECT DISTINCT program, courseNumber FROM courseinfo',
+    (err, result, fields) => {
+      if (err) {
+        console.log('Error in courseinfo query');
+      } else {
+        console.log('courseinfo query success');
+        res.json(result);
+      }
     }
-  });
+  );
 });
-
 
 // add new user to the database
 app.post('/addUser', (req, res) => {
-  const userName = req.body.userName;
+  const { userName } = req.body;
   const sql = 'INSERT INTO `user` (name) VALUES (?)';
   const values = [userName];
   connection.query(sql, [values], (err, result) => {
@@ -333,10 +363,10 @@ app.post('/addCourseinfo', (req, res) => {
 // post data, req.body graps all state data
 app.post('/submit', (req, res) => {
   // console.log(req.body.tasks);
+
   const tasks = req.body.tasks;
   const totalHours = req.body.totalHours; // int
   const date = req.body.date; // submit date (date type is string)
-
   const userName = req.body.userName; // userName
   console.log(tasks);
   // coursetable or admintable post
@@ -356,7 +386,7 @@ app.post('/submit', (req, res) => {
         curTask.courseNumber.toString().toUpperCase(),
         curTask.category,
         curTask.semester,
-        userName
+        userName,
       ];
       connection.query(sql, [values], (err, result) => {
         if (err) throw err;
@@ -368,13 +398,7 @@ app.post('/submit', (req, res) => {
       const curTask = tasks[task];
       const sql =
         'INSERT INTO `admintable` (subDate, hours, adminCat, completionDate, userID) VALUES (?)';
-      const values = [
-        date,
-        curTask.hours,
-        curTask.category,
-        curTask.date,
-        userName
-      ];
+      const values = [date, curTask.hours, curTask.category, curTask.date, userName];
       connection.query(sql, [values], (err, result) => {
         if (err) throw err;
         console.log(`Number of records inserted: ${result.affectedRows}`);
@@ -393,18 +417,29 @@ app.post('/submit', (req, res) => {
 });
 
 // naming guide edit start ...
-app.put('/editname/:nameId', (req, res)=>{
+app.put('/editname/:nameId', (req, res) => {
   const nameId = req.params.nameId;
-  const newName = {program: req.body.program, course: req.body.course};
-  connection.query('UPDATE coursenaming SET ? WHERE id = ?', [{ program: req.body.program, course: req.body.course }, nameId], (err, result) => {
-    if (err) throw err;
-    console.log('new program name: ', req.body.program, " new course name: ", req.body.course, "are updated.");
-  });
+  const newName = { program: req.body.program, course: req.body.course };
+  connection.query(
+    'UPDATE coursenaming SET ? WHERE id = ?',
+    [{ program: req.body.program, course: req.body.course }, nameId],
+    (err, result) => {
+      if (err) throw err;
+      console.log(
+        'new program name: ',
+        req.body.program,
+        ' new course name: ',
+        req.body.course,
+        'are updated.'
+      );
+    }
+  );
   res.sendStatus(200);
 });
-app.post('/newname', (req, res)=>{
+
+app.post('/newname', (req, res) => {
   const sql = 'INSERT INTO `coursenaming` (program, course) VALUES (?)';
-  const values = [req.body.program, req.body.course]
+  const values = [req.body.program, req.body.course];
 
   connection.query(sql, [values], (err, result) => {
     if (err) throw err;
@@ -414,11 +449,12 @@ app.post('/newname', (req, res)=>{
 
   res.sendStatus(200);
 });
-app.delete('/deletename/:nameId', (req, res)=>{
+
+app.delete('/deletename/:nameId', (req, res) => {
   console.log(req.params.nameId);
-  connection.query('DELETE FROM coursenaming WHERE id= ?', [req.params.nameId], function(err, result) {
+  connection.query('DELETE FROM coursenaming WHERE id= ?', [req.params.nameId], (err, result) => {
     if (err) throw err;
-    console.log("deleted.");
+    console.log('deleted.');
   });
   res.sendStatus(200);
 });
