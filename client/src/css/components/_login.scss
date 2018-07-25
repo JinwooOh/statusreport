@@ -1,5 +1,6 @@
 .login{
   &__container{
+    animation: fadein 0.3s;
     border-radius: 3px;
     border-top: 0.5rem solid $color-tertiary-dark;
     background: $color-tertiary-light;
