@@ -38,27 +38,44 @@ class Login extends Component {
   }
   render() {
     return (
-      <div className="center">
-        <div className="card">
-          <h1>Login</h1>
-          <form onSubmit={this.handleFormSubmit}>
+      <div className="wrapper">
+        <h1 className="App-title">Login for Naming Guide</h1>
+
+        <div className="login__container">
+          <button
+            className="btn btn__login--back"
+            onClick={() => {
+              if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                this.props.history.push('/');
+              } else {
+                // production code
+                this.props.history.push('/all-status-reports/');
+              }
+            }}
+          >
+            BACK TO REPORT PAGE
+          </button>
+          <form className="login__form" onSubmit={this.handleFormSubmit}>
+            <h2 className="center login__form--title">Login</h2>
             <input
-              className="form-item"
-              placeholder="Username goes here..."
+              className="login__form--username"
+              placeholder="User name"
               name="username"
               type="text"
               onChange={this.handleChange}
               required
             />
             <input
-              className="form-item"
-              placeholder="Password goes here..."
+              className="login__form--password"
+              placeholder="Password"
               name="password"
               type="password"
               onChange={this.handleChange}
               required
             />
-            <input className="form-submit" value="SUBMIT" type="submit" />
+            <button className="btn btn__submit login__form--submit" type="submit">
+              SUBMIT
+            </button>
           </form>
         </div>
       </div>

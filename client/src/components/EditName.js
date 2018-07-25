@@ -247,7 +247,7 @@ class EditName extends React.Component {
         </MuiThemeProvider>
         <h1 className="App-title">Edit Naming Guide </h1>
         <div className="guide">
-          <button type="button" className="form-submit" onClick={() => this.handleLogout()}>
+          <button type="button" className="btn btn__logout" onClick={() => this.handleLogout()}>
             Logout
           </button>
           <button

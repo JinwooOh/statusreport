@@ -95,6 +95,7 @@ li {
 input[type="text"],
 input[type="number"],
 input[type="date"],
+input[type="password"],
 select {
   display: inline-block;
   border: 0.1rem solid #140107;
@@ -288,7 +289,7 @@ input:focus {
 .btn {
   font-size: 1.4rem;
   font-weight: 500; }
-  .btn__report, .btn__summary, .btn__taskSelector, .btn__remove, .btn__search, .btn__notFound, .btn__guide, .btn__editname {
+  .btn__report, .btn__summary, .btn__taskSelector, .btn__remove, .btn__search, .btn__notFound, .btn__guide, .btn__editname, .btn__submit, .btn__logout, .btn__login--back {
     position: relative;
     outline: 0;
     text-transform: uppercase;
@@ -300,7 +301,7 @@ input:focus {
     transition: all 0.2s;
     background-color: #a40a3c;
     color: #fbfbfb; }
-    .btn__report:hover, .btn__summary:hover, .btn__taskSelector:hover, .btn__remove:hover, .btn__search:hover, .btn__notFound:hover, .btn__guide:hover, .btn__editname:hover {
+    .btn__report:hover, .btn__summary:hover, .btn__taskSelector:hover, .btn__remove:hover, .btn__search:hover, .btn__notFound:hover, .btn__guide:hover, .btn__editname:hover, .btn__submit:hover, .btn__logout:hover, .btn__login--back:hover {
       border: 0.1rem solid #395462; }
   .btn__summary::after, .btn__notFound::after {
     content: "";
@@ -352,22 +353,24 @@ input:focus {
   .btn:active {
     transform: translateY(-0.1rem);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
-  .btn__taskSelector {
+  .btn__taskSelector, .btn__login--back {
     width: 50%;
     margin: 0 auto;
     padding: 1.2rem;
     border-radius: 0;
     border-bottom-left-radius: 5px 5px;
     border-bottom-right-radius: 5px 5px; }
-    .btn__taskSelector:not(:last-child) {
+    .btn__taskSelector:not(:last-child), .btn__login--back:not(:last-child) {
       border-right: 0.1rem solid #140107; }
-    .btn__taskSelector:hover {
+    .btn__taskSelector:hover, .btn__login--back:hover {
       border: 0.1rem solid #395462;
       background-color: #395462;
       transform: scaleY(1.1);
       box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
-      .btn__taskSelector:hover:not(:last-child) {
+      .btn__taskSelector:hover:not(:last-child), .btn__login--back:hover:not(:last-child) {
         border-right: 0.1rem solid #140107; }
+  .btn__login--back {
+    width: 100%; }
 
 .popupbtn--container {
   display: flex;
@@ -472,6 +475,44 @@ input:focus {
       .naming-edit input {
         width: 95%;
         margin: 0 auto; } }
+
+.login__container {
+  border-radius: 3px;
+  border-top: 0.5rem solid #140107;
+  background: #f8faff;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  margin-top: 6rem;
+  grid-area: form;
+  overflow: hidden;
+  height: 36rem; }
+
+.login__form {
+  display: block;
+  padding: 2rem; }
+  .login__form--title {
+    margin-top: 1.2rem;
+    margin-bottom: 2rem;
+    font-size: 3.2rem;
+    font-weight: 300;
+    color: #140107; }
+  .login__form--username, .login__form--password {
+    display: block !important;
+    outline: 0;
+    width: 32rem;
+    padding: 1.6rem 2.3rem;
+    margin: 0 auto 2rem auto;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 300; }
+  .login__form--submit {
+    display: block;
+    appearance: none;
+    outline: 0;
+    margin: 0 auto 10px auto;
+    width: 25rem;
+    cursor: pointer;
+    transition-duration: 0.25s; }
 
 /* Popup component styling*/
 .mm-popup {

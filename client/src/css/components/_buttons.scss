@@ -8,7 +8,10 @@
   &__search,
   &__notFound,
   &__guide,
-  &__editname {
+  &__editname,
+  &__submit,
+  &__logout,
+  &__login--back {
     position: relative;
     outline: 0;
     text-transform: uppercase;
@@ -93,7 +96,8 @@
     transform: translateY(-0.1rem);
     box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
   }
-  &__taskSelector {
+  &__taskSelector,
+  &__login--back {
     width: 50%;
     margin: 0 auto;
     padding: 1.2rem;
@@ -115,6 +119,9 @@
 
       box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
     }
+  }
+  &__login--back{
+    width: 100%;
   }
 }
 
