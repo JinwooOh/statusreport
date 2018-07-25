@@ -477,13 +477,13 @@ input:focus {
         margin: 0 auto; } }
 
 .login__container {
-  animation: fadein 0.3s;
+  animation: fadein 0.4s;
   border-radius: 3px;
   border-top: 0.5rem solid #140107;
   background: #f8faff;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
   margin: 0 auto;
-  margin-top: 6rem;
+  margin-top: 3.2rem;
   grid-area: form;
   overflow: hidden;
   height: 36rem; }
