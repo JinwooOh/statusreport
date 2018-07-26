@@ -8,8 +8,6 @@ const exjwt = require('express-jwt');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 
-const salt = bcrypt.genSaltSync(10);
-
 // Generate Admin password with salt !important
 // bcrypt.hash(passwordForAdmin, 10, (err, hash) => {
 //   console.log(hash);
@@ -30,7 +28,7 @@ function handleDisconnect() {
   // Recreate the connection, since
   // the old one cannot be reused.
   connection = mysql.createConnection(dbConfig);
-  connection.connect((err) => {
+  connection.connect(err => {
     // The server is either down
     // or restarting (takes a while sometimes).
     if (err) {
@@ -42,7 +40,7 @@ function handleDisconnect() {
     }
   });
   // If you're also serving http, display a 503 error.
-  connection.on('error', (err) => {
+  connection.on('error', err => {
     console.log('db error', err);
     if (err.code === 'PROTOCOL_CONNECTION_LOST') {
       // Connection to the MySQL server is usually
@@ -325,7 +323,7 @@ app.post('/addUser', (req, res) => {
 app.post('/addCourseinfo', (req, res) => {
   const program = req.body.program.toString().toUpperCase();
   const courseNumber = req.body.courseNumber.toString().toUpperCase();
-  const semesterTerm = req.body.semesterTerm;
+  const { semesterTerm } = req.body;
 
   const sql = 'INSERT INTO `courseinfo` (program, courseNumber, semesterTerm) VALUES (?)';
   const values = [program, courseNumber, semesterTerm];
@@ -347,7 +345,8 @@ app.post('/submit', (req, res) => {
   const userName = req.body.userName; // userName
   console.log(tasks);
   // coursetable or admintable post
-  for (const task in tasks) {
+
+  Object.keys(tasks).forEach(task => {
     if (tasks[task].taskType === 'Course Task') {
       // course task
       const curTask = tasks[task];
@@ -382,7 +381,7 @@ app.post('/submit', (req, res) => {
       });
       console.log(values);
     }
-  }
+  });
   // subDate Post: subdate, userID,
   const sql = 'INSERT INTO `subDate` (subDate, userID, totalHours) VALUES (?)';
   const values = [date, userName, totalHours];

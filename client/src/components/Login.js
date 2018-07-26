@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import AlertPopup from 'react-popup';
 import AuthService from './AuthService';
 
 class Login extends Component {
@@ -27,7 +28,29 @@ class Login extends Component {
         }
       })
       .catch(err => {
-        alert(err);
+        AlertPopup.registerPlugin('prompt', function() {
+          this.create({
+            title: 'Failed to login',
+            content: (
+              <div className="errorPop">
+                <p>
+                  The username or password you entered is incorrect. Please contact
+                  <a href="mailto:eipdstatusreporting@lists.wisc.edu">
+                    {' '}
+                    eipdstatusreporting@lists.wisc.edu.
+                  </a>
+                  to get login information.
+                </p>
+              </div>
+            ),
+            buttons: {
+              right: ['ok'],
+            },
+          });
+        });
+        AlertPopup.plugins().prompt('', 'Type your name', value => {
+          AlertPopup.alert(`You typed: ${value}`);
+        });
       });
   }
 
@@ -39,6 +62,7 @@ class Login extends Component {
   render() {
     return (
       <div className="wrapper">
+        <AlertPopup closeBtn={false} />
         <h1 className="App-title">Login for Naming Guide</h1>
 
         <div className="login__container">
@@ -59,7 +83,7 @@ class Login extends Component {
             <h2 className="center login__form--title">Login</h2>
             <input
               className="login__form--username"
-              placeholder="User name"
+              placeholder="Username"
               name="username"
               type="text"
               onChange={this.handleChange}
