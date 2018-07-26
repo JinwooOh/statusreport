@@ -11,7 +11,8 @@
   &__editname,
   &__submit,
   &__logout,
-  &__login--back {
+  &__login--back,
+  {
     position: relative;
     outline: 0;
     text-transform: uppercase;
@@ -28,7 +29,8 @@
     }
   }
   &__summary,
-  &__notFound {
+  &__notFound,
+  {
     &::after {
       content: "";
       background-color: $color-primary;

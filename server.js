@@ -6,9 +6,17 @@ const helmet = require('helmet');
 const jwt = require('jsonwebtoken');
 const exjwt = require('express-jwt');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+
+const salt = bcrypt.genSaltSync(10);
+
+// Generate Admin password with salt !important
+// bcrypt.hash(passwordForAdmin, 10, (err, hash) => {
+//   console.log(hash);
+// });
 
 // Database config
-const db_config = {
+const dbConfig = {
   host: config.get('dbConfg.host'),
   user: config.get('dbConfg.user'),
   password: config.get('dbConfg.password'),
@@ -21,7 +29,7 @@ let connection;
 function handleDisconnect() {
   // Recreate the connection, since
   // the old one cannot be reused.
-  connection = mysql.createConnection(db_config);
+  connection = mysql.createConnection(dbConfig);
   connection.connect((err) => {
     // The server is either down
     // or restarting (takes a while sometimes).
@@ -34,7 +42,7 @@ function handleDisconnect() {
     }
   });
   // If you're also serving http, display a 503 error.
-  connection.on('error', err => {
+  connection.on('error', (err) => {
     console.log('db error', err);
     if (err.code === 'PROTOCOL_CONNECTION_LOST') {
       // Connection to the MySQL server is usually
@@ -68,19 +76,6 @@ const jwtMW = exjwt({
   secret: 'keyboard cat 4 ever',
 });
 
-// let users = [
-//   {
-//       id: 1,
-//       username: 'test',
-//       password: 'asdf123'
-//   },
-//   {
-//       id: 2,
-//       username: 'test2',
-//       password: 'asdf12345'
-//   }
-// ];
-
 // LOGIN ROUTE
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
@@ -92,24 +87,27 @@ app.post('/login', (req, res) => {
         failed: 'error ocurred',
       });
     } else if (result.length > 0) {
-      if (result[0].password === password) {
-        const token = jwt.sign(
-          { id: result[0].id, username: result[0].name },
-          'keyboard cat 4 ever',
-          { expiresIn: 129600 }
-        ); // Sigining the token
-        res.json({
-          sucess: true,
-          err: null,
-          token,
-        });
-      } else {
-        res.status(401).json({
-          sucess: false,
-          token: null,
-          err: 'Username or password is incorrect',
-        });
-      }
+      bcrypt.compare(password, result[0].password, (err, match) => {
+        if (match) {
+          // if (result[0].password === password) {
+          const token = jwt.sign(
+            { id: result[0].id, username: result[0].name },
+            'keyboard cat 4 ever',
+            { expiresIn: 129600 }
+          ); // Sigining the token
+          res.json({
+            sucess: true,
+            err: null,
+            token,
+          });
+        } else {
+          res.status(401).json({
+            sucess: false,
+            token: null,
+            err: 'Username or password is incorrect',
+          });
+        }
+      });
     } else {
       res.status(401).json({
         sucess: false,
@@ -118,27 +116,6 @@ app.post('/login', (req, res) => {
       });
     }
   });
-
-  // // Use your DB ORM logic here to find user and compare password
-  // for (let user of users) { // I am using a simple array users which i made above
-  //     if (username == user.username && password == user.password /* Use your password hash checking logic here !*/) {
-  //         //If all credentials are correct do this
-  //         let token = jwt.sign({ id: user.id, username: user.username }, 'keyboard cat 4 ever', { expiresIn: 129600 }); // Sigining the token
-  //         res.json({
-  //             sucess: true,
-  //             err: null,
-  //             token
-  //         });
-  //         break;
-  //     }
-  //     else {
-  //         res.status(401).json({
-  //             sucess: false,
-  //             token: null,
-  //             err: 'Username or password is incorrect'
-  //         });
-  //     }
-  // }
 });
 
 app.get('/', jwtMW /* Using the express jwt MW here */, (req, res) => {

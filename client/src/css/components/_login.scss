@@ -42,7 +42,19 @@
       width: 25rem;
       cursor: pointer;
       transition-duration: 0.25s;
-
+        &::after {
+          content: "";
+          background-color: $color-primary;
+          display: inline-block;
+          height: 100%;
+          width: 100%;
+          border-radius: 1.2rem;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: -1;
+          transition: all 0.4s;
+        }
     }
   }
 

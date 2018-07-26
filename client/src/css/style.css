@@ -514,6 +514,18 @@ input:focus {
     width: 25rem;
     cursor: pointer;
     transition-duration: 0.25s; }
+    .login__form--submit::after {
+      content: "";
+      background-color: #a40a3c;
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      border-radius: 1.2rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transition: all 0.4s; }
 
 /* Popup component styling*/
 .mm-popup {
