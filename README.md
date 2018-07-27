@@ -15,15 +15,15 @@ Status Report is the web application to replace spreadsheet based reporting syst
 
 #### Searching
 
-- Two searching options are provided: search by user and search by course. Choose one of the options to search.
-- User Search:
-  1.  Type valid start date and end date. The dates are based on task completion dates not reporting dates.
-  2.  Type username. The username should be showed up automatically.
-  3.  Course task will show up in Course task table and admin task will show up in Admin task table
-- Course Search
-  1.  Type valid start date and end date. The dates are based on task completion dates not reporting dates.
-  2.  Choose search type
-  3.  Type valid program name or course number
+1. Two searching options are provided: search by user and search by course. Choose one of the options to search.
+2. User Search:
+    1.  Type valid start date and end date. The dates are based on task completion dates not reporting dates.
+    2.  Type username. The username should be showed up automatically.
+    3.  Course task will show up in Course task table and admin task will show up in Admin task table
+3. Course Search
+    1.  Type valid start date and end date. The dates are based on task completion dates not reporting dates.
+    2.  Choose search type
+    3.  Type valid program name or course number
 
 #### TIP:
 
