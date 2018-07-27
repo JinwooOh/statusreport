@@ -90,7 +90,7 @@ class Report extends Component {
       fetch(urlCourse)
         .then(res => res.json())
         .then(json => {
-          // console.info('Course result:', json);
+          console.info('Course result:', json);
           let totalHoursCourse = 0;
           json.forEach(course => {
             // date formatting
@@ -112,7 +112,7 @@ class Report extends Component {
       fetch(urlAdmin)
         .then(res => res.json())
         .then(json => {
-          // console.info('Admin result:', json);
+          console.info('Admin result:', json);
           let totalHoursAdmin = 0;
           json.forEach(course => {
             // date formatting

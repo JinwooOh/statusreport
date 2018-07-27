@@ -223,11 +223,7 @@ app.get('/search/coursetable/:userID/:startDate/:endDate', (req, res) => {
 
 // search by user (admintable)
 app.get('/search/admintable/:userID/:startDate/:endDate', (req, res) => {
-  console.log(req.params.userID);
-  console.log(req.params.startDate);
-  console.log(req.params.endDate);
-
-  const { userID, startDate, endDate } = req.params.userID;
+  const { userID, startDate, endDate } = req.params;
   connection.query(
     `SELECT * FROM admintable
     WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
