@@ -188,7 +188,7 @@ app.get('/subDate', (req, res) => {
 
 // courseinfo
 app.get('/courseinfo', (req, res) => {
-  connection.query('SELECT * FROM courseinfo', (err, result, fields) => {
+  connection.query('SELECT * FROM courseinfo ORDER BY program', (err, result, fields) => {
     if (err) {
       console.log('Error in courseinfo query');
     } else {

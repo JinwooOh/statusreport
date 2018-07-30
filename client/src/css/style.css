@@ -286,10 +286,16 @@ input:focus {
       display: block;
       margin: 0 auto; } }
 
+.editSelector {
+  grid-area: form;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
 .btn {
   font-size: 1.4rem;
   font-weight: 500; }
-  .btn__report, .btn__summary, .btn__taskSelector, .btn__remove, .btn__search, .btn__notFound, .btn__guide, .btn__editname, .btn__submit, .btn__logout, .btn__login--back {
+  .btn__report, .btn__summary, .btn__taskSelector, .btn__remove, .btn__search, .btn__notFound, .btn__guide, .btn__editname, .btn__submit, .btn__logout, .btn__login--back, .btn__editSelect {
     position: relative;
     outline: 0;
     text-transform: uppercase;
@@ -301,7 +307,7 @@ input:focus {
     transition: all 0.2s;
     background-color: #a40a3c;
     color: #fbfbfb; }
-    .btn__report:hover, .btn__summary:hover, .btn__taskSelector:hover, .btn__remove:hover, .btn__search:hover, .btn__notFound:hover, .btn__guide:hover, .btn__editname:hover, .btn__submit:hover, .btn__logout:hover, .btn__login--back:hover {
+    .btn__report:hover, .btn__summary:hover, .btn__taskSelector:hover, .btn__remove:hover, .btn__search:hover, .btn__notFound:hover, .btn__guide:hover, .btn__editname:hover, .btn__submit:hover, .btn__logout:hover, .btn__login--back:hover, .btn__editSelect:hover {
       border: 0.1rem solid #395462; }
   .btn__summary::after, .btn__notFound::after {
     content: "";
@@ -371,6 +377,12 @@ input:focus {
         border-right: 0.1rem solid #140107; }
   .btn__login--back {
     width: 100%; }
+  .btn__editSelect {
+    margin: 2rem;
+    height: 16rem;
+    width: 24rem;
+    font-size: 2.4rem;
+    font-weight: 300; }
 
 .popupbtn--container {
   display: flex;

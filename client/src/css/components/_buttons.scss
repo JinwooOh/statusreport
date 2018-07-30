@@ -12,6 +12,7 @@
   &__submit,
   &__logout,
   &__login--back,
+  &__editSelect,
   {
     position: relative;
     outline: 0;
@@ -124,6 +125,13 @@
   }
   &__login--back{
     width: 100%;
+  }
+  &__editSelect{
+    margin: 2rem;
+    height: 16rem;
+    width: 24rem;
+    font-size: 2.4rem;
+    font-weight: 300;
   }
 }
 

@@ -254,6 +254,19 @@ class EditName extends React.Component {
             className="btn btn__search"
             onClick={() => {
               if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                this.props.history.push('/editcourseinfo');
+              } else {
+                // production code
+                this.props.history.push('/all-status-reports/editcourseinfo');
+              }
+            }}
+          >
+            Edit course info
+          </button>
+          <button
+            className="btn btn__search"
+            onClick={() => {
+              if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
                 this.props.history.push('/');
               } else {
                 // production code
@@ -267,6 +280,9 @@ class EditName extends React.Component {
           <div className="form-list form-list--report">
             <div className="message__text">
               <div className="message__text--body">
+                  <p className="heading-primary center">
+                  This is the table that shows up in Naming Guide.
+                  </p>
                 <ul>
                   {this.state.nameList.map((p, i) => {
                     return (
