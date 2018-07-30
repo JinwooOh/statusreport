@@ -21,10 +21,10 @@ class Login extends Component {
     this.Auth.login(this.state.username, this.state.password)
       .then(res => {
         if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-          this.props.history.push('/editname/');
+          this.props.history.push('/editselect/');
         } else {
           // production
-          this.props.history.push('/all-status-reports/editname/');
+          this.props.history.push('/all-status-reports/editselect/');
         }
       })
       .catch(err => {
@@ -63,7 +63,7 @@ class Login extends Component {
     return (
       <div className="wrapper">
         <AlertPopup closeBtn={false} />
-        <h1 className="App-title">Login for Naming Guide</h1>
+        <h1 className="App-title">Login for Editing DB</h1>
 
         <div className="login__container">
           <button
