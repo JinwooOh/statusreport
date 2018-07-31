@@ -35,6 +35,20 @@ class EditSelect extends React.Component {
           >
             Edit Course Info
           </button>
+
+          <button
+            className="btn btn__editSelect"
+            onClick={() => {
+              if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                this.props.history.push('/edituser');
+              } else {
+                // production code
+                this.props.history.push('/all-status-reports/edituser');
+              }
+            }}
+          >
+            Edit User
+          </button>
         </div>
       </div>
     );

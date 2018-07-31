@@ -290,7 +290,8 @@ input:focus {
   grid-area: form;
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  flex-wrap: wrap; }
 
 .btn {
   font-size: 1.4rem;

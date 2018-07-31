@@ -1,35 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Dialog from 'material-ui/Dialog';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Dialog from 'material-ui/Dialog';
 import withAuth from './withAuth';
 import AuthService from './AuthService';
 
 const Auth = new AuthService();
 
-class EditCourseInfo extends React.Component {
+class EditUser extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false, // popup open?
-      curName: {}, // current program/course name
-      type: '', // edit, remove or new
+      open: false,
+      curName: {},
+      userList: [], // for naming guide
+      type: '',
       success: false,
-      courseinfo: [],
     };
   }
   componentDidMount() {
-    fetch('/courseinfo')
+    fetch('/users')
       .then(response => response.json())
       .then(findresponse => {
         this.setState({
-          courseinfo: [...findresponse],
+          userList: [...findresponse],
         });
       })
       .catch(err => console.log(err));
   }
   programRef = React.createRef();
   courseRef = React.createRef();
+
+  handleOpen = (p, type) => {
+    this.setState({ open: true, curName: p, type, success: false });
+  };
+
   handleLogout = () => {
     Auth.logout();
     if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
@@ -40,72 +45,14 @@ class EditCourseInfo extends React.Component {
     }
   };
 
-  handleAddNewName = event => {
-    event.preventDefault();
-    const data = {
-      program: this.programRef.current.value,
-      course: this.courseRef.current.value,
-    };
-
-    fetch('/addnewcourseinfo', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-      .then(body => {
-        console.log('State: ', body);
-        // refetch to rerender updated courseinfo
-        return fetch('/courseinfo');
-      })
-      .then(response => response.json())
-      .then(findresponse => {
-        this.setState({
-          courseinfo: [...findresponse],
-        });
-      })
-      .catch(err => console.log(err));
-
-    this.setState({
-      success: true,
-    });
-  };
-
-  handleDeleteName = () => {
-    console.log(this.state.curName);
-    const data = this.state.curName;
-    const nameId = this.state.curName.ID;
-    const urlName = `/deletecourseinfo/${nameId}`;
-    fetch(urlName, {
-      method: 'delete',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-      .then(() => {
-        console.log('deleted');
-        // refetch to rerender updated nameList
-        return fetch('/courseinfo');
-      })
-      .then(response => response.json())
-      .then(findresponse => {
-        this.setState({
-          courseinfo: [...findresponse],
-        });
-      })
-      .catch(err => console.log(err));
-
-    this.setState({
-      success: true,
-    });
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   handleEditName = event => {
     event.preventDefault();
     // it might not need to update state
+
     const data = {
       program: this.programRef.current.value,
       course: this.courseRef.current.value,
@@ -113,7 +60,7 @@ class EditCourseInfo extends React.Component {
     };
     // updating new name
     const nameId = this.state.curName.ID;
-    const urlName = `/editcourseinfo/${nameId}`;
+    const urlName = `/editname/${nameId}`;
     fetch(urlName, {
       method: 'PUT',
       headers: {
@@ -124,27 +71,84 @@ class EditCourseInfo extends React.Component {
     })
       .then(() => {
         console.log('updated');
-        // refetch to rerender updated nameList
-        return fetch('/courseinfo');
+        // refetch to rerender updated userList
+        return fetch('/users');
       })
       .then(response => response.json())
       .then(findresponse => {
         this.setState({
-          courseinfo: [...findresponse],
+          userList: [...findresponse],
         });
       })
       .catch(err => console.log(err));
+
+    this.setState({
+      success: true,
+    });
+  };
+  handleDeleteName = () => {
+    const data = this.state.curName;
+    const nameId = this.state.curName.ID;
+    const urlName = `/deletename/${nameId}`;
+    fetch(urlName, {
+      method: 'delete',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(() => {
+        console.log('deleted');
+        // refetch to rerender updated userList
+        return fetch('/users');
+      })
+      .then(response => response.json())
+      .then(findresponse => {
+        this.setState({
+          userList: [...findresponse],
+        });
+      })
+      .catch(err => console.log(err));
+
     this.setState({
       success: true,
     });
   };
 
-  handleOpen = (p, type) => {
-    this.setState({ open: true, curName: p, type, success: false });
+  handleAddNewName = event => {
+    event.preventDefault();
+    const data = {
+      program: this.programRef.current.value,
+      course: this.courseRef.current.value,
+    };
+
+    fetch('/addnewcoursenaming', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(body => {
+        console.log('State: ', body);
+        // refetch to rerender updated userList
+        return fetch('/users');
+      })
+      .then(response => response.json())
+      .then(findresponse => {
+        this.setState({
+          userList: [...findresponse],
+        });
+      })
+      .catch(err => console.log(err));
+
+    this.setState({
+      success: true,
+    });
   };
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+
+  // inside of the dialog popup
   handleEdit = () => {
     if (this.state.type.type === 'edit') {
       return (
@@ -153,10 +157,13 @@ class EditCourseInfo extends React.Component {
           <h2 className="message__heading">Current name</h2>
           <p>Program: {this.state.curName.program}</p>
           <p>Courses: {this.state.curName.course}</p>
+
           <h2 className="message__heading">New Name</h2>
+
           <form className="naming-edit" onSubmit={this.handleEditName}>
             <span>Program</span>
             <input name="Program" ref={this.programRef} type="text" placeholder="Program name" />
+
             <span>Course</span>
             <input name="Course" ref={this.courseRef} type="text" placeholder="Course name" />
             <div className="center">
@@ -173,9 +180,9 @@ class EditCourseInfo extends React.Component {
         <div className="message">
           <h2 className="message__heading">Current name</h2>
           <p>Program: {this.state.curName.program}</p>
-          <p>Courses: {this.state.curName.courseNumber}</p>
+          <p>Courses: {this.state.curName.course}</p>
           <p className="message__warning">
-            Are you sure you want to remove this name from courseinfo table?
+            Are you sure you want to remove this name from naming guide?
           </p>
 
           <div className="popupbtn--container">
@@ -196,31 +203,32 @@ class EditCourseInfo extends React.Component {
         </div>
       );
     }
-    // add new program/course form
+    // add new course form
     return (
       <div className="message">
         <h2 className="message__heading">New Name</h2>
+
         <form className="naming-edit" onSubmit={this.handleAddNewName}>
           <span>Program</span>
           <input
             name="Program"
             ref={this.programRef}
             type="text"
-            placeholder="Program name. eg.ENVST"
+            placeholder="Program name. eg.Clinical Nutrition (NS)"
             required
           />
 
-          <span>Course Number</span>
+          <span>Course</span>
           <input
             name="Course"
             ref={this.courseRef}
             type="text"
-            placeholder="Course number. eg.ENVST978"
+            placeholder="Course number. eg.NS650 NS651 NS652"
             required
           />
           <div className="center">
             <button className="btn btn__summary" type="submit">
-              Add New Program/Course
+              Add New List
             </button>
             {this.state.success ? <p className="message__warning--success">Success!</p> : ''}
           </div>
@@ -239,7 +247,7 @@ class EditCourseInfo extends React.Component {
       <div className="wrapper">
         <MuiThemeProvider>
           <Dialog
-            title="Edit Course List"
+            title="Edit Naming Guide"
             autoScrollBodyContent
             actions={actions}
             modal={false}
@@ -249,7 +257,7 @@ class EditCourseInfo extends React.Component {
             {this.handleEdit()}
           </Dialog>
         </MuiThemeProvider>
-        <h1 className="App-title">Edit Course Info for DB</h1>
+        <h1 className="App-title">Edit Naming Guide </h1>
         <div className="guide">
           <button
             type="button"
@@ -262,16 +270,15 @@ class EditCourseInfo extends React.Component {
             className="btn btn__guide"
             onClick={() => {
               if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                this.props.history.push('/editname');
+                this.props.history.push('/editcourseinfo');
               } else {
                 // production code
-                this.props.history.push('/all-status-reports/editname');
+                this.props.history.push('/all-status-reports/editcourseinfo');
               }
             }}
           >
-            Edit naming guide
+            Edit course info
           </button>
-
           <button
             className="btn btn__search"
             onClick={() => {
@@ -287,47 +294,46 @@ class EditCourseInfo extends React.Component {
           </button>
         </div>
         <div className="form-list form-list--report">
-          <div className="message__text--body">
-            <p className="heading-primary center">
-              This is the table that is used in program/course number search.
-            </p>
-            <div className="center">
-              <button
-                className="btn btn__guide btn--margin"
-                onClick={() => this.handleOpen({ program: '', course: '' }, { type: 'new' })}
-              >
-                Add New Course
-              </button>
+          <div className="message__text">
+            <div className="message__text--body">
+              <p className="heading-primary center">User Information</p>
+              <div className="center">
+                <button
+                  className="btn btn__guide btn--margin"
+                  onClick={() => this.handleOpen({ program: '', course: '' }, { type: 'new' })}
+                >
+                  Add New List
+                </button>
+              </div>
+              <ul>
+                {this.state.userList.map((u, i) => {
+                  return (
+                    <li key={i} style={{ wordSpacing: '3px' }}>
+                      {u.name}
+                      <button
+                        className="btn btn__remove"
+                        onClick={() => this.handleOpen(u, { type: 'edit' })}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="btn btn__remove"
+                        onClick={() => this.handleOpen(u, { type: 'delete' })}
+                      >
+                        remove
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
-
-            <ul>
-              {this.state.courseinfo.map((p, i) => {
-                return (
-                  <li key={i} style={{ wordSpacing: '3px' }}>
-                    {p.program}: {p.courseNumber} {p.semesterTerm}{' '}
-                    <button
-                      className="btn btn__remove"
-                      onClick={() => this.handleOpen(p, { type: 'edit' })}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="btn btn__remove"
-                      onClick={() => this.handleOpen(p, { type: 'delete' })}
-                    >
-                      remove
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
           </div>
         </div>
       </div>
     );
   }
 }
-export default withAuth(EditCourseInfo);
-EditCourseInfo.propTypes = {
+export default withAuth(EditUser);
+EditUser.propTypes = {
   history: PropTypes.object.isRequired,
 };

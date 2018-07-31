@@ -6,6 +6,7 @@ import NotFound from './NotFound';
 import EditName from './EditName';
 import EditSelect from './EditSelect';
 import EditCourseInfo from './EditCourseInfo';
+import EditUser from './EditUser';
 import Login from './Login';
 
 // import NotFound from "./NotFound";
@@ -17,6 +18,7 @@ const Router = () => (
       <Route path={`${baseUrl}/editname`} component={EditName} />
       <Route path={`${baseUrl}/editcourseinfo`} component={EditCourseInfo} />
       <Route path={`${baseUrl}/editselect`} component={EditSelect} />
+      <Route path={`${baseUrl}/edituser`} component={EditUser} />
       <Route path={`${baseUrl}/report`} component={Report} />
       <Route path={`${baseUrl}/login`} component={Login} />
       <Route component={NotFound} />
