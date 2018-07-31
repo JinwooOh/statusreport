@@ -59,7 +59,7 @@ class EditName extends React.Component {
       curName: this.state.curName,
     };
     // updating new name
-    const nameId = this.state.curName.id;
+    const nameId = this.state.curName.ID;
     const urlName = `/editname/${nameId}`;
     fetch(urlName, {
       method: 'PUT',
@@ -88,7 +88,7 @@ class EditName extends React.Component {
   };
   handleDeleteName = () => {
     const data = this.state.curName;
-    const nameId = this.state.curName.id;
+    const nameId = this.state.curName.ID;
     const urlName = `/deletename/${nameId}`;
     fetch(urlName, {
       method: 'delete',
@@ -123,7 +123,7 @@ class EditName extends React.Component {
       course: this.courseRef.current.value,
     };
 
-    fetch('/newname', {
+    fetch('/addnewcoursenaming', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -182,7 +182,7 @@ class EditName extends React.Component {
           <p>Program: {this.state.curName.program}</p>
           <p>Courses: {this.state.curName.course}</p>
           <p className="message__warning">
-            Are You Sure you want to remove this name from naming guide?
+            Are you sure you want to remove this name from naming guide?
           </p>
 
           <div className="popupbtn--container">
@@ -210,13 +210,25 @@ class EditName extends React.Component {
 
         <form className="naming-edit" onSubmit={this.handleAddNewName}>
           <span>Program</span>
-          <input name="Program" ref={this.programRef} type="text" placeholder="Program name" />
+          <input
+            name="Program"
+            ref={this.programRef}
+            type="text"
+            placeholder="Program name. eg.Clinical Nutrition (NS)"
+            required
+          />
 
           <span>Course</span>
-          <input name="Course" ref={this.courseRef} type="text" placeholder="Course name" />
+          <input
+            name="Course"
+            ref={this.courseRef}
+            type="text"
+            placeholder="Course number. eg.NS650 NS651 NS652"
+            required
+          />
           <div className="center">
             <button className="btn btn__summary" type="submit">
-              Add New Course
+              Add New List
             </button>
             {this.state.success ? <p className="message__warning--success">Success!</p> : ''}
           </div>
@@ -247,11 +259,15 @@ class EditName extends React.Component {
         </MuiThemeProvider>
         <h1 className="App-title">Edit Naming Guide </h1>
         <div className="guide">
-          <button type="button" className="btn btn__logout" onClick={() => this.handleLogout()}>
+          <button
+            type="button"
+            className="btn btn__logout btn--marginRight"
+            onClick={() => this.handleLogout()}
+          >
             Logout
           </button>
           <button
-            className="btn btn__search"
+            className="btn btn__guide"
             onClick={() => {
               if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
                 this.props.history.push('/editcourseinfo');
@@ -280,9 +296,17 @@ class EditName extends React.Component {
           <div className="form-list form-list--report">
             <div className="message__text">
               <div className="message__text--body">
-                  <p className="heading-primary center">
-                  This is the table that shows up in Naming Guide.
-                  </p>
+                <p className="heading-primary center">
+                  This is the table that is used in Naming Guide.
+                </p>
+                <div className="center">
+                  <button
+                    className="btn btn__guide btn--margin"
+                    onClick={() => this.handleOpen({ program: '', course: '' }, { type: 'new' })}
+                  >
+                    Add New List
+                  </button>
+                </div>
                 <ul>
                   {this.state.nameList.map((p, i) => {
                     return (
@@ -304,14 +328,6 @@ class EditName extends React.Component {
                     );
                   })}
                 </ul>
-                <div className="center">
-                  <button
-                    className="btn btn__summary"
-                    onClick={() => this.handleOpen({ program: '', course: '' }, { type: 'new' })}
-                  >
-                    Add New Course
-                  </button>
-                </div>
               </div>
             </div>
           </div>

@@ -391,9 +391,9 @@ app.post('/submit', (req, res) => {
 // naming guide edit start ...
 app.put('/editname/:nameId', (req, res) => {
   const nameId = req.params.nameId;
-  const newName = { program: req.body.program, course: req.body.course };
+  console.log('courseID: ', nameId);
   connection.query(
-    'UPDATE coursenaming SET ? WHERE id = ?',
+    'UPDATE coursenaming SET ? WHERE ID = ?',
     [{ program: req.body.program, course: req.body.course }, nameId],
     (err, result) => {
       if (err) throw err;
@@ -409,8 +409,30 @@ app.put('/editname/:nameId', (req, res) => {
   res.sendStatus(200);
 });
 
-app.post('/newname', (req, res) => {
+app.post('/addnewcoursenaming', (req, res) => {
   const sql = 'INSERT INTO `coursenaming` (program, course) VALUES (?)';
+  const values = [req.body.program, req.body.course];
+
+  connection.query(sql, [values], (err, result) => {
+    if (err) throw err;
+    console.log(`new coursename is added: ${result.affectedRows}`);
+    console.log(req.body.program, ' and ', req.body.course);
+  });
+  res.sendStatus(200);
+});
+app.delete('/deletename/:nameId', (req, res) => {
+  console.log('courseID: ', req.params.nameId);
+  connection.query('DELETE FROM coursenaming WHERE ID= ?', [req.params.nameId], (err, result) => {
+    if (err) throw err;
+    console.log('deleted.');
+  });
+  res.sendStatus(200);
+});
+// naming guide edit end...
+
+// courseinfo edit start...
+app.post('/addnewcourseinfo', (req, res) => {
+  const sql = 'INSERT INTO `courseinfo` (program, courseNumber) VALUES (?)';
   const values = [req.body.program, req.body.course];
 
   connection.query(sql, [values], (err, result) => {
@@ -422,15 +444,35 @@ app.post('/newname', (req, res) => {
   res.sendStatus(200);
 });
 
-app.delete('/deletename/:nameId', (req, res) => {
-  console.log(req.params.nameId);
-  connection.query('DELETE FROM coursenaming WHERE id= ?', [req.params.nameId], (err, result) => {
+app.delete('/deletecourseinfo/:nameId', (req, res) => {
+  console.log('courseID: ', req.params.nameId);
+  connection.query('DELETE FROM courseinfo WHERE ID= ?', [req.params.nameId], (err, result) => {
     if (err) throw err;
     console.log('deleted.');
   });
   res.sendStatus(200);
 });
-// naming guide edit end...
+
+app.put('/editcourseinfo/:nameId', (req, res) => {
+  const nameId = req.params.nameId;
+  console.log('courseID: ', nameId);
+  connection.query(
+    'UPDATE courseinfo SET ? WHERE ID = ?',
+    [{ program: req.body.program, courseNumber: req.body.course }, nameId],
+    (err, result) => {
+      if (err) throw err;
+      console.log(
+        'new program name: ',
+        req.body.program,
+        ' new course name: ',
+        req.body.course,
+        'are updated.'
+      );
+    }
+  );
+  res.sendStatus(200);
+});
+// courseinfo edit end...
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));

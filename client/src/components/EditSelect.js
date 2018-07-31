@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import withAuth from './withAuth';
 
 class EditSelect extends React.Component {
@@ -40,3 +41,6 @@ class EditSelect extends React.Component {
   }
 }
 export default withAuth(EditSelect);
+EditSelect.propTypes = {
+  history: PropTypes.object.isRequired,
+};
