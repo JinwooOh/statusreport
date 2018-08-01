@@ -238,14 +238,15 @@ class EditUser extends React.Component {
         </MuiThemeProvider>
         <h1 className="App-title">Edit User Information</h1>
         <div className="guide">
-          <button
-            type="button"
-            className="btn btn__logout btn--marginRight"
-            onClick={() => this.handleLogout()}
-          >
-            Logout
-          </button>
-
+          <div className="guide__popup">
+            <button
+              type="button"
+              className="btn btn__logout btn--marginRight"
+              onClick={() => this.handleLogout()}
+            >
+              Logout
+            </button>
+          </div>
           <button
             className="btn btn__search"
             onClick={() => {

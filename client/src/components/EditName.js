@@ -259,26 +259,28 @@ class EditName extends React.Component {
         </MuiThemeProvider>
         <h1 className="App-title">Edit Naming Guide </h1>
         <div className="guide">
-          <button
-            type="button"
-            className="btn btn__logout btn--marginRight"
-            onClick={() => this.handleLogout()}
-          >
-            Logout
-          </button>
-          <button
-            className="btn btn__guide"
-            onClick={() => {
-              if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                this.props.history.push('/editcourseinfo');
-              } else {
-                // production code
-                this.props.history.push('/all-status-reports/editcourseinfo');
-              }
-            }}
-          >
-            Edit course info
-          </button>
+          <div className="guide__popup">
+            <button
+              type="button"
+              className="btn btn__logout btn--marginRight"
+              onClick={() => this.handleLogout()}
+            >
+              Logout
+            </button>
+            <button
+              className="btn btn__guide"
+              onClick={() => {
+                if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                  this.props.history.push('/editcourseinfo');
+                } else {
+                  // production code
+                  this.props.history.push('/all-status-reports/editcourseinfo');
+                }
+              }}
+            >
+              Edit course info
+            </button>
+          </div>
           <button
             className="btn btn__search"
             onClick={() => {
