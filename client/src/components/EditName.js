@@ -292,44 +292,41 @@ class EditName extends React.Component {
           >
             BACK TO REPORT PAGE
           </button>
-
-          <div className="form-list form-list--report">
-            <div className="message__text">
-              <div className="message__text--body">
-                <p className="heading-primary center">
-                  This is the table that is used in Naming Guide.
-                </p>
-                <div className="center">
-                  <button
-                    className="btn btn__guide btn--margin"
-                    onClick={() => this.handleOpen({ program: '', course: '' }, { type: 'new' })}
-                  >
-                    Add New List
-                  </button>
-                </div>
-                <ul>
-                  {this.state.nameList.map((p, i) => {
-                    return (
-                      <li key={i} style={{ wordSpacing: '3px' }}>
-                        {p.program}: {p.course}{' '}
-                        <button
-                          className="btn btn__remove"
-                          onClick={() => this.handleOpen(p, { type: 'edit' })}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          className="btn btn__remove"
-                          onClick={() => this.handleOpen(p, { type: 'delete' })}
-                        >
-                          remove
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
+        </div>
+        <div className="form-list form-list--report">
+          <div className="message__text--body">
+            <p className="heading-primary center">
+              This is the table that is used in Naming Guide.
+            </p>
+            <div className="center">
+              <button
+                className="btn btn__guide btn--margin"
+                onClick={() => this.handleOpen({ program: '', course: '' }, { type: 'new' })}
+              >
+                Add New List
+              </button>
             </div>
+            <ul>
+              {this.state.nameList.map((p, i) => {
+                return (
+                  <li key={i} style={{ wordSpacing: '3px' }}>
+                    {p.program}: {p.course}{' '}
+                    <button
+                      className="btn btn__remove"
+                      onClick={() => this.handleOpen(p, { type: 'edit' })}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="btn btn__remove"
+                      onClick={() => this.handleOpen(p, { type: 'delete' })}
+                    >
+                      remove
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </div>
       </div>
