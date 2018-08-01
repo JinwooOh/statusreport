@@ -156,6 +156,10 @@ select {
   border-radius: 0.3rem;
   background-image: linear-gradient(to right bottom, rgba(164, 10, 60, 0.3), rgba(248, 250, 255, 0.3)); }
 
+.adminBadge {
+  color: #a40a3c;
+  font-weight: 600; }
+
 .center {
   text-align: center; }
 

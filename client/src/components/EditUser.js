@@ -28,11 +28,10 @@ class EditUser extends React.Component {
       })
       .catch(err => console.log(err));
   }
-  programRef = React.createRef();
-  courseRef = React.createRef();
+  userRef = React.createRef();
 
-  handleOpen = (p, type) => {
-    this.setState({ open: true, curName: p, type, success: false });
+  handleOpen = (curName, type) => {
+    this.setState({ open: true, curName, type, success: false });
   };
 
   handleLogout = () => {
@@ -54,13 +53,12 @@ class EditUser extends React.Component {
     // it might not need to update state
 
     const data = {
-      program: this.programRef.current.value,
-      course: this.courseRef.current.value,
+      user: this.userRef.current.value,
       curName: this.state.curName,
     };
     // updating new name
-    const nameId = this.state.curName.ID;
-    const urlName = `/editname/${nameId}`;
+    const nameId = this.state.curName.userID;
+    const urlName = `/edituser/${nameId}`;
     fetch(urlName, {
       method: 'PUT',
       headers: {
@@ -88,8 +86,8 @@ class EditUser extends React.Component {
   };
   handleDeleteName = () => {
     const data = this.state.curName;
-    const nameId = this.state.curName.ID;
-    const urlName = `/deletename/${nameId}`;
+    const nameId = this.state.curName.userID;
+    const urlName = `/deleteuser/${nameId}`;
     fetch(urlName, {
       method: 'delete',
       headers: {
@@ -119,11 +117,10 @@ class EditUser extends React.Component {
   handleAddNewName = event => {
     event.preventDefault();
     const data = {
-      program: this.programRef.current.value,
-      course: this.courseRef.current.value,
+      user: this.userRef.current.value,
     };
 
-    fetch('/addnewcoursenaming', {
+    fetch('/addnewuser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -155,17 +152,13 @@ class EditUser extends React.Component {
         // edit course form
         <div className="message">
           <h2 className="message__heading">Current name</h2>
-          <p>Program: {this.state.curName.program}</p>
-          <p>Courses: {this.state.curName.course}</p>
+          <p>User: {this.state.curName.name}</p>
 
-          <h2 className="message__heading">New Name</h2>
+          <h2 className="message__heading">User Name</h2>
 
           <form className="naming-edit" onSubmit={this.handleEditName}>
-            <span>Program</span>
-            <input name="Program" ref={this.programRef} type="text" placeholder="Program name" />
-
-            <span>Course</span>
-            <input name="Course" ref={this.courseRef} type="text" placeholder="Course name" />
+            <span>Change User Name</span>
+            <input name="User" ref={this.userRef} type="text" placeholder="user name" required />
             <div className="center">
               <button className="btn btn__summary" type="submit">
                 Change Name
@@ -179,10 +172,10 @@ class EditUser extends React.Component {
       return (
         <div className="message">
           <h2 className="message__heading">Current name</h2>
-          <p>Program: {this.state.curName.program}</p>
-          <p>Courses: {this.state.curName.course}</p>
+          <p>User: {this.state.curName.name}</p>
+
           <p className="message__warning">
-            Are you sure you want to remove this name from naming guide?
+            Are you sure you want to remove this user from user table?
           </p>
 
           <div className="popupbtn--container">
@@ -190,7 +183,7 @@ class EditUser extends React.Component {
               className="btn btn__summary popupbtn--delete"
               onClick={() => this.handleDeleteName()}
             >
-              Delete Name
+              Delete User
             </button>
             <button
               className="btn btn__summary popupbtn--cancle"
@@ -203,32 +196,18 @@ class EditUser extends React.Component {
         </div>
       );
     }
-    // add new course form
+    // add new user form
     return (
       <div className="message">
         <h2 className="message__heading">New Name</h2>
 
         <form className="naming-edit" onSubmit={this.handleAddNewName}>
-          <span>Program</span>
-          <input
-            name="Program"
-            ref={this.programRef}
-            type="text"
-            placeholder="Program name. eg.Clinical Nutrition (NS)"
-            required
-          />
+          <span>New User</span>
+          <input name="User" ref={this.userRef} type="text" placeholder="user name" required />
 
-          <span>Course</span>
-          <input
-            name="Course"
-            ref={this.courseRef}
-            type="text"
-            placeholder="Course number. eg.NS650 NS651 NS652"
-            required
-          />
           <div className="center">
             <button className="btn btn__summary" type="submit">
-              Add New List
+              Add New User
             </button>
             {this.state.success ? <p className="message__warning--success">Success!</p> : ''}
           </div>
@@ -247,7 +226,7 @@ class EditUser extends React.Component {
       <div className="wrapper">
         <MuiThemeProvider>
           <Dialog
-            title="Edit Naming Guide"
+            title="Edit User Info"
             autoScrollBodyContent
             actions={actions}
             modal={false}
@@ -257,7 +236,7 @@ class EditUser extends React.Component {
             {this.handleEdit()}
           </Dialog>
         </MuiThemeProvider>
-        <h1 className="App-title">Edit Naming Guide </h1>
+        <h1 className="App-title">Edit User Information</h1>
         <div className="guide">
           <button
             type="button"
@@ -266,19 +245,7 @@ class EditUser extends React.Component {
           >
             Logout
           </button>
-          <button
-            className="btn btn__guide"
-            onClick={() => {
-              if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                this.props.history.push('/editcourseinfo');
-              } else {
-                // production code
-                this.props.history.push('/all-status-reports/editcourseinfo');
-              }
-            }}
-          >
-            Edit course info
-          </button>
+
           <button
             className="btn btn__search"
             onClick={() => {
@@ -300,15 +267,16 @@ class EditUser extends React.Component {
               <div className="center">
                 <button
                   className="btn btn__guide btn--margin"
-                  onClick={() => this.handleOpen({ program: '', course: '' }, { type: 'new' })}
+                  onClick={() => this.handleOpen({ curName: '' }, { type: 'new' })}
                 >
-                  Add New List
+                  Add New User
                 </button>
               </div>
               <ul>
                 {this.state.userList.map((u, i) => {
                   return (
                     <li key={i} style={{ wordSpacing: '3px' }}>
+                      <span className="adminBadge">{u.admin === 1 ? '[Admin] ' : ' '}</span>
                       {u.name}
                       <button
                         className="btn btn__remove"

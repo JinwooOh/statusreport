@@ -143,7 +143,7 @@ app.get('/name', (req, res) => {
 });
 
 app.get('/users', (req, res) => {
-  connection.query('SELECT * FROM user', (err, result, fields) => {
+  connection.query('SELECT * FROM user ORDER BY admin DESC', (err, result, fields) => {
     if (err) {
       console.log('Error in users query');
     } else {
@@ -473,6 +473,41 @@ app.put('/editcourseinfo/:nameId', (req, res) => {
   res.sendStatus(200);
 });
 // courseinfo edit end...
+
+// user edit start...
+app.post('/addnewuser', (req, res) => {
+  const sql = 'INSERT INTO `user` (name) VALUES (?)';
+  const values = [req.body.user];
+
+  connection.query(sql, [values], (err, result) => {
+    if (err) throw err;
+    console.log(`new coursename is added: ${result.affectedRows}`);
+    console.log(req.body.program, ' and ', req.body.course);
+  });
+  res.sendStatus(200);
+});
+
+app.delete('/deleteuser/:nameId', (req, res) => {
+  connection.query('DELETE FROM user WHERE userID= ?', [req.params.nameId], (err, result) => {
+    if (err) throw err;
+    console.log('deleted.');
+  });
+  res.sendStatus(200);
+});
+
+app.put('/edituser/:nameId', (req, res) => {
+  const nameId = req.params.nameId;
+  connection.query(
+    'UPDATE user SET ? WHERE userID = ?',
+    [{ name: req.body.user }, nameId],
+    (err, result) => {
+      if (err) throw err;
+      console.log('new user name: ', req.body.user);
+    }
+  );
+  res.sendStatus(200);
+});
+// user edit end...
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
