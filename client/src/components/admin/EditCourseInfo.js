@@ -1,40 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Dialog from 'material-ui/Dialog';
-import withAuth from './withAuth';
-import AuthService from './AuthService';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import withAuth from '../withAuth';
+import AuthService from '../AuthService';
 
 const Auth = new AuthService();
 
-class EditName extends React.Component {
+class EditCourseInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
-      curName: {},
-      nameList: [], // for naming guide
-      type: '',
+      open: false, // popup open?
+      curName: {}, // current program/course name
+      type: '', // edit, remove or new
       success: false,
+      courseinfo: [],
     };
   }
   componentDidMount() {
-    fetch('/name')
+    fetch('/courseinfo')
       .then(response => response.json())
       .then(findresponse => {
         this.setState({
-          nameList: [...findresponse],
+          courseinfo: [...findresponse],
         });
       })
       .catch(err => console.log(err));
   }
   programRef = React.createRef();
   courseRef = React.createRef();
-
-  handleOpen = (p, type) => {
-    this.setState({ open: true, curName: p, type, success: false });
-  };
-
   handleLogout = () => {
     Auth.logout();
     if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
@@ -45,39 +40,29 @@ class EditName extends React.Component {
     }
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
-  handleEditName = event => {
+  handleAddNewName = event => {
     event.preventDefault();
-    // it might not need to update state
-
     const data = {
       program: this.programRef.current.value,
       course: this.courseRef.current.value,
-      curName: this.state.curName,
     };
-    // updating new name
-    const nameId = this.state.curName.ID;
-    const urlName = `/editname/${nameId}`;
-    fetch(urlName, {
-      method: 'PUT',
+
+    fetch('/addnewcourseinfo', {
+      method: 'POST',
       headers: {
-        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     })
-      .then(() => {
-        console.log('updated');
-        // refetch to rerender updated nameList
-        return fetch('/name');
+      .then(body => {
+        console.log('State: ', body);
+        // refetch to rerender updated courseinfo
+        return fetch('/courseinfo');
       })
       .then(response => response.json())
       .then(findresponse => {
         this.setState({
-          nameList: [...findresponse],
+          courseinfo: [...findresponse],
         });
       })
       .catch(err => console.log(err));
@@ -86,10 +71,12 @@ class EditName extends React.Component {
       success: true,
     });
   };
+
   handleDeleteName = () => {
+    console.log(this.state.curName);
     const data = this.state.curName;
     const nameId = this.state.curName.ID;
-    const urlName = `/deletename/${nameId}`;
+    const urlName = `/deletecourseinfo/${nameId}`;
     fetch(urlName, {
       method: 'delete',
       headers: {
@@ -101,12 +88,12 @@ class EditName extends React.Component {
       .then(() => {
         console.log('deleted');
         // refetch to rerender updated nameList
-        return fetch('/name');
+        return fetch('/courseinfo');
       })
       .then(response => response.json())
       .then(findresponse => {
         this.setState({
-          nameList: [...findresponse],
+          courseinfo: [...findresponse],
         });
       })
       .catch(err => console.log(err));
@@ -116,39 +103,48 @@ class EditName extends React.Component {
     });
   };
 
-  handleAddNewName = event => {
+  handleEditName = event => {
     event.preventDefault();
+    // it might not need to update state
     const data = {
       program: this.programRef.current.value,
       course: this.courseRef.current.value,
+      curName: this.state.curName,
     };
-
-    fetch('/addnewcoursenaming', {
-      method: 'POST',
+    // updating new name
+    const nameId = this.state.curName.ID;
+    const urlName = `/editcourseinfo/${nameId}`;
+    fetch(urlName, {
+      method: 'PUT',
       headers: {
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     })
-      .then(body => {
-        console.log('State: ', body);
+      .then(() => {
+        console.log('updated');
         // refetch to rerender updated nameList
-        return fetch('/name');
+        return fetch('/courseinfo');
       })
       .then(response => response.json())
       .then(findresponse => {
         this.setState({
-          nameList: [...findresponse],
+          courseinfo: [...findresponse],
         });
       })
       .catch(err => console.log(err));
-
     this.setState({
       success: true,
     });
   };
 
-  // inside of the dialog popup
+  handleOpen = (p, type) => {
+    this.setState({ open: true, curName: p, type, success: false });
+  };
+  handleClose = () => {
+    this.setState({ open: false });
+  };
   handleEdit = () => {
     if (this.state.type.type === 'edit') {
       return (
@@ -157,13 +153,10 @@ class EditName extends React.Component {
           <h2 className="message__heading">Current name</h2>
           <p>Program: {this.state.curName.program}</p>
           <p>Courses: {this.state.curName.course}</p>
-
           <h2 className="message__heading">New Name</h2>
-
           <form className="naming-edit" onSubmit={this.handleEditName}>
             <span>Program</span>
             <input name="Program" ref={this.programRef} type="text" placeholder="Program name" />
-
             <span>Course</span>
             <input name="Course" ref={this.courseRef} type="text" placeholder="Course name" />
             <div className="center">
@@ -180,9 +173,9 @@ class EditName extends React.Component {
         <div className="message">
           <h2 className="message__heading">Current name</h2>
           <p>Program: {this.state.curName.program}</p>
-          <p>Courses: {this.state.curName.course}</p>
+          <p>Courses: {this.state.curName.courseNumber}</p>
           <p className="message__warning">
-            Are you sure you want to remove this name from naming guide?
+            Are you sure you want to remove this name from courseinfo table?
           </p>
 
           <div className="popupbtn--container">
@@ -203,32 +196,31 @@ class EditName extends React.Component {
         </div>
       );
     }
-    // add new course form
+    // add new program/course form
     return (
       <div className="message">
         <h2 className="message__heading">New Name</h2>
-
         <form className="naming-edit" onSubmit={this.handleAddNewName}>
           <span>Program</span>
           <input
             name="Program"
             ref={this.programRef}
             type="text"
-            placeholder="Program name. eg.Clinical Nutrition (NS)"
+            placeholder="Program name. eg.ENVST"
             required
           />
 
-          <span>Course</span>
+          <span>Course Number</span>
           <input
             name="Course"
             ref={this.courseRef}
             type="text"
-            placeholder="Course number. eg.NS650 NS651 NS652"
+            placeholder="Course number. eg.ENVST978"
             required
           />
           <div className="center">
             <button className="btn btn__summary" type="submit">
-              Add New List
+              Add New Program/Course
             </button>
             {this.state.success ? <p className="message__warning--success">Success!</p> : ''}
           </div>
@@ -247,7 +239,7 @@ class EditName extends React.Component {
       <div className="wrapper">
         <MuiThemeProvider>
           <Dialog
-            title="Edit Naming Guide"
+            title="Edit Course List"
             autoScrollBodyContent
             actions={actions}
             modal={false}
@@ -257,7 +249,7 @@ class EditName extends React.Component {
             {this.handleEdit()}
           </Dialog>
         </MuiThemeProvider>
-        <h1 className="App-title">Edit Naming Guide </h1>
+        <h1 className="App-title">Edit Course Info for DB</h1>
         <div className="guide">
           <div className="guide__popup">
             <button
@@ -271,14 +263,14 @@ class EditName extends React.Component {
               className="btn btn__guide"
               onClick={() => {
                 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                  this.props.history.push('/editcourseinfo');
+                  this.props.history.push('/editname');
                 } else {
                   // production code
-                  this.props.history.push('/all-status-reports/editcourseinfo');
+                  this.props.history.push('/all-status-reports/editname');
                 }
               }}
             >
-              Edit course info
+              Edit naming guide
             </button>
           </div>
           <button
@@ -298,21 +290,22 @@ class EditName extends React.Component {
         <div className="form-list form-list--report">
           <div className="message__text--body">
             <p className="heading-primary center">
-              This is the table that is used in Naming Guide.
+              This is the table that is used in program/course number search.
             </p>
             <div className="center">
               <button
                 className="btn btn__guide btn--margin"
                 onClick={() => this.handleOpen({ program: '', course: '' }, { type: 'new' })}
               >
-                Add New List
+                Add New Course
               </button>
             </div>
+
             <ul>
-              {this.state.nameList.map((p, i) => {
+              {this.state.courseinfo.map((p, i) => {
                 return (
                   <li key={i} style={{ wordSpacing: '3px' }}>
-                    {p.program}: {p.course}{' '}
+                    {p.program}: {p.courseNumber} {p.semesterTerm}{' '}
                     <button
                       className="btn btn__remove"
                       onClick={() => this.handleOpen(p, { type: 'edit' })}
@@ -335,7 +328,7 @@ class EditName extends React.Component {
     );
   }
 }
-export default withAuth(EditName);
-EditName.propTypes = {
+export default withAuth(EditCourseInfo);
+EditCourseInfo.propTypes = {
   history: PropTypes.object.isRequired,
 };

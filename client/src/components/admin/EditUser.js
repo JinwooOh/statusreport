@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Dialog from 'material-ui/Dialog';
-import withAuth from './withAuth';
-import AuthService from './AuthService';
+import withAuth from '../withAuth';
+import AuthService from '../AuthService';
 
 const Auth = new AuthService();
 

@@ -3,11 +3,11 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import App from './App';
 import Report from './Report';
 import NotFound from './NotFound';
-import EditName from './EditName';
-import EditSelect from './EditSelect';
-import EditCourseInfo from './EditCourseInfo';
-import EditUser from './EditUser';
-import Login from './Login';
+import EditName from './admin/EditName';
+import EditSelect from './admin/EditSelect';
+import EditCourseInfo from './admin/EditCourseInfo';
+import EditUser from './admin/EditUser';
+import Login from './admin/Login';
 
 // import NotFound from "./NotFound";
 const baseUrl = process.env.PUBLIC_URL;

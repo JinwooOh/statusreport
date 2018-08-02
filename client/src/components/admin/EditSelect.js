@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withAuth from './withAuth';
-import AuthService from './AuthService';
+import withAuth from '../withAuth';
+import AuthService from '../AuthService';
 
 const Auth = new AuthService();
 

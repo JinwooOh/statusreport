@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AlertPopup from 'react-popup';
-import AuthService from './AuthService';
+import AuthService from '../AuthService';
 
 class Login extends Component {
   constructor() {
