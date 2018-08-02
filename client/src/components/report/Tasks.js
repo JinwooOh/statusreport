@@ -71,7 +71,11 @@ class Tasks extends React.Component {
           </TransitionGroup>
           <p>{this.props.date.toString()}</p>
 
-          <UserSuggestion handleUserName={this.handleUserName} required />
+          <UserSuggestion
+            handleUserName={this.handleUserName}
+            userName={this.props.userName}
+            required
+          />
         </div>
 
         <button className="btn btn__summary" onClick={this.props.handleSubmit}>

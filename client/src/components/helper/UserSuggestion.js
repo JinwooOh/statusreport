@@ -63,6 +63,7 @@ class UserSuggestion extends React.Component {
       value,
       onChange: this.onChange,
     };
+
     return (
       <React.Fragment>
         <Autosuggest

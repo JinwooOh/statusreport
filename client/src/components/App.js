@@ -162,7 +162,7 @@ class App extends React.Component {
     this.setState({
       tasks: {},
       totalHours: 0,
-      userName: '',
+      // userName: '',
     });
   };
 
