@@ -185,7 +185,7 @@ class AddForm extends React.Component {
     };
     this.props.sumHours(this.hoursRef.current.value);
     this.props.addTask(task);
-    event.currentTarget.reset();
+    // event.currentTarget.reset();
   };
   createTaskAdmin = event => {
     event.preventDefault();
@@ -198,7 +198,7 @@ class AddForm extends React.Component {
     };
     this.props.sumHours(this.hoursRef.current.value);
     this.props.addTask(task);
-    event.currentTarget.reset();
+    // event.currentTarget.reset();
   };
 
   render() {
