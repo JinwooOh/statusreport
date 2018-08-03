@@ -216,35 +216,37 @@ class App extends React.Component {
             <AppContext.Consumer>
               {context => {
                 return (
-                  <button
-                    className="btn btn__editname"
-                    onClick={() => {
-                      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                        this.props.history.push(`/editselect/`);
-                      } else {
-                        // production
-                        this.props.history.push(`${context.production}editselect/`);
-                      }
-                    }}
-                  >
-                    Edit
-                  </button>
+                  <React.Fragment>
+                    <button
+                      className="btn btn__editname"
+                      onClick={() => {
+                        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                          this.props.history.push(`/editselect/`);
+                        } else {
+                          // production
+                          this.props.history.push(`${context.production}editselect/`);
+                        }
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="btn btn__search"
+                      onClick={() => {
+                        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                          this.props.history.push('/report/');
+                        } else {
+                          // production
+                          this.props.history.push(`${context.production}report/`);
+                        }
+                      }}
+                    >
+                      SEARCH
+                    </button>
+                  </React.Fragment>
                 );
               }}
             </AppContext.Consumer>
-            <button
-              className="btn btn__search"
-              onClick={() => {
-                if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                  this.props.history.push('/report/');
-                } else {
-                  // production
-                  this.props.history.push('/all-status-reports/report/');
-                }
-              }}
-            >
-              SEARCH
-            </button>
           </div>
 
           <Forms

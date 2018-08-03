@@ -4,6 +4,8 @@ import Dialog from 'material-ui/Dialog';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import withAuth from '../withAuth';
 import AuthService from '../AuthService';
+import AppProvider from '../helper/AppProvider';
+import { AppContext } from '../helper/envHelper';
 
 const Auth = new AuthService();
 
@@ -236,95 +238,113 @@ class EditCourseInfo extends React.Component {
       </button>,
     ];
     return (
-      <div className="wrapper">
-        <MuiThemeProvider>
-          <Dialog
-            title="Edit Course List"
-            autoScrollBodyContent
-            actions={actions}
-            modal={false}
-            open={this.state.open}
-            onRequestClose={this.handleClose}
-          >
-            {this.handleEdit()}
-          </Dialog>
-        </MuiThemeProvider>
-        <h1 className="App-title">Edit Course Info for DB</h1>
-        <div className="guide">
-          <div className="guide__popup">
-            <button
-              type="button"
-              className="btn btn__logout btn--marginRight"
-              onClick={() => this.handleLogout()}
+      <AppProvider>
+        <div className="wrapper">
+          <MuiThemeProvider>
+            <Dialog
+              title="Edit Course List"
+              autoScrollBodyContent
+              actions={actions}
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.handleClose}
             >
-              Logout
-            </button>
-            <button
-              className="btn btn__guide"
-              onClick={() => {
-                if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                  this.props.history.push('/editname');
-                } else {
-                  // production code
-                  this.props.history.push('/all-status-reports/editname');
-                }
-              }}
-            >
-              Edit naming guide
-            </button>
-          </div>
-          <button
-            className="btn btn__search"
-            onClick={() => {
-              if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                this.props.history.push('/');
-              } else {
-                // production code
-                this.props.history.push('/all-status-reports/');
-              }
-            }}
-          >
-            BACK TO REPORT PAGE
-          </button>
-        </div>
-        <div className="form-list form-list--report">
-          <div className="message__text--body">
-            <p className="heading-primary center">
-              This is the table that is used in program/course number search.
-            </p>
-            <div className="center">
+              {this.handleEdit()}
+            </Dialog>
+          </MuiThemeProvider>
+          <h1 className="App-title">Edit Course Info for DB</h1>
+          <div className="guide">
+            <div className="guide__popup">
               <button
-                className="btn btn__guide btn--margin"
-                onClick={() => this.handleOpen({ program: '', course: '' }, { type: 'new' })}
+                type="button"
+                className="btn btn__logout btn--marginRight"
+                onClick={() => this.handleLogout()}
               >
-                Add New Course
+                Logout
               </button>
+              <AppContext.Consumer>
+                {context => {
+                  return (
+                    <React.Fragment>
+                      <button
+                        className="btn btn__guide"
+                        onClick={() => {
+                          if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                            this.props.history.push('/editname');
+                          } else {
+                            // production code
+                            this.props.history.push(`${context.production}editname`);
+                          }
+                        }}
+                      >
+                        Edit naming guide
+                      </button>
+                    </React.Fragment>
+                  );
+                }}
+              </AppContext.Consumer>
             </div>
-
-            <ul>
-              {this.state.courseinfo.map((p, i) => {
+            <AppContext.Consumer>
+              {context => {
                 return (
-                  <li key={i} style={{ wordSpacing: '3px' }}>
-                    {p.program}: {p.courseNumber} {p.semesterTerm}{' '}
+                  <React.Fragment>
                     <button
-                      className="btn btn__remove"
-                      onClick={() => this.handleOpen(p, { type: 'edit' })}
+                      className="btn btn__search"
+                      onClick={() => {
+                        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                          this.props.history.push('/');
+                        } else {
+                          // production code
+                          this.props.history.push(`${context.production}`);
+                        }
+                      }}
                     >
-                      Edit
+                      BACK TO REPORT PAGE
                     </button>
-                    <button
-                      className="btn btn__remove"
-                      onClick={() => this.handleOpen(p, { type: 'delete' })}
-                    >
-                      remove
-                    </button>
-                  </li>
+                  </React.Fragment>
                 );
-              })}
-            </ul>
+              }}
+            </AppContext.Consumer>
+          </div>
+          <div className="form-list form-list--report">
+            <div className="message__text--body">
+              <p className="heading-primary center">
+                This is the table that is used in program/course number search.
+              </p>
+              <div className="center">
+                <button
+                  className="btn btn__guide btn--margin"
+                  onClick={() => this.handleOpen({ program: '', course: '' }, { type: 'new' })}
+                >
+                  Add New Course
+                </button>
+              </div>
+
+              <ul>
+                {this.state.courseinfo.map((p, i) => {
+                  return (
+                    <li key={i} style={{ wordSpacing: '3px' }}>
+                      {p.program}: {p.courseNumber} {p.semesterTerm}{' '}
+                      <button
+                        className="btn btn__remove"
+                        onClick={() => this.handleOpen(p, { type: 'edit' })}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="btn btn__remove"
+                        onClick={() => this.handleOpen(p, { type: 'delete' })}
+                      >
+                        remove
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
+      </AppProvider>
     );
   }
 }

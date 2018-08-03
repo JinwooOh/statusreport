@@ -9,6 +9,9 @@ import { search } from './helper/Message';
 import Popup from './Popup';
 import SearchSummary from './search/SearchSummary';
 
+import AppProvider from './helper/AppProvider';
+import { AppContext } from './helper/envHelper';
+
 class Report extends Component {
   constructor(props) {
     super(props);
@@ -185,56 +188,67 @@ class Report extends Component {
 
   render() {
     return (
-      <div className="wrapper">
-        {/* <Popup closeBtn={false} /> */}
+      <AppProvider>
+        <div className="wrapper">
+          {/* <Popup closeBtn={false} /> */}
 
-        <h1 className="App-title">Search Database</h1>
-        <div className="guide">
-          <MuiThemeProvider>
-            <div className="guide__popup">
-              <Popup title="Search Guide" text={search()} />
-            </div>
-          </MuiThemeProvider>
-          <button
-            className="btn btn__search"
-            onClick={() => {
-              if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                this.props.history.push('/');
-              } else {
-                // production code
-                this.props.history.push('/all-status-reports/');
-              }
-            }}
-          >
-            BACK TO REPORT PAGE
-          </button>
-          {/* <button onClick={() => this.handlePop("search-guide")}>
+          <h1 className="App-title">Search Database</h1>
+          <div className="guide">
+            <MuiThemeProvider>
+              <div className="guide__popup">
+                <Popup title="Search Guide" text={search()} />
+              </div>
+            </MuiThemeProvider>
+            <AppContext.Consumer>
+              {context => {
+                return (
+                  <React.Fragment>
+                    <button
+                      className="btn btn__search"
+                      onClick={() => {
+                        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                          this.props.history.push('/');
+                        } else {
+                          // production code
+                          this.props.history.push(`${context.production}`);
+                        }
+                      }}
+                    >
+                      BACK TO REPORT PAGE
+                    </button>
+                  </React.Fragment>
+                );
+              }}
+            </AppContext.Consumer>
+
+            {/* <button onClick={() => this.handlePop("search-guide")}>
             Search Guide
           </button> */}
-        </div>
-        <SearchType
-          selectSearch={this.selectSearch}
-          searchType={this.state.searchType}
-          addSearchOptions={this.addSearchOptions}
-          handleSearch={this.handleSearch}
-          programSearchType={this.programSearchType}
-        />
+          </div>
+          <SearchType
+            selectSearch={this.selectSearch}
+            searchType={this.state.searchType}
+            addSearchOptions={this.addSearchOptions}
+            handleSearch={this.handleSearch}
+            programSearchType={this.programSearchType}
+          />
 
-        <SearchResult
-          searchCourse={this.state.searchCourse}
-          searchAdmin={this.state.searchAdmin}
-          searchProgram={this.state.searchProgram}
-          searchType={this.state.searchType}
-        />
-        <SearchSummary
-          searchType={this.state.searchType}
-          totalHours={this.state.totalHours}
-          summaryInfo={this.state.summaryInfo}
-          searchProgram={this.state.searchProgram}
-          searchCourse={this.state.searchCourse}
-          searchAdmin={this.state.searchAdmin}
-        />
-      </div>
+          <SearchResult
+            searchCourse={this.state.searchCourse}
+            searchAdmin={this.state.searchAdmin}
+            searchProgram={this.state.searchProgram}
+            searchType={this.state.searchType}
+          />
+          <SearchSummary
+            searchType={this.state.searchType}
+            totalHours={this.state.totalHours}
+            summaryInfo={this.state.summaryInfo}
+            searchProgram={this.state.searchProgram}
+            searchCourse={this.state.searchCourse}
+            searchAdmin={this.state.searchAdmin}
+          />
+        </div>
+      </AppProvider>
     );
   }
 }

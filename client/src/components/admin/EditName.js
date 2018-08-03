@@ -5,6 +5,9 @@ import Dialog from 'material-ui/Dialog';
 import withAuth from '../withAuth';
 import AuthService from '../AuthService';
 
+import AppProvider from '../helper/AppProvider';
+import { AppContext } from '../helper/envHelper';
+
 const Auth = new AuthService();
 
 class EditName extends React.Component {
@@ -37,6 +40,7 @@ class EditName extends React.Component {
 
   handleLogout = () => {
     Auth.logout();
+
     if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
       this.props.history.push('/login/');
     } else {
@@ -244,94 +248,112 @@ class EditName extends React.Component {
       </button>,
     ];
     return (
-      <div className="wrapper">
-        <MuiThemeProvider>
-          <Dialog
-            title="Edit Naming Guide"
-            autoScrollBodyContent
-            actions={actions}
-            modal={false}
-            open={this.state.open}
-            onRequestClose={this.handleClose}
-          >
-            {this.handleEdit()}
-          </Dialog>
-        </MuiThemeProvider>
-        <h1 className="App-title">Edit Naming Guide </h1>
-        <div className="guide">
-          <div className="guide__popup">
-            <button
-              type="button"
-              className="btn btn__logout btn--marginRight"
-              onClick={() => this.handleLogout()}
+      <AppProvider>
+        <div className="wrapper">
+          <MuiThemeProvider>
+            <Dialog
+              title="Edit Naming Guide"
+              autoScrollBodyContent
+              actions={actions}
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.handleClose}
             >
-              Logout
-            </button>
-            <button
-              className="btn btn__guide"
-              onClick={() => {
-                if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                  this.props.history.push('/editcourseinfo');
-                } else {
-                  // production code
-                  this.props.history.push('/all-status-reports/editcourseinfo');
-                }
-              }}
-            >
-              Edit course info
-            </button>
-          </div>
-          <button
-            className="btn btn__search"
-            onClick={() => {
-              if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                this.props.history.push('/');
-              } else {
-                // production code
-                this.props.history.push('/all-status-reports/');
-              }
-            }}
-          >
-            BACK TO REPORT PAGE
-          </button>
-        </div>
-        <div className="form-list form-list--report">
-          <div className="message__text--body">
-            <p className="heading-primary center">
-              This is the table that is used in Naming Guide.
-            </p>
-            <div className="center">
+              {this.handleEdit()}
+            </Dialog>
+          </MuiThemeProvider>
+          <h1 className="App-title">Edit Naming Guide </h1>
+          <div className="guide">
+            <div className="guide__popup">
               <button
-                className="btn btn__guide btn--margin"
-                onClick={() => this.handleOpen({ program: '', course: '' }, { type: 'new' })}
+                type="button"
+                className="btn btn__logout btn--marginRight"
+                onClick={() => this.handleLogout()}
               >
-                Add New List
+                Logout
               </button>
+              <AppContext.Consumer>
+                {context => {
+                  return (
+                    <React.Fragment>
+                      <button
+                        className="btn btn__guide"
+                        onClick={() => {
+                          if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                            this.props.history.push('/editcourseinfo');
+                          } else {
+                            // production code
+                            this.props.history.push(`${context.production}editcourseinfo`);
+                          }
+                        }}
+                      >
+                        Edit course info
+                      </button>
+                    </React.Fragment>
+                  );
+                }}
+              </AppContext.Consumer>
             </div>
-            <ul>
-              {this.state.nameList.map((p, i) => {
+            <AppContext.Consumer>
+              {context => {
                 return (
-                  <li key={i} style={{ wordSpacing: '3px' }}>
-                    {p.program}: {p.course}{' '}
+                  <React.Fragment>
                     <button
-                      className="btn btn__remove"
-                      onClick={() => this.handleOpen(p, { type: 'edit' })}
+                      className="btn btn__search"
+                      onClick={() => {
+                        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                          this.props.history.push('/');
+                        } else {
+                          // production code
+                          this.props.history.push(`${context.production}`);
+                        }
+                      }}
                     >
-                      Edit
+                      BACK TO REPORT PAGE
                     </button>
-                    <button
-                      className="btn btn__remove"
-                      onClick={() => this.handleOpen(p, { type: 'delete' })}
-                    >
-                      remove
-                    </button>
-                  </li>
+                  </React.Fragment>
                 );
-              })}
-            </ul>
+              }}
+            </AppContext.Consumer>
+          </div>
+          <div className="form-list form-list--report">
+            <div className="message__text--body">
+              <p className="heading-primary center">
+                This is the table that is used in Naming Guide.
+              </p>
+              <div className="center">
+                <button
+                  className="btn btn__guide btn--margin"
+                  onClick={() => this.handleOpen({ program: '', course: '' }, { type: 'new' })}
+                >
+                  Add New List
+                </button>
+              </div>
+              <ul>
+                {this.state.nameList.map((p, i) => {
+                  return (
+                    <li key={i} style={{ wordSpacing: '3px' }}>
+                      {p.program}: {p.course}{' '}
+                      <button
+                        className="btn btn__remove"
+                        onClick={() => this.handleOpen(p, { type: 'edit' })}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="btn btn__remove"
+                        onClick={() => this.handleOpen(p, { type: 'delete' })}
+                      >
+                        remove
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
+      </AppProvider>
     );
   }
 }

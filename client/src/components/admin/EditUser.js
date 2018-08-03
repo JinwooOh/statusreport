@@ -5,6 +5,9 @@ import Dialog from 'material-ui/Dialog';
 import withAuth from '../withAuth';
 import AuthService from '../AuthService';
 
+import AppProvider from '../helper/AppProvider';
+import { AppContext } from '../helper/envHelper';
+
 const Auth = new AuthService();
 
 class EditUser extends React.Component {
@@ -223,82 +226,92 @@ class EditUser extends React.Component {
       </button>,
     ];
     return (
-      <div className="wrapper">
-        <MuiThemeProvider>
-          <Dialog
-            title="Edit User Info"
-            autoScrollBodyContent
-            actions={actions}
-            modal={false}
-            open={this.state.open}
-            onRequestClose={this.handleClose}
-          >
-            {this.handleEdit()}
-          </Dialog>
-        </MuiThemeProvider>
-        <h1 className="App-title">Edit User Information</h1>
-        <div className="guide">
-          <div className="guide__popup">
-            <button
-              type="button"
-              className="btn btn__logout btn--marginRight"
-              onClick={() => this.handleLogout()}
+      <AppProvider>
+        <div className="wrapper">
+          <MuiThemeProvider>
+            <Dialog
+              title="Edit User Info"
+              autoScrollBodyContent
+              actions={actions}
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.handleClose}
             >
-              Logout
-            </button>
+              {this.handleEdit()}
+            </Dialog>
+          </MuiThemeProvider>
+          <h1 className="App-title">Edit User Information</h1>
+          <div className="guide">
+            <div className="guide__popup">
+              <button
+                type="button"
+                className="btn btn__logout btn--marginRight"
+                onClick={() => this.handleLogout()}
+              >
+                Logout
+              </button>
+            </div>
+            <AppContext.Consumer>
+              {context => {
+                return (
+                  <React.Fragment>
+                    <button
+                      className="btn btn__search"
+                      onClick={() => {
+                        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                          this.props.history.push('/');
+                        } else {
+                          // production code
+                          this.props.history.push(`${context.production}`);
+                        }
+                      }}
+                    >
+                      BACK TO REPORT PAGE
+                    </button>
+                  </React.Fragment>
+                );
+              }}
+            </AppContext.Consumer>
           </div>
-          <button
-            className="btn btn__search"
-            onClick={() => {
-              if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                this.props.history.push('/');
-              } else {
-                // production code
-                this.props.history.push('/all-status-reports/');
-              }
-            }}
-          >
-            BACK TO REPORT PAGE
-          </button>
-        </div>
-        <div className="form-list form-list--report">
-          <div className="message__text">
-            <div className="message__text--body">
-              <p className="heading-primary center">User Information</p>
-              <div className="center">
-                <button
-                  className="btn btn__guide btn--margin"
-                  onClick={() => this.handleOpen({ curName: '' }, { type: 'new' })}
-                >
-                  Add New User
-                </button>
+          <div className="form-list form-list--report">
+            <div className="message__text">
+              <div className="message__text--body">
+                <p className="heading-primary center">User Information</p>
+                <div className="center">
+                  <button
+                    className="btn btn__guide btn--margin"
+                    onClick={() => this.handleOpen({ curName: '' }, { type: 'new' })}
+                  >
+                    Add New User
+                  </button>
+                </div>
+                <ul>
+                  {this.state.userList.map((u, i) => {
+                    return (
+                      <li key={i} style={{ wordSpacing: '3px' }}>
+                        <span className="adminBadge">{u.admin === 1 ? '[Admin] ' : ' '}</span>
+                        {u.name}
+                        <button
+                          className="btn btn__remove"
+                          onClick={() => this.handleOpen(u, { type: 'edit' })}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn btn__remove"
+                          onClick={() => this.handleOpen(u, { type: 'delete' })}
+                        >
+                          remove
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
-              <ul>
-                {this.state.userList.map((u, i) => {
-                  return (
-                    <li key={i} style={{ wordSpacing: '3px' }}>
-                      <span className="adminBadge">{u.admin === 1 ? '[Admin] ' : ' '}</span>
-                      {u.name}
-                      <button
-                        className="btn btn__remove"
-                        onClick={() => this.handleOpen(u, { type: 'edit' })}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="btn btn__remove"
-                        onClick={() => this.handleOpen(u, { type: 'delete' })}
-                      >
-                        remove
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
             </div>
           </div>
         </div>
-      </div>
+      </AppProvider>
     );
   }
 }
