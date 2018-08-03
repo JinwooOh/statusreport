@@ -9,6 +9,8 @@ import Tasks from './report/Tasks';
 import { dateNow } from './helper/Helper';
 import { coursehelp, adminhelp, naminghelp } from './helper/Message';
 
+import AppProvider from './helper/AppProvider';
+import { AppContext } from './helper/envHelper';
 import Popup from './Popup';
 
 class App extends React.Component {
@@ -198,67 +200,74 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <AlertPopup closeBtn={false} />
-        <h1 className="App-title">Status Report</h1>
+      <AppProvider>
+        <div className="wrapper">
+          <AlertPopup closeBtn={false} />
+          <h1 className="App-title">Status Report</h1>
 
-        <div className="guide">
-          <MuiThemeProvider>
-            <div className="guide__popup">
-              <Popup title="Course Guide" text={coursehelp()} />
-              <Popup title="Admin Guide" text={adminhelp()} />
-              <Popup title="Naming Guide" text={naminghelp(this.state.nameList)} />
-            </div>
-          </MuiThemeProvider>
+          <div className="guide">
+            <MuiThemeProvider>
+              <div className="guide__popup">
+                <Popup title="Course Guide" text={coursehelp()} />
+                <Popup title="Admin Guide" text={adminhelp()} />
+                <Popup title="Naming Guide" text={naminghelp(this.state.nameList)} />
+              </div>
+            </MuiThemeProvider>
+            <AppContext.Consumer>
+              {context => {
+                return (
+                  <button
+                    className="btn btn__editname"
+                    onClick={() => {
+                      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                        this.props.history.push(`/editselect/`);
+                      } else {
+                        // production
+                        this.props.history.push(`${context.production}editselect/`);
+                      }
+                    }}
+                  >
+                    Edit
+                  </button>
+                );
+              }}
+            </AppContext.Consumer>
+            <button
+              className="btn btn__search"
+              onClick={() => {
+                if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                  this.props.history.push('/report/');
+                } else {
+                  // production
+                  this.props.history.push('/all-status-reports/report/');
+                }
+              }}
+            >
+              SEARCH
+            </button>
+          </div>
 
-          <button
-            className="btn btn__editname"
-            onClick={() => {
-              if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                this.props.history.push('/editselect/');
-              } else {
-                // production
-                this.props.history.push('/all-status-reports/editselect/');
-              }
-            }}
-          >
-            Edit
-          </button>
-          <button
-            className="btn btn__search"
-            onClick={() => {
-              if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                this.props.history.push('/report/');
-              } else {
-                // production
-                this.props.history.push('/all-status-reports/report/');
-              }
-            }}
-          >
-            SEARCH
-          </button>
+          <Forms
+            addTask={this.addTask}
+            sumHours={this.sumHours}
+            taskType={this.state.taskType}
+            selectTask={this.selectTask}
+            nameList={this.state.nameList}
+          />
+
+          <Tasks
+            tasks={this.state.tasks}
+            userName={this.state.userName}
+            details={this.state.tasks}
+            date={this.state.date}
+            addUser={this.addUser}
+            removeTask={this.removeTask}
+            taskType={this.state.taskType}
+            totalHours={this.state.totalHours}
+            handleSubmit={this.handleSubmit}
+          />
         </div>
-
-        <Forms
-          addTask={this.addTask}
-          sumHours={this.sumHours}
-          taskType={this.state.taskType}
-          selectTask={this.selectTask}
-          nameList={this.state.nameList}
-        />
-
-        <Tasks
-          tasks={this.state.tasks}
-          userName={this.state.userName}
-          details={this.state.tasks}
-          date={this.state.date}
-          addUser={this.addUser}
-          removeTask={this.removeTask}
-          taskType={this.state.taskType}
-          totalHours={this.state.totalHours}
-          handleSubmit={this.handleSubmit}
-        />
-      </div>
+      </AppProvider>
     );
   }
 }
