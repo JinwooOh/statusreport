@@ -68,17 +68,3 @@ The application has two main pages which are Report page and Search Page.
 - "img" contain one png file for the background image.
 
 ---
-
-## Server/Database Information
-
-#### Test server
-
-- host: wwwtest.eipd.dcs.wisc.edu
-- user: status_report
-- database: status_report
-- port: 3306
-- password: Ask server maintainer
-
-#### Production server
-
-- Ask server maintainer
