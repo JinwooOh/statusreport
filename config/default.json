@@ -1,8 +1,0 @@
-{
-  "dbConfg": {
-    "host": "wwwtest.eipd.dcs.wisc.edu",
-    "user": "status_report",
-    "database": "status_report",
-    "port": "3306"
-  }
-}

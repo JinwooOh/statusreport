@@ -10,7 +10,7 @@ module.exports = (app, connection) => {
   app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
-    connection.query('SELECT * FROM user WHERE name = ?', [username], (err, result, fields) => {
+    connection.query('SELECT * FROM user WHERE name = ?', [username], (err, result) => {
       if (err) {
         res.send({
           code: 400,

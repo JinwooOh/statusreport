@@ -27,6 +27,7 @@
         "argsIgnorePattern": "res|next|^err"
       }
     ],
+    "global-require": 0,
     "prefer-const": [
       "error",
       {

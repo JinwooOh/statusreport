@@ -1,8 +1,8 @@
 const express = require('express');
 const mysql = require('mysql');
-const config = require('config');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
+const keys = require('./config/keys');
 // Generate Admin password with salt !important DONT DELETE
 // bcrypt.hash(passwordForAdmin, 10, (err, hash) => {
 //   console.log(hash);
@@ -10,11 +10,11 @@ const bodyParser = require('body-parser');
 
 // Database config
 const dbConfig = {
-  host: config.get('dbConfg.host'),
-  user: config.get('dbConfg.user'),
-  password: config.get('dbConfg.password'),
-  database: config.get('dbConfg.database'),
-  port: config.get('dbConfg.port'),
+  host: keys.host,
+  user: keys.user,
+  password: keys.password,
+  database: keys.database,
+  port: keys.port,
 };
 
 // disconnection: https://github.com/mysqljs/mysql#server-disconnects
