@@ -25,14 +25,9 @@ Status Report is the web application to replace spreadsheet based reporting syst
     2.  Choose search type
     3.  Type valid program name or course number
 
-#### TIP:
-
-- If you are not sure about task category about your task, check course and admin guide on top of the application.
-- To have consistent program name and course number, please reference naming guide before entering program name or course number
-
 ---
 
-# For Developer
+# Development
 
 ## Stack
 
@@ -67,5 +62,9 @@ The application has two main pages which are Report page and Search Page.
   - to change, message on popup menus such as course guide and admin guide, modify Message.js file in helper folder.
 - "css" contains all of the files that are related to styling.
 - "img" contain one png file for the background image.
+
+### server side
+
+- routes folder containes routes related files for server
 
 ---
