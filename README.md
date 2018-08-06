@@ -46,12 +46,13 @@ Status Report is the web application to replace spreadsheet based reporting syst
 
 #### Database: MySql
 
-#### API
+#### Major API
 
 - material-ui: Dialog component is used to handle popup menu.
 - react-autosuggest: it is used throughout the application to handle auto-completion.
 - react-table: it is used in search page to show the data in the table.
 - react-transition-group: it is used to animate components.
+- bcrypt, jsonwebtoken, express-jwt: those api are used to implement login system.
 
 ---
 
