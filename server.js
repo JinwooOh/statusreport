@@ -2,12 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const config = require('config');
 const helmet = require('helmet');
-
-// const jwt = require('jsonwebtoken');
-const exjwt = require('express-jwt');
 const bodyParser = require('body-parser');
-// const bcrypt = require('bcrypt');
-
 // Generate Admin password with salt !important
 // bcrypt.hash(passwordForAdmin, 10, (err, hash) => {
 //   console.log(hash);
@@ -69,11 +64,6 @@ app.use((req, res, next) => {
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-const jwtMW = exjwt({
-  secret: 'keyboard cat 4 ever',
-});
-// Error handling
 app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
     // Send the error rather than to show it on the console
@@ -83,178 +73,12 @@ app.use((err, req, res, next) => {
   }
 });
 
-// Fetch data
-app.get('/name', (req, res) => {
-  connection.query('SELECT * FROM coursenaming ORDER BY program', (err, result, fields) => {
-    if (err) {
-      console.log('Error in users query');
-    } else {
-      console.log('course naming query success');
-      res.json(result);
-    }
-  });
-});
-
-app.get('/users', (req, res) => {
-  connection.query('SELECT * FROM user ORDER BY admin DESC', (err, result, fields) => {
-    if (err) {
-      console.log('Error in users query');
-    } else {
-      console.log('users query success');
-      res.json(result);
-    }
-  });
-});
-
-app.get('/admintable', (req, res) => {
-  connection.query('SELECT * FROM admintable', (err, result, fields) => {
-    if (err) {
-      console.log('Error in admintable query');
-    } else {
-      console.log('admintable query success');
-      res.json(result);
-    }
-  });
-});
-
-app.get('/coursetable', (req, res) => {
-  connection.query('SELECT * FROM coursetable', (err, result, fields) => {
-    if (err) {
-      console.log('Error in coursetable query');
-    } else {
-      console.log('coursetable query success');
-      res.json(result);
-    }
-  });
-});
-
-app.get('/subDate', (req, res) => {
-  connection.query('SELECT * FROM subDate', (err, result, fields) => {
-    if (err) {
-      console.log('Error in subDate query');
-    } else {
-      console.log('subDate query success');
-      res.json(result);
-    }
-  });
-});
-
-// courseinfo
-app.get('/courseinfo', (req, res) => {
-  connection.query('SELECT * FROM courseinfo ORDER BY program', (err, result, fields) => {
-    if (err) {
-      console.log('Error in courseinfo query');
-    } else {
-      console.log('courseinfo query success');
-      res.json(result);
-    }
-  });
-});
-
-// search by user (coursetble)
-app.get('/search/coursetable/:userID/:startDate/:endDate', (req, res) => {
-  console.log(req.params.userID);
-  console.log(req.params.startDate);
-  console.log(req.params.endDate);
-
-  const { userID, startDate, endDate } = req.params;
-
-  connection.query(
-    `SELECT * FROM coursetable
-    WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
-    AND userID='${userID}'`,
-    (err, result, fields) => {
-      if (err) {
-        console.log('Error in coursetable query');
-      } else {
-        console.log(result);
-        res.json(result);
-      }
-    }
-  );
-});
-
-// search by user (admintable)
-app.get('/search/admintable/:userID/:startDate/:endDate', (req, res) => {
-  const { userID, startDate, endDate } = req.params;
-  connection.query(
-    `SELECT * FROM admintable
-    WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
-    AND userID='${userID}'`,
-    (err, result, fields) => {
-      if (err) {
-        console.log('Error in admintable query');
-      } else {
-        console.log(result);
-        res.json(result);
-      }
-    }
-  );
-});
-
-// search by user (program name)
-app.get('/search/program/:courseProgram/:startDate/:endDate', (req, res) => {
-  console.log('program search start: ');
-  console.log(req.params.courseProgram);
-  console.log(req.params.startDate);
-  console.log(req.params.endDate);
-  const { courseProgram, startDate, endDate } = req.params;
-
-  // const userID = req.params.userID;
-  // const startDate = req.params.startDate;
-  // const endDate = req.params.endDate;
-  connection.query(
-    `SELECT * FROM coursetable
-    WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
-    AND courseProgram='${courseProgram}'`,
-    (err, result, fields) => {
-      if (err) {
-        console.log('Error in program(name) query');
-      } else {
-        console.log(result);
-        res.json(result);
-      }
-    }
-  );
-});
-
-// search by user (program number)
-app.get('/search/programNumber/:courseNumber/:startDate/:endDate', (req, res) => {
-  console.log('program Number search start: ');
-  console.log(req.params.courseNumber);
-  console.log(req.params.startDate);
-  console.log(req.params.endDate);
-  const { courseNumber, startDate, endDate } = req.params;
-
-  connection.query(
-    `SELECT * FROM coursetable
-      WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
-      AND courseNumber='${courseNumber}'`,
-    (err, result, fields) => {
-      if (err) {
-        console.log('Error in program(number) query');
-      } else {
-        console.log(result);
-        res.json(result);
-      }
-    }
-  );
-});
-
-// Search course info
-app.get('/search/courseinfo', (req, res) => {
-  connection.query(
-    'SELECT DISTINCT program, courseNumber FROM courseinfo',
-    (err, result, fields) => {
-      if (err) {
-        console.log('Error in courseinfo query');
-      } else {
-        console.log('courseinfo query success');
-        res.json(result);
-      }
-    }
-  );
-});
+// login routes
+require('./routes/login')(app, connection);
+// fetch data routes
+require('./routes/fetch')(app, connection);
+// search related routes
+require('./routes/search')(app, connection);
 
 // add new user to the database
 app.post('/addUser', (req, res) => {

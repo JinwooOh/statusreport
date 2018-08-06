@@ -1,7 +1,12 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const exjwt = require('express-jwt');
+
+const jwtMW = exjwt({
+  secret: 'keyboard cat 4 ever',
+});
 // LOGIN ROUTE
-module.exports = app => {
+module.exports = (app, connection) => {
   app.post('/login', (req, res) => {
     const { username, password } = req.body;
 
