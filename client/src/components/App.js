@@ -42,7 +42,7 @@ class App extends React.Component {
           nameList: [...findresponse],
         });
       })
-      .catch(err => console.log(err));
+      .catch(err => this.props.history.push(`/notfound`));
   }
   componentDidUpdate() {
     // time
