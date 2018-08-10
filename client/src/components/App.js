@@ -35,6 +35,7 @@ class App extends React.Component {
         date: JSON.parse(localStorageRef),
       });
     }
+    // error page when fetch is failed
     fetch('/name')
       .then(response => response.json())
       .then(findresponse => {
@@ -42,7 +43,14 @@ class App extends React.Component {
           nameList: [...findresponse],
         });
       })
-      .catch(err => this.props.history.push(`/notfound`));
+      .catch(err => {
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+          this.props.history.push(`/notfound/`);
+        } else {
+          // production
+          this.props.history.push(`/all-status-reports/notfound/`);
+        }
+      });
   }
   componentDidUpdate() {
     // time
