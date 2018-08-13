@@ -35,7 +35,8 @@ class App extends React.Component {
         date: JSON.parse(localStorageRef),
       });
     }
-    // error page when fetch is failed
+
+    // fetch naming guide list
     fetch('/name')
       .then(response => response.json())
       .then(findresponse => {
@@ -44,12 +45,7 @@ class App extends React.Component {
         });
       })
       .catch(err => {
-        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-          this.props.history.push(`/notfound/`);
-        } else {
-          // production
-          this.props.history.push(`/all-status-reports/notfound/`);
-        }
+        console.log(err, 'failed to load naming list');
       });
   }
   componentDidUpdate() {
@@ -82,71 +78,9 @@ class App extends React.Component {
       AlertPopup.queue(errorSubmitPopup);
       return;
     }
+
     // success
     const data = this.state;
-    // check if user name is in database. If not, add a new user to database
-    fetch('/users')
-      .then(res => res.json())
-      .then(users => {
-        const match = users.find(o => o.name === data.userName);
-        // case where there is no user in the database
-        // then add new user to the database
-        if (match === undefined) {
-          fetch('/addUser', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          }).then(body => {
-            console.log('State: ', body); // error
-          });
-        }
-      })
-      .catch(error => console.error('fetch error at users ', error)); // error
-
-    let hasCourseDb = true;
-
-    // check if the database has courseinformation that a user typed
-    // If yes, add new course to courseinfo table
-    Object.keys(this.state.tasks).forEach(key => {
-      if (this.state.tasks[key].taskType === 'Course Task') {
-        const inputCourseNumber = this.state.tasks[key].courseNumber;
-        // const inputCourseName = this.state.tasks[key].program;
-        // const inputSemester = this.state.tasks[key].semester;
-        fetch('/courseinfo')
-          .then(res => res.json())
-          .then(courses => {
-            console.log('course info:', courses);
-            // const matchName = courses.find(course => course.courseName === inputCourseName);
-            const matchNumber = courses.find(course => course.courseNumber === inputCourseNumber);
-            if (matchNumber === undefined) {
-              hasCourseDb = false;
-              // const newCourse = {
-              //   program: inputCourseName,
-              //   courseNumber: inputCourseNumber,
-              //   semesterTerm: inputSemester, // can be empty
-              // };
-              // fetch('/addCourseinfo', {
-              //   method: 'POST',
-              //   headers: {
-              //     'Content-Type': 'application/json',
-              //   },
-              //   body: JSON.stringify(newCourse),
-              // })
-              //   .then(body => {
-              //     console.log('State: ', body); // error
-              //   })
-              //   .catch(error => console.error('fetch error at users ', error)); // error
-            }
-          })
-          .catch(error => console.error('fetch error at users ', error)); // error
-      }
-    });
-    if (!hasCourseDb) {
-      console.log('fail to submit');
-      return;
-    }
     // submit the tasks
     fetch('/submit', {
       method: 'POST',
@@ -154,11 +88,34 @@ class App extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
-    })
-      .then(body => {
-        console.log('State: ', body); // error
-      })
-      .catch(error => console.error('fetch error at submit', error)); // error
+    }).catch(error => console.error('fetch error at submit', error)); // error
+
+    // Final submitsion check and render appropriate popup
+    async function checker() {
+      try {
+        const res = await fetch('/users');
+        const result = await res.json();
+        const success = AlertPopup.register({
+          title: 'Status Report',
+          content: 'Report submitted. Thank you.',
+          buttons: {
+            right: ['ok'],
+          },
+        });
+        AlertPopup.queue(success);
+      } catch (e) {
+        const fail = AlertPopup.register({
+          title: 'Status Report',
+          content: 'Failed to submit. There might be a database connection issue.',
+          buttons: {
+            right: ['ok'],
+          },
+        });
+        AlertPopup.queue(fail);
+      }
+    }
+    checker();
+
     // success popup message
     const submitPopup = AlertPopup.register({
       title: 'Status Report',
