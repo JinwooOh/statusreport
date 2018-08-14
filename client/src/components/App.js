@@ -65,6 +65,7 @@ class App extends React.Component {
 
   handleSubmit = () => {
     // error
+    // check empty case
     if (this.isEmpty(this.state.tasks) || this.isEmpty(this.state.userName)) {
       // popup message
       const errorSubmitPopup = AlertPopup.register({
@@ -78,9 +79,11 @@ class App extends React.Component {
       AlertPopup.queue(errorSubmitPopup);
       return;
     }
+    // check user name
+    // ...
 
-    // success
     const data = this.state;
+    // success
     // submit the tasks
     fetch('/submit', {
       method: 'POST',
@@ -94,7 +97,7 @@ class App extends React.Component {
     async function checker() {
       try {
         const res = await fetch('/users');
-        const result = await res.json();
+        await res.json();
         const success = AlertPopup.register({
           title: 'Status Report',
           content: 'Report submitted. Thank you.',
