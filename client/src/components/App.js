@@ -35,7 +35,12 @@ class App extends React.Component {
         date: JSON.parse(localStorageRef),
       });
     }
-
+    if (this.state.nameList.length === 0) {
+      console.log('test');
+      this.setState({
+        nameList: [{ program: ':::Loading::' }],
+      });
+    }
     // fetch naming guide list
     fetch('/name')
       .then(response => response.json())
