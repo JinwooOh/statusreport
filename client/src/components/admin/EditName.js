@@ -321,6 +321,9 @@ class EditName extends React.Component {
               <p className="heading-primary center">
                 This is the table that is used in Naming Guide.
               </p>
+              <p className="heading-secondary center">
+                The change of this will only impact on naming guide popup text.
+              </p>
               <div className="center">
                 <button
                   className="btn btn__guide btn--margin"

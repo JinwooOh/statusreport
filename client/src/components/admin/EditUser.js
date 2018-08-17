@@ -241,6 +241,7 @@ class EditUser extends React.Component {
             </Dialog>
           </MuiThemeProvider>
           <h1 className="App-title">Edit User Information</h1>
+
           <div className="guide">
             <div className="guide__popup">
               <button
@@ -277,6 +278,9 @@ class EditUser extends React.Component {
             <div className="message__text">
               <div className="message__text--body">
                 <p className="heading-primary center">User Information</p>
+                <p className="heading-secondary center">
+                  The change of this will impact auto-suggestion for username
+                </p>
                 <div className="center">
                   <button
                     className="btn btn__guide btn--margin"

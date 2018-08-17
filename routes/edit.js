@@ -1,4 +1,5 @@
-module.exports = (app, connection) => {
+module.exports = app => {
+  const connection = require('../server');
   // naming guide edit start ...
   app.put('/editname/:nameId', (req, res) => {
     const nameId = req.params.nameId;

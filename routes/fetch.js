@@ -1,5 +1,6 @@
 // Fetch data
-module.exports = (app, connection) => {
+module.exports = app => {
+  const connection = require('../server');
   app.get('/name', (req, res) => {
     connection.query('SELECT * FROM coursenaming ORDER BY program', (err, result) => {
       if (err) {

@@ -47,6 +47,10 @@
             border-bottom: 1px solid $color-primary;
           }
         }
+        p {
+          color: $color-primary;
+          font-weight: 600;
+        }
       }
     }
     &--summary {

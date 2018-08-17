@@ -1,4 +1,5 @@
-module.exports = (app, connection) => {
+module.exports = app => {
+  const connection = require('../server');
   // add new user to the database
   app.post('/addUser', (req, res) => {
     const { userName } = req.body;

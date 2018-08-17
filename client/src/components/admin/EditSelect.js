@@ -45,6 +45,21 @@ class EditSelect extends React.Component {
           </button>
         </div>
         <div className="form-list form-list--report">
+          <div className="message__text--body">
+            <p className="heading-primary center">Information</p>
+            <ul>
+              <li>Edit Naming Guide: The change of this will impact on naming Guide popup text.</li>
+              <li>
+                Edit Course Info: The change of this will impact auto-suggestion for program names
+                and a course numbers
+                <p>(It will change database data).</p>
+              </li>
+              <li>
+                Edit User: The change of this will impact auto-suggestion for username
+                <p>(It will change database data).</p>
+              </li>
+            </ul>
+          </div>
           <div className="editSelector">
             <button
               className="btn btn__editSelect"
@@ -87,17 +102,6 @@ class EditSelect extends React.Component {
             >
               Edit User
             </button>
-          </div>
-          <div className="message__text--body">
-            <p className="heading-primary center">Information</p>
-            <ul>
-              <li>Edit Naming Guide: The change of this will impact on naming Guide popup text.</li>
-              <li>
-                Edit Course Info: The change of this will impact auto-suggestion for program names
-                and a course numbers.
-              </li>
-              <li>Edit User: The change of this will impact auto-suggestion for username.</li>
-            </ul>
           </div>
         </div>
       </div>

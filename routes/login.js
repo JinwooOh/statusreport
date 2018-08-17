@@ -6,7 +6,8 @@ const jwtMW = exjwt({
   secret: 'keyboard cat 4 ever',
 });
 // LOGIN ROUTE
-module.exports = (app, connection) => {
+module.exports = app => {
+  const connection = require('../server');
   app.post('/login', (req, res) => {
     const { username, password } = req.body;
 

@@ -1,4 +1,5 @@
-module.exports = (app, connection) => {
+module.exports = app => {
+  const connection = require('../server');
   // search by user (coursetble)
   app.get('/search/coursetable/:userID/:startDate/:endDate', (req, res) => {
     console.log(req.params.userID);
