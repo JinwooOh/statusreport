@@ -437,9 +437,6 @@ input:focus {
       margin-left: 2rem; }
       .message__text--body ul li:not(:last-child), .message__text--summary ul li:not(:last-child) {
         border-bottom: 1px solid #a40a3c; }
-    .message__text--body ul p, .message__text--summary ul p {
-      color: #a40a3c;
-      font-weight: 600; }
   .message__text--summary {
     text-align: justify; }
 
