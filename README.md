@@ -1,10 +1,10 @@
 # Status Report Documentation
 
-## Overview
+# Overview
 
 Status Report is the web application to replace spreadsheet based reporting system in Online Program Development
 
-## Usage
+# Usage
 
 #### Reporting
 
