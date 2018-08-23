@@ -68,3 +68,13 @@ The application has two main pages which are Report page and Search Page.
 - routes folder containes routes related files for server
 
 ---
+
+## Database (MySQL)
+
+Table List
+- admintable
+- coursetable
+- courseinfo
+- coursenaming
+- subData
+- user
