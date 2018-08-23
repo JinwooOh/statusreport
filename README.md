@@ -39,7 +39,7 @@ Status Report is the web application to replace spreadsheet based reporting syst
 
 #### Back-End: Node, Express
 
-#### Database: MySql
+#### Database: MySQL
 
 #### Major API
 
