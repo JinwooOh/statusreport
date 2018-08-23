@@ -72,9 +72,11 @@ The application has two main pages which are Report page and Search Page.
 ## Database (MySQL)
 
 Table List
-- admintable
-- coursetable
-- courseinfo
-- coursenaming
-- subData
-- user
+- admintable: it records administration task.
+- coursetable: it records course task.
+- courseinfo: course information.
+- coursenaming: it is used for course naming guide.
+- subData: it records username, submittion data and total hours when a user submits.
+- user: it contains user infomration.
+
+---
