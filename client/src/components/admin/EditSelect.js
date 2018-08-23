@@ -52,11 +52,11 @@ class EditSelect extends React.Component {
               <li>
                 Edit Course Info: The change of this will impact auto-suggestion for program names
                 and a course numbers
-                <p>(It will change database data).</p>
+                <p className="warning">(It will change database data).</p>
               </li>
               <li>
                 Edit User: The change of this will impact auto-suggestion for username
-                <p>(It will change database data).</p>
+                <p className="warning">(It will change database data).</p>
               </li>
             </ul>
           </div>

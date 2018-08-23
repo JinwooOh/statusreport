@@ -36,7 +36,6 @@ class App extends React.Component {
       });
     }
     if (this.state.nameList.length === 0) {
-      console.log('test');
       this.setState({
         nameList: [{ program: ':::Loading::' }],
       });
@@ -181,9 +180,9 @@ class App extends React.Component {
           <div className="guide">
             <MuiThemeProvider>
               <div className="guide__popup">
-                <Popup title="Course Guide" text={coursehelp()} />
-                <Popup title="Admin Guide" text={adminhelp()} />
-                <Popup title="Naming Guide" text={naminghelp(this.state.nameList)} />
+                <Popup title="COURSE GUIDE" text={coursehelp()} />
+                <Popup title="ADMIN GUIDE" text={adminhelp()} />
+                <Popup title="NAMING GUIDE" text={naminghelp(this.state.nameList)} />
               </div>
             </MuiThemeProvider>
             <AppContext.Consumer>

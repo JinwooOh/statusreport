@@ -166,6 +166,10 @@ select {
   color: #a40a3c;
   font-weight: 600; }
 
+.warning {
+  color: #a40a3c;
+  font-weight: 600; }
+
 .center {
   text-align: center; }
 
