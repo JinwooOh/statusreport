@@ -123,8 +123,6 @@ class AddForm extends React.Component {
   categoryRef = React.createRef();
   courseNumberRef = React.createRef();
   semesterRef = React.createRef();
-  // other
-  resetOptionRef = React.createRef();
   // admin task
   categoryAdminRef = React.createRef();
 
@@ -188,14 +186,7 @@ class AddForm extends React.Component {
     this.props.sumHours(this.hoursRef.current.value);
     this.props.addTask(task);
 
-    // reset current form data
-    if (this.resetOptionRef.current.value === 'no') {
-      event.currentTarget.reset();
-      this.setState({
-        programValue: '',
-        courseNumberValue: '',
-      });
-    }
+    // event.currentTarget.reset();
   };
   createTaskAdmin = event => {
     event.preventDefault();
@@ -209,6 +200,21 @@ class AddForm extends React.Component {
     this.props.sumHours(this.hoursRef.current.value);
     this.props.addTask(task);
     // event.currentTarget.reset();
+  };
+  clearForm = type => {
+    if (type === 'course') {
+      this.setState({
+        programValue: '',
+        courseNumberValue: '',
+      });
+      this.hoursRef.current.value = '';
+      this.dateRef.current.value = '';
+      this.semesterRef.current.value = '';
+      this.instructorRef.current.value = '';
+    } else {
+      this.hoursRef.current.value = '';
+      this.dateRef.current.value = '';
+    }
   };
 
   render() {
@@ -273,6 +279,13 @@ class AddForm extends React.Component {
           <div className="center">
             <button className="btn btn__summary" type="submit">
               Add Task
+            </button>
+            <button
+              className="btn btn__summary"
+              type="button"
+              onClick={() => this.clearForm('admin')}
+            >
+              Clear the form
             </button>
           </div>
         </form>
@@ -369,16 +382,16 @@ class AddForm extends React.Component {
           min="0.25"
           required
         />
-        <span>Keep current form</span>
-        <div className="select-custom">
-          <select name="type" ref={this.resetOptionRef}>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-          </select>
-        </div>
 
         <div className="center">
           <button className="btn btn__summary">Add task</button>
+          <button
+            className="btn btn__summary"
+            type="button"
+            onClick={() => this.clearForm('course')}
+          >
+            Clear the form
+          </button>
         </div>
       </form>
     );
