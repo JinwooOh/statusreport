@@ -11,6 +11,11 @@
         "kind": "build",
         "isDefault": true
       }
+    },
+    {
+      "type": "gulp",
+      "task": "markdown",
+      "problemMatcher": []
     }
   ]
   // "tasks": [

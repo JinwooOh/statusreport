@@ -201,6 +201,8 @@ class AddForm extends React.Component {
     this.props.addTask(task);
     // event.currentTarget.reset();
   };
+
+  // clear form triggers by btn
   clearForm = type => {
     if (type === 'course') {
       this.setState({
