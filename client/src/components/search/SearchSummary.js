@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { dateFormat } from '../helper/Helper';
-import Chart from './UserChart';
+import UserChart from './UserChart';
+import CourseChart from './CourseChart';
 
 class SearchSummary extends React.Component {
   toListCourse = () => {
@@ -51,7 +52,7 @@ class SearchSummary extends React.Component {
     });
     return userAdmin;
   };
-  renderCourseTotal = () => {
+  toListProgram = () => {
     // Extract unique courseNumber as Object
     let courseNumberListTemp = []; //
     courseNumberListTemp = [...new Set(this.props.searchProgram.map(task => task.courseNumber))];
@@ -84,6 +85,11 @@ class SearchSummary extends React.Component {
         }
       }
     });
+    return courseNumberList;
+  };
+
+  renderCourseTotal = () => {
+    const courseNumberList = this.toListProgram();
 
     return Object.keys(courseNumberList).map((key, index) => {
       return (
@@ -203,6 +209,7 @@ class SearchSummary extends React.Component {
     // chart data
     const courseList = this.toListCourse();
     const adminList = this.toListAdmin();
+    const programList = this.toListProgram();
 
     return (
       <div className="searchSummary searchSummary--report">
@@ -239,7 +246,11 @@ class SearchSummary extends React.Component {
                     <div>
                       <ul>{this.renderUserCourseTotal()}</ul>
                       {/* <Polar data={courseData} /> */}
-                      <Chart courseList={courseList} adminList={adminList} renderType="course" />
+                      <UserChart
+                        courseList={courseList}
+                        adminList={adminList}
+                        renderType="course"
+                      />
                     </div>
                   )}
 
@@ -248,7 +259,7 @@ class SearchSummary extends React.Component {
                   ) : (
                     <div>
                       <ul>{this.renderUserAdminTotal()}</ul>
-                      <Chart courseList={courseList} adminList={adminList} renderType="admin" />
+                      <UserChart courseList={courseList} adminList={adminList} renderType="admin" />
                     </div>
                   )}
                 </Fragment>
@@ -261,6 +272,7 @@ class SearchSummary extends React.Component {
                       <div>
                         Course Total Hours: {this.props.totalHours.program}
                         {this.renderCourseTotal()}
+                        <CourseChart programList={programList} />
                       </div>
                     )}
                   </ul>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Polar } from 'react-chartjs-2';
 
 // chart for user search summary
-class Chart extends Component {
+class UserChart extends Component {
   render() {
     const courseData = {
       labels: [
@@ -92,9 +92,9 @@ class Chart extends Component {
   }
 }
 
-export default Chart;
+export default UserChart;
 
-Chart.propTypes = {
+UserChart.propTypes = {
   courseList: PropTypes.array.isRequired,
   adminList: PropTypes.array.isRequired,
   renderType: PropTypes.string.isRequired,
