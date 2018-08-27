@@ -18,7 +18,7 @@ class CourseChart extends Component {
     const { programList } = this.props;
     // iterate object
     for (const program in programList) {
-      if (programList.hasOwnProperty(program)) {
+      if (Object.prototype.hasOwnProperty.call(programList, program)) {
         courseData.labels.push(program); // name of the program
         courseData.datasets[0].data.push(programList[program].total); // total hours for the program
       }
@@ -34,6 +34,6 @@ class CourseChart extends Component {
 
 export default CourseChart;
 
-// CourseChart.propTypes = {
-//   courseList: PropTypes.array.isRequired,
-// };
+CourseChart.propTypes = {
+  programList: PropTypes.object.isRequired,
+};

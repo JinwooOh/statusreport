@@ -5,6 +5,8 @@ import { Polar } from 'react-chartjs-2';
 // chart for user search summary
 class UserChart extends Component {
   render() {
+    // const { courseList, adminList } = this.props;
+    // console.log(courseList);
     const courseData = {
       labels: [
         this.props.courseList.list[0].name,
