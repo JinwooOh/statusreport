@@ -1,9 +1,9 @@
+// This is a root of client side of a reporting page
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SearchType from './search//SearchType';
 import SearchResult from './search/SearchResult';
-// import Popup from "react-popup";
 import { isEmpty } from './helper/Helper';
 import { search } from './helper/Message';
 import Popup from './Popup';
@@ -63,10 +63,6 @@ class Report extends Component {
   }
 
   componentDidUpdate() {
-    // // localStorage for admintable/coursetable
-    // localStorage.setItem('adminTable', JSON.stringify(this.state.admintable));
-    // localStorage.setItem('courseTable', JSON.stringify(this.state.coursetable));
-    // ready for search
     if (!isEmpty(this.state.searchOptions)) {
       this.handleSearch();
     }
@@ -93,7 +89,7 @@ class Report extends Component {
       fetch(urlCourse)
         .then(res => res.json())
         .then(json => {
-          console.info('Course result:', json);
+          // console.info('Course result:', json);
           let totalHoursCourse = 0;
           json.forEach(course => {
             // date formatting

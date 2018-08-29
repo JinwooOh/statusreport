@@ -1,7 +1,6 @@
-// text for popup message
-// used for Popup API argument
+// Text for popup message
+// It is used for Popup API argument
 import React from 'react';
-// import naming from './naming.json';
 
 export function coursehelp() {
   return (

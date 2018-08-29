@@ -1,3 +1,6 @@
+// Parent component for SearchForm and SearchSelector
+// Similar to Form component
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SearchSelector from './SearchSelector';

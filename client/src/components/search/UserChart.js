@@ -1,3 +1,4 @@
+// chart that is used in user Search
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Polar } from 'react-chartjs-2';
@@ -5,8 +6,6 @@ import { Polar } from 'react-chartjs-2';
 // chart for user search summary
 class UserChart extends Component {
   render() {
-    // const { courseList, adminList } = this.props;
-    // console.log(courseList);
     const courseData = {
       labels: [
         this.props.courseList.list[0].name,
@@ -29,6 +28,12 @@ class UserChart extends Component {
         },
       ],
     };
+    console.log(courseData);
+    // const { courseList, adminList } = this.props;
+    // courseList.list.forEach(course => {
+    //   courseData.labels.push(course.name);
+    //   console.log(course.name);
+    // });
     const adminData = {
       labels: [
         this.props.adminList.list[0].name,
@@ -97,7 +102,7 @@ class UserChart extends Component {
 export default UserChart;
 
 UserChart.propTypes = {
-  courseList: PropTypes.array.isRequired,
-  adminList: PropTypes.array.isRequired,
+  courseList: PropTypes.object.isRequired,
+  adminList: PropTypes.object.isRequired,
   renderType: PropTypes.string.isRequired,
 };

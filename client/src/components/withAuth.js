@@ -1,7 +1,8 @@
+// Wrapper/higher order component for components use authentication.
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AuthService from './AuthService';
-// higher order componenet
+
 export default function withAuth(AuthComponent) {
   const Auth = new AuthService('http://localhost:8080');
   return class AuthWrapped extends Component {

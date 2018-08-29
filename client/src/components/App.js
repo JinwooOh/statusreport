@@ -1,3 +1,4 @@
+// This is a root of client side of a submitting page
 import React from 'react';
 import PropTypes from 'prop-types';
 import AlertPopup from 'react-popup';
@@ -58,7 +59,6 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
-    // console.log('Clock', 'componentWillUnmount');
     clearInterval(this.timerID);
   }
   updateDate = () => {
@@ -83,8 +83,6 @@ class App extends React.Component {
       AlertPopup.queue(errorSubmitPopup);
       return;
     }
-    // check user name
-    // ...
 
     const data = this.state;
     // success

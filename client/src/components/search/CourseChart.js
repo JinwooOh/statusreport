@@ -1,3 +1,5 @@
+// chart that is used in course Search
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Pie } from 'react-chartjs-2';

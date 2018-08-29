@@ -1,3 +1,4 @@
+// Form component for search page
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import PropTypes from 'prop-types';

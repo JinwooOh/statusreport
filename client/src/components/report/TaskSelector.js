@@ -1,3 +1,5 @@
+// Task Selector to handle rendering for either course form or admin form
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 

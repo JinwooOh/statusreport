@@ -1,3 +1,6 @@
+// Simiar to TaskSelector.
+// It gives options to choose either user or program
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 

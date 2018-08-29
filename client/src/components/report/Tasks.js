@@ -1,4 +1,5 @@
 /* eslint react/prop-types: 0 */
+// Summary part of the report page
 import React from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { dateFormat } from '../helper/Helper';

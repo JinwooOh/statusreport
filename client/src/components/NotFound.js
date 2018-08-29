@@ -1,3 +1,5 @@
+// for invalid URL route
+
 import React from 'react';
 
 const NotFound = () => (

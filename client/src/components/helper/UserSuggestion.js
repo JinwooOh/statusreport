@@ -1,3 +1,5 @@
+// Auto suggestion for user name
+// Check https://github.com/moroshko/react-autosuggest for further infomration
 import React from 'react';
 import PropTypes from 'prop-types';
 import Autosuggest from 'react-autosuggest';

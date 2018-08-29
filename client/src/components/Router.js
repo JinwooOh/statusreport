@@ -1,3 +1,4 @@
+// Router component that handles all routes of the application
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import App from './App';
@@ -9,7 +10,6 @@ import EditCourseInfo from './admin/EditCourseInfo';
 import EditUser from './admin/EditUser';
 import Login from './admin/Login';
 
-// import NotFound from "./NotFound";
 const baseUrl = process.env.PUBLIC_URL;
 const Router = () => (
   <BrowserRouter>
@@ -26,5 +26,4 @@ const Router = () => (
     </Switch>
   </BrowserRouter>
 );
-// basename="/all-status-reports"
 export default Router;

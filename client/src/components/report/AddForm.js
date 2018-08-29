@@ -1,3 +1,7 @@
+// Form for submitting.
+// It handles both course task form and admin task form
+// Check https://github.com/moroshko/react-autosuggest for further infomration
+// about react-autosuggest
 import React from 'react';
 import PropTypes from 'prop-types';
 import Autosuggest from 'react-autosuggest';
@@ -126,9 +130,11 @@ class AddForm extends React.Component {
   // admin task
   categoryAdminRef = React.createRef();
 
+  // create course task
   createTask = event => {
     event.preventDefault();
     const that = this;
+    // error
     if (this.state.noSuggestionsC || this.state.noSuggestionsP) {
       AlertPopup.registerPlugin('prompt', function() {
         this.create({
@@ -185,9 +191,10 @@ class AddForm extends React.Component {
     };
     this.props.sumHours(this.hoursRef.current.value);
     this.props.addTask(task);
-
     // event.currentTarget.reset();
   };
+
+  // create admin task
   createTaskAdmin = event => {
     event.preventDefault();
     const task = {
@@ -202,7 +209,7 @@ class AddForm extends React.Component {
     // event.currentTarget.reset();
   };
 
-  // clear form triggers by btn
+  // method for clear form. button triggers this.
   clearForm = type => {
     if (type === 'course') {
       this.setState({

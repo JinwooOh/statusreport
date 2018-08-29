@@ -1,11 +1,10 @@
 /* eslint react/prop-types: 0 */
+
+// Popup component that uses material-ul
+// check https://material-ui.com/ to understand its API
+
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
-
-// const dropzoneStyles =
-// window.screen.availWidth < 780 ?
-// { 'width': '150px', 'height': '150px', 'border': 'none', 'borderRadius': '50%' }
-// : { 'width': '200px', 'height': '200px', 'border': 'none', 'borderRadius': '50%' };
 
 const customContentStyle =
   window.screen.availWidth >= 900
