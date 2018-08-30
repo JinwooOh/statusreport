@@ -29,6 +29,7 @@ class SearchSummary extends React.Component {
     });
     return userCourse;
   };
+
   toListAdmin = () => {
     const userAdmin = {
       list: [
@@ -54,6 +55,7 @@ class SearchSummary extends React.Component {
     });
     return userAdmin;
   };
+
   toListProgram = () => {
     // Extract unique courseNumber as Object
     let courseNumberListTemp = []; //
@@ -134,6 +136,7 @@ class SearchSummary extends React.Component {
       </div>
     );
   };
+
   renderUserAdminTotal = () => {
     const userAdmin = this.toListAdmin();
     return (

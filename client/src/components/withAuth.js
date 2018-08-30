@@ -12,6 +12,7 @@ export default function withAuth(AuthComponent) {
         user: null,
       };
     }
+
     componentWillMount() {
       if (!Auth.loggedIn()) {
         if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {

@@ -17,6 +17,13 @@ function getSuggestions(value) {
 // Autosuggestion helpers end
 
 class SearchForm extends React.Component {
+  programRef = React.createRef();
+
+  // userRef = React.createRef();
+  startDateRef = React.createRef();
+
+  endDateRef = React.createRef();
+
   constructor() {
     super();
     this.state = {
@@ -44,6 +51,7 @@ class SearchForm extends React.Component {
       programValue: newValue,
     });
   };
+
   onprogramSuggestionsFetchRequested = ({ value }) => {
     const suggestion = getSuggestions(value);
     // unique Program name to render in auto-suggestion container
@@ -60,23 +68,21 @@ class SearchForm extends React.Component {
       programSuggestions: newSuggestion,
     });
   };
+
   onprogramSuggestionsClearRequested = () => {
     this.setState({
       programSuggestions: [],
     });
   };
+
   getSuggestionprogram = suggestion =>
     this.state.selectValue === 'Program' ? suggestion.program : suggestion.courseNumber;
   // Autosuggestion method end
 
-  programRef = React.createRef();
-  // userRef = React.createRef();
-  startDateRef = React.createRef();
-  endDateRef = React.createRef();
-
   handleChange = e => {
     this.setState({ selectValue: e.target.value });
   };
+
   createSearchUser = event => {
     event.preventDefault();
     const options = {
@@ -87,6 +93,7 @@ class SearchForm extends React.Component {
     this.props.addSearchOptions(options);
     event.currentTarget.reset();
   };
+
   createSearchProgram = event => {
     event.preventDefault();
     let options = {};
@@ -110,6 +117,7 @@ class SearchForm extends React.Component {
   };
 
   handleUserName = userName => this.setState({ userName });
+
   renderSuggestion = suggestion => {
     if (this.state.selectValue === 'Program') {
       return <React.Fragment>{suggestion.program}</React.Fragment>;

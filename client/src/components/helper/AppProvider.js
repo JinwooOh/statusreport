@@ -6,6 +6,7 @@ class AppProvider extends React.Component {
   state = {
     production: '/all-status-reports/',
   };
+
   render() {
     return <AppContext.Provider value={this.state}>{this.props.children}</AppContext.Provider>;
   }

@@ -25,6 +25,7 @@ class UserSuggestion extends React.Component {
       noSuggestions: false,
     };
   }
+
   componentDidMount() {
     // get user info from database for Autosugesstion
     fetch('/users')
@@ -42,6 +43,7 @@ class UserSuggestion extends React.Component {
       value: newValue,
     });
   };
+
   onSuggestionsFetchRequested = ({ value }) => {
     const suggestions = getSuggestions(value);
     const isInputBlank = value.trim() === '';
@@ -51,6 +53,7 @@ class UserSuggestion extends React.Component {
       noSuggestions,
     });
   };
+
   onSuggestionsClearRequested = () => {
     this.setState({
       suggestions: [],

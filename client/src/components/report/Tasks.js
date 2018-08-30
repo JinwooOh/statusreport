@@ -14,20 +14,23 @@ class Tasks extends React.Component {
     const renderItem = Object.keys(task).map(item => {
       if (task[item] === '') {
         return '';
-      } else if (item === 'taskType') {
+      }
+      if (item === 'taskType') {
         return (
           <span key={item} className="tasks-list-gap">
             {task[item]}
             {': '}
           </span>
         );
-      } else if (item === 'hours') {
+      }
+      if (item === 'hours') {
         return (
           <span key={item} className="tasks-list-gap">
             {task[item]} hours
           </span>
         );
-      } else if (item === 'date') {
+      }
+      if (item === 'date') {
         return (
           <span key={item} className="tasks-list-gap">
             {dateFormat(task[item])}
