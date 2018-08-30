@@ -39,6 +39,26 @@ function renderSuggestion(suggestion) {
 // Autosuggestion helpers end
 
 class AddForm extends React.Component {
+  // Course task
+  programRef = React.createRef();
+
+  hoursRef = React.createRef();
+
+  courseTypeRef = React.createRef();
+
+  dateRef = React.createRef();
+
+  instructorRef = React.createRef();
+
+  categoryRef = React.createRef();
+
+  courseNumberRef = React.createRef();
+
+  semesterRef = React.createRef();
+
+  // admin task
+  categoryAdminRef = React.createRef();
+
   constructor() {
     super();
     this.state = {
@@ -50,6 +70,7 @@ class AddForm extends React.Component {
       noSuggestionsC: false,
     };
   }
+
   componentDidMount() {
     // get user info from database for Autosugesstion
     fetch('/search/courseinfo')
@@ -117,18 +138,6 @@ class AddForm extends React.Component {
     });
   };
   // Autosuggestion method end
-
-  // Course task
-  programRef = React.createRef();
-  hoursRef = React.createRef();
-  courseTypeRef = React.createRef();
-  dateRef = React.createRef();
-  instructorRef = React.createRef();
-  categoryRef = React.createRef();
-  courseNumberRef = React.createRef();
-  semesterRef = React.createRef();
-  // admin task
-  categoryAdminRef = React.createRef();
 
   // create course task
   createTask = event => {
@@ -393,7 +402,9 @@ class AddForm extends React.Component {
         />
 
         <div className="center">
-          <button className="btn btn__summary">Add task</button>
+          <button type="submit" className="btn btn__summary">
+            Add task
+          </button>
           <button
             className="btn btn__summary"
             type="button"

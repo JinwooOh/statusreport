@@ -11,6 +11,10 @@ import { AppContext } from '../helper/envHelper';
 const Auth = new AuthService();
 
 class EditName extends React.Component {
+  programRef = React.createRef();
+
+  courseRef = React.createRef();
+
   constructor(props) {
     super(props);
     this.state = {
@@ -21,6 +25,7 @@ class EditName extends React.Component {
       success: false,
     };
   }
+
   componentDidMount() {
     fetch('/name')
       .then(response => response.json())
@@ -31,8 +36,6 @@ class EditName extends React.Component {
       })
       .catch(err => console.log(err));
   }
-  programRef = React.createRef();
-  courseRef = React.createRef();
 
   handleOpen = (p, type) => {
     this.setState({ open: true, curName: p, type, success: false });
@@ -90,6 +93,7 @@ class EditName extends React.Component {
       success: true,
     });
   };
+
   handleDeleteName = () => {
     const data = this.state.curName;
     const nameId = this.state.curName.ID;
@@ -179,7 +183,8 @@ class EditName extends React.Component {
           </form>
         </div>
       );
-    } else if (this.state.type.type === 'delete') {
+    }
+    if (this.state.type.type === 'delete') {
       return (
         <div className="message">
           <h2 className="message__heading">Current name</h2>

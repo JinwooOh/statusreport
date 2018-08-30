@@ -11,6 +11,8 @@ import { AppContext } from '../helper/envHelper';
 const Auth = new AuthService();
 
 class EditUser extends React.Component {
+  userRef = React.createRef();
+
   constructor(props) {
     super(props);
     this.state = {
@@ -21,6 +23,7 @@ class EditUser extends React.Component {
       success: false,
     };
   }
+
   componentDidMount() {
     fetch('/users')
       .then(response => response.json())
@@ -31,7 +34,6 @@ class EditUser extends React.Component {
       })
       .catch(err => console.log(err));
   }
-  userRef = React.createRef();
 
   handleOpen = (curName, type) => {
     this.setState({ open: true, curName, type, success: false });
@@ -87,6 +89,7 @@ class EditUser extends React.Component {
       success: true,
     });
   };
+
   handleDeleteName = () => {
     const data = this.state.curName;
     const nameId = this.state.curName.userID;
@@ -171,7 +174,8 @@ class EditUser extends React.Component {
           </form>
         </div>
       );
-    } else if (this.state.type.type === 'delete') {
+    }
+    if (this.state.type.type === 'delete') {
       return (
         <div className="message">
           <h2 className="message__heading">Current name</h2>

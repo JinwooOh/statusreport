@@ -28,6 +28,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    const { nameList } = this.state;
     this.timerID = setInterval(() => this.updateDate(), 1000); // for time
     // time
     const localStorageRef = localStorage.getItem('date');
@@ -36,11 +37,12 @@ class App extends React.Component {
         date: JSON.parse(localStorageRef),
       });
     }
-    if (this.state.nameList.length === 0) {
+    if (nameList.length === 0) {
       this.setState({
         nameList: [{ program: ':::Loading::' }],
       });
     }
+
     // fetch naming guide list
     fetch('/name')
       .then(response => response.json())
@@ -53,14 +55,17 @@ class App extends React.Component {
         console.log(err, 'failed to load naming list');
       });
   }
+
   componentDidUpdate() {
     // time
-    localStorage.setItem('date', JSON.stringify(this.state.date));
+    const { date } = this.state;
+    localStorage.setItem('date', JSON.stringify(date));
   }
 
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
+
   updateDate = () => {
     this.setState({
       date: dateNow(),
@@ -70,7 +75,8 @@ class App extends React.Component {
   handleSubmit = () => {
     // error
     // check empty case
-    if (this.isEmpty(this.state.tasks) || this.isEmpty(this.state.userName)) {
+    const { tasks, userName } = this.state;
+    if (this.isEmpty(tasks) || this.isEmpty(userName)) {
       // popup message
       const errorSubmitPopup = AlertPopup.register({
         title: 'Alert',
@@ -148,15 +154,18 @@ class App extends React.Component {
       tasks,
     });
   };
+
   addUser = userName => {
     this.setState({
       userName,
     });
   };
+
   sumHours = hours => {
     const totalHours = this.state.totalHours + parseFloat(hours);
     this.setState({ totalHours });
   };
+
   removeTask = key => {
     const tasks = { ...this.state.tasks };
     const totalHours = this.state.totalHours - tasks[key].hours;
@@ -164,11 +173,13 @@ class App extends React.Component {
     this.setState({ tasks });
     this.setState({ totalHours });
   };
+
   selectTask = taskType => {
     this.setState({ taskType });
   };
 
   render() {
+    const { tasks, totalHours, taskType, date, userName, nameList } = this.state;
     return (
       <AppProvider>
         <div className="wrapper">
@@ -188,6 +199,7 @@ class App extends React.Component {
                 return (
                   <React.Fragment>
                     <button
+                      type="button"
                       className="btn btn__editname"
                       onClick={() => {
                         if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
@@ -201,6 +213,7 @@ class App extends React.Component {
                       Edit
                     </button>
                     <button
+                      type="button"
                       className="btn btn__search"
                       onClick={() => {
                         if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
@@ -222,20 +235,20 @@ class App extends React.Component {
           <Forms
             addTask={this.addTask}
             sumHours={this.sumHours}
-            taskType={this.state.taskType}
+            taskType={taskType}
             selectTask={this.selectTask}
-            nameList={this.state.nameList}
+            nameList={nameList}
           />
 
           <Tasks
-            tasks={this.state.tasks}
-            userName={this.state.userName}
-            details={this.state.tasks}
-            date={this.state.date}
+            tasks={tasks}
+            userName={userName}
+            details={tasks}
+            date={date}
             addUser={this.addUser}
             removeTask={this.removeTask}
-            taskType={this.state.taskType}
-            totalHours={this.state.totalHours}
+            taskType={taskType}
+            totalHours={totalHours}
             handleSubmit={this.handleSubmit}
           />
         </div>

@@ -17,6 +17,7 @@ class EditSelect extends React.Component {
       this.props.history.push('/all-status-reports/login/');
     }
   };
+
   render() {
     return (
       <div className="wrapper">

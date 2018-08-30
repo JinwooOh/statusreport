@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import SearchType from './search//SearchType';
+import SearchType from './search/SearchType';
 import SearchResult from './search/SearchResult';
 import { isEmpty } from './helper/Helper';
 import { search } from './helper/Message';
@@ -71,14 +71,17 @@ class Report extends Component {
   selectSearch = searchType => {
     this.setState({ searchType });
   };
+
   addSearchOptions = searchOptions => {
     this.setState({
       searchOptions,
     });
   };
+
   programSearchType = programSearchType => {
     this.setState({ programSearchType });
   };
+
   handleSearch = () => {
     const { userID, startDate, endDate, courseProgram, courseNumber } = this.state.searchOptions;
 
