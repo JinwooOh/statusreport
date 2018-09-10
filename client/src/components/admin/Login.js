@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AlertPopup from 'react-popup';
 import AuthService from '../AuthService';
-import ChangePassword from './ChangePassword';
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.Auth = new AuthService();
+    this.state = {
+      pageRender: 'default', // or 'newPassword'
+    };
   }
 
   // Add redirection if we are already loggedIn
@@ -18,7 +20,7 @@ class Login extends Component {
   }
 
   handleNewPassword() {
-    <ChangePassword />;
+    this.setState({ pageRender: 'newPoassword' });
   }
 
   handleFormSubmit(e) {
@@ -65,6 +67,81 @@ class Login extends Component {
     });
   }
 
+  renderHelper(status) {
+    if (status === 'default') {
+      return (
+        <form className="login__form" onSubmit={this.handleFormSubmit}>
+          <h2 className="center login__form--title">Login</h2>
+          <input
+            className="login__form--username"
+            placeholder="Username"
+            name="username"
+            type="text"
+            onChange={this.handleChange}
+            required
+          />
+          <input
+            className="login__form--password"
+            placeholder="Password"
+            name="password"
+            type="password"
+            onChange={this.handleChange}
+            required
+          />
+          <button className="btn btn__submit login__form--submit" type="submit">
+            SUBMIT
+          </button>
+          <button
+            onClick={() => this.handleNewPassword()}
+            className="btn btn__submit login__form--submit"
+            type="button"
+          >
+            Change Password
+          </button>
+        </form>
+      );
+    }
+    return (
+      <form className="login__form" onSubmit={this.handleFormSubmit}>
+        <h2 className="center login__form--title">Login</h2>
+        <input
+          className="login__form--username"
+          placeholder="Username"
+          name="username"
+          type="text"
+          onChange={this.handleChange}
+          required
+        />
+        <input
+          className="login__form--password"
+          placeholder="Old Password"
+          name="password"
+          type="password"
+          onChange={this.handleChange}
+          required
+        />
+        <input
+          className="login__form--password"
+          placeholder="New Password"
+          name="password"
+          type="password"
+          onChange={this.handleChange}
+          required
+        />
+        <button className="btn btn__submit login__form--submit" type="submit">
+          Change Password
+        </button>
+        <button
+          onClick={() => this.setState({ pageRender: 'default' })}
+          className="btn btn__submit login__form--submit"
+          type="button"
+        >
+          Back to Login Page
+        </button>
+      </form>
+    );
+  }
+
   render() {
     return (
       <div className="wrapper">
@@ -85,35 +162,7 @@ class Login extends Component {
           >
             BACK TO REPORT PAGE
           </button>
-          <form className="login__form" onSubmit={this.handleFormSubmit}>
-            <h2 className="center login__form--title">Login</h2>
-            <input
-              className="login__form--username"
-              placeholder="Username"
-              name="username"
-              type="text"
-              onChange={this.handleChange}
-              required
-            />
-            <input
-              className="login__form--password"
-              placeholder="Password"
-              name="password"
-              type="password"
-              onChange={this.handleChange}
-              required
-            />
-            <button className="btn btn__submit login__form--submit" type="submit">
-              SUBMIT
-            </button>
-            <button
-              onClick={() => this.handleNewPassword()}
-              className="btn btn__submit login__form--submit"
-              type="button"
-            >
-              Change Password
-            </button>
-          </form>
+          {this.renderHelper(this.state.pageRender)}
         </div>
       </div>
     );
