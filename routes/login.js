@@ -8,9 +8,9 @@ const jwtMW = exjwt({
 // LOGIN ROUTE
 module.exports = app => {
   const connection = require('../server');
+
   app.post('/login', (req, res) => {
     const { username, password } = req.body;
-
     connection.query('SELECT * FROM user WHERE name = ?', [username], (err, result) => {
       if (err) {
         res.send({
@@ -27,13 +27,13 @@ module.exports = app => {
               { expiresIn: 129600 }
             ); // Sigining the token
             res.json({
-              sucess: true,
+              success: true,
               err: null,
               token,
             });
           } else {
             res.status(401).json({
-              sucess: false,
+              success: false,
               token: null,
               err: 'Username or password is incorrect',
             });
@@ -41,7 +41,7 @@ module.exports = app => {
         });
       } else {
         res.status(401).json({
-          sucess: false,
+          success: false,
           token: null,
           err: 'Username or password is incorrect',
         });
@@ -51,5 +51,25 @@ module.exports = app => {
 
   app.get('/', jwtMW /* Using the express jwt MW here */, (req, res) => {
     res.send('You are authenticated'); // Sending some response when authenticated
+  });
+
+  // change admin password
+  app.put('/changepassword', (req, res) => {
+    // // Generate Admin password with salt !important DONT DELETE
+    const name = req.body.username;
+
+    bcrypt.hash(req.body.newPassword, 10, (err, hash) => {
+      connection.query(
+        'UPDATE user SET ? WHERE name = ?',
+        [{ password: hash }, name],
+        (err, result) => {
+          if (err) throw err;
+          console.log(
+            "Successed to change the password"
+          );
+        }
+      );
+      res.sendStatus(200);
+    });
   });
 };
