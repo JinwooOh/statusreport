@@ -9,12 +9,13 @@
     margin-top: 3.2rem;
     grid-area: form;
     overflow: hidden;
-    height: 36rem;
+    // height: auto;
   }
 
   &__form{
     display: block;
     padding: 2rem;
+
 
     &--title{
       margin-top: 1.2rem;

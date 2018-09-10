@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AlertPopup from 'react-popup';
 import AuthService from '../AuthService';
+import ChangePassword from './ChangePassword';
 
 class Login extends Component {
   constructor() {
@@ -14,6 +15,10 @@ class Login extends Component {
   // Add redirection if we are already loggedIn
   componentWillMount() {
     if (this.Auth.loggedIn()) this.props.history.replace('/');
+  }
+
+  handleNewPassword() {
+    <ChangePassword />;
   }
 
   handleFormSubmit(e) {
@@ -100,6 +105,13 @@ class Login extends Component {
             />
             <button className="btn btn__submit login__form--submit" type="submit">
               SUBMIT
+            </button>
+            <button
+              onClick={() => this.handleNewPassword()}
+              className="btn btn__submit login__form--submit"
+              type="button"
+            >
+              Change Password
             </button>
           </form>
         </div>

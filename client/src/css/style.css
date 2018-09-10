@@ -516,8 +516,7 @@ input:focus {
   margin: 0 auto;
   margin-top: 3.2rem;
   grid-area: form;
-  overflow: hidden;
-  height: 36rem; }
+  overflow: hidden; }
 
 .login__form {
   display: block;

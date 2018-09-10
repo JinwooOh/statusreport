@@ -3,8 +3,10 @@ const mysql = require('mysql');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const keys = require('./config/keys');
-// Generate Admin password with salt !important DONT DELETE
-// bcrypt.hash(passwordForAdmin, 10, (err, hash) => {
+// const bcrypt = require('bcrypt');
+
+// // Generate Admin password with salt !important DONT DELETE
+// bcrypt.hash("PUTPASSWORD HERE", 10, (err, hash) => {
 //   console.log(hash);
 // });
 
