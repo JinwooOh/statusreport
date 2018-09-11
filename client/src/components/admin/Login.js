@@ -88,7 +88,14 @@ class Login extends Component {
           title: 'Success',
           content: 'Your password is successfully changed. Please go back and login again!',
           buttons: {
-            right: ['ok'],
+            right: [
+              {
+                text: 'Ok',
+                action() {
+                  AlertPopup.close();
+                },
+              },
+            ],
           },
         });
         AlertPopup.queue(success);
