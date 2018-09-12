@@ -173,6 +173,7 @@ class Login extends Component {
             onChange={this.handleChange}
             required
           />
+
           <input
             className="login__form--password"
             placeholder="Old Password"
