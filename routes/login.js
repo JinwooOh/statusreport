@@ -53,7 +53,7 @@ module.exports = app => {
     res.send('You are authenticated'); // Sending some response when authenticated
   });
 
-  // change admin password
+  // change password, create a new salted password
   app.put('/changepassword', (req, res) => {
     // // Generate Admin password with salt !important DONT DELETE
     const name = req.body.username;

@@ -118,10 +118,6 @@ class Login extends Component {
           AlertPopup.alert(`You typed: ${value}`);
         });
       });
-
-    // console.log(this.state.username);
-    // console.log(this.state.password);
-    // console.log(this.state.newPassword);
   }
 
   handleChange(e) {
