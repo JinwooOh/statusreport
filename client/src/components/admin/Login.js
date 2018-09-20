@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import AlertPopup from 'react-popup';
 
 import AuthService from '../AuthService';
+import { prodUrl } from '../helper/envHelper';
 
 class Login extends Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class Login extends Component {
           this.props.history.push('/editselect/');
         } else {
           // production
-          this.props.history.push('/all-status-reports/editselect/');
+          this.props.history.push(`${prodUrl}/editselect/`);
         }
       })
       .catch(err => {
@@ -219,7 +220,7 @@ class Login extends Component {
                 this.props.history.push('/');
               } else {
                 // production code
-                this.props.history.push('/all-status-reports/');
+                this.props.history.push(`${prodUrl}/`);
               }
             }}
           >

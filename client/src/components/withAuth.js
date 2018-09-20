@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AuthService from './AuthService';
+import { prodUrl } from './helper/envHelper';
 
 export default function withAuth(AuthComponent) {
   const Auth = new AuthService('http://localhost:8080');
@@ -19,7 +20,7 @@ export default function withAuth(AuthComponent) {
           this.props.history.push('/login/');
         } else {
           // production
-          this.props.history.push('/all-status-reports/login/');
+          this.props.history.push(`${prodUrl}/login/`);
         }
       } else {
         try {
@@ -33,7 +34,7 @@ export default function withAuth(AuthComponent) {
             this.props.history.push('/login/');
           } else {
             // production
-            this.props.history.push('/all-status-reports/login/');
+            this.props.history.push(`${prodUrl}/login/`);
           }
         }
       }

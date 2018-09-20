@@ -4,7 +4,7 @@ import { AppContext } from './envHelper';
 
 class AppProvider extends React.Component {
   state = {
-    production: '/all-status-reports/',
+    production: '/statusreport',
   };
 
   render() {

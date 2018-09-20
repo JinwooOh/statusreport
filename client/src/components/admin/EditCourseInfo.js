@@ -5,7 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import withAuth from '../withAuth';
 import AuthService from '../AuthService';
 import AppProvider from '../helper/AppProvider';
-import { AppContext } from '../helper/envHelper';
+import { AppContext, prodUrl } from '../helper/envHelper';
 
 const Auth = new AuthService();
 
@@ -42,7 +42,7 @@ class EditCourseInfo extends React.Component {
       this.props.history.push('/login/');
     } else {
       // production
-      this.props.history.push('/all-status-reports/login/');
+      this.props.history.push(`${prodUrl}/login/`);
     }
   };
 
@@ -319,8 +319,7 @@ class EditCourseInfo extends React.Component {
                 This is the table that is used in program/course number search.
               </p>
               <p className="heading-secondary center">
-                The change of this will impact auto-suggestion for program names and a course
-                numbers
+                The change of this will impact auto-suggestion for program names and course numbers
               </p>
               <div className="center">
                 <button

@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import withAuth from '../withAuth';
 import AuthService from '../AuthService';
+import { prodUrl } from '../helper/envHelper';
 
 const Auth = new AuthService();
 
@@ -14,7 +15,7 @@ class EditSelect extends React.Component {
       this.props.history.push('/login/');
     } else {
       // production
-      this.props.history.push('/all-status-reports/login/');
+      this.props.history.push(`${prodUrl}/login/`);
     }
   };
 
@@ -40,7 +41,7 @@ class EditSelect extends React.Component {
                 this.props.history.push('/');
               } else {
                 // production code
-                this.props.history.push('/all-status-reports/');
+                this.props.history.push(`${prodUrl}/`);
               }
             }}
           >
@@ -71,7 +72,7 @@ class EditSelect extends React.Component {
                   this.props.history.push('/editname');
                 } else {
                   // production code
-                  this.props.history.push('/all-status-reports/editname');
+                  this.props.history.push(`${prodUrl}/editname`);
                 }
               }}
             >
@@ -85,7 +86,7 @@ class EditSelect extends React.Component {
                   this.props.history.push('/editcourseinfo');
                 } else {
                   // production code
-                  this.props.history.push('/all-status-reports/editcourseinfo');
+                  this.props.history.push(`${prodUrl}/editcourseinfo`);
                 }
               }}
             >
@@ -99,7 +100,7 @@ class EditSelect extends React.Component {
                   this.props.history.push('/edituser');
                 } else {
                   // production code
-                  this.props.history.push('/all-status-reports/edituser');
+                  this.props.history.push(`${prodUrl}/edituser`);
                 }
               }}
             >

@@ -6,7 +6,7 @@ import withAuth from '../withAuth';
 import AuthService from '../AuthService';
 
 import AppProvider from '../helper/AppProvider';
-import { AppContext } from '../helper/envHelper';
+import { AppContext, prodUrl } from '../helper/envHelper';
 
 const Auth = new AuthService();
 
@@ -48,7 +48,7 @@ class EditName extends React.Component {
       this.props.history.push('/login/');
     } else {
       // production
-      this.props.history.push('/all-status-reports/login/');
+      this.props.history.push(`${prodUrl}/login/`);
     }
   };
 

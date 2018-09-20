@@ -38,7 +38,7 @@
     "eject": "react-scripts eject",
     "start": "serve --single ./build"
   },
-  "homepage": "https://wwwtest.eipd.dcs.wisc.edu/all-status-reports",
+  "homepage": "https://eipd.dcs.wisc.edu/statusreport",
   "proxy": "http://localhost:5000",
   "devDependencies": {
     "eslint": "^5.3.0",

@@ -227,7 +227,7 @@ class App extends React.Component {
                           this.props.history.push(`/editselect/`);
                         } else {
                           // production
-                          this.props.history.push(`${context.production}editselect/`);
+                          this.props.history.push(`${context.production}/editselect/`);
                         }
                       }}
                     >
@@ -241,7 +241,7 @@ class App extends React.Component {
                           this.props.history.push('/report/');
                         } else {
                           // production
-                          this.props.history.push(`${context.production}report/`);
+                          this.props.history.push(`${context.production}/report/`);
                         }
                       }}
                     >
