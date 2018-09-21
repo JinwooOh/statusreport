@@ -84,7 +84,11 @@ require('./routes/edit')(app);
 // post related routes
 require('./routes/post')(app);
 
-app.get('/*', (req, res) => {
+// modify URL according to a hosting server url
+// should be
+// app.get('/statusreport/*', (req, res)
+// if we don't deploy on a subfolder /statusreport
+app.get('/statusreport/*', (req, res) => {
   const path = require('path');
   res.sendFile(path.join(__dirname, '/index.html'), err => {
     if (err) {

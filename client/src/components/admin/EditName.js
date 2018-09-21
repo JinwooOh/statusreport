@@ -288,7 +288,7 @@ class EditName extends React.Component {
                             this.props.history.push('/editcourseinfo');
                           } else {
                             // production code
-                            this.props.history.push(`${context.production}editcourseinfo`);
+                            this.props.history.push(`${context.production}/editcourseinfo`);
                           }
                         }}
                       >

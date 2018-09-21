@@ -72,7 +72,7 @@ class EditSelect extends React.Component {
                   this.props.history.push('/editname');
                 } else {
                   // production code
-                  this.props.history.push(`${prodUrl}/editname`);
+                  this.props.history.push(`${prodUrl}/editname/`);
                 }
               }}
             >
@@ -86,7 +86,7 @@ class EditSelect extends React.Component {
                   this.props.history.push('/editcourseinfo');
                 } else {
                   // production code
-                  this.props.history.push(`${prodUrl}/editcourseinfo`);
+                  this.props.history.push(`${prodUrl}/editcourseinfo/`);
                 }
               }}
             >
@@ -100,7 +100,7 @@ class EditSelect extends React.Component {
                   this.props.history.push('/edituser');
                 } else {
                   // production code
-                  this.props.history.push(`${prodUrl}/edituser`);
+                  this.props.history.push(`${prodUrl}/edituser/`);
                 }
               }}
             >

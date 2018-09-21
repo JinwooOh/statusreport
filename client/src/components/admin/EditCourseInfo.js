@@ -280,7 +280,7 @@ class EditCourseInfo extends React.Component {
                             this.props.history.push('/editname');
                           } else {
                             // production code
-                            this.props.history.push(`${context.production}editname`);
+                            this.props.history.push(`${context.production}/editname/`);
                           }
                         }}
                       >

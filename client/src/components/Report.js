@@ -209,7 +209,7 @@ class Report extends Component {
                           this.props.history.push('/');
                         } else {
                           // production code
-                          this.props.history.push(`${context.production}`);
+                          this.props.history.push(`${context.production}/`);
                         }
                       }}
                     >
