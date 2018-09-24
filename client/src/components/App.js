@@ -122,42 +122,6 @@ class App extends React.Component {
       body: JSON.stringify(data),
     }).catch(error => console.error('fetch error at submit', error)); // error
 
-    // Final submitsion check and render appropriate popup
-    // async function checker() {
-    //   try {
-    //     const res = await fetch('/users');
-    //     await res.json();
-    //     const success = AlertPopup.register({
-    //       title: 'Status Report',
-    //       content: 'Report submitted. Thank you.',
-    //       buttons: {
-    //         right: ['ok'],
-    //       },
-    //     });
-    //     AlertPopup.queue(success);
-    //   } catch (e) {
-    //     const fail = AlertPopup.register({
-    //       title: 'Status Report',
-    //       content: 'Failed to submit. There might be a database connection issue.',
-    //       buttons: {
-    //         right: ['ok'],
-    //       },
-    //     });
-    //     AlertPopup.queue(fail);
-    //   }
-    // }
-    // checker();
-
-    // success popup message
-    // const submitPopup = AlertPopup.register({
-    //   title: 'Status Report',
-    //   content: 'Report submitted. Thank you.',
-    //   buttons: {
-    //     right: ['ok'],
-    //   },
-    // });
-    // AlertPopup.queue(submitPopup);
-    // reset the state relate to submit the form
     this.setState({
       tasks: {},
       totalHours: 0,
