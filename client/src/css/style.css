@@ -410,7 +410,7 @@ input:focus {
   .btn--margin {
     margin: 1rem; }
   .btn__clearForm {
-    background-color: #eeeeee;
+    background-color: #f1f1f1;
     border: 0.1rem solid #d0d0d0;
     color: #000; }
     .btn__clearForm:hover {

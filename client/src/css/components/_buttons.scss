@@ -144,7 +144,7 @@
     margin: 1rem;
   }
   &__clearForm{
-    background-color: lighten($color-gray, 2);
+    background-color: lighten($color-gray, 3);
     border: 0.1rem solid darken($color-gray, 10);
     color: $color-black;
     &:hover {
