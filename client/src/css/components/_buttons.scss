@@ -78,6 +78,8 @@
     padding: 1rem 2rem;
     margin: 0.4rem;
     margin-top: 2.4rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
   }
 
   &__remove {
@@ -85,6 +87,7 @@
     margin: 0.4rem;
     font-weight: 100;
   }
+
 
   &:hover {
     background-color: $color-secondary;
@@ -139,6 +142,27 @@
   }
   &--margin{
     margin: 1rem;
+  }
+  &__clearForm{
+    background-color: lighten($color-gray, 2);
+    border: 0.1rem solid darken($color-gray, 10);
+    color: $color-black;
+    &:hover {
+     color: $color-white;
+    }
+    &::after {
+      content: "";
+      background-color: $color-gray;
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      border-radius: 1.2rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transition: all 0.4s;
+    }
   }
 }
 

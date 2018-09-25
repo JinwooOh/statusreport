@@ -300,6 +300,11 @@ input:focus {
       display: block;
       margin: 0 auto; } }
 
+.container__summaryBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
 .editSelector {
   grid-area: form;
   display: flex;
@@ -359,7 +364,9 @@ input:focus {
   .btn__summary {
     padding: 1rem 2rem;
     margin: 0.4rem;
-    margin-top: 2.4rem; }
+    margin-top: 2.4rem;
+    margin-left: 5rem;
+    margin-right: 5rem; }
   .btn__remove {
     padding: 0.3rem 0.8rem;
     margin: 0.4rem;
@@ -402,6 +409,24 @@ input:focus {
     margin-Right: 1rem; }
   .btn--margin {
     margin: 1rem; }
+  .btn__clearForm {
+    background-color: #eeeeee;
+    border: 0.1rem solid #d0d0d0;
+    color: #000; }
+    .btn__clearForm:hover {
+      color: #fbfbfb; }
+    .btn__clearForm::after {
+      content: "";
+      background-color: #e9e9e9;
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      border-radius: 1.2rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transition: all 0.4s; }
 
 .popupbtn--container {
   display: flex;

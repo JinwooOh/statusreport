@@ -81,17 +81,16 @@ class Tasks extends React.Component {
             required
           />
         </div>
-
-        <button className="btn btn__summary" onClick={this.props.handleSubmit}>
-          Submit
-        </button>
         <button
           className="btn btn__summary"
           onClick={() => {
             window.print();
           }}
         >
-          Print this page
+          Print
+        </button>
+        <button className="btn btn__summary" onClick={this.props.handleSubmit}>
+          Submit
         </button>
       </div>
     );

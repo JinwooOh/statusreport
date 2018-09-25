@@ -294,16 +294,16 @@ class AddForm extends React.Component {
             placeholder="hours"
             required
           />
-          <div className="center">
-            <button className="btn btn__summary" type="submit">
-              Add Task
-            </button>
+          <div className="container__summaryBtn">
             <button
-              className="btn btn__summary"
+              className="btn btn__summary btn__clearForm"
               type="button"
               onClick={() => this.clearForm('admin')}
             >
-              Clear the form
+              Clear form
+            </button>
+            <button className="btn btn__summary" type="submit">
+              Add Task
             </button>
           </div>
         </form>
@@ -401,16 +401,16 @@ class AddForm extends React.Component {
           required
         />
 
-        <div className="center">
-          <button type="submit" className="btn btn__summary">
-            Add task
-          </button>
+        <div className="container__summaryBtn">
           <button
-            className="btn btn__summary"
+            className="btn btn__summary btn__clearForm"
             type="button"
             onClick={() => this.clearForm('course')}
           >
-            Clear the form
+            Clear form
+          </button>
+          <button type="submit" className="btn btn__summary">
+            Add task
           </button>
         </div>
       </form>
