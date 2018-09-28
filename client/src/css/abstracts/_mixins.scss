@@ -1,6 +1,7 @@
 @mixin respond($breakpoint) {
   @if $breakpoint == phone {
     @media only screen and (max-width: 37.5em) {
+      //@content directive, which allows us to pass a content block into a mixin.sasss-content-directive
       @content;
     } //600px
   }
