@@ -1,8 +1,15 @@
 const assert = require('assert');
+const request = require('supertest');
+const app = require('../server');
 
-describe("sample teset", ()=>{
-  it("is sample test", (done)=>{
-    assert(1+1 === 2);
-    done();
+
+describe("FETCH controller", ()=>{
+  it("GET to /users to get user names", (done)=>{
+    request(app)
+      .get('/users')
+      .end((err, response) => {
+        console.log(response.body);
+        done();
+      });
   })
 })
