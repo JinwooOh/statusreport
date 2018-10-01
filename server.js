@@ -21,8 +21,6 @@ const pool = mysql.createPool({
   port: keys.port,
 });
 
-
-
 // Use pool connection to maintain a stable connection.
 // wrapper: it replaces connection.query() with pooling
 module.exports = {
@@ -52,7 +50,6 @@ module.exports = {
     });
   },
 };
-
 
 
 const app = express();
@@ -104,4 +101,6 @@ app.get('/statusreport/*', (req, res) => {
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
 
-module.exports = app;
+if(process.env.NODE_ENV === 'test'){
+  module.exports = app
+}
