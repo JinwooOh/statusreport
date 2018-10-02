@@ -7,8 +7,10 @@ module.exports = app => {
     const values = [userName];
     connection.query(sql, [values], (err, result) => {
       if (err) throw err;
-      console.log(`new user is added${result.affectedRows}`);
+      console.log(`new user is added ${result.affectedRows}`);
+      res.sendStatus(200);
     });
+
   });
 
   // add new courseinfo to the database
