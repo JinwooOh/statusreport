@@ -10,7 +10,6 @@ module.exports = app => {
       console.log(`new user is added ${result.affectedRows}`);
       res.sendStatus(200);
     });
-
   });
 
   // add new courseinfo to the database

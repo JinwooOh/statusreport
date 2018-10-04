@@ -2,10 +2,10 @@ const assert = require('assert');
 const request = require('supertest');
 const app = require('../server');
 const chai = require('chai');
-const expect = chai.expect;
+const { expect } = chai;
+const should = require('chai').should();
 
 describe("FETCH controller", ()=>{
-
   it("GET to /users finds users", (done)=>{
     request(app)
       .get("/users")
@@ -19,9 +19,11 @@ describe("FETCH controller", ()=>{
   it("POST to /addUser creates a new user", (done)=>{
     request(app)
       .post('/addUser')
-      .send({userName: "test33"})
+      .send({userName: "testUser"})
+      .expect(200)
       .end((err, res) => {
-        assert(res.status === 200);
+        res.status.should.equal(200);
+        res.error.should.equal(false);
         done();
       })
   });

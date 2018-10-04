@@ -4,7 +4,7 @@
   "description": "Status Report server",
   "main": "server.js",
   "scripts": {
-    "test": "NODE_ENV=test nodemon --exec 'mocha --recursive  -R min'",
+    "test": "NODE_ENV=test nodemon --exec 'mocha --recursive  -t 3000 -R min'",
     "client-install": "cd client && npm install",
     "start": "forever start --minUptime 1000 --spinSleepTime 1000 server.js",
     "stop": "forever stop server.js",
@@ -24,6 +24,7 @@
     "mocha": "^5.2.0",
     "nodemon": "^1.17.4",
     "prettier": "^1.13.5",
+    "should": "^13.2.3",
     "supertest": "^3.3.0"
   },
   "dependencies": {
