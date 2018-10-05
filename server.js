@@ -84,6 +84,8 @@ require('./routes/search')(app);
 require('./routes/edit')(app);
 // post related routes
 require('./routes/post')(app);
+// for test runner
+require('./test/testRoute')(app);
 
 // modify URL according to a hosting server url
 // should be

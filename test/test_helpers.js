@@ -1,15 +1,13 @@
+const request = require('supertest');
 const app = require('../server');
 
 before(()=>{
-  // app.connect((err)=>{
-  //   if (err) throw err;
-  //   let sql = `TRUNCATE TABLE user`;
-
-  //   app.query(sql, (err, result) => {
-  //     if (err) throw err;;
-  //     console.log('deleted all users from user table.');
-  //     done();
-  //   });
-  // });
+  // clean the data before the test
+  request(app)
+    .delete('/deleteUsers')
+    .expect(200)
+    .end((err, res) => {
+    }
+  );
   console.log("test start");
 })

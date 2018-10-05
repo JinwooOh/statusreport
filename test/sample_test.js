@@ -11,7 +11,7 @@ describe("FETCH controller", ()=>{
       .get("/users")
       .end((err, response) => {
         //Need to change to be dynamic.
-        assert(response.body[0].name ==="Dolores Sirek");
+        assert(response.body[0].name ==="testUser");
         done();
       });
   });
@@ -27,5 +27,7 @@ describe("FETCH controller", ()=>{
         done();
       })
   });
+
+
 })
 
