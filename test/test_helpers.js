@@ -1,6 +1,5 @@
 const request = require('supertest');
-const app = require('../server');
-
+const app = require('../server').app;
 before(()=>{
   // clean the data before the test
   request(app)

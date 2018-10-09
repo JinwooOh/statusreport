@@ -84,8 +84,7 @@ require('./routes/search')(app);
 require('./routes/edit')(app);
 // post related routes
 require('./routes/post')(app);
-// for test runner
-require('./test/testRoute')(app);
+
 
 // modify URL according to a hosting server url
 // should be
@@ -101,8 +100,10 @@ app.get('/statusreport/*', (req, res) => {
 });
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server running on port ${port}`));
+const server = app.listen(port, () => console.log(`Server running on port ${port}`));
 
 if(process.env.NODE_ENV === 'test'){
-  module.exports = app
+  // for test runner routes
+  require('./test/testRoute')(app);
+  module.exports = {app: app, server: server};
 }
