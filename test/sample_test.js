@@ -11,9 +11,8 @@ describe("FETCH controller", ()=>{
   after(function (done) {
     console.log("close server");
     server.close(done());
-
   });
-
+  // get user
   it("GET to /users finds users", (done)=>{
     request(app)
       .get("/users")
@@ -23,7 +22,7 @@ describe("FETCH controller", ()=>{
         done();
       });
   });
-
+  // add user
   it("POST to /addUser creates a new user", (done)=>{
     request(app)
       .post('/addUser')
@@ -35,6 +34,14 @@ describe("FETCH controller", ()=>{
         done();
       })
   });
+  // delete user
+  // it("DELETE to /deletename/:nameId", done=>{
+  //   request(app)
+  //     .delete()
+  // })
+
+  // app.delete('/deletename/:nameId', (req, res) => {
+
 })
 
 

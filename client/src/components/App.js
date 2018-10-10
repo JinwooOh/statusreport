@@ -73,17 +73,20 @@ class App extends React.Component {
   };
 
   handleSubmit = async () => {
+    const { tasks, userName } = this.state;
     try {
-      const res = await fetch('/name');
-      const result = await res.json();
-      const success = AlertPopup.register({
-        title: 'Status Report',
-        content: 'Report submitted. Thank you.',
-        buttons: {
-          right: ['ok'],
-        },
-      });
-      AlertPopup.queue(success);
+      if (!this.isEmpty(userName)) {
+        const res = await fetch('/name');
+        const result = await res.json();
+        const success = AlertPopup.register({
+          title: 'Status Report',
+          content: 'Report submitted. Thank you.',
+          buttons: {
+            right: ['ok'],
+          },
+        });
+        AlertPopup.queue(success);
+      }
     } catch (e) {
       const fail = AlertPopup.register({
         title: 'Status Report',
@@ -96,7 +99,6 @@ class App extends React.Component {
     }
     // error
     // check empty case
-    const { tasks, userName } = this.state;
     if (this.isEmpty(tasks) || this.isEmpty(userName)) {
       // popup message
       const errorSubmitPopup = AlertPopup.register({
