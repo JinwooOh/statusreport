@@ -95,16 +95,21 @@ module.exports = app => {
       if (err) throw err;
       console.log(`new coursename is added: ${result.affectedRows}`);
       console.log(req.body.program, ' and ', req.body.course);
+      res.sendStatus(200);
     });
-    res.sendStatus(200);
   });
 
   app.delete('/deleteuser/:nameId', (req, res) => {
     connection.query('DELETE FROM user WHERE userID= ?', [req.params.nameId], (err, result) => {
-      if (err) throw err;
-      console.log('deleted.');
+      if (err)throw err;
+      //delete nothing
+      if(result.affectedRows === 0){
+        res.sendStatus(204);
+      }else{
+        console.log('deleted.');
+        res.sendStatus(200);
+      }
     });
-    res.sendStatus(200);
   });
 
   app.put('/edituser/:nameId', (req, res) => {

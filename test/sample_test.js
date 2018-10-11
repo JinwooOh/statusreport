@@ -34,14 +34,20 @@ describe("FETCH controller", ()=>{
         done();
       })
   });
+
   // delete user
-  // it("DELETE to /deletename/:nameId", done=>{
-  //   request(app)
-  //     .delete()
-  // })
-
-  // app.delete('/deletename/:nameId', (req, res) => {
-
+  it("DELETE to /deleteuser/:nameId", done=>{
+    let agent = request(app);
+    agent.get("/users").end((err, res)=>{
+      agent.delete(`/deleteuser/${res.body[0].userID}`)
+        .expect(200)
+        .end((err, res)=>{
+          res.status.should.equal(200);
+          res.error.should.equal(false);
+          done();
+        })
+    })
+  })
 })
 
 
