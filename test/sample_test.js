@@ -7,7 +7,7 @@ const chai = require('chai');
 const { expect } = chai;
 const should = require('chai').should();
 
-describe("FETCH controller", ()=>{
+describe("Restful controller", ()=>{
   after(function (done) {
     console.log("close server");
     server.close(done());
