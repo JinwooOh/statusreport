@@ -209,8 +209,8 @@ class AddForm extends React.Component {
     const task = {
       // admin form
       taskType: 'Adminstration Task',
-      category: this.categoryAdminRef.current.value,
       date: this.dateRef.current.value,
+      category: this.categoryAdminRef.current.value,
       hours: parseFloat(this.hoursRef.current.value),
     };
     this.props.sumHours(this.hoursRef.current.value);
@@ -291,6 +291,7 @@ class AddForm extends React.Component {
             ref={this.hoursRef}
             type="number"
             step="0.25"
+            min="0.25"
             placeholder="hours"
             required
           />

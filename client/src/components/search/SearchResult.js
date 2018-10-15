@@ -4,6 +4,13 @@ import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
 class SearchResult extends React.Component {
+  // custome sorting for react table
+  sortDate = (a, b) => {
+    const aDate = new Date(a);
+    const bDate = new Date(b);
+    return aDate > bDate ? 1 : -1;
+  };
+
   render() {
     const courseData = this.props.searchCourse;
     const adminData = this.props.searchAdmin;
@@ -17,14 +24,22 @@ class SearchResult extends React.Component {
       { Header: 'Semester', accessor: 'semester' },
       { Header: 'Instructor', accessor: 'courseInst' },
       { Header: 'Course category', accessor: 'courseCat' },
-      { Header: 'Report date', accessor: 'subDate' },
-      { Header: 'Completion date', accessor: 'completionDate' },
+      { Header: 'Report date', accessor: 'subDate', sortMethod: (a, b) => this.sortDate(a, b) },
+      {
+        Header: 'Completion date',
+        accessor: 'completionDate',
+        sortMethod: (a, b) => this.sortDate(a, b),
+      },
       { Header: 'Hours', accessor: 'hours' },
     ];
     const adminColumns = [
       { Header: 'Name', accessor: 'userID' },
-      { Header: 'Report date', accessor: 'subDate' },
-      { Header: 'Completion date', accessor: 'completionDate' },
+      { Header: 'Report date', accessor: 'subDate', sortMethod: (a, b) => this.sortDate(a, b) },
+      {
+        Header: 'Completion date',
+        accessor: 'completionDate',
+        sortMethod: (a, b) => this.sortDate(a, b),
+      },
       { Header: 'Admin category', accessor: 'adminCat' },
       { Header: 'Hours', accessor: 'hours' },
     ];
@@ -38,8 +53,12 @@ class SearchResult extends React.Component {
       { Header: 'Semester', accessor: 'semester' },
       { Header: 'Instructor', accessor: 'courseInst' },
       { Header: 'Course category', accessor: 'courseCat' },
-      { Header: 'Report date', accessor: 'subDate' },
-      { Header: 'Completion date', accessor: 'completionDate' },
+      { Header: 'Report date', accessor: 'subDate', sortMethod: (a, b) => this.sortDate(a, b) },
+      {
+        Header: 'Completion date',
+        accessor: 'completionDate',
+        sortMethod: (a, b) => this.sortDate(a, b),
+      },
       { Header: 'Hours', accessor: 'hours' },
     ];
 
