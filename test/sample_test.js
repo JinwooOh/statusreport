@@ -12,16 +12,7 @@ describe("Restful controller", ()=>{
     console.log("close server");
     server.close(done());
   });
-  // get user
-  it("GET to /users finds users", (done)=>{
-    request(app)
-      .get("/users")
-      .end((err, response) => {
-        //Need to change to be dynamic.
-        assert(response.body[0].name ==="testUser");
-        done();
-      });
-  });
+
   // add user
   it("POST to /addUser creates a new user", (done)=>{
     request(app)
@@ -34,7 +25,16 @@ describe("Restful controller", ()=>{
         done();
       })
   });
-
+  // get user
+  it("GET to /users finds users", (done)=>{
+    request(app)
+      .get("/users")
+      .end((err, response) => {
+        //Need to change to be dynamic.
+        assert(response.body[0].name ==="testUser");
+        done();
+      });
+  });
   // delete user
   it("DELETE to /deleteuser/:nameId", done=>{
     let agent = request(app);

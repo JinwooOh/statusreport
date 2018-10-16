@@ -76,8 +76,8 @@ class App extends React.Component {
     const { tasks, userName } = this.state;
     try {
       if (!this.isEmpty(userName)) {
-        const res = await fetch('/name');
-        const result = await res.json();
+        // const res = await fetch('/name');
+        // const result = await res.json();
         const success = AlertPopup.register({
           title: 'Status Report',
           content: 'Report submitted. Thank you.',

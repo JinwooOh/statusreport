@@ -67,12 +67,12 @@ class Login extends Component {
 
   handleChangePassword(e) {
     e.preventDefault();
-    let validation = false;
+    // let validation = false;
     this.Auth.login(this.state.username, this.state.password)
       .then(res => res.success)
-      .then(() => {
-        validation = true;
-      })
+      // .then(() => {
+      //   validation = true;
+      // })
       .then(() => {
         const data = { username: this.state.username, newPassword: this.state.newPassword };
         fetch('/changepassword', {

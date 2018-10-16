@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactTable from 'react-table';
+import { ReactTableDefaults } from 'react-table';
 import 'react-table/react-table.css';
+
+// default react table setting
+Object.assign(ReactTableDefaults, {
+  noDataText: 'No task...',
+});
 
 class SearchResult extends React.Component {
   // custome sorting for react table
@@ -82,6 +88,7 @@ class SearchResult extends React.Component {
     );
   }
 }
+
 export default SearchResult;
 SearchResult.propTypes = {
   searchCourse: PropTypes.array.isRequired,
