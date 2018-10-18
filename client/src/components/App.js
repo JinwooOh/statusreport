@@ -24,6 +24,7 @@ class App extends React.Component {
       date: {}, // to track submit date and time
       userName: '',
       nameList: [], // for naming guide
+      userList: [],
     };
   }
 
@@ -50,6 +51,14 @@ class App extends React.Component {
         this.setState({
           nameList: [...findresponse],
         });
+        fetch('/users')
+          .then(res => res.json())
+          .then(users => {
+            this.setState({
+              userList: users,
+            });
+          })
+          .catch(error => console.error('fetch error at componentDidMount', error)); // error
       })
       .catch(err => {
         console.log(err, 'failed to load naming list');
@@ -73,20 +82,55 @@ class App extends React.Component {
   };
 
   handleSubmit = async () => {
-    const { tasks, userName } = this.state;
-    try {
-      if (!this.isEmpty(userName)) {
-        // const res = await fetch('/name');
-        // const result = await res.json();
-        const success = AlertPopup.register({
-          title: 'Status Report',
-          content: 'Report submitted. Thank you.',
-          buttons: {
-            right: ['ok'],
-          },
-        });
-        AlertPopup.queue(success);
+    const { tasks, userName, userList } = this.state;
+    let canYouSubmit = false;
+    // check whether usernmae is in the database.
+    for (const index of userList) {
+      if (index.name === userName) {
+        canYouSubmit = true;
+        break;
       }
+    }
+    // error
+    // username is not in the database
+    if (!canYouSubmit) {
+      console.log('you cannot submit');
+      const noName = AlertPopup.register({
+        title: 'Alert',
+        content:
+          'Failed to submit. Your name is not in the database. Please ask a manager to add your name.',
+        buttons: {
+          right: ['ok'],
+        },
+      });
+      AlertPopup.queue(noName);
+      return;
+    }
+    // error
+    // there is no task to submit
+    if (this.isEmpty(tasks)) {
+      // popup message
+      const errorSubmitPopup = AlertPopup.register({
+        title: 'Alert',
+        content: 'To report, you should add at least one task to summary',
+        buttons: {
+          right: ['ok'],
+        },
+      });
+      AlertPopup.queue(errorSubmitPopup);
+      return;
+    }
+
+    // success!!
+    try {
+      const success = AlertPopup.register({
+        title: 'Status Report',
+        content: 'Report submitted. Thank you.',
+        buttons: {
+          right: ['ok'],
+        },
+      });
+      AlertPopup.queue(success);
     } catch (e) {
       const fail = AlertPopup.register({
         title: 'Status Report',
@@ -97,22 +141,6 @@ class App extends React.Component {
       });
       AlertPopup.queue(fail);
     }
-    // error
-    // check empty case
-    if (this.isEmpty(tasks) || this.isEmpty(userName)) {
-      // popup message
-      const errorSubmitPopup = AlertPopup.register({
-        title: 'Alert',
-        content:
-          'To report, you should add at least one task to summary, and type your name at the bottom.',
-        buttons: {
-          right: ['ok'],
-        },
-      });
-      AlertPopup.queue(errorSubmitPopup);
-      return;
-    }
-
     const data = this.state;
     // success
     // submit the tasks

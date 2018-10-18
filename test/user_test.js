@@ -12,7 +12,6 @@ describe("Restful controller", ()=>{
     console.log("close server");
     server.close(done());
   });
-
   // add user
   it("POST to /addUser creates a new user", (done)=>{
     request(app)
@@ -35,6 +34,21 @@ describe("Restful controller", ()=>{
         done();
       });
   });
+
+  //edit user name
+  it("PUT to /edituser/:nameId to edit username", done=>{
+    let agent = request(app);
+    agent.get("/users").end((err, res)=>{
+      agent.put(`/edituser/${res.body[0].userID}`)
+        .send({user: "userTest"})
+        .end((err, res)=>{
+          res.status.should.equal(200);
+          res.error.should.equal(false);
+          done();
+        })
+    })
+  })
+
   // delete user
   it("DELETE to /deleteuser/:nameId", done=>{
     let agent = request(app);
@@ -48,6 +62,7 @@ describe("Restful controller", ()=>{
         })
     })
   })
+
 })
 
 

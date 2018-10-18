@@ -122,6 +122,7 @@ module.exports = app => {
         console.log('new user name: ', req.body.user);
       }
     );
+    res.send(req.body.user);
     res.sendStatus(200);
   });
   // user edit end...
