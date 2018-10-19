@@ -171,3 +171,17 @@
   display: flex;
   justify-content: center;
 }
+
+// TaskSelector menu bar
+// when a button is clicked.
+.selected{
+  border: 0.1rem solid $color-secondary;
+      &:not(:last-child) {
+        border-right: 0.1rem solid $color-tertiary-dark;
+      }
+      background-color: $color-secondary;
+
+      box-shadow: 0 0.5rem 1rem rgba($color-black, 0.5);
+
+
+}

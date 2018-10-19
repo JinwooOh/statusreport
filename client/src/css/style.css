@@ -432,6 +432,13 @@ input:focus {
   display: flex;
   justify-content: center; }
 
+.selected {
+  border: 0.1rem solid #395462;
+  background-color: #395462;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5); }
+  .selected:not(:last-child) {
+    border-right: 0.1rem solid #140107; }
+
 .message__heading {
   font-size: 2.8rem;
   font-weight: 300;
