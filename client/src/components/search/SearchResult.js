@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactTable from 'react-table';
-import { ReactTableDefaults } from 'react-table';
+import ReactTable, { ReactTableDefaults } from 'react-table';
 import 'react-table/react-table.css';
 
 // default react table setting

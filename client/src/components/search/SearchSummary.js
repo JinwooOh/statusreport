@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { dateFormat } from '../helper/Helper';
 import UserChart from './UserChart';
 import CourseChart from './CourseChart';
+import CourseBar from './CourseBar';
 
 class SearchSummary extends React.Component {
   toListCourse = () => {
@@ -215,6 +216,11 @@ class SearchSummary extends React.Component {
     const courseList = this.toListCourse();
     const adminList = this.toListAdmin();
     const programList = this.toListProgram();
+    const courseTypeResult = [
+      { name: 'New Course', total: 10 },
+      { name: 'Course Maintenance', total: 12 },
+      { name: 'Course Live Support', total: 22 },
+    ];
 
     return (
       <div className="searchSummary searchSummary--report">
@@ -278,6 +284,7 @@ class SearchSummary extends React.Component {
                         Course Total Hours: {this.props.totalHours.program}
                         {this.renderCourseTotal()}
                         <CourseChart programList={programList} />
+                        <CourseBar courseTypeResult={courseTypeResult} />
                       </div>
                     )}
                   </ul>

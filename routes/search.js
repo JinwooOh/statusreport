@@ -24,7 +24,7 @@ module.exports = app => {
   });
 
   // search by user (admintable)
-  app.get('/search/admintable/:userID/:startDate/:endDate', (req, res) => {
+  app.get('/search/admintable/:userID/:startDate/:endDate/', (req, res) => {
     const { userID, startDate, endDate } = req.params;
     connection.query(
       `SELECT * FROM admintable
@@ -42,52 +42,76 @@ module.exports = app => {
   });
 
   // search by user (program name)
-  app.get('/search/program/:courseProgram/:startDate/:endDate', (req, res) => {
+  app.get('/search/program/:courseProgram/:startDate/:endDate/:courseTypeValue', (req, res) => {
     console.log('program search start: ');
-    console.log(req.params.courseProgram);
-    console.log(req.params.startDate);
-    console.log(req.params.endDate);
-    const { courseProgram, startDate, endDate } = req.params;
-
-    // const userID = req.params.userID;
-    // const startDate = req.params.startDate;
-    // const endDate = req.params.endDate;
-    connection.query(
-      `SELECT * FROM coursetable
-    WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
-    AND courseProgram='${courseProgram}'`,
-      (err, result) => {
-        if (err) {
-          console.log('Error in program(name) query');
-        } else {
-          console.log(result);
-          res.json(result);
+    const { courseProgram, startDate, endDate, courseTypeValue } = req.params;
+    if(courseTypeValue === 'All'){
+      connection.query(
+        `SELECT * FROM coursetable
+      WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
+      AND courseProgram='${courseProgram}'`,
+        (err, result) => {
+          if (err) {
+            console.log('Error in program(name) query');
+          } else {
+            console.log(result);
+            res.json(result);
+          }
         }
-      }
-    );
+      );
+    }else{
+      connection.query(
+        `SELECT * FROM coursetable
+      WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
+      AND courseProgram='${courseProgram}' AND courseTask='${courseTypeValue}'`,
+        (err, result) => {
+          if (err) {
+            console.log('Error in program(name) query');
+          } else {
+            console.log(result);
+            res.json(result);
+          }
+        }
+      );
+    }
   });
 
   // search by user (program number)
-  app.get('/search/programNumber/:courseNumber/:startDate/:endDate', (req, res) => {
+  app.get('/search/programNumber/:courseNumber/:startDate/:endDate/:courseTypeValue', (req, res) => {
     console.log('program Number search start: ');
     console.log(req.params.courseNumber);
     console.log(req.params.startDate);
     console.log(req.params.endDate);
-    const { courseNumber, startDate, endDate } = req.params;
-
-    connection.query(
-      `SELECT * FROM coursetable
-      WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
-      AND courseNumber='${courseNumber}'`,
-      (err, result) => {
-        if (err) {
-          console.log('Error in program(number) query');
-        } else {
-          console.log(result);
-          res.json(result);
+    const { courseNumber, startDate, endDate, courseTypeValue} = req.params;
+    if(courseTypeValue === 'All'){
+      connection.query(
+        `SELECT * FROM coursetable
+        WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
+        AND courseNumber='${courseNumber}'`,
+        (err, result) => {
+          if (err) {
+            console.log('Error in program(number) query');
+          } else {
+            console.log(result);
+            res.json(result);
+          }
         }
-      }
-    );
+      );
+    }else{
+      connection.query(
+        `SELECT * FROM coursetable
+        WHERE completionDate BETWEEN '${startDate}' AND '${endDate}'
+        AND courseNumber='${courseNumber}' AND courseTask='${courseTypeValue}'`,
+        (err, result) => {
+          if (err) {
+            console.log('Error in program(number) query');
+          } else {
+            console.log(result);
+            res.json(result);
+          }
+        }
+      );
+    }
   });
 
   // Search course info

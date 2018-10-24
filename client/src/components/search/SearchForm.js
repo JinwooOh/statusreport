@@ -28,6 +28,7 @@ class SearchForm extends React.Component {
     super();
     this.state = {
       selectValue: 'Program',
+      courseTypeValue: 'All',
       // autosuggestion states
       programValue: '',
       programSuggestions: [],
@@ -79,8 +80,12 @@ class SearchForm extends React.Component {
     this.state.selectValue === 'Program' ? suggestion.program : suggestion.courseNumber;
   // Autosuggestion method end
 
-  handleChange = e => {
+  handleChangeSearchType = e => {
     this.setState({ selectValue: e.target.value });
+  };
+
+  handleChangeCourseType = e => {
+    this.setState({ courseTypeValue: e.target.value });
   };
 
   createSearchUser = event => {
@@ -102,6 +107,7 @@ class SearchForm extends React.Component {
         startDate: this.startDateRef.current.value,
         endDate: this.endDateRef.current.value,
         courseProgram: this.state.programValue,
+        courseTypeValue: this.state.courseTypeValue,
       };
       this.props.programSearchType('Program');
     } else {
@@ -109,6 +115,7 @@ class SearchForm extends React.Component {
         startDate: this.startDateRef.current.value,
         endDate: this.endDateRef.current.value,
         courseNumber: this.state.programValue,
+        courseTypeValue: this.state.courseTypeValue,
       };
       this.props.programSearchType('Program Number');
     }
@@ -141,11 +148,29 @@ class SearchForm extends React.Component {
           <span>End Date </span>
           <input name="date" ref={this.endDateRef} type="date" required />
 
-          <span>Search Type </span>
+          <span>Search By</span>
           <div className="select-custom">
-            <select name="type" value={this.state.selectValue} onChange={this.handleChange}>
+            <select
+              name="type"
+              value={this.state.selectValue}
+              onChange={this.handleChangeSearchType}
+            >
               <option value="Program">Program name</option>
               <option value="Program Number">Course number</option>
+            </select>
+          </div>
+
+          <span>Course Type</span>
+          <div className="select-custom">
+            <select
+              name="type"
+              value={this.state.courseTypeValue}
+              onChange={this.handleChangeCourseType}
+            >
+              <option value="All">All</option>
+              <option value="New Course">New Course</option>
+              <option value="Course Maintenance">Course Maintenance</option>
+              <option value="Course Live Support">Course Live Support</option>
             </select>
           </div>
 

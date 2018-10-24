@@ -83,7 +83,16 @@ class Report extends Component {
   };
 
   handleSearch = () => {
-    const { userID, startDate, endDate, courseProgram, courseNumber } = this.state.searchOptions;
+    const {
+      userID,
+      startDate,
+      endDate,
+      courseProgram,
+      courseNumber,
+      courseTypeValue,
+    } = this.state.searchOptions;
+
+    console.log(courseTypeValue);
 
     // Search user
     if (this.state.searchType === 'user') {
@@ -138,8 +147,8 @@ class Report extends Component {
       // Search program
       const urlProgram =
         this.state.programSearchType === 'Program'
-          ? `/search/program/${courseProgram}/${startDate}/${endDate}`
-          : `/search/programNumber/${courseNumber}/${startDate}/${endDate}`;
+          ? `/search/program/${courseProgram}/${startDate}/${endDate}/${courseTypeValue}`
+          : `/search/programNumber/${courseNumber}/${startDate}/${endDate}/${courseTypeValue}`;
       fetch(urlProgram)
         .then(res => res.json())
         .then(json => {
