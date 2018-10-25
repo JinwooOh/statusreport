@@ -28,12 +28,7 @@ class UserChart extends Component {
         },
       ],
     };
-    console.log(courseData);
-    // const { courseList, adminList } = this.props;
-    // courseList.list.forEach(course => {
-    //   courseData.labels.push(course.name);
-    //   console.log(course.name);
-    // });
+
     const adminData = {
       labels: [
         this.props.adminList.list[0].name,

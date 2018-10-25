@@ -93,6 +93,28 @@ class SearchSummary extends React.Component {
     return courseNumberList;
   };
 
+  toListCourseType = () => {
+    const courseTypeTotalTemp = [...new Set(this.props.searchProgram.map(task => task.courseTask))];
+
+    const courseTypeTotal = courseTypeTotalTemp.reduce((obj, v) => {
+      obj[v] = {
+        total: 0,
+      };
+      return obj;
+    }, []);
+    // calculate each courseTask total hour
+    this.props.searchProgram.forEach(task => {
+      for (const property in courseTypeTotal) {
+        if (task.courseTask === property) {
+          // total hours for a course
+          courseTypeTotal[property].total += task.hours;
+          // total hours for each course category
+        }
+      }
+    });
+    return courseTypeTotal;
+  };
+
   renderCourseTotal = () => {
     const courseNumberList = this.toListProgram();
 
@@ -216,11 +238,7 @@ class SearchSummary extends React.Component {
     const courseList = this.toListCourse();
     const adminList = this.toListAdmin();
     const programList = this.toListProgram();
-    const courseTypeResult = [
-      { name: 'New Course', total: 10 },
-      { name: 'Course Maintenance', total: 12 },
-      { name: 'Course Live Support', total: 22 },
-    ];
+    const courseTypeResult = this.toListCourseType();
 
     return (
       <div className="searchSummary searchSummary--report">

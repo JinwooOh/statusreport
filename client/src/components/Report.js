@@ -92,8 +92,6 @@ class Report extends Component {
       courseTypeValue,
     } = this.state.searchOptions;
 
-    console.log(courseTypeValue);
-
     // Search user
     if (this.state.searchType === 'user') {
       const urlCourse = `/search/coursetable/${userID}/${startDate}/${endDate}`;

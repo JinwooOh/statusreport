@@ -8,25 +8,28 @@ import { Bar } from 'react-chartjs-2';
 class CourseBar extends Component {
   render() {
     const { courseTypeResult } = this.props;
-    console.log(courseTypeResult);
     const courseData = {
-      labels: [courseTypeResult[0].name, courseTypeResult[1].name, courseTypeResult[2].name],
+      labels: [],
       datasets: [
         {
-          data: [courseTypeResult[0].total, courseTypeResult[1].total, courseTypeResult[2].total],
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+          data: [],
+          backgroundColor: 'rgba(75, 144, 179, 0.40)',
+          borderColor: 'rgba(75, 144, 179, 1)',
+          borderWidth: 1,
+          hoverBackgroundColor: 'rgba(75, 144, 179, 0.69)',
+          hoverBorderColor: 'rgba(75, 144, 179, 1)',
+          label: 'Couse Types',
         },
       ],
     };
 
-    // // iterate object
-    // for (const program in programList) {
-    //   if (Object.prototype.hasOwnProperty.call(programList, program)) {
-    //     courseData.labels.push(program); // name of the program
-    //     courseData.datasets[0].data.push(programList[program].total); // total hours for the program
-    //   }
-    // }
+    // iterate object
+    for (const program in courseTypeResult) {
+      if (Object.prototype.hasOwnProperty.call(courseTypeResult, program)) {
+        courseData.labels.push(program); // name of the program
+        courseData.datasets[0].data.push(courseTypeResult[program].total); // total hours for the program
+      }
+    }
 
     return (
       <div>
@@ -39,5 +42,5 @@ class CourseBar extends Component {
 export default CourseBar;
 
 CourseBar.propTypes = {
-  courseTypeResult: PropTypes.object.isRequired,
+  courseTypeResult: PropTypes.array.isRequired,
 };

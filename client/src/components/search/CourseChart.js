@@ -25,7 +25,6 @@ class CourseChart extends Component {
         courseData.datasets[0].data.push(programList[program].total); // total hours for the program
       }
     }
-    console.log(courseData);
     return (
       <div>
         <Pie data={courseData} />
