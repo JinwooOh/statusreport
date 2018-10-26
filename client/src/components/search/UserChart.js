@@ -13,6 +13,8 @@ class UserChart extends Component {
         this.props.courseList.list[2].name,
         this.props.courseList.list[3].name,
         this.props.courseList.list[4].name,
+        this.props.courseList.list[5].name,
+        this.props.courseList.list[6].name,
       ],
       datasets: [
         {
@@ -22,9 +24,27 @@ class UserChart extends Component {
             this.props.courseList.list[2].total,
             this.props.courseList.list[3].total,
             this.props.courseList.list[4].total,
+            this.props.courseList.list[5].total,
+            this.props.courseList.list[6].total,
           ],
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#ff9063', '#63d2ff'],
-          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#ff9063', '#63d2ff'],
+          backgroundColor: [
+            '#FF6384',
+            '#36A2EB',
+            '#FFCE56',
+            '#ff9063',
+            '#63d2ff',
+            '#367700',
+            '#d2ff63',
+          ],
+          hoverBackgroundColor: [
+            '#FF6384',
+            '#36A2EB',
+            '#FFCE56',
+            '#ff9063',
+            '#63d2ff',
+            '#367700',
+            '#d2ff63',
+          ],
         },
       ],
     };

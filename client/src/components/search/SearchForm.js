@@ -106,6 +106,7 @@ class SearchForm extends React.Component {
       options = {
         startDate: this.startDateRef.current.value,
         endDate: this.endDateRef.current.value,
+        selectValue: this.state.selectValue,
         courseProgram: this.state.programValue,
         courseTypeValue: this.state.courseTypeValue,
       };
@@ -114,6 +115,7 @@ class SearchForm extends React.Component {
       options = {
         startDate: this.startDateRef.current.value,
         endDate: this.endDateRef.current.value,
+        selectValue: this.state.selectValue,
         courseNumber: this.state.programValue,
         courseTypeValue: this.state.courseTypeValue,
       };

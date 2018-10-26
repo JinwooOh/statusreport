@@ -388,6 +388,7 @@ class AddForm extends React.Component {
             <option value="ISD Time">ISD Time</option>
             <option value="Media Production">Media Production</option>
             <option value="Quality Control">Quality Control</option>
+            <option value="Transcription">Transcription</option>
           </select>
         </div>
 

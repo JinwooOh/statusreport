@@ -17,6 +17,7 @@ class SearchSummary extends React.Component {
         { name: 'ISD Time', total: 0 },
         { name: 'Media Production', total: 0 },
         { name: 'Quality Control', total: 0 },
+        { name: 'Transcription', total: 0 },
       ],
     };
     this.props.searchCourse.forEach(task => {
@@ -73,6 +74,7 @@ class SearchSummary extends React.Component {
           { name: 'ISD Time', total: 0 },
           { name: 'Media Production', total: 0 },
           { name: 'Quality Control', total: 0 },
+          { name: 'Transcription', total: 0 },
         ],
       };
       return obj;
@@ -239,7 +241,6 @@ class SearchSummary extends React.Component {
     const adminList = this.toListAdmin();
     const programList = this.toListProgram();
     const courseTypeResult = this.toListCourseType();
-
     return (
       <div className="searchSummary searchSummary--report">
         <h2 className="heading-primary">Summary</h2>
