@@ -147,9 +147,14 @@ export function coursehelp() {
 
       <div className="message__text">
         <h3 className="message__text--title">
-          <span className="message__text--title-span">Trascription</span>
+          <span className="message__text--title-span">Transcription</span>
         </h3>
-        <div className="message__text--body" />
+        <div className="message__text--body">
+          <ul>
+            <li>Student</li>
+            <li>Other</li>
+          </ul>
+        </div>
       </div>
     </div>
   );
