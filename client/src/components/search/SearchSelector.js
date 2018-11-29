@@ -7,9 +7,12 @@ import PropTypes from 'prop-types';
 class SearchSelector extends Component {
   handleSearchSelector = (e, searchType) => {
     const taskSelector = document.getElementsByClassName('btn__taskSelector');
-    for (const task of taskSelector) {
-      task.className = task.className.replace(' selected', '');
+    for (let i = 0; i < taskSelector.length; i++) {
+      taskSelector[i].className = taskSelector[i].className.replace(' selected', '');
     }
+    // for (const task of taskSelector) {
+    //   task.className = task.className.replace(' selected', '');
+    // }
     e.currentTarget.className += ' selected';
     this.props.selectSearch(searchType);
   };
