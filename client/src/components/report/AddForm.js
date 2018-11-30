@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 // Form for submitting.
 // It handles both course task form and admin task form
 // Check https://github.com/moroshko/react-autosuggest for further infomration
@@ -9,6 +11,7 @@ import AlertPopup from 'react-popup';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Popup from '../Popup';
 import { naminghelp } from '../helper/Message';
+import infoIcon from '../../img/information.svg';
 
 let courseData = [];
 // Autosuggestion helpers start
@@ -379,7 +382,25 @@ class AddForm extends React.Component {
           placeholder="Instructor name"
         />
 
-        <span className="requiredField">Task Type</span>
+        <span className="requiredField">
+          Task Type{' '}
+          <a
+            onClick={() => {
+              const taskTypeHelp = AlertPopup.register({
+                title: 'Task Type',
+                content:
+                  'Task Type defines the types of course related tasks. To learn more about task type, please check Course Guide on top of the menu bar',
+                buttons: {
+                  right: ['ok'],
+                },
+              });
+              AlertPopup.queue(taskTypeHelp);
+            }}
+          >
+            <img className="help-icon" src={infoIcon} alt="help icon" />
+          </a>
+        </span>
+
         <div className="select-custom">
           <select name="type" ref={this.categoryRef}>
             <option value="Content Development">Content Development</option>
