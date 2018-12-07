@@ -370,3 +370,31 @@ export function naminghelp(nameList) {
     </div>
   );
 }
+
+// request popup
+export function request(req) {
+  if (req[0] !== undefined) console.log(req[0].user);
+
+  // course
+  // email
+  // program
+  // status
+  // user
+  return (
+    <div className="message">
+      <h2 className="message__heading">Request</h2>
+      <div className="message__text--body">
+        <ul>
+          {req.map((item, i) => {
+            return (
+              <li key={i} style={{ wordSpacing: '3px' }}>
+                {item.user} requested {item.program} {item.course}
+                <p>{item.status}</p>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </div>
+  );
+}

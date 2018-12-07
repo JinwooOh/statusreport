@@ -41,11 +41,20 @@ export default class Popup extends React.Component {
   };
 
   render() {
-    const actions = [
-      <button className="btn btn__guide btn__guide--inPopup" onClick={this.handleClose}>
-        OK
-      </button>,
-    ];
+    let actions = [];
+    if (this.props.title === 'Request') {
+      actions = [
+        <button className="btn btn__guide btn__guide--inPopup" onClick={this.handleClose}>
+          Request
+        </button>,
+      ];
+    } else {
+      actions = [
+        <button className="btn btn__guide btn__guide--inPopup" onClick={this.handleClose}>
+          OK
+        </button>,
+      ];
+    }
     const { text } = this.props;
 
     return (

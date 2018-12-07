@@ -8,7 +8,7 @@ import Forms from './report/Forms';
 import Tasks from './report/Tasks';
 
 import { dateNow } from './helper/Helper';
-import { coursehelp, adminhelp, naminghelp } from './helper/Message';
+import { coursehelp, adminhelp, naminghelp, request } from './helper/Message';
 
 import AppProvider from './helper/AppProvider';
 import { AppContext } from './helper/envHelper';
@@ -25,6 +25,7 @@ class App extends React.Component {
       userName: '',
       nameList: [], // for naming guide
       userList: [],
+      requestList: [],
     };
   }
 
@@ -62,6 +63,14 @@ class App extends React.Component {
       })
       .catch(err => {
         console.log(err, 'failed to load naming list');
+      });
+
+    fetch('/request')
+      .then(response => response.json())
+      .then(requestList => {
+        this.setState({
+          requestList,
+        });
       });
   }
 
@@ -227,6 +236,10 @@ class App extends React.Component {
                     >
                       Edit
                     </button>
+                    <MuiThemeProvider>
+                      <Popup title="Request" text={request(this.state.requestList)} />
+                    </MuiThemeProvider>
+
                     <button
                       type="button"
                       className="btn btn__search"

@@ -66,4 +66,15 @@ module.exports = app => {
       }
     });
   });
+
+  app.get('/request', (req, res) => {
+    connection.query('SELECT * FROM requestList', (err, result) => {
+      if (err) {
+        console.log('Error in requestLists query');
+      } else {
+        console.log('requestLists query success');
+        res.json(result);
+      }
+    });
+  })
 };
