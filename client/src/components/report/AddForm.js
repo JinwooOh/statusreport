@@ -389,7 +389,7 @@ class AddForm extends React.Component {
               const taskTypeHelp = AlertPopup.register({
                 title: 'Task Type',
                 content:
-                  'Task Type defines the types of course related tasks. To learn more about task type, please check Course Guide on top of the menu bar',
+                  'To learn more about task type, please check Course Guide on top of the menu bar',
                 buttons: {
                   right: ['ok'],
                 },
