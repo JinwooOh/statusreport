@@ -2,7 +2,7 @@
 
 # Overview
 
-Status Report is the web application to replace spreadsheet based reporting system in Online Program Development
+Status Report is the web application to replace spreadsheet based reporting system.
 
 # Usage
 
